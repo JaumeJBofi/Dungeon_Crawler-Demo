@@ -67,7 +67,7 @@ public  class MazeBase {
         if(varPrcEnemies>=1){
             // Lanzamos exepcion, la cantiddad del porcentajes de enemigos
             // no puede ser mas del 100%
-            throw new UnknownError();
+            //throw new UnknownError();
         }else{
             prcEnemies = varPrcEnemies;
         }
