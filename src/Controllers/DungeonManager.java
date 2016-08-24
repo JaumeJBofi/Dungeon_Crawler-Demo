@@ -6,7 +6,7 @@
 package Controllers;
 import Foundation.CellInformation;
 import Models.Dungeon;
-import java.util.AbstractMap;
+import Foundation.Coordinate;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
@@ -23,7 +23,7 @@ public class DungeonManager extends ManagerBase{
     final private Random randomManager;
     
     
-    public DungeonManager(int varM,int varN,double worldprcEnemies,double worldlvlEnemies,CellInformation.CELLMODE mode,CellInformation.CELLTYPE type){
+    public DungeonManager(double worldprcEnemies,double worldlvlEnemies,CellInformation.CELLMODE mode,CellInformation.CELLTYPE type){
         theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies, mode, type);
         randomManager = new Random();
     }
@@ -33,18 +33,16 @@ public class DungeonManager extends ManagerBase{
         return ((i>=0&&i<M)&&(j>=0&&j<N));
     }
     
-    private boolean checkAdjCells(int i,int j,int M,int N){        
-        int[] a = {-1,1};
-        
+    private boolean checkAdjCells(Coordinate point){              
         List <ManagerBase.DIRECTIONS> validDir = new ArrayList();
        
         int factor = -1;
-        if(inRange(i, j+factor, M, N)) validDir.add(ManagerBase.DIRECTIONS.TOP);
-        if(inRange(i+factor, j, M, N)) validDir.add(ManagerBase.DIRECTIONS.LEFT);                        
+        if(inRange(point.GetX(), point.GetY()+factor, point.GetM(), point.GetN())) validDir.add(ManagerBase.DIRECTIONS.TOP);
+        if(inRange(point.GetX()+factor,  point.GetY(), point.GetM(), point.GetN())) validDir.add(ManagerBase.DIRECTIONS.LEFT);                        
         
         factor = 1;
-        if(inRange(i, j+factor, M, N)) validDir.add(ManagerBase.DIRECTIONS.BOT);
-        if(inRange(i+factor, j, M, N)) validDir.add(ManagerBase.DIRECTIONS.RIGHT);
+        if(inRange(point.GetX(), point.GetY()+factor,  point.GetM(), point.GetN())) validDir.add(ManagerBase.DIRECTIONS.BOT);
+        if(inRange(point.GetX()+factor, point.GetY(),  point.GetM(), point.GetN())) validDir.add(ManagerBase.DIRECTIONS.RIGHT);
         
         if(validDir.isEmpty()) return false;
         
@@ -56,27 +54,31 @@ public class DungeonManager extends ManagerBase{
         dungeonAccess = new int[M][N];
         theDungeon.SetM(M);
         theDungeon.SetN(N);                
+        M = theDungeon.GetM();
+        N = theDungeon.GetN();
         
         // Capaz podemos hacer que las conexiones agregen info a la matriz, como
-        // el numero de conexiones. De esta manera podemos saber si es que es una habitacion.        
-        AbstractMap.SimpleEntry<Integer,Integer> currentPair = new AbstractMap.SimpleEntry(randomManager.nextInt(M),randomManager.nextInt(N));
-        AbstractMap.SimpleEntry<Integer,Integer> nextPair;
-        Stack<AbstractMap.SimpleEntry<Integer,Integer>> myStack = new Stack();
+        // el numero de conexiones. De esta manera podemos saber si es que es una habitacion.
+        Coordinate currentPoint = new Coordinate(M,N);
+        currentPoint.SetX(randomManager.nextInt(M));
+        currentPoint.SetY(randomManager.nextInt(N));
         
-        dungeonAccess[currentPair.getKey()][currentPair.getValue()] = 1;
-        myStack.push(currentPair);
+        Stack<Coordinate> myStack = new Stack();
+        
+        dungeonAccess[currentPoint.GetX()][currentPoint.GetY()] = 1;
+        myStack.push(currentPoint.GetPoint());
         
         while(!myStack.isEmpty()){
-            currentPair = myStack.peek();
-            if(checkAdjCells(currentPair.getKey(),currentPair.getValue(),theDungeon.GetM(),theDungeon.GetN())){
+            currentPoint = myStack.peek();
+            if(checkAdjCells(currentPoint)){
                 
                 // Marcar camino y a V
-                nextPair = advanceInDirection(currentPair, currentDirections,1);   
-                dungeonAccess[nextPair.getKey()][nextPair.getValue()] = 1;                                           
-                nextPair = advanceInDirection(currentPair, currentDirections,2);   
-                dungeonAccess[nextPair.getKey()][nextPair.getValue()] = 1;
+                advanceInDirection(currentPoint, currentDirections,1);   
+                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()] = 1;                                           
+                advanceInDirection(currentPoint, currentDirections,1);   
+                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()] = 1;
                                 
-                myStack.push(nextPair);
+                myStack.push(currentPoint.GetPoint());
             }else
             {
                 myStack.pop();
