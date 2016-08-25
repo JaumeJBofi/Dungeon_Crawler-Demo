@@ -11,7 +11,8 @@ package Models;
  */
 public class Enemy extends Entity {
     int nivel;
-    public  Enemy(){
+    public Enemy(int M,int N){
+        super(M, N);
         nivel = 1;
     }
     

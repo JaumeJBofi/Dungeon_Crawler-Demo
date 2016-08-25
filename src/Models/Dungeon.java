@@ -18,6 +18,7 @@ public class Dungeon extends MazeBase{
     public Dungeon(double varprcEnemies,double varlvlEnemies,CellInformation.CELLMODE mode,CellInformation.CELLTYPE type){
         // Momentaneamente el Laberinto no posee dimensiones
         super(0,0, varprcEnemies, varlvlEnemies);
+        dungeonStatus = new CellInformation();
         dungeonStatus.SetMode(mode);
         dungeonStatus.SetType(type);
     }

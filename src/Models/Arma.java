@@ -10,8 +10,8 @@ package Models;
  * @author Arthuro
  */
 public class Arma extends Artefacto{
-    int danho_min;
-    int danho_max;
+    private int danho_min;
+    private int danho_max;
     
     public Arma(){
         danho_min = 0;

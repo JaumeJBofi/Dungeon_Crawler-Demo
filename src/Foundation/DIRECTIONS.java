@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package Foundation;
 
 /**
  *
- * @author Arthuro
+ * @author Jauma
  */
-public class Artefacto {
-    protected String nombre; 
+public enum DIRECTIONS {     
+    TOP,RIGHT,BOT,LEFT
 }

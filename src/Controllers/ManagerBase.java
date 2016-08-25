@@ -6,16 +6,14 @@
 package Controllers;
 
 import Foundation.Coordinate;
+import Foundation.DIRECTIONS;
 
 /**
  *
  * @author Jauma
  */
 public class ManagerBase {
-    
-    public enum DIRECTIONS{
-        TOP,RIGHT,BOT,LEFT
-    }
+       
     
     public void advanceInDirection(Coordinate coord, DIRECTIONS dir,int steps)
     {

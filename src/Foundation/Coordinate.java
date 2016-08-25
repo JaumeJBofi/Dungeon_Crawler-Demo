@@ -4,14 +4,13 @@
  * and open the template in the editor.
  */
 package Foundation;
-
 /**
  *
  * @author Jauma
  */
 public class Coordinate {
-    private int M;
-    private int N;
+    final private int M;
+    final private int N;
     private int x;
     private int y;
     
@@ -44,12 +43,11 @@ public class Coordinate {
         return x;
     }
     
-    public boolean SetX(int xVar){
+    public void SetX(int xVar){
         if(InRangeX(xVar)){
-            x = xVar;
-            return true;
+            x = xVar;            
         }else{
-            return false;
+            //throw new IndexOutOfBoundsException();
         }        
     }
     
@@ -57,12 +55,11 @@ public class Coordinate {
         return y;
     }
     
-    public boolean SetY(int yVar){
+    public void SetY(int yVar){
         if(InRangeY(yVar)){
-            x = yVar;
-            return true;
+            y = yVar;
         }else{
-            return false;
+            //throw new IndexOutOfBoundsException();
         }        
     }
             
