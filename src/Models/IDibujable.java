@@ -12,7 +12,6 @@ package Models;
 public interface IDibujable {
     // Maneja la implementacion de poder ser renderizado
     public void Render();
-    public void Render(int x,int y);
     public void LoadComponents();
     public void Dispose();    
 }

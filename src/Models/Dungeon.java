@@ -5,7 +5,6 @@
  */
 package Models;
 import Foundation.CellInformation;
-import Models.IDibujable;
 
 /**
  *
@@ -20,8 +19,6 @@ public class Dungeon implements IDibujable{
     private int maxshowY;
     private int minshowX; 
     private int maxshowX;
-    private int tamShowX;
-    private int tamShowY;
     
     private double prcEnemies;
     private double lvlEnemies;
@@ -102,7 +99,7 @@ public class Dungeon implements IDibujable{
         dungeonAccess = access;
     }
     
-    private void inicializarDatosMostrarMapa(int posY,int posX){
+    private void inicializarDatosMostrarMapa(int posY,int posX,int tamShowX,int tamShowY){
         if( (posY - tamShowY) > 0 )
             minshowY = posY - tamShowY;
         else
@@ -126,10 +123,20 @@ public class Dungeon implements IDibujable{
     public void Render(){
         
     }
-    public void Render(int posX,int posY){
-        
+    public void Render(int posX,int posY,int tamShowX,int tamShowY){        
         int minShowY,minShowX;
-        inicializarDatosMostrarMapa(posX,posY);
+        
+//        for(int i = 0;i<M;i++){
+//            for(int j = 0;j<N;j++){
+//                if(dungeonAccess[i][j].isWall()){
+//                    System.out.print("0");
+//                }else{
+//                    System.out.print(" ");
+//                }                
+//            }
+//            System.out.println(" ");
+//        }
+        inicializarDatosMostrarMapa(posX,posY,tamShowX,tamShowY);
         for( int y = minshowY ; y <= maxshowY ; y++ ){
             for( int x = minshowX ; x <= maxshowX ; x++ ){
                 if( (x == posX) && (y == posY) ){

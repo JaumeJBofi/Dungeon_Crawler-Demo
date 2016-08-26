@@ -28,7 +28,7 @@ import Foundation.CellInformation.CELLMODE;
 public class DungeonManager{
       
     private CellInformation[][] dungeonAccess;
-    List<Dungeon> dungeons;       
+    public List<Dungeon> dungeons;       
     private DIRECTIONS currentDirections;
     final private Random randomManager;
  
@@ -85,7 +85,7 @@ public class DungeonManager{
         coord.SetY(coord.GetY()+yFactor);        
     }
     
-    public void CreateDungeonDistribution(int M,int N,double worldprcEnemies,double worldlvlEnemies){        
+    public Coordinate CreateDungeonDistribution(int M,int N,double worldprcEnemies,double worldlvlEnemies){        
         Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies);        
         theDungeon.SetM(M);
         theDungeon.SetN(N);                
@@ -103,10 +103,12 @@ public class DungeonManager{
         // el numero de conexiones. De esta manera podemos saber si es que es una habitacion.
         Coordinate currentPoint = new Coordinate(M,N);
         int x = randomManager.nextInt(M-2) + 1 ;                
-        int y = randomManager.nextInt(M-2) + 1;        
-        
+        int y = randomManager.nextInt(M-2) + 1;
+               
         currentPoint.SetX(x);
         currentPoint.SetY(y);
+        
+        Coordinate playerPoint = currentPoint.GetPoint();
         
         Stack<Coordinate> myStack = new Stack();
         
@@ -130,22 +132,11 @@ public class DungeonManager{
             {           
                 myStack.pop();
             }
-//            char c = 219;
-//            for(int i = 0;i<M;i++){
-//                for(int j = 0;j<N;j++){
-//                    if(!dungeonAccess[i][j].isWall()){
-//                        System.out.print("0");
-//                    }else{
-//                        System.out.print(" ");
-//                    }                   
-//                }
-//                 System.out.println();
-//            }
-//            System.out.println();
-//            System.out.println();
         }
         dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.SIGUENTE);
         dungeons.add(theDungeon);
         theDungeon.SetAccess(dungeonAccess);
+        
+        return playerPoint;
     }
 }

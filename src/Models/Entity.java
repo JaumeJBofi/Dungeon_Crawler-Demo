@@ -14,19 +14,31 @@ import Foundation.DIRECTIONS;
  */
 public class Entity {
 
-    protected Coordinate position;
+    final private Coordinate position;
     int hp; // vida actual
-
-    public Entity(int M,int N){
-        hp = 0;
-        position = new Coordinate(M, N);        
+  
+    public Entity(Coordinate varPosition){
+        hp = 100;
+        position = varPosition;        
     }
     
-    public Coordinate GetPosition()
-    {
-        return position;
+    public Coordinate GetPosition(){
+        return position.GetPoint();
     }
-
+    
+    public void SetPosition(int x,int y){
+        position.SetX(x);
+        position.SetY(y);
+    }
+    
+    public int GetX(){
+        return position.GetX();
+    }
+    
+    public int GetY(){
+        return position.GetY();
+    }
+    
     public void SetVida(int v) {
         hp = v;
     }
@@ -54,6 +66,5 @@ public class Entity {
             System.err.println("Move out of bounds");
             System.exit(1);
         }                
-    }
-    
+    }        
 }
