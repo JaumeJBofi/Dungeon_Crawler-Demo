@@ -20,11 +20,13 @@ public class Coordinate {
     }
     
     public boolean InRangeX(int xVar){
-        return (xVar>=0&&xVar<N);
+        //En Rango con Cero Exclusivo!!
+        return (xVar>0&&xVar<N-1);
     }
     
     public boolean InRangeY(int yVar){
-        return (yVar>=0&&yVar<M);
+        //En Rango con Cero Exclusivo!!
+        return (yVar>0&&yVar<M-1);
     }
     public boolean InRange()
     {
@@ -68,6 +70,5 @@ public class Coordinate {
         newCoord.SetX(x);
         newCoord.SetY(y);
         return newCoord;
-    }
-    
+    }    
 }

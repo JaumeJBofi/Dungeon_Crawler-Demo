@@ -6,7 +6,6 @@
 
 package gameproject;
 import Controllers.DungeonManager;
-import Foundation.CellInformation;
 
 /**
  *
@@ -18,8 +17,8 @@ public class GameProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {               
-        DungeonManager myManager = new DungeonManager(0, 0, CellInformation.CELLMODE.NORMAL, CellInformation.CELLTYPE.AFUERA);
-        myManager.CreateDungeonDistribution(10, 10);
+        DungeonManager myManager = new DungeonManager();
+        myManager.CreateDungeonDistribution(25, 25,0,0);
     }
     
 }

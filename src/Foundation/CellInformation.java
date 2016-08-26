@@ -10,7 +10,7 @@ package Foundation;
  */
 public class CellInformation {
     public enum CELLTYPE{
-        ADENTRO,AFUERA
+        ADENTRO,PARED
     }
     
     public enum CELLMODE{
@@ -18,8 +18,16 @@ public class CellInformation {
         //Podemos agregar diferentes tipos especiales de celdas o Laberintos.
     }
     
+    public enum CELLOBJECT{
+        ENEMY,POTION,WEAPON,EMPTY
+    }
+
+    public CellInformation() {
+    }
+            
     private CELLMODE MODE = CELLMODE.NORMAL;
-    private CELLTYPE TYPE = CELLTYPE.AFUERA;    
+    private CELLTYPE TYPE = CELLTYPE.PARED; 
+    private CELLOBJECT OBJECT = CELLOBJECT.EMPTY;
 
     public boolean isNext(){
         return MODE == CELLMODE.SIGUENTE;
@@ -29,9 +37,9 @@ public class CellInformation {
         return !isNext();
     }
     
-    public boolean isOut()
+    public boolean isWall()
     {
-        return TYPE == CELLTYPE.AFUERA;
+        return TYPE == CELLTYPE.PARED;
     }
     
     public void SetMode(CELLMODE cellMode){
@@ -39,6 +47,18 @@ public class CellInformation {
     }
     
     public void SetType(CELLTYPE cellType){
-        TYPE = cellType;
+        TYPE = cellType;                
+    }
+    
+    public CELLMODE GetMode(){
+        return MODE;
+    }
+    
+    public CELLTYPE GetType(){
+        return TYPE;
+    }
+
+    public CELLOBJECT GetObject(){
+        return OBJECT;
     }
 }
