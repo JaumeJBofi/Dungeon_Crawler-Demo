@@ -30,26 +30,28 @@ public class Avatar extends Entity implements IDibujable{
         super(position);
         hp = 100; // digamos q sea 100
         vidaMaxima = 500; // la vida maxima en el juego, por ejemplo        
-        SetTamShowX(tamShowX);
-        SetTamShowY(tamShowY);
+//        SetTamShowX(tamShowX);
+//        SetTamShowY(tamShowY);
+          tamShowX = varTamShowX;
+          tamShowY = varTamShowY;
     }
     
-    public void MoveAvatar(DIRECTIONS way,int steps){ // nuevas coordenadas
-        // Regresa False si las cooredenadas estan fuera de rango        
-        int xFactor = 0, yFactor = 0;
-        switch(way) {
-                    case BOT:{ yFactor+=steps;                        
-                    }break;
-                    case TOP:{ yFactor-=steps;                        
-                    }break;
-                    case LEFT:{ xFactor-=steps;                        
-                    }break;
-                    case RIGHT:{ xFactor+=steps;                        
-                    }
-                }
-        SetPosition(GetX()+xFactor, GetY()+yFactor);
-        // falta verificar los limites de pantalla
-    }   
+//    public void MoveAvatar(DIRECTIONS way,int steps){ // nuevas coordenadas
+//        // Regresa False si las cooredenadas estan fuera de rango        
+//        int xFactor = 0, yFactor = 0;
+//        switch(way) {
+//                    case BOT:{ yFactor+=steps;                        
+//                    }break;
+//                    case TOP:{ yFactor-=steps;                        
+//                    }break;
+//                    case LEFT:{ xFactor-=steps;                        
+//                    }break;
+//                    case RIGHT:{ xFactor+=steps;                        
+//                    }
+//                }
+//        SetPosition(GetX()+xFactor, GetY()+yFactor);
+//        // falta verificar los limites de pantalla
+//    }   
     
     public void SetVidaMaxima(int v) {
         vidaMaxima = v;

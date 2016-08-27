@@ -7,6 +7,8 @@
 package gameproject;
 import Controllers.Dibujador;
 import Controllers.DungeonManager;
+import Foundation.CellInformation;
+import Foundation.DIRECTIONS;
 import Models.Avatar;
 import Foundation.Options;
 import Foundation.Options.ACTION;
@@ -25,24 +27,31 @@ public class GameProject {
     public static void main(String[] args) {               
         DungeonManager myManager = new DungeonManager();                        
         
-        Avatar player = new Avatar(myManager.CreateDungeonDistribution(25, 25,0,0));
+        // Aca hacemos random de las dimensiones
+        //Tambien podemos ya ir creando los otros laberintos
+        Avatar player = new Avatar(myManager.CreateDungeonDistribution(30, 30,0,0),10,10);
         
         Dibujador Renderer = new Dibujador();
         
-        Options choiceTaken;
+        Options choiceTaken = new Options(ACTION.INTERACT);
         
-        while((ACTION.EXIT!=((choiceTaken=Renderer.mostrarMenu()).taken)))
-        {
-            Renderer.mostrarLaberinto(myManager.dungeons.get(0), player);
+        CellInformation nextCellInformation;
+        
+        while((ACTION.EXIT!=((Renderer.mostrarMenu(choiceTaken)).taken)))
+        {            
+            Renderer.mostrarLaberinto(myManager.GetActiveDungeon(), player);
             switch(choiceTaken.taken){
                 case MOVE:{
-                    
+                    if(!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(),choiceTaken.path)).isWall()){
+                        player.Move(choiceTaken.path, 1);                    
+                    }else{
+                        System.out.println("\n\nNo puedes moverte en esa Direccion");
+                        System.out.println("");
+                    }                    
                 }break;
-                case INTERACT:{
-                    
+                case INTERACT:{                    
                 }break;
-            }
-            
+            }            
         }
     }
     

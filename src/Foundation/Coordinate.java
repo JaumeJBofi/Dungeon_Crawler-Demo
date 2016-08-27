@@ -21,12 +21,12 @@ public class Coordinate {
     
     public boolean InRangeX(int xVar){
         //En Rango con Cero Exclusivo!!
-        return (xVar>0&&xVar<N-1);
+        return (xVar>0&&xVar<M-1);
     }
     
     public boolean InRangeY(int yVar){
         //En Rango con Cero Exclusivo!!
-        return (yVar>0&&yVar<M-1);
+        return (yVar>0&&yVar<N-1);
     }
     public boolean InRange()
     {

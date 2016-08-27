@@ -22,37 +22,38 @@ public class Dibujador {
     public Dibujador(){        
         scanner = new Scanner(System.in);
     }
+ 
     
-    public Options mostrarMenu(){        
+    public Options mostrarMenu(Options choice){        
         System.out.println("\nDefinir accion:\t");        
         String input = scanner.nextLine();    
                 
         if( input.equalsIgnoreCase("salir") ){
             System.out.println("\n\nSesionFinalizada");
-            return new Options(Options.ACTION.EXIT);
-        }
-        
-        if( input.toLowerCase().toLowerCase().startsWith("mover") ){
+            choice.SetAction(ACTION.EXIT);
+        }else if( input.toLowerCase().toLowerCase().startsWith("mover") ){
+          choice.SetAction(ACTION.MOVE);
+          
             if(input.toLowerCase().endsWith("derecha") ){
-                return new Options(ACTION.MOVE,DIRECTIONS.RIGHT);
+                choice.SetPath(DIRECTIONS.RIGHT);
             }
             else if(input.toLowerCase().endsWith("izquierda") ){
-                return new Options(ACTION.MOVE,DIRECTIONS.LEFT);
+                choice.SetPath(DIRECTIONS.LEFT);
             }
             else if(input.toLowerCase().endsWith("abajo") ){
-                return new Options(ACTION.MOVE,DIRECTIONS.BOT);
+                choice.SetPath(DIRECTIONS.BOT);
             }
             else if(input.toLowerCase().endsWith("arriba") ){
-                return new Options(ACTION.MOVE,DIRECTIONS.TOP);
-            }
-        }
-        
-        if( input.toLowerCase().startsWith("interactuar") ){
-            return new Options(ACTION.INTERACT);
-        }
-        else{
-            return new Options(ACTION.NULA);
-        }                        
+                choice.SetPath(DIRECTIONS.TOP);
+            }else{
+                choice.SetAction(ACTION.NULA);
+            } 
+        }else if( input.toLowerCase().startsWith("interactuar") ){
+           choice.SetAction(ACTION.INTERACT);
+        }else{
+            choice.SetAction(ACTION.NULA);
+        }                                                      
+        return choice;
     }
     
     public void mostrarLaberinto(Dungeon theDungeon,Avatar player){

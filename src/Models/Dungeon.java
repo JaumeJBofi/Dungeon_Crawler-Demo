@@ -40,6 +40,10 @@ public class Dungeon implements IDibujable{
         return M;
     }
     
+    public CellInformation GetCellInformation(int x,int y){
+        return dungeonAccess[x][y];
+    }
+    
     // Recordar que las dimensiones deben ser impares
     final public void SetM(int varM){
         if(varM%2==0){
@@ -126,24 +130,13 @@ public class Dungeon implements IDibujable{
     public void Render(int posX,int posY,int tamShowX,int tamShowY){        
         int minShowY,minShowX;
         
-//        for(int i = 0;i<M;i++){
-//            for(int j = 0;j<N;j++){
-//                if(dungeonAccess[i][j].isWall()){
-//                    System.out.print("0");
-//                }else{
-//                    System.out.print(" ");
-//                }                
-//            }
-//            System.out.println(" ");
-//        }
-        inicializarDatosMostrarMapa(posX,posY,tamShowX,tamShowY);
-        for( int y = minshowY ; y <= maxshowY ; y++ ){
-            for( int x = minshowX ; x <= maxshowX ; x++ ){
-                if( (x == posX) && (y == posY) ){
+        for(int j = 0;j<N;j++){
+            for(int i = 0;i<M;i++){               
+                if( (i == posX) && (j == posY) ){
                     System.out.print("H");
                 }
                 else{
-                    CellInformation factor = dungeonAccess[y][x];
+                    CellInformation factor = dungeonAccess[i][j];
                     
                     switch (factor.GetMode()){
                         case SIGUENTE:
@@ -173,10 +166,10 @@ public class Dungeon implements IDibujable{
                             }                            
                         }break;                                                     
                     }                                                            
-                }
+                }  
             }
-            System.out.println();
-        }        
+            System.out.println(" ");
+        }       
     }
     
     public void LoadComponents(){

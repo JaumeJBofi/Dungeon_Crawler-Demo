@@ -28,15 +28,19 @@ import Foundation.CellInformation.CELLMODE;
 public class DungeonManager{
       
     private CellInformation[][] dungeonAccess;
-    public List<Dungeon> dungeons;       
+    private CellInformation currenCellInfo;
+    
+    private List<Dungeon> dungeons;       
     private DIRECTIONS currentDirections;
     final private Random randomManager;
- 
+    private int activeDungeon;
     
     
     public DungeonManager(){                                        
         randomManager = new Random();
         dungeons = new ArrayList();
+        activeDungeon = dungeons.size();
+        currenCellInfo = new CellInformation();
     }
     
     //Podemos usar el mismo point.
@@ -44,6 +48,28 @@ public class DungeonManager{
     {
         return ((i>0&&i<M)&&(j>0&&j<N));
     }
+    
+    public boolean SetActiveDungeon(int n){
+        if(dungeons.size()<=n) return false;
+        activeDungeon = n;
+        return true;
+    }
+    
+    public CellInformation ValidMoveAndChange(Coordinate point,DIRECTIONS path){        
+        advanceInDirection(point, path, 1);
+        if(point.InRange())
+        {
+            return dungeons.get(activeDungeon).GetCellInformation(point.GetX(),point.GetY());
+        }else{
+            currenCellInfo.SetType(CELLTYPE.PARED);
+            return currenCellInfo;
+        }
+    }
+    
+    public Dungeon GetActiveDungeon(){
+        return dungeons.get(activeDungeon);
+    }
+    
     
     private boolean checkAdjCells(Coordinate point){              
         List <DIRECTIONS> validDir = new ArrayList();
@@ -116,7 +142,7 @@ public class DungeonManager{
         dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.ANTERIOR);
         
         myStack.push(currentPoint.GetPoint());
-      
+        boolean firstPop = true;
         while(!myStack.isEmpty()){
             currentPoint = myStack.peek();
             if(checkAdjCells(currentPoint)){
@@ -128,15 +154,16 @@ public class DungeonManager{
                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
                 
                 myStack.push(currentPoint.GetPoint());                
-            }else
-            {           
+            }else{   
+                if(firstPop) {
+                    dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.SIGUENTE);        
+                    firstPop = false;
+                }
                 myStack.pop();
             }
-        }
-        dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.SIGUENTE);
+        }        
         dungeons.add(theDungeon);
-        theDungeon.SetAccess(dungeonAccess);
-        
+        theDungeon.SetAccess(dungeonAccess);        
         return playerPoint;
     }
 }
