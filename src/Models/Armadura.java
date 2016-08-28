@@ -10,7 +10,7 @@ package Models;
  * @author Arthuro
  */
 public class Armadura extends Artefacto {
-    int defensa;
+    private int defensa;
     public Armadura(){
         defensa = 0;
     }

@@ -7,13 +7,11 @@ package Models;
 
 /**
  *
- * @author Arthuro
+ * @author Jauma
  */
-public class Artefacto {
-    protected String nombre; 
-    
-    // agregado 27/08/16 
-    public void Render(){
-        System.out.println("Nombre = " + nombre);
-    }
+public interface IDibujable {
+    // Maneja la implementacion de poder ser renderizado
+    public void Render();
+    public void LoadComponents();
+    public void Dispose();    
 }

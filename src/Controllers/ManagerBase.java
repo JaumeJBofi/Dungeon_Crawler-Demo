@@ -5,7 +5,7 @@
  */
 package Controllers;
 
-import java.util.AbstractMap;
+import Foundation.Coordinate;
 
 /**
  *
@@ -17,7 +17,7 @@ public class ManagerBase {
         TOP,RIGHT,BOT,LEFT
     }
     
-    public AbstractMap.SimpleEntry<Integer,Integer> advanceInDirection(AbstractMap.SimpleEntry<Integer,Integer> coord, DIRECTIONS dir,int steps)
+    public void advanceInDirection(Coordinate point, DIRECTIONS dir,int steps)
     {
         int xFactor = 0, yFactor = 0;
         switch(dir) {
@@ -30,7 +30,7 @@ public class ManagerBase {
                     case RIGHT:{ xFactor+=steps;                        
                     }
                 }
-
-        return new AbstractMap.SimpleEntry(coord.getKey()+xFactor,coord.getValue()+yFactor);
+        point.SetX(point.GetX()+xFactor);
+        point.SetY(point.GetY()+yFactor);        
     }
 }

@@ -5,13 +5,17 @@
  */
 package Models;
 
+import Foundation.Coordinate;
+
 /**
  *
  * @author Arthuro
  */
 public class Enemy extends Entity {
     int nivel;
-    public  Enemy(){
+    Coordinate position;
+    public Enemy(Coordinate varPosition){
+        super(varPosition);
         nivel = 1;
     }
     

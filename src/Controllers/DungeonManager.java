@@ -4,83 +4,250 @@
  * and open the template in the editor.
  */
 package Controllers;
-import Foundation.CellInformation;
-import Models.Dungeon;
-import java.util.AbstractMap;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 import java.util.List;
+import java.lang.Math ; // include solo por round
+import Models.Dungeon;
+import Foundation.Coordinate;
+import Foundation.DIRECTIONS;
+
+import Foundation.CellInformation;
+import Foundation.CellInformation.CELLTYPE;
+import Foundation.CellInformation.CELLMODE;
+
+
 
 /**
  *
  * @author Jauma
  */
-public class DungeonManager extends ManagerBase{
-    private int[][] dungeonAccess;
-    final private Dungeon theDungeon;   
-    private ManagerBase.DIRECTIONS currentDirections;
+// Puede tambien referirse al mundo del Juego.
+public class DungeonManager {
+
+    private CellInformation[][] dungeonAccess;
+    private CellInformation currenCellInfo;
+
+    private List<Dungeon> dungeons;
+    private DIRECTIONS currentDirections;
     final private Random randomManager;
-    
-    
-    public DungeonManager(int varM,int varN,double worldprcEnemies,double worldlvlEnemies,CellInformation.CELLMODE mode,CellInformation.CELLTYPE type){
-        theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies, mode, type);
+    private int activeDungeon;
+
+    public DungeonManager() {
         randomManager = new Random();
+        dungeons = new ArrayList();
+        activeDungeon = dungeons.size();
+        currenCellInfo = new CellInformation();
     }
-    
-    private boolean inRange(int i,int j,int M,int N)
-    {
-        return ((i>=0&&i<M)&&(j>=0&&j<N));
+
+    //Podemos usar el mismo point.
+    private boolean inRange(int i, int j, int M, int N) {
+        return ((i > 0 && i < M) && (j > 0 && j < N));
     }
-    
-    private boolean checkAdjCells(int i,int j,int M,int N){        
-        int[] a = {-1,1};
-        
-        List <ManagerBase.DIRECTIONS> validDir = new ArrayList();
-       
-        int factor = -1;
-        if(inRange(i, j+factor, M, N)) validDir.add(ManagerBase.DIRECTIONS.TOP);
-        if(inRange(i+factor, j, M, N)) validDir.add(ManagerBase.DIRECTIONS.LEFT);                        
-        
-        factor = 1;
-        if(inRange(i, j+factor, M, N)) validDir.add(ManagerBase.DIRECTIONS.BOT);
-        if(inRange(i+factor, j, M, N)) validDir.add(ManagerBase.DIRECTIONS.RIGHT);
-        
-        if(validDir.isEmpty()) return false;
-        
-        currentDirections = validDir.get(randomManager.nextInt(validDir.size()));   
+
+    public boolean SetActiveDungeon(int n) {
+        if (dungeons.size() <= n) {
+            return false;
+        }
+        activeDungeon = n;
         return true;
     }
-    
-    public void CreateDungeonDistribution(int M,int N){
-        dungeonAccess = new int[M][N];
+
+    public CellInformation ValidMoveAndChange(Coordinate point, DIRECTIONS path) {
+        advanceInDirection(point, path, 1);
+        if (point.InRange()) {
+            return dungeons.get(activeDungeon).GetCellInformation(point.GetX(), point.GetY());
+        } else {
+            currenCellInfo.SetType(CELLTYPE.PARED);
+            return currenCellInfo;
+        }
+    }
+
+    /// agregado ////}
+    public void Interactuar(Coordinate point, DIRECTIONS path) {
+        int xFactor = point.GetX(), yFactor = point.GetY();
+        switch (path) {
+            case BOT: {
+                yFactor += 1;
+            }
+            break;
+            case TOP: {
+                yFactor -= 1;
+            }
+            break;
+            case LEFT: {
+                xFactor -= 1;
+            }
+            break;
+            case RIGHT: {
+                xFactor += 1;
+            }
+        }
+        ///// deberia actualizar el access y borrar el objeto de la matriz
+    }
+
+    ////
+    public Dungeon GetActiveDungeon() {
+        return dungeons.get(activeDungeon);
+    }
+
+    private boolean checkAdjCells(Coordinate point) {
+        List<DIRECTIONS> validDir = new ArrayList();
+        Coordinate varPointX = point.GetPoint();
+        Coordinate varPointY = point.GetPoint();
+
+        advanceInDirection(varPointX, DIRECTIONS.TOP, 2);
+        if (varPointX.InRange() && dungeonAccess[varPointX.GetX()][varPointX.GetY()].isWall()) {
+            validDir.add(DIRECTIONS.TOP);
+        }
+
+        advanceInDirection(varPointX, DIRECTIONS.BOT, 4);
+        if (varPointX.InRange() && dungeonAccess[varPointX.GetX()][varPointX.GetY()].isWall()) {
+            validDir.add(DIRECTIONS.BOT);
+        }
+
+        advanceInDirection(varPointY, DIRECTIONS.LEFT, 2);
+        if (varPointY.InRange() && dungeonAccess[varPointY.GetX()][varPointY.GetY()].isWall()) {
+            validDir.add(DIRECTIONS.LEFT);
+        }
+
+        advanceInDirection(varPointY, DIRECTIONS.RIGHT, 4);
+        if (varPointY.InRange() && dungeonAccess[varPointY.GetX()][varPointY.GetY()].isWall()) {
+            validDir.add(DIRECTIONS.RIGHT);
+        }
+
+        if (validDir.isEmpty()) {
+            return false;
+        }
+
+        currentDirections = validDir.get(randomManager.nextInt(validDir.size()));
+        return true;
+    }
+
+    public void advanceInDirection(Coordinate coord, DIRECTIONS dir, int steps) {
+        int xFactor = 0, yFactor = 0;
+        switch (dir) {
+            case BOT: {
+                yFactor += steps;
+            }
+            break;
+            case TOP: {
+                yFactor -= steps;
+            }
+            break;
+            case LEFT: {
+                xFactor -= steps;
+            }
+            break;
+            case RIGHT: {
+                xFactor += steps;
+            }
+        }
+        coord.SetX(coord.GetX() + xFactor);
+        coord.SetY(coord.GetY() + yFactor);
+    }
+
+    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, double worldlvlEnemies) {
+        Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies);
         theDungeon.SetM(M);
-        theDungeon.SetN(N);                
-        
+        theDungeon.SetN(N);
+        M = theDungeon.GetM();
+        N = theDungeon.GetN();
+
+        dungeonAccess = new CellInformation[M][N];
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                dungeonAccess[i][j] = new CellInformation();
+            }
+        }
+
         // Capaz podemos hacer que las conexiones agregen info a la matriz, como
-        // el numero de conexiones. De esta manera podemos saber si es que es una habitacion.        
-        AbstractMap.SimpleEntry<Integer,Integer> currentPair = new AbstractMap.SimpleEntry(randomManager.nextInt(M),randomManager.nextInt(N));
-        AbstractMap.SimpleEntry<Integer,Integer> nextPair;
-        Stack<AbstractMap.SimpleEntry<Integer,Integer>> myStack = new Stack();
-        
-        dungeonAccess[currentPair.getKey()][currentPair.getValue()] = 1;
-        myStack.push(currentPair);
-        
-        while(!myStack.isEmpty()){
-            currentPair = myStack.peek();
-            if(checkAdjCells(currentPair.getKey(),currentPair.getValue(),theDungeon.GetM(),theDungeon.GetN())){
-                
+        // el numero de conexiones. De esta manera podemos saber si es que es una habitacion.
+        Coordinate currentPoint = new Coordinate(M, N);
+        int x = randomManager.nextInt(M - 2) + 1;
+        int y = randomManager.nextInt(N - 2) + 1;
+
+        currentPoint.SetX(x);
+        currentPoint.SetY(y);
+
+        Coordinate playerPoint = currentPoint.GetPoint();
+
+        Stack<Coordinate> myStack = new Stack();
+
+        dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
+        dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.ANTERIOR);
+
+        myStack.push(currentPoint.GetPoint());
+        boolean firstPop = true;
+        int numCellAdentro = 1;
+        while (!myStack.isEmpty()) {
+            currentPoint = myStack.peek();
+            if (checkAdjCells(currentPoint)) {
+
                 // Marcar camino y a V
-                nextPair = advanceInDirection(currentPair, currentDirections,1);   
-                dungeonAccess[nextPair.getKey()][nextPair.getValue()] = 1;                                           
-                nextPair = advanceInDirection(currentPair, currentDirections,2);   
-                dungeonAccess[nextPair.getKey()][nextPair.getValue()] = 1;
-                                
-                myStack.push(nextPair);
-            }else
-            {
+                advanceInDirection(currentPoint, currentDirections, 1);
+                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
+
+                advanceInDirection(currentPoint, currentDirections, 1);
+                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
+
+
+                // agregado
+                numCellAdentro += 2;
+                // ////
+                myStack.push(currentPoint.GetPoint());
+            } else {
+                if (firstPop) {
+                    dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.SIGUENTE);
+                    firstPop = false;
+                }
                 myStack.pop();
             }
         }
+
+        /// agregado ////
+        int numEnemies = 0;
+        int out = 0;
+        float porcEnemy = (float)(worldprcEnemies * 100) ;
+        int porc =Math.round(porcEnemy);
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                if (!(dungeonAccess[i][j].isWall())) {
+                    int randomObject = randomManager.nextInt(porc);
+                    switch (randomObject) {
+                        case 0: {
+                            dungeonAccess[i][j].SetObject(CellInformation.CELLOBJECT.ENEMY);
+                            break;
+                        }
+                        default: {
+                            randomObject = randomManager.nextInt(3);
+                            switch (randomObject) {
+                                case 0: {
+                                    dungeonAccess[i][j].SetObject(CellInformation.CELLOBJECT.EMPTY);
+                                    break;
+                                }
+                                case 1: {
+                                    dungeonAccess[i][j].SetObject(CellInformation.CELLOBJECT.POTION);
+                                    break;
+                                }
+                                case 2: {
+                                    dungeonAccess[i][j].SetObject(CellInformation.CELLOBJECT.WEAPON);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                numEnemies++;
+            }
+        }
+
+        //// 
+        dungeons.add(theDungeon);
+        theDungeon.SetAccess(dungeonAccess);
+        return playerPoint;
     }
 }
