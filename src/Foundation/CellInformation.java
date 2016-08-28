@@ -50,11 +50,13 @@ public class CellInformation {
         TYPE = cellType;                
     }
     
+
     //// agregado /////////////
     public void SetObject(CELLOBJECT cellObject){
         OBJECT = cellObject;                
     }
     /////
+
     public CELLMODE GetMode(){
         return MODE;
     }

@@ -29,7 +29,9 @@ public class GameProject {
         
         // Aca hacemos random de las dimensiones
         //Tambien podemos ya ir creando los otros laberintos
+
         Avatar player = new Avatar(myManager.CreateDungeonDistribution(30, 30,0.5,0),10,10);
+
         
         Dibujador Renderer = new Dibujador();
         

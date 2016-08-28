@@ -58,8 +58,10 @@ public class Dibujador {
     
     public void mostrarLaberinto(Dungeon theDungeon,Avatar player){
         
+
         theDungeon.Render(player.GetX(),player.GetY(),player.GetTamShowX(),player.GetTamShowY()); 
         player.Render();
+
     }   
 
     private boolean mostrarStats(){

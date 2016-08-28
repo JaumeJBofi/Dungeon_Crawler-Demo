@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
@@ -20,10 +21,19 @@ import Foundation.CellInformation.CELLMODE;
 
 
 
+import Models.Dungeon;
+import Foundation.Coordinate;
+import Foundation.DIRECTIONS;
+
+import Foundation.CellInformation;
+import Foundation.CellInformation.CELLTYPE;
+import Foundation.CellInformation.CELLMODE;
+
 /**
  *
  * @author Jauma
  */
+
 // Puede tambien referirse al mundo del Juego.
 public class DungeonManager {
 
@@ -36,10 +46,12 @@ public class DungeonManager {
     private int activeDungeon;
 
     public DungeonManager() {
+
         randomManager = new Random();
         dungeons = new ArrayList();
         activeDungeon = dungeons.size();
         currenCellInfo = new CellInformation();
+
     }
 
     //Podemos usar el mismo point.
@@ -205,6 +217,7 @@ public class DungeonManager {
                 }
                 myStack.pop();
             }
+
         }
 
         /// agregado ////
@@ -248,6 +261,7 @@ public class DungeonManager {
         //// 
         dungeons.add(theDungeon);
         theDungeon.SetAccess(dungeonAccess);
+
         return playerPoint;
     }
 }

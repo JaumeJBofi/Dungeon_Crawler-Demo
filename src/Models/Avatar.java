@@ -10,6 +10,7 @@ import Foundation.DIRECTIONS;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  *
  * @author Arthuro
@@ -19,7 +20,9 @@ public class Avatar extends Entity implements IDibujable{
     private int vidaMaxima;
     private int tamShowX;
     private int tamShowY;
+
     private List<Artefacto> saco;
+
     public Avatar(Coordinate position) {
         super(position);
         hp = 100; // digamos q sea 100
@@ -27,6 +30,7 @@ public class Avatar extends Entity implements IDibujable{
         tamShowX = 15;
         tamShowY = 15;
         saco = new ArrayList(); 
+
     }
     
     public Avatar(Coordinate position,int varTamShowX,int varTamShowY) {
