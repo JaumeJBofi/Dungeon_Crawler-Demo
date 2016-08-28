@@ -10,8 +10,10 @@ package Models;
  * @author Arthuro
  */
 public class Pocion extends Artefacto {
+    
     private int valor; // por el momento es el valor de cura digamos
-    public void Pocion(int varValor){
+    public Pocion(String varNombre,int varValor){ 
+        super(varNombre);
         valor = varValor;
     }
     public void SetValor(int v){

@@ -19,7 +19,7 @@ public class CellInformation {
     }
     
     public enum CELLOBJECT{
-        ENEMY,POTION,WEAPON,EMPTY
+        ENEMY,POTION,WEAPON,EMPTY,ARMOR
     }
 
     public CellInformation() {

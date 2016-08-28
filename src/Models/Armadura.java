@@ -11,11 +11,12 @@ package Models;
  */
 public class Armadura extends Artefacto {
     private int defensa;
-    public Armadura(){
-        defensa = 0;
+    public Armadura(String varNombre,int varDefensa){
+        super(varNombre);
+        SetDefensa(varDefensa);
     }
     
-    public void SetDefensa(int def){
+    final public void SetDefensa(int def){
         defensa = def;
     }
     
