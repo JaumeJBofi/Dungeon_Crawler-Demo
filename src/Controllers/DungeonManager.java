@@ -11,13 +11,7 @@ import java.util.Random;
 import java.util.Stack;
 import java.util.List;
 import java.lang.Math ; // include solo por round
-import Models.Dungeon;
-import Foundation.Coordinate;
-import Foundation.DIRECTIONS;
-
-import Foundation.CellInformation;
-import Foundation.CellInformation.CELLTYPE;
-import Foundation.CellInformation.CELLMODE;
+;
 
 
 
@@ -161,8 +155,8 @@ public class DungeonManager {
         coord.SetY(coord.GetY() + yFactor);
     }
 
-    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, double worldlvlEnemies) {
-        Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies);
+    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, double worldlvlEnemies,double varprcItems) {
+        Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies,varprcItems);
         theDungeon.SetM(M);
         theDungeon.SetN(N);
         M = theDungeon.GetM();
@@ -190,10 +184,15 @@ public class DungeonManager {
 
         dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
         dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.ANTERIOR);
-
+        
+        //Seteo la posicion del Anterior punto
+        theDungeon.SetAntPos(currentPoint.GetPoint());
+        
         myStack.push(currentPoint.GetPoint());
         boolean firstPop = true;
         int numCellAdentro = 1;
+        int numEnemies = 0;
+        
         while (!myStack.isEmpty()) {
             currentPoint = myStack.peek();
             if (checkAdjCells(currentPoint)) {
@@ -201,64 +200,41 @@ public class DungeonManager {
                 // Marcar camino y a V
                 advanceInDirection(currentPoint, currentDirections, 1);
                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
-
+                
+                if(Math.random()<=theDungeon.GetPrcEnemies()){
+                    dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.ENEMY);
+                    numEnemies++;
+                }else
+                {
+                    if(Math.random()<=theDungeon.GetPrcItem()){
+                        int randomObject = randomManager.nextInt(2);
+                            switch (randomObject) {                          
+                            case 0: {
+                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.POTION);
+                                break;
+                            }
+                            case 1: {
+                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.WEAPON);
+                                break;
+                            }                        
+                        }                    
+                    }else{
+                        dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.EMPTY);
+                    }
+                }   
                 advanceInDirection(currentPoint, currentDirections, 1);
-                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
-
-
-                // agregado
-                numCellAdentro += 2;
-                // ////
+                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);     
                 myStack.push(currentPoint.GetPoint());
             } else {
                 if (firstPop) {
                     dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.SIGUENTE);
+                    theDungeon.SetSigPos(currentPoint.GetPoint());
                     firstPop = false;
                 }
                 myStack.pop();
             }
-
-        }
-
-        /// agregado ////
-        int numEnemies = 0;
-        int out = 0;
-        float porcEnemy = (float)(worldprcEnemies * 100) ;
-        int porc =Math.round(porcEnemy);
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                if (!(dungeonAccess[i][j].isWall())) {
-                    int randomObject = randomManager.nextInt(porc);
-                    switch (randomObject) {
-                        case 0: {
-                            dungeonAccess[i][j].SetObject(CellInformation.CELLOBJECT.ENEMY);
-                            break;
-                        }
-                        default: {
-                            randomObject = randomManager.nextInt(3);
-                            switch (randomObject) {
-                                case 0: {
-                                    dungeonAccess[i][j].SetObject(CellInformation.CELLOBJECT.EMPTY);
-                                    break;
-                                }
-                                case 1: {
-                                    dungeonAccess[i][j].SetObject(CellInformation.CELLOBJECT.POTION);
-                                    break;
-                                }
-                                case 2: {
-                                    dungeonAccess[i][j].SetObject(CellInformation.CELLOBJECT.WEAPON);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                numEnemies++;
-            }
-        }
-
-        //// 
+        }       
+        theDungeon.SetNumEnemies(numEnemies);
         dungeons.add(theDungeon);
         theDungeon.SetAccess(dungeonAccess);
 

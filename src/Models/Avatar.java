@@ -6,10 +6,8 @@
 package Models;
 
 import Foundation.Coordinate;
-import Foundation.DIRECTIONS;
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  *
@@ -20,20 +18,19 @@ public class Avatar extends Entity implements IDibujable{
     private int vidaMaxima;
     private int tamShowX;
     private int tamShowY;
-
     private List<Artefacto> saco;
-
-    public Avatar(Coordinate position) {
+    
+    public Avatar(Coordinate position,String varNombre) {
         super(position);
         hp = 100; // digamos q sea 100
         vidaMaxima = 500; // la vida maxima en el juego, por ejemplo        
         tamShowX = 15;
         tamShowY = 15;
         saco = new ArrayList(); 
-
+        SetNombre(varNombre);
     }
     
-    public Avatar(Coordinate position,int varTamShowX,int varTamShowY) {
+    public Avatar(Coordinate position,int varTamShowX,int varTamShowY,String varNombre) {
         super(position);
         hp = 100; // digamos q sea 100
         vidaMaxima = 500; // la vida maxima en el juego, por ejemplo        
@@ -42,24 +39,10 @@ public class Avatar extends Entity implements IDibujable{
           tamShowX = varTamShowX;
           tamShowY = varTamShowY;
           saco = new ArrayList();
+          SetNombre(varNombre);
     }
     
-//    public void MoveAvatar(DIRECTIONS way,int steps){ // nuevas coordenadas
-//        // Regresa False si las cooredenadas estan fuera de rango        
-//        int xFactor = 0, yFactor = 0;
-//        switch(way) {
-//                    case BOT:{ yFactor+=steps;                        
-//                    }break;
-//                    case TOP:{ yFactor-=steps;                        
-//                    }break;
-//                    case LEFT:{ xFactor-=steps;                        
-//                    }break;
-//                    case RIGHT:{ xFactor+=steps;                        
-//                    }
-//                }
-//        SetPosition(GetX()+xFactor, GetY()+yFactor);
-//        // falta verificar los limites de pantalla
-//    }   
+
     
     public void SetVidaMaxima(int v) {
         vidaMaxima = v;
@@ -98,6 +81,7 @@ public class Avatar extends Entity implements IDibujable{
     }
     public void Render(){
         int tamanho = saco.size();
+        System.err.println("");
         Artefacto art;
         System.out.println(" ----- SACO ------");
         for (int i= 0; i <tamanho ; i++){

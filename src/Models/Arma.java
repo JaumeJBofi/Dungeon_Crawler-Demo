@@ -13,9 +13,11 @@ public class Arma extends Artefacto{
     private int danho_min;
     private int danho_max;
     
-    public Arma(){
-        danho_min = 0;
-        danho_max = 0;
+    
+    public Arma(String varNombre,int varDanoMin,int varDanoMax){
+        super(varNombre);
+        danho_min = varDanoMin;
+        danho_max = varDanoMax;        
     }
     
     public void SetDanhoMin(int min){

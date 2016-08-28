@@ -5,6 +5,7 @@
  */
 package Models;
 import Foundation.CellInformation;
+import Foundation.Coordinate;
 
 /**
  *
@@ -22,27 +23,31 @@ public class Dungeon implements IDibujable{
     
     private double prcEnemies;
     private double lvlEnemies;
+    private double prcItems;
+    
+    private Coordinate antPos;
+    private Coordinate sigPos;
+    
+    private int numEnemies;
     
     //private CellInformation dungeonStatus;    
     
     private Chamber[][] layOutChamber;
     private CellInformation[][] dungeonAccess;
     
-    public Dungeon(double varprcEnemies,double varlvlEnemies){
+    public Dungeon(double varprcEnemies,double varlvlEnemies,double varPrcItems){
         // Momentaneamente el Laberinto no posee dimensiones
         M = 0;
         N = 0;
         SetLvlEnemies(varlvlEnemies);
         SetPrcEnemies(varprcEnemies);
+        SetPrcItems(varPrcItems);
     }
      
     public int GetM(){
         return M;
     }
-    
-    public CellInformation GetCellInformation(int x,int y){
-        return dungeonAccess[x][y];
-    }
+       
     
     // Recordar que las dimensiones deben ser impares
     final public void SetM(int varM){
@@ -70,9 +75,6 @@ public class Dungeon implements IDibujable{
         return prcEnemies;
     }
     
-    final public double GetPrcEnemies(double worldPrc){
-        return prcEnemies;
-    }
     
     final public void SetPrcEnemies(double varPrcEnemies){
         if(varPrcEnemies>=1){
@@ -97,6 +99,46 @@ public class Dungeon implements IDibujable{
     final public void SetLvlEnemies(double varLvlEnemies){
         //Logica de validacion para nivel de Enemigos
         lvlEnemies = varLvlEnemies;
+    }
+    
+    final public void SetPrcItems(double varPrcItems){
+        prcItems = varPrcItems;
+    }
+    
+    public double GetPrcItem(){
+        return prcItems;
+    }
+    
+    public int GetNumEnemies(){
+        return numEnemies;
+    }
+    
+    public void SetNumEnemies(int varNumEnemies){
+        if(varNumEnemies<0){
+            numEnemies = varNumEnemies;
+        }
+    }
+        
+    public CellInformation GetCellInformation(int x,int y){
+        return dungeonAccess[x][y];
+    }
+    
+    public Coordinate GetAntPos()
+    {
+        return antPos;
+    }
+    
+    public void SetAntPos(Coordinate varAntPos){
+        //Me entrega memoria
+        antPos = varAntPos;
+    }
+    
+    public Coordinate GetSigPos(){
+        return sigPos;
+    }
+    
+    public void SetSigPos(Coordinate varSigPos){
+        sigPos = varSigPos;
     }
     
     public void SetAccess(CellInformation access[][]){
@@ -127,11 +169,10 @@ public class Dungeon implements IDibujable{
     public void Render(){
         
     }
-    public void Render(int posX,int posY,int tamShowX,int tamShowY){        
-        int minShowY,minShowX;
-        
-        for(int j = 0;j<N;j++){
-            for(int i = 0;i<M;i++){               
+    public void Render(int posX,int posY,int tamShowX,int tamShowY){     
+        inicializarDatosMostrarMapa(posY, posX, tamShowX, tamShowY);
+        for(int j = minshowY;j<maxshowY;j++){
+            for(int i = minshowX;i<maxshowX;i++){               
                 if( (i == posX) && (j == posY) ){
                     System.out.print("H");
                 }

@@ -16,6 +16,7 @@ public class Entity {
 
     final private Coordinate position;
     int hp; // vida actual
+    private String nombre;
   
     public Entity(Coordinate varPosition){
         hp = 100;
@@ -45,6 +46,14 @@ public class Entity {
 
     public int GetVida() {
         return hp;
+    }
+    
+    final public void SetNombre(String nombre){
+      this.nombre = nombre;
+    }
+    
+    public String GetNombre(){
+        return nombre;
     }
     
     public void Move(DIRECTIONS way,int steps){

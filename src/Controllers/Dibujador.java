@@ -50,6 +50,18 @@ public class Dibujador {
             } 
         }else if( input.toLowerCase().startsWith("interactuar") ){
            choice.SetAction(ACTION.INTERACT);
+           if(input.toLowerCase().endsWith("derecha") ){
+                choice.SetPath(DIRECTIONS.RIGHT);
+            }
+            else if(input.toLowerCase().endsWith("izquierda") ){
+                choice.SetPath(DIRECTIONS.LEFT);
+            }
+            else if(input.toLowerCase().endsWith("abajo") ){
+                choice.SetPath(DIRECTIONS.BOT);
+            }
+            else if(input.toLowerCase().endsWith("arriba") ){
+                choice.SetPath(DIRECTIONS.TOP);
+            }
         }else{
             choice.SetAction(ACTION.NULA);
         }                                                      
