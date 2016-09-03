@@ -145,6 +145,31 @@ public class Dungeon implements IDibujable{
         dungeonAccess = access;
     }
     
+    public Artefacto getObject(int x,int y)
+    {
+        dungeonAccess[x][y].SetType(CellInformation.CELLTYPE.ADENTRO);
+        switch(dungeonAccess[x][y].GetObject())
+        {
+            case WEAPON:
+            {
+                return new Arma("Espada",1, 10);
+            }
+            case ARMOR:
+            {
+                return new Armadura("Escudo", 5);
+            }
+            case POTION:
+            {
+                return new Pocion("Healing Potion",15);                
+            }
+            default:
+            {
+                return new Pocion("Healing Potion",15);                
+            }
+        }        
+        // Deberiamos liberar la memoria de layout
+    }
+    
     private void inicializarDatosMostrarMapa(int posY,int posX,int tamShowX,int tamShowY){
         if( (posY - tamShowY) > 0 )
             minshowY = posY - tamShowY;
@@ -168,6 +193,38 @@ public class Dungeon implements IDibujable{
     }
     public void Render(){
         
+        for(int j=0;j<N;j++)
+        {
+            for(int i=0;i<M;i++)
+            {
+                CellInformation factor = dungeonAccess[i][j];                    
+                switch (factor.GetMode()){
+                    case SIGUENTE:
+                        System.out.print("+");
+                        break;
+                    case ANTERIOR:
+                        System.out.print("-");
+                        break;
+                    default:{                            
+                        switch (factor.GetType()){
+                            case PARED:
+                                System.out.print("#");
+                            break;
+                            case ADENTRO:
+                                System.out.print(" ");
+                            break;
+                            case ARTIFACT:
+                            System.out.print("A");
+                            break;
+                            case ENEMY:
+                                System.out.print("E");
+                            break;                            
+                        }                            
+                    }break;                                                     
+                }                                                            
+            }
+            System.err.print("\n");
+        }        
     }
     public void Render(int posX,int posY,int tamShowX,int tamShowY){     
         inicializarDatosMostrarMapa(posY, posX, tamShowX, tamShowY);
@@ -177,8 +234,7 @@ public class Dungeon implements IDibujable{
                     System.out.print("H");
                 }
                 else{
-                    CellInformation factor = dungeonAccess[i][j];
-                    
+                    CellInformation factor = dungeonAccess[i][j];                    
                     switch (factor.GetMode()){
                         case SIGUENTE:
                             System.out.print("+");
@@ -187,24 +243,20 @@ public class Dungeon implements IDibujable{
                             System.out.print("-");
                             break;
                         default:{                            
-                                switch (factor.GetObject()){
-                                case WEAPON:
-                                    System.out.print("A");
-                                    break;
+                            switch (factor.GetType()){
+                                case PARED:
+                                    System.out.print("#");
+                                break;
+                                case ADENTRO:
+                                    System.out.print(" ");
+                                break;
+                                case ARTIFACT:
+                                System.out.print("A");
+                                break;
                                 case ENEMY:
                                     System.out.print("E");
-                                    break;                 
-                                default:{
-                                    switch (factor.GetType()){
-                                    case PARED:
-                                    System.out.print("#");
-                                    break;
-                                    case ADENTRO:
-                                    System.out.print(" ");
-                                    break;                                                        
-                                    }
-                                }break;
-                            }                            
+                                break;
+                            }                          
                         }break;                                                     
                     }                                                            
                 }  

@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.Stack;
 import java.util.List;
 import java.lang.Math ; // include solo por round
-;
+import Models.Avatar;
 
 
 
@@ -72,8 +72,8 @@ public class DungeonManager {
     }
 
     /// agregado ////}
-    public void Interactuar(Coordinate point, DIRECTIONS path) {
-        int xFactor = point.GetX(), yFactor = point.GetY();
+    public void Interactuar(Avatar player, DIRECTIONS path) {
+        int xFactor = player.GetX(), yFactor = player.GetY();
         switch (path) {
             case BOT: {
                 yFactor += 1;
@@ -92,6 +92,7 @@ public class DungeonManager {
             }
         }
         ///// deberia actualizar el access y borrar el objeto de la matriz
+        player.AddArtefact(dungeons.get(activeDungeon).getObject(xFactor,yFactor));
     }
 
     ////
@@ -172,8 +173,10 @@ public class DungeonManager {
         // Capaz podemos hacer que las conexiones agregen info a la matriz, como
         // el numero de conexiones. De esta manera podemos saber si es que es una habitacion.
         Coordinate currentPoint = new Coordinate(M, N);
-        int x = randomManager.nextInt(M - 2) + 1;
+        int x = randomManager.nextInt(M - 3) + 1;
+        if(x%2==0) x++;
         int y = randomManager.nextInt(N - 2) + 1;
+        if(y%2==0) y++;
 
         currentPoint.SetX(x);
         currentPoint.SetY(y);
@@ -202,7 +205,7 @@ public class DungeonManager {
                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
                 
                 if(Math.random()<=theDungeon.GetPrcEnemies()){
-                    dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.ENEMY);
+                    dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);
                     numEnemies++;
                 }else
                 {
@@ -217,7 +220,8 @@ public class DungeonManager {
                                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.WEAPON);
                                 break;
                             }                        
-                        }                    
+                        }
+                    dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ARTIFACT);
                     }else{
                         dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.EMPTY);
                     }

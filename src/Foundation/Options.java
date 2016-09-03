@@ -5,8 +5,6 @@
  */
 package Foundation;
 
-import java.awt.Desktop;
-
 /**
  *
  * @author Jauma
@@ -22,16 +20,18 @@ public class Options {
     
     public Options(ACTION taken){
         this.taken = taken;
+        path = DIRECTIONS.BOT;
     }
     
     public Options(ACTION taken,DIRECTIONS dir){
         this.taken = taken;
         path = dir;
     }        
-    
+        
     public void SetAction(ACTION act){
         taken = act;
     }
+    
     
     public void SetPath(DIRECTIONS dir){        
         path = dir;

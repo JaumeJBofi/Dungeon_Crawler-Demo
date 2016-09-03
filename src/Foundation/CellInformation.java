@@ -10,7 +10,7 @@ package Foundation;
  */
 public class CellInformation {
     public enum CELLTYPE{
-        ADENTRO,PARED
+        ADENTRO,PARED,ENEMY,ARTIFACT
     }
     
     public enum CELLMODE{
@@ -19,7 +19,7 @@ public class CellInformation {
     }
     
     public enum CELLOBJECT{
-        ENEMY,POTION,WEAPON,EMPTY,ARMOR
+        POTION,WEAPON,EMPTY,ARMOR
     }
 
     public CellInformation() {

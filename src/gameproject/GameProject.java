@@ -50,31 +50,43 @@ public class GameProject {
         {                        
             switch(choiceTaken.taken){
                 case MOVE:{
-                    if(!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(),choiceTaken.path)).isWall()&&nextCellInformation.GetObject()!=CellInformation.CELLOBJECT.ENEMY){
+                    if(!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(),choiceTaken.path)).isWall()&&nextCellInformation.GetType()==CellInformation.CELLTYPE.ADENTRO)
+                            {
                         player.Move(choiceTaken.path, 1);                    
                     }else{
-                        System.out.println("\n\nNo puedes moverte en esa Direccion");
-                        System.out.println("");
+                        switch(nextCellInformation.GetType())
+                        {
+                            case PARED:
+                                System.out.println("\n\nNo puedes atravezar paredes....aún...");
+                            break;
+                            case ARTIFACT:
+                                System.out.println("\n\nUn misterioso objeto bloquea tu camino. Puedes intentar cogerlo\n");
+                            break;
+                            case ENEMY:
+                                System.out.printf("Cuidado! Un enemigo? Preparate para una posible batalla");
+                            break;
+                        }                        
+                        System.out.println("\n");
                     }                    
                 }break;
                 case INTERACT:{  
                     if(!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(),choiceTaken.path)).isWall()){
-                        CellInformation.CELLOBJECT var_object = nextCellInformation.GetObject();
-                        switch(var_object){
-                            case WEAPON:
-                            case POTION:
+                        
+                        
+                        switch(nextCellInformation.GetType())
+                        {
+                            case ARTIFACT:
                             {
-                                myManager.Interactuar(player.GetPosition(),choiceTaken.path); // borra el artefacto de la matriz                                
+                                myManager.Interactuar(player,choiceTaken.path); // borra el artefacto de la matriz                                
                                 System.out.println("\n\n INTERACT CORRECTO");
-                                System.out.println("");
-                                break;
-                            }
-                            default: {
+                                System.out.println("");                                  
+                            }break;
+                            default:
+                            {
                                 System.out.println("\n\nNo puedes interactuar con esa casilla");
-                                System.out.println("");
-                                break;
-                            }
-                        }
+                                System.out.println("");                                
+                            }break;                            
+                        }                        
                     }else{
                         System.out.println("\n\nNo puedes interactuar con esa pared");
                         System.out.println("");
