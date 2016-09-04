@@ -10,22 +10,23 @@ package Models;
  * @author Arthuro
  */
 public class Artefacto {
-    protected String nombre; 
-    
-    public Artefacto(String varNombre){
-        SetNombre(nombre);
+
+    protected String nombre;
+
+    public Artefacto(String varNombre) {
+        nombre = varNombre;
     }
-    
+
     // agregado 27/08/16 
-    public void Render(){
+    public void Render() {
         System.out.println("Nombre = " + nombre);
     }
-    
-    public void SetNombre(String nombre){
-        this.nombre= nombre;
+
+    public void SetNombre(String nombre) {
+        this.nombre = nombre;
     }
-    
-    public String GetNombre(){
+
+    public String GetNombre() {
         return nombre;
-    }
+    }    
 }

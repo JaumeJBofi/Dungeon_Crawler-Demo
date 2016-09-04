@@ -14,7 +14,7 @@ import Foundation.DIRECTIONS;
  */
 public class Entity {
 
-    final private Coordinate position;
+    private Coordinate position;
     int hp; // vida actual
     private String nombre;
   
@@ -31,6 +31,11 @@ public class Entity {
         position.SetX(x);
         position.SetY(y);
     }
+    
+    public void SetPosition(Coordinate newCoordinate){
+        position = newCoordinate;
+    }
+            
     
     public int GetX(){
         return position.GetX();

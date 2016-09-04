@@ -23,4 +23,14 @@ public class Pocion extends Artefacto {
         return valor;
     }
             
+    //Añadido por mi
+    @Override
+    public void Render() {
+        System.out.println(this.GetNombre() + " (" + this.valor + " HP)");
+    }
+    
+    public Pocion copiar() {
+        Pocion nueva_pocion = new Pocion(this.GetNombre(), valor);
+        return nueva_pocion;
+    }
 }

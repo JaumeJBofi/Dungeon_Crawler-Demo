@@ -10,17 +10,30 @@ package Models;
  * @author Arthuro
  */
 public class Armadura extends Artefacto {
+
     private int defensa;
-    public Armadura(String varNombre,int varDefensa){
+
+    public Armadura(String varNombre, int varDefensa) {
         super(varNombre);
         SetDefensa(varDefensa);
     }
-    
-    final public void SetDefensa(int def){
+
+    final public void SetDefensa(int def) {
         defensa = def;
     }
-    
-    public int GetDefensa(){
+
+    public int GetDefensa() {
         return defensa;
+    }
+
+    //Añadido por mi
+    @Override
+    public void Render() {
+        System.out.println(this.GetNombre() + " (" + this.defensa + " DEF)");
+    }
+
+    public Armadura copiar() {
+        Armadura nueva_armadura = new Armadura(this.GetNombre(), defensa);
+        return nueva_armadura;
     }
 }

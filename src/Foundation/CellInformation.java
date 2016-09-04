@@ -34,7 +34,7 @@ public class CellInformation {
     }
     
     public boolean isPrevious(){
-        return !isNext();
+        return MODE==CELLMODE.ANTERIOR;
     }
     
     public boolean isWall()

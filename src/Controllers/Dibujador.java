@@ -32,8 +32,7 @@ public class Dibujador {
             System.out.println("\n\nSesionFinalizada");
             choice.SetAction(ACTION.EXIT);
         }else if( input.toLowerCase().toLowerCase().startsWith("mover") ){
-          choice.SetAction(ACTION.MOVE);
-          
+          choice.SetAction(ACTION.MOVE);          
             if(input.toLowerCase().endsWith("derecha") ){
                 choice.SetPath(DIRECTIONS.RIGHT);
             }
@@ -62,9 +61,13 @@ public class Dibujador {
             else if(input.toLowerCase().endsWith("arriba") ){
                 choice.SetPath(DIRECTIONS.TOP);
             }
+        }else if(input.compareToIgnoreCase("debug")==0){
+            choice.SetAction(ACTION.DEBUG);            
+        }else if(input.toLowerCase().startsWith("sudo teleport")){
+            choice.SetAction(ACTION.TELEPORT);
         }else{
             choice.SetAction(ACTION.NULA);
-        }                                                      
+        }
         return choice;
     }
     

@@ -38,13 +38,16 @@ public class DungeonManager {
     private DIRECTIONS currentDirections;
     final private Random randomManager;
     private int activeDungeon;
+    
+    private int totalDungeons;
 
-    public DungeonManager() {
+    public DungeonManager(int varTotalDungeons) {
 
         randomManager = new Random();
         dungeons = new ArrayList();
         activeDungeon = dungeons.size();
         currenCellInfo = new CellInformation();
+        totalDungeons = varTotalDungeons;
 
     }
 
@@ -155,8 +158,41 @@ public class DungeonManager {
         coord.SetX(coord.GetX() + xFactor);
         coord.SetY(coord.GetY() + yFactor);
     }
+    
+    public int ChangeDungeon(Avatar player,boolean isNext){
+        if(isNext)
+        {
+            if(activeDungeon==totalDungeons-1) {
+                return 1;
+                
+            }
+            Dungeon currDungeon = dungeons.get(activeDungeon);
+            CreateDungeonDistribution(randomManager.nextInt(50-25)+25,randomManager.nextInt(50-25)+25,currDungeon.GetPrcEnemies()+0.075,currDungeon.GetLvlEnemies(),
+                    currDungeon.GetPrcItem()+0.025);
+            activeDungeon++;
+            player.SetPosition(dungeons.get(activeDungeon).GetAntPos().GetPoint());
+        }else
+        {
+            if(activeDungeon==0) return 0;
+            activeDungeon--;
+            player.SetPosition(dungeons.get(activeDungeon).GetSigPos().GetPoint());           
+        }        
+        return 0;
+    }
+    
+    public void printDebugInfo(Avatar player)
+    {
+        System.out.println("Informacion manager actual:\n");
+        System.out.format("Numero de dungeon activo: %d\n",activeDungeon);
+        dungeons.get(activeDungeon).Render();
+        System.out.println("Informacion laberinto actual:\n");
+        dungeons.get(activeDungeon).printDebugInfo();
+        System.out.println("Informacion de Jugador actual:\n");
+        player.GetPosition().PrintCoordinate();
+        System.out.println("");
+    }
 
-    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, double worldlvlEnemies,double varprcItems) {
+    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, int worldlvlEnemies,double varprcItems) {
         Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies,varprcItems);
         theDungeon.SetM(M);
         theDungeon.SetN(N);

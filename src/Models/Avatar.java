@@ -18,6 +18,8 @@ public class Avatar extends Entity implements IDibujable{
     private int vidaMaxima;
     private int tamShowX;
     private int tamShowY;
+    private Arma arma_equip;
+    private Armadura armadura_equip;
     private List<Artefacto> saco;
     
     public Avatar(Coordinate position,String varNombre) {
@@ -40,9 +42,7 @@ public class Avatar extends Entity implements IDibujable{
           tamShowY = varTamShowY;
           saco = new ArrayList();
           SetNombre(varNombre);
-    }
-    
-
+    }    
     
     public void SetVidaMaxima(int v) {
         vidaMaxima = v;
@@ -79,15 +79,27 @@ public class Avatar extends Entity implements IDibujable{
     public void AddArtefact(Artefacto a){
         saco.add(a);
     }
+    
+    //Modificado por mi
     public void Render(){
         int tamanho = saco.size();
-        System.err.println("");
+        System.out.println("");
+        System.out.println(" ------ STATS ------");
+        System.out.print("  ");//Personaje: ");
+        System.out.println(this.GetNombre());
+        System.out.println("  HP: " + this.hp + "/" + this.vidaMaxima);
+        System.out.print("  Arma: ");
+        if (arma_equip == null) System.out.println("Ninguno"); else arma_equip.Render();
+        System.out.print("  Armadura: ");
+        if (armadura_equip == null) System.out.println("Ninguno"); else armadura_equip.Render(); 
         Artefacto art;
-        System.out.println(" ----- SACO ------");
-        for (int i= 0; i <tamanho ; i++){
+        System.out.println(" ------ ITEMS ------");
+        if (tamanho == 0) System.out.println("  Vacio");
+        else for (int i= 0; i <tamanho ; i++){
             art = saco.get(i);
+            System.out.print("  ");
             art.Render();
-            System.out.println();
+            //System.out.println();
         }
     }
     

@@ -35,4 +35,16 @@ public class Arma extends Artefacto{
     public int GetDanhoMax(){
         return danho_max;
     }
+       
+     
+    //Añadido por mi
+    @Override
+    public void Render() {
+        System.out.println(this.GetNombre() + " (" + this.danho_min + "-" + this.danho_max + " ATK)");
+    }
+    
+    public Arma copiar() {
+        Arma nueva_arma = new Arma(this.GetNombre(), danho_min, danho_max);
+        return nueva_arma;
+    }
 }

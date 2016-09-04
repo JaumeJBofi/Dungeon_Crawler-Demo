@@ -12,7 +12,7 @@ package Foundation;
 public class Options {
     
     public enum ACTION{
-        MOVE,EXIT,INTERACT,NULA
+        MOVE,EXIT,INTERACT,DEBUG,TELEPORT,NULA
     }    
     
     public DIRECTIONS path;    
@@ -30,8 +30,7 @@ public class Options {
         
     public void SetAction(ACTION act){
         taken = act;
-    }
-    
+    }    
     
     public void SetPath(DIRECTIONS dir){        
         path = dir;

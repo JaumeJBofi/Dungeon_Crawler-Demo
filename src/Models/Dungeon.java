@@ -6,6 +6,7 @@
 package Models;
 import Foundation.CellInformation;
 import Foundation.Coordinate;
+import Controllers.ObjectGenerator;
 
 /**
  *
@@ -22,7 +23,7 @@ public class Dungeon implements IDibujable{
     private int maxshowX;
     
     private double prcEnemies;
-    private double lvlEnemies;
+    private int lvlEnemies;
     private double prcItems;
     
     private Coordinate antPos;
@@ -33,15 +34,18 @@ public class Dungeon implements IDibujable{
     //private CellInformation dungeonStatus;    
     
     private Chamber[][] layOutChamber;
-    private CellInformation[][] dungeonAccess;
+    private CellInformation[][] dungeonAccess;    
+    private ObjectGenerator objManager;
+                                    
     
-    public Dungeon(double varprcEnemies,double varlvlEnemies,double varPrcItems){
+    public Dungeon(double varprcEnemies,int varlvlEnemies,double varPrcItems){
         // Momentaneamente el Laberinto no posee dimensiones
         M = 0;
         N = 0;
         SetLvlEnemies(varlvlEnemies);
         SetPrcEnemies(varprcEnemies);
         SetPrcItems(varPrcItems);
+        objManager = new ObjectGenerator(varlvlEnemies);
     }
      
     public int GetM(){
@@ -86,7 +90,7 @@ public class Dungeon implements IDibujable{
         }
     }
     
-    final public double GetLvlEnemies(){
+    final public int GetLvlEnemies(){
         return lvlEnemies;
     }
     
@@ -96,7 +100,7 @@ public class Dungeon implements IDibujable{
         return lvlEnemies;
     }
     
-    final public void SetLvlEnemies(double varLvlEnemies){
+    final public void SetLvlEnemies(int varLvlEnemies){
         //Logica de validacion para nivel de Enemigos
         lvlEnemies = varLvlEnemies;
     }
@@ -171,6 +175,9 @@ public class Dungeon implements IDibujable{
     }
     
     private void inicializarDatosMostrarMapa(int posY,int posX,int tamShowX,int tamShowY){
+        tamShowX = (int)tamShowX/2;
+        tamShowY = (int)tamShowY/2;
+        
         if( (posY - tamShowY) > 0 )
             minshowY = posY - tamShowY;
         else
@@ -191,6 +198,23 @@ public class Dungeon implements IDibujable{
         else
             maxshowX = M;
     }
+    
+    public void printDebugInfo()
+    {
+        System.out.format("Numero de enemigos = %d\n",numEnemies);
+        System.out.format("Nivel de los enemigos = %d\n",lvlEnemies);
+        System.out.print("Informacion de puntos:\nAnterior:\n");
+        antPos.PrintCoordinate();
+        System.out.print("Siguiente:\n");
+        sigPos.PrintCoordinate();
+        System.out.println("");
+    }
+    
+    public void TeleportPlayer(Avatar player,int x,int y)
+    {
+        player.SetPosition(x, y);        
+    }
+    
     public void Render(){
         
         for(int j=0;j<N;j++)
@@ -223,7 +247,7 @@ public class Dungeon implements IDibujable{
                     }break;                                                     
                 }                                                            
             }
-            System.err.print("\n");
+            System.out.print("\n");
         }        
     }
     public void Render(int posX,int posY,int tamShowX,int tamShowY){     
