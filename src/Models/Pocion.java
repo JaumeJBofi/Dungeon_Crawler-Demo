@@ -26,7 +26,7 @@ public class Pocion extends Artefacto {
     //Añadido por mi
     @Override
     public void Render() {
-        System.out.format("%-15s (%-3d) HP \n", this.GetNombre(),this.valor);
+        System.out.format("%-15s (%-3d HP) \n", this.GetNombre(),this.valor);
     }
     
     public Pocion copiar() {

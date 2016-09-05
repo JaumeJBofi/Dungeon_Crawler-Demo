@@ -106,7 +106,7 @@ public class GameProject {
                 case MOVE:{
                     if(!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(),choiceTaken.path)).isWall()&&nextCellInformation.GetType()==CellInformation.CELLTYPE.ADENTRO)
                             {
-                                if(nextCellInformation.isNext()||nextCellInformation.isNext())
+                                if(nextCellInformation.isNext()||nextCellInformation.isPrevious())
                                 {
                                    if(myManager.ChangeDungeon(player,nextCellInformation.isNext())==1){
                                        winGame(in);                                       

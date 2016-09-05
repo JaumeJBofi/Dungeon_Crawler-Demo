@@ -83,8 +83,8 @@ public class Avatar extends Entity implements IDibujable{
     //Modificado por mi
     public void Render(){
         
-        String space20 = new String(new char[25]).replace('\0', ' ');
-        String space19 = new String(new char[24]).replace('\0', ' ');
+        String space20 = new String(new char[22]).replace('\0', ' ');
+        String space19 = new String(new char[21]).replace('\0', ' ');
         int tamanho = saco.size();
         
         System.out.println("");
@@ -99,14 +99,16 @@ public class Avatar extends Entity implements IDibujable{
          if (tamanho == 0){
             System.out.print(space20);
             System.out.format("%-25s\n","Vacio");
-        }else{
+        }else{             
              if(saco.get(0)!=armadura_equip||saco.get(0)!=armadura_equip) System.out.print(space20);
              else 
              {                 
                 System.out.print(space19);
+                System.out.print("1) ");
                 System.out.print(">");
              }
-             saco.get(0).Render();             
+             saco.get(0).Render();    
+             
         }
         
         
@@ -114,10 +116,12 @@ public class Avatar extends Entity implements IDibujable{
         
         if(tamanho>=2)
         {
+           
             if(saco.get(1)!=armadura_equip||saco.get(1)!=armadura_equip) System.out.print(space20);
              else 
              {                 
                 System.out.print(space19);
+                System.out.print("2) ");
                 System.out.print(">");
              }
             saco.get(1).Render();          
@@ -130,11 +134,12 @@ public class Avatar extends Entity implements IDibujable{
         if (arma_equip == null) System.out.format("%-19s","Ninguno"); else arma_equip.Render();
         
         if(tamanho>=3)
-        {
+        {           
             if(saco.get(2)!=armadura_equip||saco.get(2)!=armadura_equip) System.out.print(space20);
              else 
              {                 
                 System.out.print(space19);
+                System.out.print("3) ");
                 System.out.print(">");
              }
             saco.get(2).Render();           
@@ -147,11 +152,12 @@ public class Avatar extends Entity implements IDibujable{
         Artefacto art;
         
          if(tamanho>=4)
-        {
+        {            
             if(saco.get(3)!=armadura_equip||saco.get(3)!=armadura_equip) System.out.print(space20);
              else 
              {                 
                 System.out.print(space19);
+                System.out.print("4) ");
                 System.out.print(">");
              }
             saco.get(3).Render();           
@@ -162,11 +168,12 @@ public class Avatar extends Entity implements IDibujable{
         
         for (int i= 4; i <tamanho ; i++){
             art = saco.get(i);
-            System.out.format("%-30s"," ");
+            System.out.format("%-30s"," ");           
             if(saco.get(i)!=armadura_equip||saco.get(i)!=armadura_equip) System.out.print(space20);
              else 
              {                 
                 System.out.print(space19);
+                System.out.format("%d) ",i);
                 System.out.print(">");
              }
             art.Render();
