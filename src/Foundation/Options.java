@@ -12,7 +12,7 @@ package Foundation;
 public class Options {
     
     public enum ACTION{
-        MOVE,EXIT,INTERACT,DEBUG,TELEPORT,NULA
+        MOVE,EXIT,INTERACT,DEBUG,TELEPORT,ATTACK,HELP,EQUIP,NULA
     }    
     
     public DIRECTIONS path;    

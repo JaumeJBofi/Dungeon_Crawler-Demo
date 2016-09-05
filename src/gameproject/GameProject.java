@@ -97,6 +97,7 @@ public class GameProject {
         
         CellInformation nextCellInformation;
         
+        writeNLines(20);
         Renderer.mostrarLaberinto(myManager.GetActiveDungeon(), player);
         
         while((ACTION.EXIT!=((Renderer.mostrarMenu(choiceTaken)).taken)))
@@ -139,7 +140,7 @@ public class GameProject {
                         {
                             case ARTIFACT:
                             {                                
-                                myManager.Interactuar(player,choiceTaken.path); // borra el artefacto de la matriz                                
+                                myManager.GetActiveDungeon().Interactuar(player,choiceTaken.path); // borra el artefacto de la matriz                                
                                 writeNLines(20);                              
                                 System.out.println("\n\n INTERACT CORRECTO");
                                 
@@ -154,9 +155,10 @@ public class GameProject {
                     }else{
                         writeNLines(20);
                         System.out.println("\n\nNo puedes interactuar con esa pared");
-                        System.err.println("");                        
+                        System.out.println("");                        
                     }
-                }case DEBUG:
+                }break;
+                case DEBUG:
                 {
                     writeNLines(20);                    
                     myManager.printDebugInfo(player);
@@ -167,12 +169,49 @@ public class GameProject {
                     int x = in.nextInt();
                     int y = in.nextInt();
                     myManager.GetActiveDungeon().TeleportPlayer(player, x, y);                            
-                }
+                }case HELP:
+                {
+                    writeNLines(20);
+                    System.out.println("Comandos:\nMover [Derecha|Izquierda|Arriba|Abajo] : Te mueves a la dirección especificada si es posible. No es case sensitive\n"
+                            + "Interactuar: Interactuas con el objeto al que estas mirando. Donde miras es la ultima dirección a la que te moviste o intentaste\n"
+                            + "Atacar: Eliminas al enemigo al que estas mirando\nEquipar: Te equipas una armadura o arma de tu inventorio\n"
+                            + "Help: Muestra la ayuda del juego\nSalir: Sale del Juego actual\n\nPresione cualquier tecla para continuar\n");
+                             in.nextLine();
+                    writeNLines(20);
+                }break;
+                case ATTACK:
+                {
+                    if(!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(),choiceTaken.path)).isWall()){
+                        switch(nextCellInformation.GetType())
+                        {
+                            case ENEMY:
+                            {
+                                // Random Text
+                                writeNLines(20); 
+                                System.out.println("\n\nHyaaa!!!\nTu ataque dio en el blanco...El enemigo se desvanece silenciosamente como si estuviera aliviado");      
+                                myManager.GetActiveDungeon().Battle(player.GetX(),player.GetY(),choiceTaken.path);
+                            }break;
+                            default:
+                            {
+                                writeNLines(20);                              
+                                System.out.println("\n\nNo hay absolutamente nada peligroso en esa dirección.");      
+                            }
+                        }
+                    }else
+                    {
+                        writeNLines(20);                              
+                        System.out.println("\n\nEsa pared no te ha hecho nada. Disculpate, Las paredes tambien tienen sentimientos...");      
+                    }
+                    System.out.println("");
+                }break;
+                case EQUIP:
+                {                    
+                    // Falta Implementar
+                }break;
                 default:{
                     writeNLines(20);
                     System.out.println("\n\nAcción no definida");
-                    System.out.println("");
-                    
+                    System.out.println("");                    
                 }break;
             }            
             Renderer.mostrarLaberinto(myManager.GetActiveDungeon(), player);

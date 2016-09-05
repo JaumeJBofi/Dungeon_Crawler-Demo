@@ -5,8 +5,8 @@
         <group>
             <file>file:/C:/Users/Jauma/Desktop/AProgram/NetBeans/GameProject/GameProject/src/Foundation/Options.java</file>
             <file>file:/C:/Users/Jauma/Desktop/AProgram/NetBeans/GameProject/GameProject/src/gameproject/GameProject.java</file>
-            <file>file:/C:/Users/Jauma/Desktop/AProgram/NetBeans/GameProject/GameProject/src/Models/Entity.java</file>
             <file>file:/C:/Users/Jauma/Desktop/AProgram/NetBeans/GameProject/GameProject/src/Models/Pocion.java</file>
+            <file>file:/C:/Users/Jauma/Desktop/AProgram/NetBeans/GameProject/GameProject/src/Models/Arma.java</file>
             <file>file:/C:/Users/Jauma/Desktop/AProgram/NetBeans/GameProject/GameProject/src/Controllers/DungeonManager.java</file>
             <file>file:/C:/Users/Jauma/Desktop/AProgram/NetBeans/GameProject/GameProject/src/Models/Avatar.java</file>
             <file>file:/C:/Users/Jauma/Desktop/AProgram/NetBeans/GameProject/GameProject/src/Controllers/Dibujador.java</file>
@@ -14,7 +14,6 @@
             <file>file:/C:/Users/Jauma/Desktop/AProgram/NetBeans/GameProject/GameProject/src/Foundation/CellInformation.java</file>
             <file>file:/C:/Users/Jauma/Desktop/AProgram/NetBeans/GameProject/GameProject/src/Foundation/Coordinate.java</file>
             <file>file:/C:/Users/Jauma/Desktop/AProgram/NetBeans/GameProject/GameProject/src/Models/Dungeon.java</file>
-            <file>file:/C:/Users/Jauma/Desktop/AProgram/NetBeans/GameProject/GameProject/src/Controllers/ObjectGenerator.java</file>
         </group>
     </open-files>
 </project-private>

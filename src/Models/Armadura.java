@@ -29,7 +29,7 @@ public class Armadura extends Artefacto {
     //Añadido por mi
     @Override
     public void Render() {
-        System.out.println(this.GetNombre() + " (" + this.defensa + " DEF)");
+        System.out.format("%-20s (%-3d) DEF\n", this.GetNombre(),this.defensa);
     }
 
     public Armadura copiar() {

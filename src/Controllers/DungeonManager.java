@@ -74,29 +74,6 @@ public class DungeonManager {
         }
     }
 
-    /// agregado ////}
-    public void Interactuar(Avatar player, DIRECTIONS path) {
-        int xFactor = player.GetX(), yFactor = player.GetY();
-        switch (path) {
-            case BOT: {
-                yFactor += 1;
-            }
-            break;
-            case TOP: {
-                yFactor -= 1;
-            }
-            break;
-            case LEFT: {
-                xFactor -= 1;
-            }
-            break;
-            case RIGHT: {
-                xFactor += 1;
-            }
-        }
-        ///// deberia actualizar el access y borrar el objeto de la matriz
-        player.AddArtefact(dungeons.get(activeDungeon).getObject(xFactor,yFactor));
-    }
 
     ////
     public Dungeon GetActiveDungeon() {
@@ -157,7 +134,8 @@ public class DungeonManager {
         }
         coord.SetX(coord.GetX() + xFactor);
         coord.SetY(coord.GetY() + yFactor);
-    }
+    }    
+    
     
     public int ChangeDungeon(Avatar player,boolean isNext){
         if(isNext)
@@ -242,6 +220,8 @@ public class DungeonManager {
                 
                 if(Math.random()<=theDungeon.GetPrcEnemies()){
                     dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);
+                    /////////////////////////    MI LINEA :v   ////////////////////////7
+                    theDungeon.addenemy(currentPoint);
                     numEnemies++;
                 }else
                 {

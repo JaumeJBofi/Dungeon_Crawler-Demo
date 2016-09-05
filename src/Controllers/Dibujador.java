@@ -65,9 +65,15 @@ public class Dibujador {
             choice.SetAction(ACTION.DEBUG);            
         }else if(input.toLowerCase().startsWith("sudo teleport")){
             choice.SetAction(ACTION.TELEPORT);
+        }else if(input.toLowerCase().startsWith("atacar")){
+            choice.SetAction(ACTION.ATTACK);
+        }else if(input.toLowerCase().compareTo("help")==0){
+            choice.SetAction(ACTION.HELP);
+        }else if(input.toLowerCase().compareTo("equip")==0){
+            
         }else{
             choice.SetAction(ACTION.NULA);
-        }
+        }            
         return choice;
     }
     

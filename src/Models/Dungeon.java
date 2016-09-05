@@ -7,6 +7,11 @@ package Models;
 import Foundation.CellInformation;
 import Foundation.Coordinate;
 import Controllers.ObjectGenerator;
+import java.util.List;
+import Models.Enemy;
+import Controllers.EnemyGenerator;
+import Foundation.DIRECTIONS;
+import java.util.ArrayList;
 
 /**
  *
@@ -36,7 +41,10 @@ public class Dungeon implements IDibujable{
     private Chamber[][] layOutChamber;
     private CellInformation[][] dungeonAccess;    
     private ObjectGenerator objManager;
-                                    
+    
+    private List<Enemy> lista_enemigos;
+    private EnemyGenerator enemygen;
+    
     
     public Dungeon(double varprcEnemies,int varlvlEnemies,double varPrcItems){
         // Momentaneamente el Laberinto no posee dimensiones
@@ -46,6 +54,9 @@ public class Dungeon implements IDibujable{
         SetPrcEnemies(varprcEnemies);
         SetPrcItems(varPrcItems);
         objManager = new ObjectGenerator(varlvlEnemies);
+        
+        enemygen = new EnemyGenerator();
+        lista_enemigos = new ArrayList();
     }
      
     public int GetM(){
@@ -210,17 +221,65 @@ public class Dungeon implements IDibujable{
         System.out.println("");
     }
     
+        /// agregado ////}
+    public void Interactuar(Avatar player, DIRECTIONS path) {
+        int xFactor = player.GetX(), yFactor = player.GetY();
+        switch (path) {
+            case BOT: {
+                yFactor += 1;
+            }
+            break;
+            case TOP: {
+                yFactor -= 1;
+            }
+            break;
+            case LEFT: {
+                xFactor -= 1;
+            }
+            break;
+            case RIGHT: {
+                xFactor += 1;
+            }
+        }
+        ///// deberia actualizar el access y borrar el objeto de la matriz
+        player.AddArtefact(getObject(xFactor,yFactor));
+    }
+    
+    public void Battle(int x,int y,DIRECTIONS path){
+        int xFactor = x, yFactor = y;
+        switch (path) {
+            case BOT: {
+                yFactor += 1;
+            }
+            break;
+            case TOP: {
+                yFactor -= 1;
+            }
+            break;
+            case LEFT: {
+                xFactor -= 1;
+            }
+            break;
+            case RIGHT: {
+                xFactor += 1;
+            }
+        }
+        dungeonAccess[xFactor][yFactor].SetType(CellInformation.CELLTYPE.ADENTRO);
+    }
+
+    
     public void TeleportPlayer(Avatar player,int x,int y)
     {
         player.SetPosition(x, y);        
     }
     
     public void Render(){
-        
+        String space20 = new String(new char[40]).replace('\0', ' ');
         for(int j=0;j<N;j++)
         {
+            System.out.print(space20);
             for(int i=0;i<M;i++)
-            {
+            {                
                 CellInformation factor = dungeonAccess[i][j];                    
                 switch (factor.GetMode()){
                     case SIGUENTE:
@@ -250,10 +309,15 @@ public class Dungeon implements IDibujable{
             System.out.print("\n");
         }        
     }
-    public void Render(int posX,int posY,int tamShowX,int tamShowY){     
+
+    public void Render(int posX,int posY,int tamShowX,int tamShowY){   
+        
+        String space20 = new String(new char[35]).replace('\0', ' ');
         inicializarDatosMostrarMapa(posY, posX, tamShowX, tamShowY);
         for(int j = minshowY;j<maxshowY;j++){
-            for(int i = minshowX;i<maxshowX;i++){               
+            System.out.print(space20);
+            for(int i = minshowX;i<maxshowX;i++){                
+                
                 if( (i == posX) && (j == posY) ){
                     System.out.print("H");
                 }
@@ -300,5 +364,12 @@ public class Dungeon implements IDibujable{
                 layOutChamber[i][j] = null;
             }
         }
+    }
+    
+     //Modif
+    public void addenemy(Coordinate pos) {
+        Enemy enemigo = enemygen.generar_enemigo();
+        enemigo.SetPosition(pos);
+        lista_enemigos.add(enemigo);
     }
 }

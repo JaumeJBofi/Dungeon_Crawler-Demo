@@ -13,7 +13,7 @@ import Foundation.Coordinate;
  */
 public class Enemy extends Entity {
     int nivel;
-    Coordinate position;
+    //Coordinate position;
     public Enemy(Coordinate varPosition){
         super(varPosition);
         nivel = 1;
@@ -25,5 +25,17 @@ public class Enemy extends Entity {
     
     public int GetNivel(){
         return nivel;
+    }
+    
+    
+    //Modif
+    public Enemy(Coordinate varPosition, String nomb, int vida, int lvl) {
+        super(varPosition, nomb, vida);
+        nivel = lvl;
+    }
+
+    public Enemy copiar() {
+        Enemy nuevo_enemigo = new Enemy(this.GetPosition(), this.GetNombre(), this.GetVida(), nivel);
+        return nuevo_enemigo;
     }
 }

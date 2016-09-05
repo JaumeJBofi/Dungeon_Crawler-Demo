@@ -81,4 +81,11 @@ public class Entity {
             System.exit(1);
         }                
     }        
+    
+     //Modif
+    public Entity(Coordinate varPosition, String nomb, int vida) {
+        hp = vida;
+        nombre = nomb;
+        position = varPosition;
+    }
 }
