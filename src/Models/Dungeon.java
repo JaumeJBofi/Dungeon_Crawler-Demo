@@ -167,19 +167,19 @@ public class Dungeon implements IDibujable{
         {
             case WEAPON:
             {
-                return new Arma("Espada",1, 10);
+                return objManager.generar_arma();
             }
             case ARMOR:
             {
-                return new Armadura("Escudo", 5);
+                return objManager.generar_armadura();
             }
             case POTION:
             {
-                return new Pocion("Healing Potion",15);                
+                return objManager.generar_pocion();
             }
             default:
             {
-                return new Pocion("Healing Potion",15);                
+                return objManager.generar_pocion();
             }
         }        
         // Deberiamos liberar la memoria de layout

@@ -40,7 +40,7 @@ public class Arma extends Artefacto{
     //Añadido por mi
     @Override
     public void Render() {
-        System.out.format("%-15s (%d - %d ATK) \n",this.GetNombre(), this.danho_min ,this.danho_max);
+        System.out.format("%-25s (%3d - %2d ATK)",this.GetNombre(), this.danho_min ,this.danho_max);
     }
     
     public Arma copiar() {

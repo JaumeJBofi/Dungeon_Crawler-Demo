@@ -31,21 +31,21 @@ public class ObjectGenerator {
         armas.add(xd);
         xd = new Arma("Espada Mediana", 4, 10);
         armas.add(xd);
-        xd = new Arma("Espada Suprema del Dolor Supremo", 50, 85);
+        xd = new Arma("Espada del Dolor Supremo", 50, 85);
         armas.add(xd);
 
         Armadura yd = new Armadura("Armadura Liviana", 5);
         armaduras.add(yd);
         yd = new Armadura("Armadura Mediana", 12);
         armaduras.add(yd);
-        yd = new Armadura("Armadura Impenetrable de la Maxima Proteccion", 70);
+        yd = new Armadura("Armadura de la Maxima Proteccion", 70);
         armaduras.add(yd);
 
         Pocion zd = new Pocion("Pocion Pequeña", 10);
         pociones.add(zd);
         zd = new Pocion("Pocion Mediana", 20);
         pociones.add(zd);
-        zd = new Pocion("Pocion de la Regeneración Hipocrática", 1000);
+        zd = new Pocion("Pocion Regeneración Hipocrática", 1000);
         pociones.add(zd);
     }
 

@@ -80,6 +80,26 @@ public class Avatar extends Entity implements IDibujable{
         saco.add(a);
     }
     
+     
+    public boolean EquipItem(int number) 
+    {
+        if(saco.size()<number) return false;
+        Artefacto selectedObj = saco.get(number);
+        
+        if(selectedObj instanceof Arma){
+            arma_equip = (Arma)selectedObj;
+        }else if(selectedObj instanceof Armadura){
+            armadura_equip = (Armadura)selectedObj;
+        }else
+        {
+            int healCant = ((Pocion)selectedObj).GetValor();
+            hp += healCant;
+            if(hp>vidaMaxima) hp = vidaMaxima;
+            saco.remove(number);
+        }
+        return true;            
+    }
+    
     //Modificado por mi
     public void Render(){
         
@@ -88,95 +108,93 @@ public class Avatar extends Entity implements IDibujable{
         int tamanho = saco.size();
         
         System.out.println("");
-        System.out.format("%-30s","     ------ STATS ------");
+        System.out.format("%-40s","     ------ STATS ------");
         System.out.print(space20);
-        System.out.println("------ ITEMS ------");
+        System.out.println("---------------- ITEMS -----------------");
               
         //Stats
-        System.out.format("%-30s","     "+this.GetNombre());
+        System.out.format("%-40s","     "+this.GetNombre());
         
         //Arma
          if (tamanho == 0){
             System.out.print(space20);
-            System.out.format("%-25s\n","Vacio");
+            System.out.format("%-40s\n",". . . . . . . . .Vacio. . . . . . . . . ");
         }else{             
-             if(saco.get(0)!=armadura_equip||saco.get(0)!=armadura_equip) System.out.print(space20);
+             if(!(saco.get(0)==arma_equip)&&!(saco.get(0)==armadura_equip)) System.out.print(space20);
              else 
              {                 
-                System.out.print(space19);
-                System.out.print("1) ");
+                System.out.print(space19);                
                 System.out.print(">");
              }
              saco.get(0).Render();    
+             System.out.format("%10s","(1)\n");
              
-        }
+        }        
         
-        
-        System.out.format("%-15s%-5d / %-5d  ","     HP: ",this.hp,this.vidaMaxima);
+        System.out.format("%-20s%-7d / %-8d  ","     HP: ",this.hp,this.vidaMaxima);
         
         if(tamanho>=2)
         {
            
-            if(saco.get(1)!=armadura_equip||saco.get(1)!=armadura_equip) System.out.print(space20);
-             else 
-             {                 
+            if(!(saco.get(1)==arma_equip)&&!(saco.get(1)==armadura_equip)) System.out.print(space20);
+            else 
+            {                 
                 System.out.print(space19);
-                System.out.print("2) ");
                 System.out.print(">");
-             }
-            saco.get(1).Render();          
+            }
+            saco.get(1).Render();    
+            System.out.format("%10s","(2)\n");
         }else{
              System.out.printf("\n");
         }
        
         
         System.out.printf("     Arma: ");
-        if (arma_equip == null) System.out.format("%-19s","Ninguno"); else arma_equip.Render();
+        if (arma_equip == null) System.out.format("%-29s","Ninguno"); else arma_equip.Render();
         
         if(tamanho>=3)
         {           
-            if(saco.get(2)!=armadura_equip||saco.get(2)!=armadura_equip) System.out.print(space20);
+            if(!(saco.get(2)==arma_equip)&&!(saco.get(2)==armadura_equip)) System.out.print(space20);
              else 
              {                 
-                System.out.print(space19);
-                System.out.print("3) ");
+                System.out.print(space19);                
                 System.out.print(">");
              }
-            saco.get(2).Render();           
+            saco.get(2).Render();       
+            System.out.format("%10s","(3)\n");
         }else{
              System.out.printf("\n");
-        }
+        }       
         
         System.out.print("     Armadura: ");
-        if (armadura_equip == null) System.out.format("%-15s","Ninguno"); else armadura_equip.Render(); 
+        if (armadura_equip == null) System.out.format("%-40s","Ninguno"); else armadura_equip.Render(); 
         Artefacto art;
         
          if(tamanho>=4)
         {            
-            if(saco.get(3)!=armadura_equip||saco.get(3)!=armadura_equip) System.out.print(space20);
+            if(!(saco.get(3)==arma_equip)&&!(saco.get(3)==armadura_equip)) System.out.print(space20);
              else 
              {                 
                 System.out.print(space19);
-                System.out.print("4) ");
                 System.out.print(">");
              }
-            saco.get(3).Render();           
+            saco.get(3).Render(); 
+            System.out.format("%10s","(4)\n");
         }else{
              System.out.printf("\n");
-        }
-                               
+        }                               
         
         for (int i= 4; i <tamanho ; i++){
             art = saco.get(i);
             System.out.format("%-30s"," ");           
-            if(saco.get(i)!=armadura_equip||saco.get(i)!=armadura_equip) System.out.print(space20);
-             else 
-             {                 
-                System.out.print(space19);
-                System.out.format("%d) ",i);
+            if(!(saco.get(i)==armadura_equip)&&!(saco.get(i)==armadura_equip)) System.out.print(space20);
+            else 
+            {                 
+                System.out.print(space19);                
                 System.out.print(">");
-             }
+            }
             art.Render();
+            System.out.format("%8s%d)","(",i+1);
             System.out.printf("\n");
             //System.out.println();
         }

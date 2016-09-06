@@ -70,7 +70,7 @@ public class Dibujador {
         }else if(input.toLowerCase().compareTo("help")==0){
             choice.SetAction(ACTION.HELP);
         }else if(input.toLowerCase().compareTo("equip")==0){
-            
+            choice.SetAction(ACTION.EQUIP);
         }else{
             choice.SetAction(ACTION.NULA);
         }            

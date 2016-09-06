@@ -13,6 +13,7 @@ import Foundation.Options;
 import Foundation.Options.ACTION;
 import java.util.Random;
 import java.util.Scanner;
+import java.lang.Object;
 
 /**
  *
@@ -68,11 +69,42 @@ public class GameProject {
         System.out.printf(" Sin embargo, no encuentras mas.\nNo encuentras mas oposición, ahora que has aceptado los pecados que antes ignoraste puedes enfrentar\n"
                 + "las verdaderas pruebas de la vida\n");
         System.out.printf("Te preguntas si sientes felicidad o remordimiento. ¿Saber que tan cruel el mundo puede ser es una bedición o maldición? Solo el tiempo"
-                + " lo dirá...\n\nPero por ahora te dices a ti mismo un pequeño y melancolico 'Felicitaciones");       
+                + " lo dirá...\n\nPero por ahora te dices a ti mismo un pequeño y melancolico 'Felicitaciones'");       
         System.out.println("\n\nPresione cualquier tecla para terminar\n");
        
         in.nextLine();
         System.exit(0);
+    }
+    
+    static public String IntroMenu(Scanner in){
+        System.out.println("Bienvenidos a Rings of Sins\n\n");
+        System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
+"::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
+"::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
+"::::::::::::::::::::::::::/\\::::::::::::::::::::::::::\n" +
+"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
+"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
+"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
+"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
+"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
+"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
+"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
+"~^~_-~^^-^~^_~^_^-~^~^-~^ || ~^~_-~^_^-^~^_~^_^-~^~^-~\n" +
+"~^-_~^-~^_~^-~^_~^-_ _^,##[]##,~_ _~^-_~^-~^_~^-~^_~^-\n" +
+"~^-~^~-_~^__.===~'`__.. ~{ \\ _-..__`'~===.__~^-~^~-_~^\n" +
+"~_~^_.=~~'   ~_.==~-.-~ .=||=. ~=.-~==._~^-^'~~=._~_~^\n" +
+"~-:`-~^-~^_~^:-~^~-_~-._`-==-'_.=~-_~^-_:~^-~^-_~`;-~\n" +
+" ~-'._~^-~^-_^~=._~-~_~-'~~'~`_^-~_^_.=~-~^-_~^-_.'^-\n" +
+"_~^-~^~=._~^-~^_-^~~==..,~_^_,..==~~-_~^-~^-_.=~_~^-~^\n" +
+"_-~^-~^_~^`~==.__-~^_~^-_~^-_~^-_~^-~__.==~`_-~^-~^_~^\n" +
+"-~_~^~-~^-~^~_~^~`~~~==,,....,,==~~~`-~~_~^~-~^-~^~_~^~\n" +
+" ~jgs^-~^-_~^~^_-^~^-~^~-_~^-~^-~^_~^~-~^~-~^-~^-~^-~^\n" +
+" ~^~^-~^-~^_~^~-^~_~^-^~^~^-~^-~^~^~-^~-~^-~^~~-^~-^~^");
+        System.out.println("\n\nIngresa tu nombre y coge la espada para continuar:\n\n");
+        String name = in.nextLine();
+        System.out.println("\n\nBienvenido "+name+" --- Presiona Enter para comenzar");
+        in.nextLine();
+        return name;
     }
     
     
@@ -81,14 +113,15 @@ public class GameProject {
         //Tambien podemos ya ir creando los otros laberintos
         Random randManager = new Random();
          Scanner in = new Scanner(System.in);
-        
+         
+        String name = IntroMenu(in);
         DungeonManager myManager = new DungeonManager(randManager.nextInt(7-3)+3);
         //DungeonManager myManager = new DungeonManager(2);
         
         int varM = randManager.nextInt(35-25)+25;
         int varN = randManager.nextInt(35-25)+25;                
         
-        Avatar player = new Avatar(myManager.CreateDungeonDistribution(varM,varN,0.15,5,0.3),10,6,"Jaume Bofi");
+        Avatar player = new Avatar(myManager.CreateDungeonDistribution(varM,varN,0.15,5,0.3),10,6,name);
         //Avatar player = new Avatar(myManager.CreateDungeonDistribution(40,5,0.5,0),40,10);
         
         Dibujador Renderer = new Dibujador();
@@ -126,7 +159,7 @@ public class GameProject {
                                 System.out.println("\n\nUn misterioso objeto bloquea tu camino. Puedes intentar cogerlo");
                             break;
                             case ENEMY:
-                                System.out.printf("\n\nCuidado! Un enemigo? Preparate para una posible batalla");
+                                System.out.println("\n\nCuidado! Un enemigo? Preparate para una posible batalla");
                             break;                            
                         }         
                         System.out.println("");
@@ -142,20 +175,25 @@ public class GameProject {
                             {                                
                                 myManager.GetActiveDungeon().Interactuar(player,choiceTaken.path); // borra el artefacto de la matriz                                
                                 writeNLines(20);                              
-                                System.out.println("\n\n INTERACT CORRECTO");
-                                
+                                System.out.println("\n\n INTERACT CORRECTO");                               
+                            }break;
+                            case ENEMY:
+                            {
+                                writeNLines(20);                              
+                                System.out.println("\n\n Ehh...No se vee muy amigable. Huyes antes que su ataque te alcanze");
+
                             }break;
                             default:
                             {
                                 writeNLines(20);                              
-                                System.out.println("\n\nNo puedes interactuar con esa casilla");                                
+                                System.out.println("\n\nNo puedes interactuar con esa casilla"); 
+ 
                             }break;                            
                         }                        
                         System.out.println("");
                     }else{
                         writeNLines(20);
-                        System.out.println("\n\nNo puedes interactuar con esa pared");
-                        System.out.println("");                        
+                        System.out.println("\n\nNo puedes interactuar con esa pared");                      
                     }
                 }break;
                 case DEBUG:
@@ -207,6 +245,17 @@ public class GameProject {
                 case EQUIP:
                 {                    
                     // Falta Implementar
+                    System.out.println();              
+                    System.out.println("\n\nIngrese el indice del item a equipar o usar\n");
+                    String input = in.nextLine();
+                    Integer n = Integer.parseInt(input);                    
+                    if(n==Double.NaN){
+                        System.out.println("Mal input. Presione Enter para continuar\n");
+                        in.nextLine();
+                    }else{
+                        player.EquipItem(n-1);
+                    }
+                    writeNLines(20);      
                 }break;
                 default:{
                     writeNLines(20);
