@@ -221,7 +221,7 @@ public class DungeonManager {
                 if(Math.random()<=theDungeon.GetPrcEnemies()){
                     dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);
                     /////////////////////////    MI LINEA :v   ////////////////////////7
-                    theDungeon.addenemy(currentPoint);
+                    theDungeon.addenemy(currentPoint.GetPoint());
                     numEnemies++;
                 }else
                 {

@@ -6,16 +6,20 @@
 package Models;
 
 import Foundation.Coordinate;
+import Foundation.DIRECTIONS;
 
 /**
  *
  * @author Arthuro
  */
 public class Enemy extends Entity {
-    int nivel;
+    private int nivel;
+    
+    
     //Coordinate position;
     public Enemy(Coordinate varPosition){
         super(varPosition);
+        SetLookDirection(DIRECTIONS.BOT);
         nivel = 1;
     }
     
@@ -26,8 +30,7 @@ public class Enemy extends Entity {
     public int GetNivel(){
         return nivel;
     }
-    
-    
+                
     //Modif
     public Enemy(Coordinate varPosition, String nomb, int vida, int lvl) {
         super(varPosition, nomb, vida);

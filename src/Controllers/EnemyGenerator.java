@@ -31,10 +31,8 @@ public class EnemyGenerator {
     }
 
     public Enemy generar_enemigo() {
-        Enemy enemigo_en_lista, copia_enemigo;
-        int i = randomManager.nextInt(enemigos.size());
-        enemigo_en_lista = enemigos.get(i);
-        copia_enemigo = enemigo_en_lista.copiar();
-        return copia_enemigo;
+        Enemy enemigo_en_lista;
+        int i = randomManager.nextInt(enemigos.size());        
+        return enemigos.get(i).copiar();        
     }
 }
