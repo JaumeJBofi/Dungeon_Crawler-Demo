@@ -197,7 +197,11 @@ public class Lore {
         return input;
     }
     public void listaAcciones(){
+<<<<<<< HEAD
         System.out.println("\nAcciones Posibles:\n1.-Mover + direccion\n2.-Interactuar\n3.-Equip\n4.-Atacar\n");
+=======
+        System.out.println("Acciones Posibles:\n1.-Mover + direccion\n2.-Interactuar\n3.-Equip\n4.-Atacar\n");
+>>>>>>> origin/master
     }
     public void writeNLines(int n)
     {
