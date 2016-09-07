@@ -78,7 +78,9 @@ public class Avatar extends Entity implements IDibujable{
         saco.add(a);
     }
     
-     
+    public Integer getSizeSaco(){
+        return saco.size();
+    }
     public boolean EquipItem(int number) 
     {
         if(saco.size()<number) return false;

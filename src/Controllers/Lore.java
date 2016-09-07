@@ -196,7 +196,9 @@ public class Lore {
         lectura.nextLine();
         return input;
     }
-    
+    public void listaAcciones(){
+        System.out.println("Acciones Posibles:\n1.-Mover + direccion\n2.-Interactuar\n3.-Equip\n4.-Atacar\n");
+    }
     public void writeNLines(int n)
     {
         for(int i =0;i<n;i++) System.out.print(" \n");

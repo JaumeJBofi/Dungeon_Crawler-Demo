@@ -31,9 +31,9 @@ public class GameProject {
         //Tambien podemos ya ir creando los otros laberintos
         Random randManager = new Random();
         Scanner in = new Scanner(System.in);
-        
+        //Lore nos ayuda a narrar la historia
         Lore historia = new Lore();
-        
+        //Decidimos que intro deseamos leer
         String name;
         if(in.nextLine().compareToIgnoreCase("re")==0) name = historia.nacer();
         else name = historia.IntroMenu(in);
@@ -55,7 +55,7 @@ public class GameProject {
         
         historia.writeNLines(20);
         Renderer.mostrarLaberinto(myManager.GetActiveDungeon(), player);
-        
+        historia.listaAcciones();
         while((ACTION.EXIT!=((Renderer.mostrarMenu(choiceTaken)).taken)))
         {                        
             switch(choiceTaken.taken){
@@ -173,12 +173,23 @@ public class GameProject {
                     System.out.println("\n\nIngrese el indice del item a equipar o usar\n");
                     String input = in.nextLine();
                     try {
-                        Integer n = Integer.parseInt(input);       
-                        player.EquipItem(n-1);
+                        Integer n = Integer.parseInt(input);
+                        if( n > 0 ){
+                            if( n <= player.getSizeSaco() )
+                                player.EquipItem(n-1);
+                            else{
+                                System.out.println("\nIndice no valido\n\n");
+                                in.nextLine();
+                            }
+                        }
+                        else{
+                            System.out.println("\nIndice no valido\n\n");
+                            in.nextLine();
+                        }
                     } catch (NumberFormatException e) {
                         System.out.println("Mal input. Presione Enter para continuar\n");
-                        in.nextLine();                        
-                        int a;
+                        in.nextLine();
+                        //int a;
                     }                             
                     historia.writeNLines(20);
                 }break;
@@ -187,8 +198,9 @@ public class GameProject {
                     System.out.println("\n\nAcción no definida");
                     System.out.println("");                    
                 }break;
-            }            
+            }
             Renderer.mostrarLaberinto(myManager.GetActiveDungeon(), player);
+            historia.listaAcciones();
             //myManager.GetActiveDungeon().Render();
         }
     }
