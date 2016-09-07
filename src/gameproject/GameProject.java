@@ -86,8 +86,9 @@ public class GameProject {
                             break;                            
                         }         
                         System.out.println("");                       
-                    }                    
-                     myManager.GetActiveDungeon().MoveEnemies();
+                    } 
+                    //Esto hace que los enemigos se muevan
+                     //myManager.GetActiveDungeon().MoveEnemies();
                 }break;
                 case INTERACT:{  
                     if(!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(),choiceTaken.path)).isWall()){
