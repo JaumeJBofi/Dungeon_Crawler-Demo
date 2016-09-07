@@ -19,33 +19,31 @@ public class Lore {
     }
     public String nacer(){
         String nombre = "Rou";
-        String input;
-        Scanner lectura;
         lectura = new Scanner(System.in);
         System.out.print("Te encuentras en un pequeño cuarto oscuro y calido.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.print("Las paredes son blandas y no tienes necesidad de buscar alimento alguno.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.print("Se puede decir que estas en un sitio de lo más agradable.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.println("De repente un dia vez como una luz ilumina el pequño cuarto y sales de este.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.print("...");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.print("......");
-        input = lectura.nextLine();;
+        lectura.nextLine();
         System.out.println(".........");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.print("Lo primero que ves es la cara de un anciano con piel color verde y orejas puntiagudas.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.print("A tu alrededor ves un monton de bebes con el mismo color de piel.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.println("Al ver tus manos ves que estas tambien son de color verde.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.println("Comprendes que eres de la misma especie que las criaturas que estan a tu alrededor.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.println("El anciano te mira y murmura algo.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         while(true){
             System.out.println("\n\nEscribe tu nombre o pon enter para tener el nombre default.");
             input = lectura.nextLine();
@@ -56,34 +54,34 @@ public class Lore {
             int rpt = lectura.nextInt();
             if(rpt == 1)
                 break;
-            input = lectura.nextLine();
+            lectura.nextLine();
         }
         if( input.length() > 0 )
             nombre = input;
         System.out.print("\n\n\n\"Tu te llamaras " + nombre + "\" dice el anciano.");
-        input = lectura.nextLine();
-        input = lectura.nextLine();
+        lectura.nextLine();
+        lectura.nextLine();
         System.out.println(nombre + "?");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.println("Te gana el cansancio y duermes");
-        input = lectura.nextLine();
+        lectura.nextLine();
         return nombre;
     }
     public void primera_salida(){
         System.out.print("Han pasado 3 dias desde que naciste.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.print("Eres un goblin, un demi-humano y vives en una cueva en medio de un bosque.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.print("A pesar de tener 3 dias de edad ya mides 110 centimetros.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.print("Esto se debe más que nada a un rasgo racial.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.print("Cuando un goblin madura ya no recibe alimento de la comuna, sino debe cazar su propia comida.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.print("Ese es el principal motivo por el cual sales de la cueva.");
-        input = lectura.nextLine();
+        lectura.nextLine();
         System.out.print("Al salir de la cueva ves una gran cantidad de arboles alrededor de la cueva.\n\n\n");
-        input = lectura.nextLine();
+        lectura.nextLine();
     }
     public void volver_cueva(){
         System.out.print("\n\n\nVes la puerta de la cueva.");
@@ -151,7 +149,7 @@ public class Lore {
                 + " lo dirá...\n\nPero por ahora te dices a ti mismo un pequeño y melancolico 'Felicitaciones'");       
         System.out.println("\n\nPresione cualquier tecla para terminar\n");
        
-        in.nextLine();
+        lectura.nextLine();
         System.exit(0);
     }
     
@@ -178,13 +176,29 @@ public class Lore {
 " `:::::`::::::::::::;'`:;::#                O\n" +
 "  `:::::`::::::::;' /  / `:#\n" +
 "   ::::::`:::::;'  /  /   `#");
-        System.out.println("\nIngresa tu nombre para poder continuar:\n");
-        String name = in.nextLine();
-        System.out.println("\n\nBienvenido "+name+" --- Presiona Enter para comenzar");
-        in.nextLine();
-        return name;
+        System.out.println("\n\"Si tuvieramos que abreviar las cosas acabas de morir\"\n");
+        lectura.nextLine();
+        System.out.println("\n\"No me mires asi, la gente muere todo el tiempo\"\n"+
+                            "\"Tú no eres la excepcion, solo te toco tu hora antes de tiempo\"\n");
+        lectura.nextLine();
+        System.out.println("\n\"Me siento algo curioso y me gustaria saber tu nombre\"\n");
+        lectura.nextLine();
+        System.out.println("\nEscribe tu nombre:\n");
+        input = lectura.nextLine();
+        if( input.length() > 0 )
+            System.out.println("\n\n\"Bienvenido "+input+"\" --- Presiona Enter para comenzar\"");
+        else{
+            input = "Rou";
+            System.out.println("\n\"Veo que no eres de los que habla\"\n");
+            lectura.nextLine();
+            System.out.println("\n\n\"Te llamare "+input+"..., de momento\" --- Presiona Enter para comenzar\"");
+        }
+        lectura.nextLine();
+        return input;
     }
-    
+    public void listaAcciones(){
+        System.out.println("\nAcciones Posibles:\n1.-Mover + direccion\n2.-Interactuar\n3.-Equip\n4.-Atacar\n");
+    }
     public void writeNLines(int n)
     {
         for(int i =0;i<n;i++) System.out.print(" \n");

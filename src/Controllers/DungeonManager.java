@@ -144,11 +144,16 @@ public class DungeonManager {
                 return 1;
                 
             }
-            Dungeon currDungeon = dungeons.get(activeDungeon);
-            CreateDungeonDistribution(randomManager.nextInt(50-25)+25,randomManager.nextInt(50-25)+25,currDungeon.GetPrcEnemies()+0.075,currDungeon.GetLvlEnemies(),
-                    currDungeon.GetPrcItem()+0.025);
-            activeDungeon++;
-            player.SetPosition(dungeons.get(activeDungeon).GetAntPos().GetPoint());
+            if(activeDungeon<dungeons.size()-1)
+            {
+                activeDungeon++;                
+            }else{
+                Dungeon currDungeon = dungeons.get(activeDungeon); //si no es el ultimo calabozo, crea otro cala
+                CreateDungeonDistribution(randomManager.nextInt(50 - 25) + 25, randomManager.nextInt(50 - 25) + 25, currDungeon.GetPrcEnemies() + 0.075, currDungeon.GetLvlEnemies(),
+                currDungeon.GetPrcItem() + 0.025);
+                activeDungeon++;
+                player.SetPosition(dungeons.get(activeDungeon).GetAntPos().GetPoint());                
+            }           
         }else
         {
             if(activeDungeon==0) return 0;
@@ -189,7 +194,7 @@ public class DungeonManager {
         Coordinate currentPoint = new Coordinate(M, N);
         int x = randomManager.nextInt(M - 3) + 1;
         if(x%2==0) x++;
-        int y = randomManager.nextInt(N - 2) + 1;
+        int y = randomManager.nextInt(N - 3) + 1;
         if(y%2==0) y++;
 
         currentPoint.SetX(x);
@@ -226,16 +231,17 @@ public class DungeonManager {
                 }else
                 {
                     if(Math.random()<=theDungeon.GetPrcItem()){
-                        int randomObject = randomManager.nextInt(2);
+                        int randomObject = randomManager.nextInt(3);
                             switch (randomObject) {                          
                             case 0: {
-                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.POTION);
-                                break;
-                            }
+                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.POTION);                                
+                            }break;
                             case 1: {
-                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.WEAPON);
-                                break;
-                            }                        
+                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.WEAPON);                                
+                            }break;     
+                            case 2:{
+                                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.ARMOR);   
+                            }break;                                
                         }
                     dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ARTIFACT);
                     }else{
