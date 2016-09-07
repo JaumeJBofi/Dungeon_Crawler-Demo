@@ -75,6 +75,7 @@ public class Avatar extends Entity implements IDibujable{
     
     /// AGREGADO ////////////
     public void AddArtefact(Artefacto a){
+        // Solo añade un artefacto al saco
         saco.add(a);
     }
     
@@ -83,24 +84,37 @@ public class Avatar extends Entity implements IDibujable{
     }
     public boolean EquipItem(int number) 
     {
-        if(saco.size()<number) return false;
+        if(saco.size()<number)
+            //Si no es un indice valido devuelve falso
+            return false;
         Artefacto selectedObj = saco.get(number);
+        // Item a equiparse
+
         
         if(selectedObj instanceof Arma){
+            //si es arma se coloca en arma equipada
             arma_equip = (Arma)selectedObj;
         }else if(selectedObj instanceof Armadura){
+            // si es armadura, se coloca en la armadura
             armadura_equip = (Armadura)selectedObj;
         }else
         {
+            //Si es una pocion, se cura la cantidad especificada
             int healCant = ((Pocion)selectedObj).GetValor();
             hp += healCant;
-            if(hp>vidaMaxima) hp = vidaMaxima;
+            if(hp>vidaMaxima)
+                //No puede curarse mas del maximo de su vida
+                hp = vidaMaxima;
+            //Se consume la pocion
             saco.remove(number);
         }
         return true;            
     }
     
     public void Render(boolean simple){
+        // Son solo impresiones, nada brutal,
+        //usa el polimorfismo en artefacto.
+        //no imprime indices ni marca los items equipados
         int tamanho = saco.size();
         System.out.println("");
         System.out.println(" ------ STATS ------");
@@ -108,7 +122,9 @@ public class Avatar extends Entity implements IDibujable{
         System.out.println(this.GetNombre());
         System.out.println("  HP: " + this.hp + "/" + this.vidaMaxima);
         System.out.print("  Arma: ");
+        //Si no tiene arma equipada
         if (arma_equip == null) System.out.println("Ninguno"); else arma_equip.Render();
+        //Si no tiene armadura equipada
         System.out.print("  Armadura: ");
         if (armadura_equip == null) System.out.println("Ninguno"); else armadura_equip.Render(); 
         Artefacto art;
@@ -116,7 +132,9 @@ public class Avatar extends Entity implements IDibujable{
         if (tamanho == 0) System.out.println("  Vacio");
         else for (int i= 0; i <tamanho ; i++){
             art = saco.get(i);
-            System.out.print("  ");
+            //System.out.print("  ");
+            System.out.print("  " + (i+1) + ")");
+            //Modificado, ahora si imprime indices xd (Deberia :v)
             art.Render();
             System.out.println();
         }
@@ -124,13 +142,14 @@ public class Avatar extends Entity implements IDibujable{
     
     //Modificado por mi
     public void Render(){
-        
+        //El nuevo render imprime 4 lineas por separado y el resto en un for
         String space20 = new String(new char[22]).replace('\0', ' ');
         String space19 = new String(new char[21]).replace('\0', ' ');
         int tamanho = saco.size();
         
         System.out.println("");
         System.out.format("%-40s","     ------ STATS ------");
+        //Cadenas de espacios en blanco
         System.out.print(space20);
         System.out.println("---------------- ITEMS -----------------");
               
@@ -139,12 +158,14 @@ public class Avatar extends Entity implements IDibujable{
         
         //Arma
          if (tamanho == 0){
+             //Cadenas de espacios en blanco
             System.out.print(space20);
             System.out.format("%-40s\n",". . . . . . . . .Vacio. . . . . . . . . ");
         }else{             
              if(!(saco.get(0)==arma_equip)&&!(saco.get(0)==armadura_equip)) System.out.print(space20);
              else 
-             {                 
+             {
+                 //Cadenas de espacios en blanco
                 System.out.print(space19);                
                 System.out.print(">");
              }
