@@ -9,11 +9,12 @@ import Controllers.Dibujador;
 import Controllers.DungeonManager;
 import Foundation.CellInformation;
 import Models.Avatar;
+import Controllers.Lore;
 import Foundation.Options;
 import Foundation.Options.ACTION;
 import java.util.Random;
 import java.util.Scanner;
-import java.lang.Object;
+
 
 /**
  *
@@ -24,101 +25,23 @@ public class GameProject {
     /**
      * @param args the command line arguments
      */
-    
-    static public void writeNLines(int n)
-    {
-        for(int i =0;i<n;i++) System.out.print(" \n");
-    }
-    
-    static public void winGame(Scanner in){
-        
-        writeNLines(20);
-         System.out.print("                                   ||`-.___\n" +
-"                                   ||    _.>\n" +
-"                                   ||_.-'\n" +
-"               ==========================================\n" +
-"                `.:::::::.       `:::::::.       `:::::::.\n" +
-"                  \\:::::::.        :::::::.        :::::::\\\n" +
-"                   L:::::::         :::::::         :::::::L\n" +
-"                   J::::::::        ::::::::        :::::::J\n" +
-"                    F:::::::        ::::::::        ::::::::L\n" +
-"                    |:::::::        ::::::::        ::::::::|\n" +
-"                    |:::::::        ::::::::        ::::::::|     .---.\n" +
-"                    |:::::::        ::::::::        ::::::::|    /(@  o`.\n" +
-"                    |:::::::        ::::::::        ::::::::|   |    /^^^\n" +
-"     __             |:::::::        ::::::::        ::::::::|    \\ . \\vvv\n" +
-"   .'_ \\            |:::::::        ::::::::        ::::::::|     \\ `--'\n" +
-"   (( ) |           |:::::::        ::::::::        ::::::::|      \\ `.\n" +
-"    `/ /            |:::::::        ::::::::        ::::::::|       L  \\\n" +
-"    / /             |:::::::        ::::::::        ::::::::|       |   \\\n" +
-"   J J              |:::::::        ::::::::        ::::::::|       |    L\n" +
-"   | |              |:::::::        ::::::::        ::::::::|       |    |\n" +
-"   | |              |:::::::        ::::::::        ::::::::|       F    |\n" +
-"   | J\\             F:::::::        ::::::::        ::::::::F      /     |\n" +
-"   |  L\\           J::::::::       .::::::::       .:::::::J      /      F\n" +
-"   J  J `.     .   F:::::::        ::::::::        ::::::::F    .'      J\n" +
-"    L  \\  `.  //  /:::::::'      .::::::::'      .::::::::/   .'        F\n" +
-"    J   `.  `//_..---.   .---.   .---.   .---.   .---.   <---<         J\n" +
-"     L    `-//_=/  _  \\=/  _  \\=/  _  \\=/  _  \\=/  _  \\=/  _  \\       /\n" +
-"     J     /|  |  (_)  |  (_)  |  (_)  |  (_)  |  (_)  |  (_)  |     /\n" +
-"      \\   / |   \\     //\\     //\\     //\\     //\\     //\\     /    .'\n" +
-"       \\ / /     `---//  `---//  `---//  `---//  `---//  `---'   .'\n" +
-"________/_/_________//______//______//______//______//_________.'_________\n" +
-"##VK######################################################################");
-        System.out.print("Abres la puerta, esperando lo mismo que ha sucedido antes... Una prueba mas, un castigo mas por lo que\nhemos ignorado tanto tiempo.");
-        System.out.printf(" Sin embargo, no encuentras mas.\nNo encuentras mas oposición, ahora que has aceptado los pecados que antes ignoraste puedes enfrentar\n"
-                + "las verdaderas pruebas de la vida\n");
-        System.out.printf("Te preguntas si sientes felicidad o remordimiento. ¿Saber que tan cruel el mundo puede ser es una bedición o maldición? Solo el tiempo"
-                + " lo dirá...\n\nPero por ahora te dices a ti mismo un pequeño y melancolico 'Felicitaciones'");       
-        System.out.println("\n\nPresione cualquier tecla para terminar\n");
-       
-        in.nextLine();
-        System.exit(0);
-    }
-    
-    static public String IntroMenu(Scanner in){
-        System.out.println("Bienvenidos a Rings of Sins\n\n");
-        System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
-"::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
-"::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
-"::::::::::::::::::::::::::/\\::::::::::::::::::::::::::\n" +
-"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
-"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
-"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
-"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
-"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
-"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
-"::::::::::::::::::::::::::||::::::::::::::::::::::::::\n" +
-"~^~_-~^^-^~^_~^_^-~^~^-~^ || ~^~_-~^_^-^~^_~^_^-~^~^-~\n" +
-"~^-_~^-~^_~^-~^_~^-_ _^,##[]##,~_ _~^-_~^-~^_~^-~^_~^-\n" +
-"~^-~^~-_~^__.===~'`__.. ~{ \\ _-..__`'~===.__~^-~^~-_~^\n" +
-"~_~^_.=~~'   ~_.==~-.-~ .=||=. ~=.-~==._~^-^'~~=._~_~^\n" +
-"~-:`-~^-~^_~^:-~^~-_~-._`-==-'_.=~-_~^-_:~^-~^-_~`;-~\n" +
-" ~-'._~^-~^-_^~=._~-~_~-'~~'~`_^-~_^_.=~-~^-_~^-_.'^-\n" +
-"_~^-~^~=._~^-~^_-^~~==..,~_^_,..==~~-_~^-~^-_.=~_~^-~^\n" +
-"_-~^-~^_~^`~==.__-~^_~^-_~^-_~^-_~^-~__.==~`_-~^-~^_~^\n" +
-"-~_~^~-~^-~^~_~^~`~~~==,,....,,==~~~`-~~_~^~-~^-~^~_~^~\n" +
-" ~jgs^-~^-_~^~^_-^~^-~^~-_~^-~^-~^_~^~-~^~-~^-~^-~^-~^\n" +
-" ~^~^-~^-~^_~^~-^~_~^-^~^~^-~^-~^~^~-^~-~^-~^~~-^~-^~^");
-        System.out.println("\n\nIngresa tu nombre y coge la espada para continuar:\n\n");
-        String name = in.nextLine();
-        System.out.println("\n\nBienvenido "+name+" --- Presiona Enter para comenzar");
-        in.nextLine();
-        return name;
-    }
-    
-    
-    public static void main(String[] args) {                                                   
+    public static void main(String[] args) {  
+               
         // Aca hacemos random de las dimensiones
         //Tambien podemos ya ir creando los otros laberintos
         Random randManager = new Random();
-         Scanner in = new Scanner(System.in);
-         
-        String name = IntroMenu(in);
+        Scanner in = new Scanner(System.in);
+        
+        Lore historia = new Lore();
+        
+        String name;
+        if(in.nextLine().compareToIgnoreCase("re")==0) name = historia.nacer();
+        else name = historia.IntroMenu(in);
+        
         DungeonManager myManager = new DungeonManager(randManager.nextInt(7-3)+3);
         //DungeonManager myManager = new DungeonManager(2);
         
-        int varM = randManager.nextInt(35-25)+25;
+        int varM = randManager.nextInt(50-25)+25;
         int varN = randManager.nextInt(35-25)+25;                
         
         Avatar player = new Avatar(myManager.CreateDungeonDistribution(varM,varN,0.15,5,0.3),10,6,name);
@@ -130,7 +53,7 @@ public class GameProject {
         
         CellInformation nextCellInformation;
         
-        writeNLines(20);
+        historia.writeNLines(20);
         Renderer.mostrarLaberinto(myManager.GetActiveDungeon(), player);
         
         while((ACTION.EXIT!=((Renderer.mostrarMenu(choiceTaken)).taken)))
@@ -142,14 +65,14 @@ public class GameProject {
                                 if(nextCellInformation.isNext()||nextCellInformation.isPrevious())
                                 {
                                    if(myManager.ChangeDungeon(player,nextCellInformation.isNext())==1){
-                                       winGame(in);                                       
+                                       historia.winGame(in);                                       
                                    }
                                 }else{
                                     player.Move(choiceTaken.path, 1);                                        
                                 }                       
-                        writeNLines(20);
+                        historia.writeNLines(20);
                     }else{
-                        writeNLines(20);
+                        historia.writeNLines(20);
                         switch(nextCellInformation.GetType())
                         {
                             case PARED:
@@ -162,8 +85,9 @@ public class GameProject {
                                 System.out.println("\n\nCuidado! Un enemigo? Preparate para una posible batalla");
                             break;                            
                         }         
-                        System.out.println("");
+                        System.out.println("");                       
                     }                    
+                     myManager.GetActiveDungeon().MoveEnemies();
                 }break;
                 case INTERACT:{  
                     if(!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(),choiceTaken.path)).isWall()){
@@ -174,31 +98,31 @@ public class GameProject {
                             case ARTIFACT:
                             {                                
                                 myManager.GetActiveDungeon().Interactuar(player,choiceTaken.path); // borra el artefacto de la matriz                                
-                                writeNLines(20);                              
+                                historia.writeNLines(20);                              
                                 System.out.println("\n\n INTERACT CORRECTO");                               
                             }break;
                             case ENEMY:
                             {
-                                writeNLines(20);                              
+                                historia.writeNLines(20);                              
                                 System.out.println("\n\n Ehh...No se vee muy amigable. Huyes antes que su ataque te alcanze");
 
                             }break;
                             default:
                             {
-                                writeNLines(20);                              
+                                historia.writeNLines(20);                              
                                 System.out.println("\n\nNo puedes interactuar con esa casilla"); 
  
                             }break;                            
                         }                        
                         System.out.println("");
                     }else{
-                        writeNLines(20);
+                        historia.writeNLines(20);
                         System.out.println("\n\nNo puedes interactuar con esa pared");                      
                     }
                 }break;
                 case DEBUG:
                 {
-                    writeNLines(20);                    
+                    historia.writeNLines(20);                    
                     myManager.printDebugInfo(player);
                     System.err.println("");
                 }break;
@@ -209,13 +133,13 @@ public class GameProject {
                     myManager.GetActiveDungeon().TeleportPlayer(player, x, y);                            
                 }case HELP:
                 {
-                    writeNLines(20);
+                    historia.writeNLines(20);
                     System.out.println("Comandos:\nMover [Derecha|Izquierda|Arriba|Abajo] : Te mueves a la dirección especificada si es posible. No es case sensitive\n"
                             + "Interactuar: Interactuas con el objeto al que estas mirando. Donde miras es la ultima dirección a la que te moviste o intentaste\n"
                             + "Atacar: Eliminas al enemigo al que estas mirando\nEquipar: Te equipas una armadura o arma de tu inventorio\n"
                             + "Help: Muestra la ayuda del juego\nSalir: Sale del Juego actual\n\nPresione cualquier tecla para continuar\n");
                              in.nextLine();
-                    writeNLines(20);
+                    historia.writeNLines(20);     
                 }break;
                 case ATTACK:
                 {
@@ -225,45 +149,47 @@ public class GameProject {
                             case ENEMY:
                             {
                                 // Random Text
-                                writeNLines(20); 
+                                historia.writeNLines(20);
                                 System.out.println("\n\nHyaaa!!!\nTu ataque dio en el blanco...El enemigo se desvanece silenciosamente como si estuviera aliviado");      
                                 myManager.GetActiveDungeon().Battle(player.GetX(),player.GetY(),choiceTaken.path);
                             }break;
                             default:
                             {
-                                writeNLines(20);                              
+                                historia.writeNLines(20);                             
                                 System.out.println("\n\nNo hay absolutamente nada peligroso en esa dirección.");      
                             }
                         }
                     }else
                     {
-                        writeNLines(20);                              
+                        historia.writeNLines(20);
                         System.out.println("\n\nEsa pared no te ha hecho nada. Disculpate, Las paredes tambien tienen sentimientos...");      
                     }
                     System.out.println("");
                 }break;
                 case EQUIP:
                 {                    
-                    // Falta Implementar
+                     // Falta Implementar
                     System.out.println();              
                     System.out.println("\n\nIngrese el indice del item a equipar o usar\n");
                     String input = in.nextLine();
-                    Integer n = Integer.parseInt(input);                    
-                    if(n==Double.NaN){
-                        System.out.println("Mal input. Presione Enter para continuar\n");
-                        in.nextLine();
-                    }else{
+                    try {
+                        Integer n = Integer.parseInt(input);       
                         player.EquipItem(n-1);
-                    }
-                    writeNLines(20);      
+                    } catch (NumberFormatException e) {
+                        System.out.println("Mal input. Presione Enter para continuar\n");
+                        in.nextLine();                        
+                        int a;
+                    }                             
+                    historia.writeNLines(20);
                 }break;
                 default:{
-                    writeNLines(20);
+                    historia.writeNLines(20);
                     System.out.println("\n\nAcción no definida");
                     System.out.println("");                    
                 }break;
             }            
             Renderer.mostrarLaberinto(myManager.GetActiveDungeon(), player);
+            //myManager.GetActiveDungeon().Render();
         }
     }
     

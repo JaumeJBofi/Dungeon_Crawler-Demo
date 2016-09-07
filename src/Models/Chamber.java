@@ -17,8 +17,28 @@ public class Chamber {
     
     // Aca podemos guardar info de enemigos, items, etc.
     
-    public Chamber(CellInformation.CELLMODE mode,CellInformation.CELLTYPE type){
-        chamberStatus.SetMode(mode);
-        chamberStatus.SetType(type);
+    private Enemy chamberEnemy;
+    private Artefacto chamberArtefact;
+    
+    public Chamber(Enemy enemyResident,Artefacto artefactResident){
+        SetArtefact(chamberArtefact);
+        SetEnemy(chamberEnemy);
     }
+    
+    final public void SetEnemy(Enemy varEnemy){
+        chamberEnemy = varEnemy;
+    }
+    
+    public Enemy GetEnemy(){
+        return chamberEnemy;
+    }
+    
+    final public void SetArtefact(Artefacto varArtefact){
+        chamberArtefact = varArtefact;
+    }
+    
+    public Artefacto GetArtefacto(){
+        return chamberArtefact;
+    }
+            
 }

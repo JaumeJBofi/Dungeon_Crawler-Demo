@@ -12,7 +12,6 @@ import Models.Enemy;
 import Controllers.EnemyGenerator;
 import Foundation.DIRECTIONS;
 import java.util.ArrayList;
-
 /**
  *
  * @author Jauma
@@ -47,7 +46,7 @@ public class Dungeon implements IDibujable{
     
     
     public Dungeon(double varprcEnemies,int varlvlEnemies,double varPrcItems){
-        // Momentaneamente el Laberinto no posee dimensiones
+        // Momentaneamente el Laberinto no posee dimensiones       
         M = 0;
         N = 0;
         SetLvlEnemies(varlvlEnemies);
@@ -129,7 +128,7 @@ public class Dungeon implements IDibujable{
     }
     
     public void SetNumEnemies(int varNumEnemies){
-        if(varNumEnemies<0){
+        if(varNumEnemies>0){
             numEnemies = varNumEnemies;
         }
     }
@@ -266,7 +265,19 @@ public class Dungeon implements IDibujable{
         }
         dungeonAccess[xFactor][yFactor].SetType(CellInformation.CELLTYPE.ADENTRO);
     }
-
+    
+    public void MoveEnemies(){
+        
+        for(Enemy currEnemy : lista_enemigos){
+            if(Math.random()<=075)
+            {
+                dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
+                currEnemy.RandomMove(dungeonAccess, 1);
+                dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);            
+            }            
+        }
+    }
+    
     
     public void TeleportPlayer(Avatar player,int x,int y)
     {
@@ -308,6 +319,7 @@ public class Dungeon implements IDibujable{
             }
             System.out.print("\n");
         }        
+       
     }
 
     public void Render(int posX,int posY,int tamShowX,int tamShowY){   
@@ -367,9 +379,9 @@ public class Dungeon implements IDibujable{
     }
     
      //Modif
-    public void addenemy(Coordinate pos) {
+    public void addenemy(Coordinate pos) {        
         Enemy enemigo = enemygen.generar_enemigo();
-        enemigo.SetPosition(pos);
+        enemigo.SetPosition(pos.GetPoint());
         lista_enemigos.add(enemigo);
     }
 }
