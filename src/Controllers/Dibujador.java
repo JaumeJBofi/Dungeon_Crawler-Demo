@@ -1,10 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Clase que se encarga de dibujar una matriz
  */
 
-//Probando
 package Controllers;
 import Models.Dungeon;
 import Models.Avatar;
@@ -17,22 +14,28 @@ import Foundation.Options.ACTION;
  * @author alulab14
  */
 public class Dibujador {
-
+    //La direccion hacia la cual mira el jugador
     private DIRECTIONS direccion;
-     Scanner scanner;
+    //scanner sirve para leer
+    Scanner scanner;
     
-    public Dibujador(){        
+    //Constructor
+    public Dibujador(){
+        //Inicializo Scanner
         scanner = new Scanner(System.in);
     }
- 
     
-    public Options mostrarMenu(Options choice){        
+    //funcion que muestra el menu, devuelve la accion que se realizo
+    public Options mostrarMenu(Options choice){
+        //Se pide una accion a realizar
         System.out.println("\nDefinir accion:\t");        
         String input = scanner.nextLine();    
-                
+        //Si se pide salir se termina el programa
         if( input.equalsIgnoreCase("salir") ){
             System.out.println("\n\nSesionFinalizada");
+            //Indico que la accion que devuelva sea salir
             choice.SetAction(ACTION.EXIT);
+        
         }else if( input.toLowerCase().toLowerCase().startsWith("mover") ){
           choice.SetAction(ACTION.MOVE);          
             if(input.toLowerCase().endsWith("derecha") ){
@@ -78,16 +81,17 @@ public class Dibujador {
         }            
         return choice;
     }
-    
+    //funcion que recibe un Dungeon y los datos del jugador
     public void mostrarLaberinto(Dungeon theDungeon,Avatar player){
-        
-
+        //Muestro el calabozo
+        //Doy las coordenadas del jugador y el tamaño que debe mostrar
         theDungeon.Render(player.GetX(),player.GetY(),player.GetTamShowX(),player.GetTamShowY()); 
+        //Muestro los datos del jugador
         player.Render();
-
-    }   
-
+    }
+    
+    //????
     private boolean mostrarStats(){
         return true;
-    }        
+    }
 }
