@@ -24,7 +24,7 @@ public class EnemyGenerator {
         //Creo los objetos base
         Enemy xd = new Enemy(nulo, "xd", 100, 1);
         enemigos.add(xd);
-        xd = new Enemy(nulo, "yd", 200, 2);
+        xd = new Enemy(nulo, "yd", 150, 2);
         enemigos.add(xd);
         xd = new Enemy(nulo, "zd", 300, 3);
         enemigos.add(xd);

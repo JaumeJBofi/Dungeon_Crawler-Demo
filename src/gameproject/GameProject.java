@@ -10,6 +10,7 @@ import Controllers.DungeonManager;
 import Foundation.CellInformation;
 import Models.Avatar;
 import Controllers.Lore;
+import Foundation.DIRECTIONS;
 import Foundation.Options;
 import Foundation.Options.ACTION;
 import java.util.Random;
@@ -35,6 +36,7 @@ public class GameProject {
         Lore historia = new Lore();
         //Decidimos que intro deseamos leer
         String name;
+        System.out.println("Presione enter para empezar:");
         if(in.nextLine().compareToIgnoreCase("re")==0) name = historia.nacer();
         else name = historia.IntroMenu(in);
         
@@ -88,7 +90,8 @@ public class GameProject {
                         System.out.println("");                       
                     } 
                     //Esto hace que los enemigos se muevan
-                     //myManager.GetActiveDungeon().MoveEnemies();
+                    //# Preg 1
+                    myManager.GetActiveDungeon().MoveEnemies();
                 }break;
                 case INTERACT:{  
                     if(!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(),choiceTaken.path)).isWall()){
@@ -104,9 +107,19 @@ public class GameProject {
                             }break;
                             case ENEMY:
                             {
+                                // #Preg 2:
                                 historia.writeNLines(20);                              
-                                System.out.println("\n\n Ehh...No se vee muy amigable. Huyes antes que su ataque te alcanze");
-
+                                // Podemos ponder en choice taken la posicion... luego podemos implementar eso
+                                if(myManager.GetActiveDungeon().Battle(player, choiceTaken.path)){
+                                    // Gana la batalla... No muere
+                                }else
+                                {
+                                    System.out.println("Fin del juego. Ha muerto. Presione Enter\n");
+                                    in.nextLine();
+                                    System.exit(0);
+                                    // Fin del juego
+                                    
+                                }
                             }break;
                             default:
                             {
@@ -120,6 +133,9 @@ public class GameProject {
                         historia.writeNLines(20);
                         System.out.println("\n\nNo puedes interactuar con esa pared");                      
                     }
+                    // Pregunta 1
+                    //# Preg 1 Y todas las clases adentro ya estaban implementadas
+                    myManager.GetActiveDungeon().MoveEnemies();
                 }break;
                 case DEBUG:
                 {
@@ -152,7 +168,7 @@ public class GameProject {
                                 // Random Text
                                 historia.writeNLines(20);
                                 System.out.println("\n\nHyaaa!!!\nTu ataque dio en el blanco...El enemigo se desvanece silenciosamente como si estuviera aliviado");      
-                                myManager.GetActiveDungeon().Battle(player.GetX(),player.GetY(),choiceTaken.path);
+                                //myManager.GetActiveDungeon().Battle(player.GetX(),player.GetY(),choiceTaken.path);
                             }break;
                             default:
                             {

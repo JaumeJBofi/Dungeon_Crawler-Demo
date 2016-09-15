@@ -19,7 +19,10 @@ public class Chamber {
     
     private Enemy chamberEnemy;
     private Artefacto chamberArtefact;
-    
+   
+    public Chamber(){
+        
+    }
     public Chamber(Enemy enemyResident,Artefacto artefactResident){
         SetArtefact(chamberArtefact);
         SetEnemy(chamberEnemy);
@@ -31,6 +34,18 @@ public class Chamber {
     
     public Enemy GetEnemy(){
         return chamberEnemy;
+    }
+    
+    //Pregunta 2
+    
+    public Enemy ReleaseEnemy(){
+        Enemy varEnemy = chamberEnemy;
+        chamberEnemy = null;
+        return varEnemy;
+    }
+    
+    public void GasEnemy(){
+        chamberEnemy = null;
     }
     
     final public void SetArtefact(Artefacto varArtefact){

@@ -244,8 +244,9 @@ public class Dungeon implements IDibujable{
         player.AddArtefact(getObject(xFactor,yFactor));
     }
     
-    public void Battle(int x,int y,DIRECTIONS path){
-        int xFactor = x, yFactor = y;
+    public boolean Battle(Avatar player,DIRECTIONS path){
+        // Preg 2
+        int xFactor = player.GetX(), yFactor = player.GetY();
         switch (path) {
             case BOT: {
                 yFactor += 1;
@@ -263,21 +264,73 @@ public class Dungeon implements IDibujable{
                 xFactor += 1;
             }
         }
-        dungeonAccess[xFactor][yFactor].SetType(CellInformation.CELLTYPE.ADENTRO);
-    }
-    
-    public void MoveEnemies(){
+        // #Pregunta 2
+        int weaponDamage = player.GetEquipWeaponDamage();
+        int enemyDamage = layOutChamber[xFactor][yFactor].GetEnemy().GetEnemyDamage();
         
+        layOutChamber[xFactor][yFactor].GetEnemy().ReciveDamage(weaponDamage);
+        player.ReciveDamage(enemyDamage);
+        
+        if(player.GetVida()==0){
+            return false;
+        }else
+        {
+            System.out.format("Sobreviviste con %d de daño\n",enemyDamage);
+        }
+        
+        if( layOutChamber[xFactor][yFactor].GetEnemy().GetVida()==0){
+            System.out.format("El enemigo ha muerto\n",weaponDamage);
+            dungeonAccess[xFactor][yFactor].SetType(CellInformation.CELLTYPE.ADENTRO);
+            lista_enemigos.remove(layOutChamber[xFactor][yFactor].GetEnemy());
+            layOutChamber[xFactor][yFactor].GasEnemy();
+            numEnemies--;            
+        }else
+        {
+            System.out.format("El Enemigo sobrevivio la batalla pero Recibio %d de daño\n",weaponDamage);
+        }
+        
+        
+        return true;
+    }
+    //# Preg 1
+    public void MoveEnemies(){
+        Enemy varEnemy;
+        DIRECTIONS current;
+        // #Pregunta  1 y 2
         for(Enemy currEnemy : lista_enemigos){
-            if(Math.random()<=075)
-            {
+            if(Math.random()<=0.75)
+            {                
+                // Aca pueden presentarse errores.... Pero en el tiempo limita dificil que salga perfecto                
+                // Puede ser que no tenga donde moverse asi que se queda en el mismo lugar
+                if((current = currEnemy.RandomMove(dungeonAccess, 1))!=DIRECTIONS.STAY){
+                
+                // Primero elimino de dungeon acess y lo saco de su cuarto. Luego muevo el enemigo y lo pongo
+                // en una nueva locación
                 dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
-                currEnemy.RandomMove(dungeonAccess, 1);
+                layOutChamber[currEnemy.GetX()][currEnemy.GetY()].GasEnemy();
+                currEnemy.Move(current, 1);
                 dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);            
+                layOutChamber[currEnemy.GetX()][currEnemy.GetY()].SetEnemy(currEnemy);                
+                }                
             }            
         }
     }
     
+    // Preg 2
+    public void SetUpChamber(){
+        layOutChamber = new Chamber[M][N];
+        for (int i = 0; i < M; i++) {
+            // ACA ES DONDE CREO QUE SE CAE EL CODIGO!!!
+            for (int j = 0; j < N; j++) {
+                //Esta linea hace que se caiga. La Comentada
+                //if(!dungeonAccess[i][j].isWal()) layOutChamber[i][j] = new Chamber();
+                layOutChamber[i][j] = new Chamber();
+            }
+        }
+        for(Enemy currEnemy : lista_enemigos){
+            layOutChamber[currEnemy.GetX()][currEnemy.GetY()].SetEnemy(currEnemy);
+        }
+    }
     
     public void TeleportPlayer(Avatar player,int x,int y)
     {

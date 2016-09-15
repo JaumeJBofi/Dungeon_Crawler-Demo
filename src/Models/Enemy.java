@@ -14,17 +14,19 @@ import Foundation.DIRECTIONS;
  */
 public class Enemy extends Entity {
     private int nivel;
-    
+    private int daño;
     
     //Coordinate position;
     public Enemy(Coordinate varPosition){
         super(varPosition);
         SetLookDirection(DIRECTIONS.BOT);
         nivel = 1;
+        daño = 15;
     }
     
     public void SetNivel(int n){
         nivel = n;
+        daño *= nivel;
     }
     
     public int GetNivel(){
@@ -35,10 +37,15 @@ public class Enemy extends Entity {
     public Enemy(Coordinate varPosition, String nomb, int vida, int lvl) {
         super(varPosition, nomb, vida);
         nivel = lvl;
+        daño = 15;
     }
 
     public Enemy copiar() {
         Enemy nuevo_enemigo = new Enemy(this.GetPosition(), this.GetNombre(), this.GetVida(), nivel);
         return nuevo_enemigo;
+    }
+    
+    public int GetEnemyDamage(){
+        return daño;
     }
 }

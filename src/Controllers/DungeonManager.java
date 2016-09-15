@@ -263,7 +263,8 @@ public class DungeonManager {
         theDungeon.SetNumEnemies(numEnemies);
         dungeons.add(theDungeon);
         theDungeon.SetAccess(dungeonAccess);
-
+        //Preg 2: Creamos los chambers con los enemies.
+        theDungeon.SetUpChamber();
         return playerPoint;
     }
 }

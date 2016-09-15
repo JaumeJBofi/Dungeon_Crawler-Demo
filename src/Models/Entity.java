@@ -56,7 +56,6 @@ public class Entity {
     }
     
     public void SetVida(int v) {
-        hp = v;
     }
 
     public int GetVida() {
@@ -77,6 +76,12 @@ public class Entity {
     
     final public void SetLookDirection(DIRECTIONS varDirection){
         lookDirection = varDirection;
+    }
+    
+    //Pregunta 2
+    public void ReciveDamage(int dmg){
+        hp -= dmg;
+        if(hp<0) hp = 0;
     }
     
     public void Move(DIRECTIONS way,int steps){
@@ -123,33 +128,37 @@ public class Entity {
         coord.SetY(coord.GetY() + yFactor);    
     }  
     
-    public boolean RandomMove(CellInformation[][] dungeonAccess,int steps){
+    public DIRECTIONS RandomMove(CellInformation[][] dungeonAccess,int steps){
         List<DIRECTIONS> validDir = new ArrayList();
         Coordinate varPointX = position.GetPoint();
         Coordinate varPointY = position.GetPoint();
 
-        ThinkMove(varPointX, DIRECTIONS.TOP, steps);
-        if (varPointX.InRange() && !dungeonAccess[varPointX.GetX()][varPointX.GetY()].isWall()&&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ARTIFACT) {
-            validDir.add(DIRECTIONS.TOP);
-        }
-
-        ThinkMove(varPointX, DIRECTIONS.BOT, steps*2);
-        if (varPointX.InRange() && !dungeonAccess[varPointX.GetX()][varPointX.GetY()].isWall()&&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ARTIFACT) {
-            validDir.add(DIRECTIONS.BOT);
-        }
-
-        ThinkMove(varPointY, DIRECTIONS.LEFT, steps);
-        if (varPointY.InRange() && !dungeonAccess[varPointY.GetX()][varPointY.GetY()].isWall()&&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ARTIFACT) {
+        ThinkMove(varPointX, DIRECTIONS.LEFT, steps);
+        if (varPointX.InRange() && !dungeonAccess[varPointX.GetX()][varPointX.GetY()].isWall()&&dungeonAccess[varPointX.GetX()][varPointX.GetY()].GetType()!=CellInformation.CELLTYPE.ARTIFACT
+                &&dungeonAccess[varPointX.GetX()][varPointX.GetY()].GetType()!=CellInformation.CELLTYPE.ENEMY) {
             validDir.add(DIRECTIONS.LEFT);
         }
 
-        ThinkMove(varPointY, DIRECTIONS.RIGHT, steps*2);
-        if (varPointY.InRange() && !dungeonAccess[varPointY.GetX()][varPointY.GetY()].isWall()&&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ARTIFACT) {
+        ThinkMove(varPointX, DIRECTIONS.RIGHT, steps*2);
+        if (varPointX.InRange() && !dungeonAccess[varPointX.GetX()][varPointX.GetY()].isWall()&&dungeonAccess[varPointX.GetX()][varPointX.GetY()].GetType()!=CellInformation.CELLTYPE.ARTIFACT
+                &&dungeonAccess[varPointX.GetX()][varPointX.GetY()].GetType()!=CellInformation.CELLTYPE.ENEMY) {
             validDir.add(DIRECTIONS.RIGHT);
         }
 
+        ThinkMove(varPointY, DIRECTIONS.TOP, steps);
+        if (varPointY.InRange() && !dungeonAccess[varPointY.GetX()][varPointY.GetY()].isWall()&&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ARTIFACT
+                &&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ENEMY) {
+            validDir.add(DIRECTIONS.TOP);
+        }
+
+        ThinkMove(varPointY, DIRECTIONS.BOT, steps*2);
+        if (varPointY.InRange() && !dungeonAccess[varPointY.GetX()][varPointY.GetY()].isWall()&&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ARTIFACT
+                &&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ENEMY) {
+            validDir.add(DIRECTIONS.BOT);
+        }
+
         if (validDir.isEmpty()) {
-            return false;
+            return DIRECTIONS.STAY;
         }
         if(validDir.contains(lookDirection)){
             // Feo pero es lo mas facil de hacer. Agregar objetos para aumentar
@@ -158,9 +167,8 @@ public class Entity {
             validDir.add(lookDirection);
             Collections.shuffle(validDir, new Random());
         }
-        lookDirection = validDir.get(generator.nextInt(validDir.size()));
-        Move(lookDirection,steps);
-        return true;
+        return validDir.get(generator.nextInt(validDir.size()));
+     
     }
     
      //Modif

@@ -8,6 +8,7 @@ package Models;
 import Foundation.Coordinate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -84,7 +85,7 @@ public class Avatar extends Entity implements IDibujable{
     }
     public boolean EquipItem(int number) 
     {
-        if(saco.size()<number)
+        if(saco.size()<=number||number<=0)
             //Si no es un indice valido devuelve falso
             return false;
         Artefacto selectedObj = saco.get(number);
@@ -109,6 +110,14 @@ public class Avatar extends Entity implements IDibujable{
             saco.remove(number);
         }
         return true;            
+    }
+    
+    //#Preg 2
+    // Para cuestiones de prueba hacemos que aunquesea haga 5 de daño;
+    public int GetEquipWeaponDamage(){
+        if(arma_equip==null) return 5;
+        Random rand = new Random();
+        return rand.nextInt(arma_equip.GetDanhoMax()-arma_equip.GetDanhoMin()) + arma_equip.GetDanhoMin() + 5;        
     }
     
     public void Render(boolean simple){
@@ -139,6 +148,7 @@ public class Avatar extends Entity implements IDibujable{
             System.out.println();
         }
     }
+   
     
     //Modificado por mi
     public void Render() { //El nuevo render imprime 4 lineas por separado y el resto en un for
