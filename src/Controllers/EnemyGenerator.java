@@ -22,11 +22,11 @@ public class EnemyGenerator {
         enemigos = new ArrayList();
         Coordinate nulo = new Coordinate(0, 0);
         //Creo los objetos base
-        Enemy xd = new Enemy(nulo, "xd", 100, 1);
+        Enemy xd = new Enemy(nulo, "xd", 5, 1,5);
         enemigos.add(xd);
-        xd = new Enemy(nulo, "yd", 150, 2);
+        xd = new Enemy(nulo, "yd", 10, 1,5);
         enemigos.add(xd);
-        xd = new Enemy(nulo, "zd", 300, 3);
+        xd = new Enemy(nulo, "zd", 15, 1,5);
         enemigos.add(xd);
     }
 

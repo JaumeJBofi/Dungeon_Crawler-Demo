@@ -22,7 +22,7 @@ public class Avatar extends Entity implements IDibujable{
     private List<Artefacto> saco;
     
     public Avatar(Coordinate position,String varNombre) {
-        super(position);
+        super(position,"Reiu",100,5);
         hp = 100; // digamos q sea 100
         vidaMaxima = 500; // la vida maxima en el juego, por ejemplo        
         tamShowX = 15;
@@ -31,9 +31,8 @@ public class Avatar extends Entity implements IDibujable{
         SetNombre(varNombre);
     }
     
-    public Avatar(Coordinate position,int varTamShowX,int varTamShowY,String varNombre) {
-        super(position);
-        hp = 100; // digamos q sea 100
+    public Avatar(Coordinate position,int varTamShowX,int varTamShowY,int vida,String varNombre,int varStrength) {
+        super(position,varNombre,vida,varStrength)        ;
         vidaMaxima = 500; // la vida maxima en el juego, por ejemplo        
 //        SetTamShowX(tamShowX);
 //        SetTamShowY(tamShowY);
@@ -85,7 +84,7 @@ public class Avatar extends Entity implements IDibujable{
     }
     public boolean EquipItem(int number) 
     {
-        if(saco.size()<=number||number<=0)
+        if(saco.size()<=number||number<0)
             //Si no es un indice valido devuelve falso
             return false;
         Artefacto selectedObj = saco.get(number);
@@ -115,9 +114,9 @@ public class Avatar extends Entity implements IDibujable{
     //#Preg 2
     // Para cuestiones de prueba hacemos que aunquesea haga 5 de daño;
     public int GetEquipWeaponDamage(){
-        if(arma_equip==null) return 5;
+        if(arma_equip==null) return GetStrength();
         Random rand = new Random();
-        return rand.nextInt(arma_equip.GetDanhoMax()-arma_equip.GetDanhoMin()) + arma_equip.GetDanhoMin() + 5;        
+        return rand.nextInt(arma_equip.GetDanhoMax()-arma_equip.GetDanhoMin()) + arma_equip.GetDanhoMin() + GetStrength();        
     }
     
     public void Render(boolean simple){

@@ -293,7 +293,7 @@ public class Dungeon implements IDibujable{
         return true;
     }
     //# Preg 1
-    public void MoveEnemies(){
+    public void MoveEnemies(int playerX,int playerY){
         Enemy varEnemy;
         DIRECTIONS current;
         // #Pregunta  1 y 2
@@ -302,7 +302,7 @@ public class Dungeon implements IDibujable{
             {                
                 // Aca pueden presentarse errores.... Pero en el tiempo limita dificil que salga perfecto                
                 // Puede ser que no tenga donde moverse asi que se queda en el mismo lugar
-                if((current = currEnemy.RandomMove(dungeonAccess, 1))!=DIRECTIONS.STAY){
+                if((current = currEnemy.RandomMove(dungeonAccess, 1,playerX,playerY))!=DIRECTIONS.STAY){
                 
                 // Primero elimino de dungeon acess y lo saco de su cuarto. Luego muevo el enemigo y lo pongo
                 // en una nueva locación

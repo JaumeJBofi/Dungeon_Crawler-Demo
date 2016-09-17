@@ -17,7 +17,7 @@ import java.util.Collections;
  *
  * @author Jauma
  */
-public class Entity {
+public abstract class Entity {
 
     private Coordinate position;
     int hp; // vida actual
@@ -26,11 +26,25 @@ public class Entity {
     protected int tamShowX;
     protected int tamShowY;
     private DIRECTIONS lookDirection;
+    private int strength;
+       
   
-    public Entity(Coordinate varPosition){
+    public Entity(Coordinate varPosition,String varNombre,int varStrength){
         hp = 100;
         position = varPosition;    
         generator = new Random();
+        nombre = varNombre;
+        strength = varStrength;
+    }
+    
+    final public int GetStrength()
+    {
+        return strength;        
+    }
+    
+    final public void SetStrength(int varStrength)
+    {
+        strength = varStrength;
     }
     
     public Coordinate GetPosition(){
@@ -122,38 +136,38 @@ public class Entity {
             break;
             case RIGHT: {
                 xFactor += steps;
-            }
+            }break;
         }
         coord.SetX(coord.GetX() + xFactor);
         coord.SetY(coord.GetY() + yFactor);    
     }  
     
-    public DIRECTIONS RandomMove(CellInformation[][] dungeonAccess,int steps){
+    public DIRECTIONS RandomMove(CellInformation[][] dungeonAccess,int steps,int playerX,int playerY){
         List<DIRECTIONS> validDir = new ArrayList();
         Coordinate varPointX = position.GetPoint();
         Coordinate varPointY = position.GetPoint();
 
         ThinkMove(varPointX, DIRECTIONS.LEFT, steps);
         if (varPointX.InRange() && !dungeonAccess[varPointX.GetX()][varPointX.GetY()].isWall()&&dungeonAccess[varPointX.GetX()][varPointX.GetY()].GetType()!=CellInformation.CELLTYPE.ARTIFACT
-                &&dungeonAccess[varPointX.GetX()][varPointX.GetY()].GetType()!=CellInformation.CELLTYPE.ENEMY) {
+                &&dungeonAccess[varPointX.GetX()][varPointX.GetY()].GetType()!=CellInformation.CELLTYPE.ENEMY&&!varPointX.IsEqual(playerX, playerY)) {
             validDir.add(DIRECTIONS.LEFT);
         }
 
         ThinkMove(varPointX, DIRECTIONS.RIGHT, steps*2);
         if (varPointX.InRange() && !dungeonAccess[varPointX.GetX()][varPointX.GetY()].isWall()&&dungeonAccess[varPointX.GetX()][varPointX.GetY()].GetType()!=CellInformation.CELLTYPE.ARTIFACT
-                &&dungeonAccess[varPointX.GetX()][varPointX.GetY()].GetType()!=CellInformation.CELLTYPE.ENEMY) {
+                &&dungeonAccess[varPointX.GetX()][varPointX.GetY()].GetType()!=CellInformation.CELLTYPE.ENEMY&&!varPointX.IsEqual(playerX, playerY)) {
             validDir.add(DIRECTIONS.RIGHT);
         }
 
         ThinkMove(varPointY, DIRECTIONS.TOP, steps);
         if (varPointY.InRange() && !dungeonAccess[varPointY.GetX()][varPointY.GetY()].isWall()&&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ARTIFACT
-                &&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ENEMY) {
+                &&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ENEMY&&!varPointY.IsEqual(playerX, playerY)) {
             validDir.add(DIRECTIONS.TOP);
         }
 
         ThinkMove(varPointY, DIRECTIONS.BOT, steps*2);
         if (varPointY.InRange() && !dungeonAccess[varPointY.GetX()][varPointY.GetY()].isWall()&&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ARTIFACT
-                &&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ENEMY) {
+                &&dungeonAccess[varPointY.GetX()][varPointY.GetY()].GetType()!=CellInformation.CELLTYPE.ENEMY&&!varPointY.IsEqual(playerX, playerY)) {
             validDir.add(DIRECTIONS.BOT);
         }
 
@@ -165,16 +179,18 @@ public class Entity {
             // la probabilidad
             validDir.add(lookDirection);
             validDir.add(lookDirection);
-            Collections.shuffle(validDir, new Random());
+            validDir.add(lookDirection);
+            //Collections.shuffle(validDir, new Random());
         }
-        return validDir.get(generator.nextInt(validDir.size()));
-     
+        return validDir.get(generator.nextInt(validDir.size()));     
     }
     
      //Modif
-    public Entity(Coordinate varPosition, String nomb, int vida) {
+    public Entity(Coordinate varPosition, String nomb, int vida,int varStrength) {
         hp = vida;
+        generator = new  Random();
         nombre = nomb;
         position = varPosition;
+        strength = varStrength;
     }
 }

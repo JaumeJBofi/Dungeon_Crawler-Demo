@@ -13,20 +13,18 @@ import Foundation.DIRECTIONS;
  * @author Arthuro
  */
 public class Enemy extends Entity {
-    private int nivel;
-    private int daño;
+    private int nivel;    
     
     //Coordinate position;
     public Enemy(Coordinate varPosition){
-        super(varPosition);
+        super(varPosition,"Lament",15,5);
         SetLookDirection(DIRECTIONS.BOT);
-        nivel = 1;
-        daño = 15;
+        nivel = 1;        
     }
     
     public void SetNivel(int n){
         nivel = n;
-        daño *= nivel;
+        SetStrength(GetStrength()*nivel);
     }
     
     public int GetNivel(){
@@ -34,18 +32,19 @@ public class Enemy extends Entity {
     }
                 
     //Modif
-    public Enemy(Coordinate varPosition, String nomb, int vida, int lvl) {
-        super(varPosition, nomb, vida);
-        nivel = lvl;
-        daño = 15;
+    public Enemy(Coordinate varPosition, String nomb, int vida, int lvl,int initStrength) {
+        super(varPosition, nomb, vida,initStrength);    
+        SetLookDirection(DIRECTIONS.BOT);    
+        SetNivel(lvl);
     }
 
     public Enemy copiar() {
-        Enemy nuevo_enemigo = new Enemy(this.GetPosition(), this.GetNombre(), this.GetVida(), nivel);
+        Enemy nuevo_enemigo = new Enemy(this.GetPosition(), this.GetNombre(), this.GetVida(), nivel,GetStrength());
         return nuevo_enemigo;
     }
     
+    // Podemos extender de aqui.
     public int GetEnemyDamage(){
-        return daño;
+        return GetStrength();
     }
 }

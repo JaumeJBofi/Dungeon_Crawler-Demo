@@ -46,7 +46,7 @@ public class GameProject {
         int varM = randManager.nextInt(50-25)+25;
         int varN = randManager.nextInt(35-25)+25;                
         
-        Avatar player = new Avatar(myManager.CreateDungeonDistribution(varM,varN,0.15,5,0.3),10,6,name);
+        Avatar player = new Avatar(myManager.CreateDungeonDistribution(varM,varN,0.15,5,0.3),10,6,100,name,5);
         //Avatar player = new Avatar(myManager.CreateDungeonDistribution(40,5,0.5,0),40,10);
         
         Dibujador Renderer = new Dibujador();
@@ -56,6 +56,7 @@ public class GameProject {
         CellInformation nextCellInformation;
         
         historia.writeNLines(20);
+        System.out.format("Mundo Nr° %d de %d\n",myManager.GetActiveDungeonIndex()+1,myManager.GetTotalDungeons());
         Renderer.mostrarLaberinto(myManager.GetActiveDungeon(), player);
         historia.listaAcciones();
         while((ACTION.EXIT!=((Renderer.mostrarMenu(choiceTaken)).taken)))
@@ -91,7 +92,7 @@ public class GameProject {
                     } 
                     //Esto hace que los enemigos se muevan
                     //# Preg 1
-                    myManager.GetActiveDungeon().MoveEnemies();
+                    myManager.GetActiveDungeon().MoveEnemies(player.GetX(),player.GetY());
                 }break;
                 case INTERACT:{  
                     if(!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(),choiceTaken.path)).isWall()){
@@ -135,7 +136,7 @@ public class GameProject {
                     }
                     // Pregunta 1
                     //# Preg 1 Y todas las clases adentro ya estaban implementadas
-                    myManager.GetActiveDungeon().MoveEnemies();
+                    myManager.GetActiveDungeon().MoveEnemies(player.GetX(),player.GetY());
                 }break;
                 case DEBUG:
                 {
@@ -216,6 +217,7 @@ public class GameProject {
                     System.out.println("");                    
                 }break;
             }
+            System.out.format("Mundo Nr° %d de %d\n",myManager.GetActiveDungeonIndex()+1,myManager.GetTotalDungeons());
             Renderer.mostrarLaberinto(myManager.GetActiveDungeon(), player);
             historia.listaAcciones();
             //myManager.GetActiveDungeon().Render();

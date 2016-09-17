@@ -48,7 +48,16 @@ public class DungeonManager {
         activeDungeon = dungeons.size();
         currenCellInfo = new CellInformation();
         totalDungeons = varTotalDungeons;
-
+    }
+    
+    public int GetTotalDungeons()
+    {
+        return totalDungeons;
+    }
+    
+    public void SetTotalDungeons(int varTotalDungeons)
+    {
+        totalDungeons = varTotalDungeons;
     }
 
     //Podemos usar el mismo point.
@@ -78,6 +87,11 @@ public class DungeonManager {
     ////
     public Dungeon GetActiveDungeon() {
         return dungeons.get(activeDungeon);
+    }
+    
+    public int GetActiveDungeonIndex()
+    {
+        return activeDungeon;
     }
 
     private boolean checkAdjCells(Coordinate point) {

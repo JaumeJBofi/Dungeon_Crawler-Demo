@@ -76,4 +76,14 @@ public class Coordinate {
         System.out.format("Limites: M = %d   N = %d\n",M,N);
         System.out.format("Posiciones:  x = %d  y = %d\n",x,y);
     }
+    
+    public boolean IsEqual(Coordinate Point)
+    {
+        return ((Point.GetX()==x)&&(Point.GetY()==y));
+    }
+    
+    public boolean IsEqual(int varX,int varY)
+    {
+        return ((varX==x)&&(varY==y));
+    }
 }
