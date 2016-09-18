@@ -5,12 +5,11 @@
  */
 
 package gameproject;
-import Controllers.Dibujador;
-import Controllers.DungeonManager;
+import Interfaz.Dibujador;
+import Mundo.DungeonManager;
 import Foundation.CellInformation;
 import Models.Avatar;
-import Controllers.Lore;
-import Foundation.DIRECTIONS;
+import Interfaz.Lore;
 import Foundation.Options;
 import Foundation.Options.ACTION;
 import java.util.Random;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package Artefactos;
 
 /**
  *
@@ -41,6 +41,12 @@ public class Arma extends Artefacto{
     @Override
     public void Render() {
         System.out.format("%-25s (%3d - %2d ATK)",this.GetNombre(), this.danho_min ,this.danho_max);
+    }
+      
+    @Override
+    public void RenderStats()
+    {
+        System.out.format(" (%3d - %2d ATK)%-25s",this.danho_min ,this.danho_max," ");
     }
     
     public Arma copiar() {

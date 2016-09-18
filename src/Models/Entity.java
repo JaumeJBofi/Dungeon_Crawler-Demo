@@ -37,6 +37,15 @@ public abstract class Entity {
         strength = varStrength;
     }
     
+         //Modif
+    public Entity(Coordinate varPosition, String nomb, int vida,int varStrength) {
+        hp = vida;
+        position = varPosition;
+        generator = new  Random();
+        nombre = nomb;       
+        strength = varStrength;
+    }
+    
     final public int GetStrength()
     {
         return strength;        
@@ -185,12 +194,5 @@ public abstract class Entity {
         return validDir.get(generator.nextInt(validDir.size()));     
     }
     
-     //Modif
-    public Entity(Coordinate varPosition, String nomb, int vida,int varStrength) {
-        hp = vida;
-        generator = new  Random();
-        nombre = nomb;
-        position = varPosition;
-        strength = varStrength;
-    }
+
 }

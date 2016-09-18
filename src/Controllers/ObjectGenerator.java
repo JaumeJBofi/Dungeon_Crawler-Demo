@@ -7,9 +7,9 @@ package Controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import Models.Arma;
-import Models.Armadura;
-import Models.Pocion;
+import Artefactos.Arma;
+import Artefactos.Armadura;
+import Artefactos.Pocion;
 import java.util.Random;
 
 public class ObjectGenerator {

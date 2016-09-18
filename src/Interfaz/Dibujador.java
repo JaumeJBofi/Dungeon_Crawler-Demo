@@ -2,8 +2,8 @@
  * Clase que se encarga de dibujar una matriz
  */
 
-package Controllers;
-import Models.Dungeon;
+package Interfaz;
+import Mundo.Dungeon;
 import Models.Avatar;
 import Foundation.DIRECTIONS;
 import java.util.*;

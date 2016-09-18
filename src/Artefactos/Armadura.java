@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package Artefactos;
 
 /**
  *
@@ -30,6 +30,11 @@ public class Armadura extends Artefacto {
     @Override
     public void Render() {
         System.out.format("%-30s (%-3d DEF)", this.GetNombre(),this.defensa);
+    }
+    
+    @Override
+    public void RenderStats() {
+        System.out.format("(%-3d DEF) %-30s",this.defensa," ");
     }
 
     public Armadura copiar() {

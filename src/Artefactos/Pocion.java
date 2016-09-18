@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package Artefactos;
 
 /**
  *
@@ -27,6 +27,11 @@ public class Pocion extends Artefacto {
     @Override
     public void Render() {
         System.out.format("%-30s (%-3d HP) ", this.GetNombre(),this.valor);
+    }
+    
+    @Override
+    public void RenderStats() {
+        System.out.format(" (%-3d HP)%-30s",this.valor," ");
     }
     
     public Pocion copiar() {

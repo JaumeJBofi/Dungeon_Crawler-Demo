@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package Mundo;
+import Artefactos.Artefacto;
 import Foundation.CellInformation;
 import Foundation.Coordinate;
 import Controllers.ObjectGenerator;
@@ -11,7 +12,11 @@ import java.util.List;
 import Models.Enemy;
 import Controllers.EnemyGenerator;
 import Foundation.DIRECTIONS;
+import Models.Avatar;
+import Models.Enemy;
+import Models.IDibujable;
 import java.util.ArrayList;
+import java.util.Scanner;
 /**
  *
  * @author Jauma
@@ -265,10 +270,24 @@ public class Dungeon implements IDibujable{
             }
         }
         // #Pregunta 2
-        int weaponDamage = player.GetEquipWeaponDamage();
-        int enemyDamage = layOutChamber[xFactor][yFactor].GetEnemy().GetEnemyDamage();
+        int playerHp = player.GetVida();
+        int playerMax = player.GetVidaMaxima();
         
-        layOutChamber[xFactor][yFactor].GetEnemy().ReciveDamage(weaponDamage);
+        Enemy currentEnemy = layOutChamber[xFactor][yFactor].GetEnemy();
+        int enemyHp = currentEnemy.GetVida();
+        
+        System.out.format("Comienza el Encuentro!\nNombre de Enemigo: %s\nDescripcion de Enemigo: %s\nAtaque: ( %d ATK)\n",currentEnemy.GetNombre(),
+                currentEnemy.GetDescription(),currentEnemy.GetStrength());
+        
+        
+        System.out.println("Presione Enter para empezar la batalla");
+        Scanner in = new Scanner(System.in);
+        in.nextLine();
+                
+        int weaponDamage = player.GetEquipWeaponDamage();
+        int enemyDamage = currentEnemy.GetEnemyDamage();
+        
+        currentEnemy.ReciveDamage(weaponDamage);
         player.ReciveDamage(enemyDamage);
         
         if(player.GetVida()==0){
@@ -278,10 +297,10 @@ public class Dungeon implements IDibujable{
             System.out.format("Sobreviviste con %d de daño\n",enemyDamage);
         }
         
-        if( layOutChamber[xFactor][yFactor].GetEnemy().GetVida()==0){
+        if( currentEnemy.GetVida()==0){
             System.out.format("El enemigo ha muerto\n",weaponDamage);
             dungeonAccess[xFactor][yFactor].SetType(CellInformation.CELLTYPE.ADENTRO);
-            lista_enemigos.remove(layOutChamber[xFactor][yFactor].GetEnemy());
+            lista_enemigos.remove(currentEnemy);
             layOutChamber[xFactor][yFactor].GasEnemy();
             numEnemies--;            
         }else

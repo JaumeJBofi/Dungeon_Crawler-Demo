@@ -5,6 +5,10 @@
  */
 package Models;
 
+import Artefactos.Arma;
+import Artefactos.Pocion;
+import Artefactos.Artefacto;
+import Artefactos.Armadura;
 import Foundation.Coordinate;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +37,7 @@ public class Avatar extends Entity implements IDibujable{
     
     public Avatar(Coordinate position,int varTamShowX,int varTamShowY,int vida,String varNombre,int varStrength) {
         super(position,varNombre,vida,varStrength)        ;
-        vidaMaxima = 500; // la vida maxima en el juego, por ejemplo        
+          vidaMaxima = 500; // la vida maxima en el juego, por ejemplo        
 //        SetTamShowX(tamShowX);
 //        SetTamShowY(tamShowY);
           tamShowX = varTamShowX;
@@ -201,7 +205,7 @@ public class Avatar extends Entity implements IDibujable{
         if (arma_equip == null) { // Si no tiene nada equipado
             System.out.format("%-29s", "Ninguno");
         } else {
-            arma_equip.Render();
+            arma_equip.RenderStats();
         }
 
         if (tamanho >= 3) {
@@ -221,7 +225,7 @@ public class Avatar extends Entity implements IDibujable{
         if (armadura_equip == null) { // Si no tiene nada equipado
             System.out.format("%-40s", "Ninguno");
         } else {
-            armadura_equip.Render();
+            armadura_equip.RenderStats();
         }
         Artefacto art; //Declaracion aleatoria salvaje aparecio :v
 

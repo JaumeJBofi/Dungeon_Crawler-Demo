@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Models;
+package Artefactos;
 
 /**
  *
  * @author Arthuro
  */
-public class Artefacto {
+public abstract class Artefacto {
 
     protected String nombre;
 
@@ -25,6 +25,8 @@ public class Artefacto {
     public void SetNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    public abstract void RenderStats();
 
     public String GetNombre() {
         return nombre;
