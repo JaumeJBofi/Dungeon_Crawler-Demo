@@ -64,16 +64,18 @@ public class Avatar extends Entity implements IDibujable,ISavable {
     }
 
     final public void SetTamShowX(int tamShow) {
+        // Temporal. Aca aunque el tamshow sea mayor pongo el mismo
         if (tamShow >= GetPosition().GetM()) {
-            tamShowX = 15;
+            tamShowX = tamShow;
         } else {
             tamShowX = tamShow;
         }
     }
 
     final public void SetTamShowY(int tamShow) {
+        // Temporal. Aca aunque el tamshow sea mayor pongo el mismo
         if (tamShow >= GetPosition().GetN()) {
-            tamShowY = 15;
+            tamShowY = tamShow;
         } else {
             tamShowY = tamShow;
         }
@@ -210,6 +212,58 @@ public class Avatar extends Entity implements IDibujable,ISavable {
         }        
     }
     
+    
+    public void Load(FileReader flectura, BufferedReader buffer, int[] coordinate)
+    {
+        try {
+            String linea = buffer.readLine();
+            this.SetNombre(linea);
+            linea = buffer.readLine();
+            String[] arr1 = linea.split(",");
+            coordinate[0] = Integer.parseInt(arr1[0]);//this.SetX(Integer.parseInt(arr1[0]));
+            coordinate[1] = Integer.parseInt(arr1[1]);//this.SetY(Integer.parseInt(arr1[1]));
+            this.SetVida(Integer.parseInt(arr1[2]));
+            this.SetVidaMaxima(Integer.parseInt(arr1[3]));
+            this.SetTamShowX(Integer.parseInt(arr1[4]));
+            this.SetTamShowY(Integer.parseInt(arr1[5]));
+            this.SetStrength(Integer.parseInt(arr1[6]));
+            this.SetArmor(Integer.parseInt(arr1[7]));
+            //Termino de leer la segunda linea
+            linea = buffer.readLine();
+            int sizeMochila = Integer.parseInt(linea);
+            for (int i = 0; i < sizeMochila; i++) {
+                linea = buffer.readLine();
+                String[] arr2 = linea.split(",");
+                //arma
+                if (arr2[0].equals("W")) {
+                    Arma auxArma = new Arma(arr2[1],
+                            Integer.parseInt(arr2[2]), Integer.parseInt(arr2[3]));
+                    saco.add(auxArma);
+                } else if (arr2[0].equals("A")) {
+                    Armadura auxArma = new Armadura(arr2[1],
+                            Integer.parseInt(arr2[2]));
+                    saco.add(auxArma);
+                } else if (arr2[0].equals("P")) {
+                    Pocion auxArma = new Pocion(arr2[1],
+                            Integer.parseInt(arr2[2]));
+                    saco.add(auxArma);
+                }
+            }
+            linea = buffer.readLine();
+            String[] arr3 = linea.split(",");
+            int auxIndice = Integer.parseInt(arr3[0]);
+            if (auxIndice != -1) {
+                this.EquipItem(auxIndice);
+            }
+            auxIndice = Integer.parseInt(arr3[1]);
+            if (auxIndice != -1) {
+                this.EquipItem(auxIndice);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }        
+    }
+
     @Override
     public void Load(FileReader flectura, BufferedReader buffer)
     {
@@ -261,7 +315,7 @@ public class Avatar extends Entity implements IDibujable,ISavable {
             e.printStackTrace();
         }        
     }
-
+    
     public void guardar_personaje(FileWriter fr) {
         try {
             fr.write(this.GetNombre() + "\r\n");

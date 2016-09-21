@@ -31,7 +31,7 @@ import java.io.FileReader;
  * @author Jauma
  */
 // Puede tambien referirse al mundo del Juego.
-public class DungeonManager implements ISavable{
+public class DungeonManager implements ISavable {
 
     private CellInformation[][] dungeonAccess;
     private CellInformation currenCellInfo;
@@ -283,10 +283,9 @@ public class DungeonManager implements ISavable{
         theDungeon.SetUpChamber();
         return playerPoint;
     }
-    
+
     @Override
-    public void Save(FileWriter fw)
-    {
+    public void Save(FileWriter fw) {
         try {
             fw.write("" + this.totalDungeons + "," + this.activeDungeon + "," + this.dungeons.size() + "\r\n");
             for (int i = 0; i < dungeons.size(); i++) {
@@ -295,18 +294,17 @@ public class DungeonManager implements ISavable{
 
         } catch (IOException e) {
             e.printStackTrace();
-        }        
+        }
     }
-    
+
     @Override
-    public void Load(FileReader lector, BufferedReader buffer)
-    {
+    public void Load(FileReader lector, BufferedReader buffer) {
         try {
             String linea = buffer.readLine();
             String[] arr1 = linea.split(",");
-            System.out.println(arr1[0] + " " + arr1[1]);
-            int prueba1 = Integer.parseInt(arr1[0]);
-            int prueba2 = Integer.parseInt(arr1[0]);
+            //System.out.println(arr1[0] + " " + arr1[1]);
+//            int prueba1 = Integer.parseInt(arr1[0]);
+//            int prueba2 = Integer.parseInt(arr1[0]);
             totalDungeons = Integer.parseInt(arr1[0]);
             activeDungeon = Integer.parseInt(arr1[1]);
             int sizeDungeon = Integer.parseInt(arr1[2]);
@@ -315,15 +313,13 @@ public class DungeonManager implements ISavable{
 //                String[] arr2 = linea.split(",");
                 Dungeon auxDungeon = new Dungeon(0, 0, 0);
                 auxDungeon.Load(lector, buffer);
-                auxDungeon.SetUpChamber();
                 dungeons.add(auxDungeon);
-            }        
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
-        }        
+        }
     }
-    
 
     public void Guardar_dungeons(FileWriter fw) {
         try {

@@ -30,7 +30,7 @@ import java.io.IOException;
  *
  * @author Jauma
  */
-public class Dungeon implements IDibujable, ISavable{
+public class Dungeon implements IDibujable, ISavable {
 
     private int M;
     private int N;
@@ -281,6 +281,7 @@ public class Dungeon implements IDibujable, ISavable{
                 currentEnemy.GetDescription(), currentEnemy.GetStrength());
         Scanner in = new Scanner(System.in);
         while (true) {
+            System.out.println("\n\n");
             System.out.println(player.GetNombre() + ": " + player.GetVida() + "/" + player.GetVidaMaxima() + " HP");
             System.out.println(currentEnemy.GetNombre() + ": " + currentEnemy.GetVida() + " HP");
             System.out.print("Opciones: atacar, huir, usar.\n");
@@ -339,9 +340,8 @@ public class Dungeon implements IDibujable, ISavable{
             }
         }
     }
-    
-    public void KillInChamber(int xFactor,int yFactor, DIRECTIONS path)
-    {        
+
+    public void KillInChamber(int xFactor, int yFactor, DIRECTIONS path) {
         switch (path) {
             case BOT: {
                 yFactor += 1;
@@ -359,13 +359,13 @@ public class Dungeon implements IDibujable, ISavable{
                 xFactor += 1;
             }
         }
-        
+
         Enemy currentEnemy = layOutChamber[xFactor][yFactor].GetEnemy();
         dungeonAccess[xFactor][yFactor].SetType(CellInformation.CELLTYPE.ADENTRO);
         lista_enemigos.remove(currentEnemy);
         layOutChamber[xFactor][yFactor].GasEnemy();
         numEnemies--;
-        
+
     }
 
     //# Preg 1
@@ -416,36 +416,32 @@ public class Dungeon implements IDibujable, ISavable{
         numEnemies--;
     }
 
-    
-    
-    
     // Implementacion de ISavable!
     @Override
-    public void Save(FileWriter fw)
-    {
-            try {
+    public void Save(FileWriter fw) {
+        try {
             fw.write("" + this.M + "," + this.N + "," + this.minshowY + "," + this.maxshowY
                     + "," + this.minshowX + "," + this.maxshowX + "," + this.prcEnemies + ","
                     + this.lvlEnemies + "," + this.prcItems + "," + this.lista_enemigos.size() + "\r\n");
-            
-            for(int i= 0; i < this.lista_enemigos.size(); i++){
+
+            for (int i = 0; i < this.lista_enemigos.size(); i++) {
                 this.lista_enemigos.get(i).Save(fw);
             }
             this.Render(fw);
             //fw.write("\r\n");
         } catch (IOException e) {
             e.printStackTrace();
-        }        
+        }
     }
-    
-     public void Cargar_Render(FileReader lector, BufferedReader buffer){
+
+    public void Cargar_Render(FileReader lector, BufferedReader buffer) {
         try {
             dungeonAccess = new CellInformation[M][N];
             String linea;
             //String space20 = new String(new char[40]).replace('\0', ' ');
             for (int j = 0; j < N; j++) {
                 linea = buffer.readLine();
-                String[] arr1 = linea.split(",");
+                //String[] arr1 = linea.split(",");
                // System.out.print(space20);
                 for (int i = 0; i < M; i++) {
                     CellInformation auxCelda = new CellInformation();
@@ -482,16 +478,16 @@ public class Dungeon implements IDibujable, ISavable{
                             }
                             break;
                     }
+                    dungeonAccess[i][j] = auxCelda;
                 }
             }
         }catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
+
     @Override
-    public void Load(FileReader lector, BufferedReader buffer)
-    {
+    public void Load(FileReader lector, BufferedReader buffer) {
         try {
             String linea = buffer.readLine();
             String[] arr1 = linea.split(",");
@@ -504,31 +500,30 @@ public class Dungeon implements IDibujable, ISavable{
             this.prcEnemies = Double.parseDouble(arr1[6]);
             this.lvlEnemies = Integer.parseInt(arr1[7]);
             this.prcItems = Double.parseDouble(arr1[8]);
-            int numEnemies = Integer.parseInt(arr1[9]);
-            for(int i = 0; i < numEnemies; i++){
+            numEnemies = Integer.parseInt(arr1[9]);
+            for (int i = 0; i < numEnemies; i++) {
                 linea = buffer.readLine();
                 String[] arr2 = linea.split(",");
                 //Coordinate varPosition, String nomb,
                 //int vida, int lvl, int initStrength,
                 //String varDescription, int varArmor
-                Coordinate auxCoord = new Coordinate( M , N );
-                auxCoord.SetX( Integer.parseInt(arr2[2]) );
-                auxCoord.SetY( Integer.parseInt(arr2[3]) );
-                Enemy auxEnemy = new Enemy( auxCoord, arr2[0],
-                    Integer.parseInt(arr2[4]) , Integer.parseInt(arr2[5]),
-                    Integer.parseInt(arr2[7]), arr2[1], Integer.parseInt(arr2[6]));
+                Coordinate auxCoord = new Coordinate(M, N);
+                auxCoord.SetX(Integer.parseInt(arr2[2]));
+                auxCoord.SetY(Integer.parseInt(arr2[3]));
+                Enemy auxEnemy = new Enemy(auxCoord, arr2[0],
+                        Integer.parseInt(arr2[4]), Integer.parseInt(arr2[5]),
+                        Integer.parseInt(arr2[7]), arr2[1], Integer.parseInt(arr2[6]));
                 lista_enemigos.add(auxEnemy);
             }
             this.SetUpChamber();
-            this.Cargar_Render(lector,buffer);
+            this.Cargar_Render(lector, buffer);
             //fw.write("\r\n");
         } catch (IOException e) {
             e.printStackTrace();
-        }            
+        }
     }
-    
+
     // Implementacion de IDibujable
-    
     public void Render() {
         String space20 = new String(new char[40]).replace('\0', ' ');
         for (int j = 0; j < N; j++) {
@@ -564,18 +559,18 @@ public class Dungeon implements IDibujable, ISavable{
             System.out.print("\n");
         }
     }
-    
+
     // Escribe a un archivo de Texto
     public void Render(FileWriter fw) {
-         try {
+        try {
             //String space20 = new String(new char[40]).replace('\0', ' ');
             for (int j = 0; j < N; j++) {
-               // System.out.print(space20);
+                // System.out.print(space20);
                 for (int i = 0; i < M; i++) {
                     CellInformation factor = dungeonAccess[i][j];
                     switch (factor.GetMode()) {
                         case SIGUENTE:
-                           // System.out.print("+");
+                            // System.out.print("+");
                             fw.write("+");
                             break;
                         case ANTERIOR:
@@ -608,12 +603,11 @@ public class Dungeon implements IDibujable, ISavable{
                 //System.out.print("\n");
                 fw.write("\r\n");
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
-    
+
     public void Render(int posX, int posY, int tamShowX, int tamShowY) {
 
         String space20 = new String(new char[35]).replace('\0', ' ');
@@ -682,12 +676,12 @@ public class Dungeon implements IDibujable, ISavable{
         try {
             //String space20 = new String(new char[40]).replace('\0', ' ');
             for (int j = 0; j < N; j++) {
-               // System.out.print(space20);
+                // System.out.print(space20);
                 for (int i = 0; i < M; i++) {
                     CellInformation factor = dungeonAccess[i][j];
                     switch (factor.GetMode()) {
                         case SIGUENTE:
-                           // System.out.print("+");
+                            // System.out.print("+");
                             fw.write("+");
                             break;
                         case ANTERIOR:
@@ -720,7 +714,7 @@ public class Dungeon implements IDibujable, ISavable{
                 //System.out.print("\n");
                 fw.write("\r\n");
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -731,8 +725,8 @@ public class Dungeon implements IDibujable, ISavable{
             fw.write("" + this.M + "," + this.N + "," + this.minshowY + "," + this.maxshowY
                     + "," + this.minshowX + "," + this.maxshowX + "," + this.prcEnemies + ","
                     + this.lvlEnemies + "," + this.prcItems + "," + this.lista_enemigos.size() + "\r\n");
-            
-            for(int i= 0; i < this.lista_enemigos.size(); i++){
+
+            for (int i = 0; i < this.lista_enemigos.size(); i++) {
                 this.lista_enemigos.get(i).guardar_enemigo(fw);
             }
             this.Guardar_Render(fw);

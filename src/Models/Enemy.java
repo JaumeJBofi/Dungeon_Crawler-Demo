@@ -80,9 +80,7 @@ public class Enemy extends Entity {
             fr.write(this.GetNombre() + ",");
             fr.write(this.GetDescription() + ",");
             fr.write("" + this.GetX() + ',' + this.GetY() + ',');
-            fr.write("" + this.hp + ',' + this.nivel + ","+ this.GetArmor() + ',' + this.GetStrength()  + "\r\n");
-            
-            
+            fr.write("" + this.hp + ',' + this.nivel + ","+ this.GetArmor() + ',' + this.GetStrength()  + "\r\n");                        
         } catch (IOException e) {
             e.printStackTrace();
         }       

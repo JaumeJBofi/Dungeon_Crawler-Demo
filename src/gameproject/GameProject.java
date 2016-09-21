@@ -38,7 +38,7 @@ public class GameProject {
         //Lore nos ayuda a narrar la historia
         Lore historia = new Lore();
         //Decidimos que intro deseamos leer
-        String name;
+        String name = "Rou";
         //System.out.println("Presione enter para empezar:");
         //if (in.nextLine().compareToIgnoreCase("re") == 0) {
        //     name = historia.nacer();
@@ -55,32 +55,37 @@ public class GameProject {
         //Avatar player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3), 10, 6, 100, name, 10, 5);
         //Avatar player = new Avatar(myManager.CreateDungeonDistribution(40,5,0.5,0),40,10);
 
+        Avatar player = new Avatar(new Coordinate(0,0), 10, 6, 100, name, 10, 5);
+                
+        System.out.println("Presione enter para empezar\n\nEscribe Load para cargar una partida anterior.");
+        if (in.nextLine().compareToIgnoreCase("load") == 0) {
+            try {
+                    int[] coordinates = new int[2];
+                    FileReader lector = new FileReader("partida.txt");
+                    BufferedReader buffer = new BufferedReader(lector);
+                    player.Load(lector, buffer, coordinates);
+                    myManager.Load(lector, buffer);
+                    Coordinate coord = new Coordinate(myManager.GetActiveDungeon().GetM(),myManager.GetActiveDungeon().GetN());
+                    player.SetPosition(coord);
+                    player.SetX(coordinates[0]);
+                    player.SetY(coordinates[1]);
+                    lector.close();
+            } catch (IOException e) {
+                System.out.println("No hay ninguna partida guardada\n");
+            }
+        } else {
+             name = historia.IntroMenu(in);
+            if(!name.equalsIgnoreCase("skip")&&!name.equalsIgnoreCase("")) historia.nacer(); 
+            player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3), 10, 6, 100, name, 10, 5);                                              
+        }
+        
+        
         Dibujador Renderer = new Dibujador();
 
         Options choiceTaken = new Options(ACTION.INTERACT);
 
         CellInformation nextCellInformation;
         
-        Avatar player = new Avatar(new Coordinate(0, 0), "Rou");
-        
-        System.out.println("Presione enter para empezar ó Escriba Load para cargar una partida anterior.");
-        if (in.nextLine().compareToIgnoreCase("load") == 0) {
-            try {
-                    FileReader lector = new FileReader("partida.txt");
-                    BufferedReader buffer = new BufferedReader(lector);
-                    player.Load(lector, buffer);
-                    myManager.Load(lector, buffer);
-                    lector.close();
-            } catch (IOException e) {
-                System.out.println("No hay ninguna partida guardada\n");
-            }
-        } else {
-            name = historia.IntroMenu(in);
-            //historia.nacer();
-            player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3), 10, 6, 100, name, 10, 5);
-            player.SetNombre(name);            
-        }
-
         historia.writeNLines(20);
         System.out.format("Mundo Nr° %d de %d\n", myManager.GetActiveDungeonIndex() + 1, myManager.GetTotalDungeons());
         Renderer.mostrarLaberinto(myManager.GetActiveDungeon(), player);
@@ -231,6 +236,9 @@ public class GameProject {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    
+                    System.out.println("\nGuardado Exitoso!\nPresione Enter para continuar");
+                    in.nextLine();
                 }
                 break;
                 default: {

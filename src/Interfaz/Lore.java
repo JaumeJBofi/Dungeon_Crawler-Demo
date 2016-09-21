@@ -184,7 +184,7 @@ public class Lore {
         lectura.nextLine();
         System.out.println("\nEscribe tu nombre:\n");
         input = lectura.nextLine();
-        if( input.length() > 0 )
+        if( input.length() >= 0 )
             System.out.println("\n\n\"Bienvenido "+input+"\" --- Presiona Enter para comenzar\"");
         else{
             input = "Rou";
