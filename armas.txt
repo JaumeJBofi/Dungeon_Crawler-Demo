@@ -1,0 +1,13 @@
+Espada Corta,2,5
+Espada Mediana,4,10
+Espada del Dolor Supremo,50,85
+Maza de Cadena,30,75
+Martillo de Guerra,60,95
+Hacha de Batalla,40,75
+Espada Alfange,55,90
+La Alabarda,20,55
+Lanza Mediana,7,18
+Lanza Corta,3,6
+Lucero Del Alba,45,80
+Arma Bardiche,35,70
+Machete Militar,20,45

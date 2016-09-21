@@ -60,7 +60,6 @@ public class Lore {
             nombre = input;
         System.out.print("\n\n\n\"Tu te llamaras " + nombre + "\" dice el anciano.");
         lectura.nextLine();
-        lectura.nextLine();
         System.out.println(nombre + "?");
         lectura.nextLine();
         System.out.println("Te gana el cansancio y duermes");
@@ -192,12 +191,11 @@ public class Lore {
             System.out.println("\n\"Veo que no eres de los que habla\"\n");
             lectura.nextLine();
             System.out.println("\n\n\"Te llamare "+input+"..., de momento\" --- Presiona Enter para comenzar\"");
-        }
-        lectura.nextLine();
+        }        
         return input;
     }
     public void listaAcciones(){
-        System.out.println("\nAcciones Posibles:\n1.-Mover + direccion\n2.-Interactuar\n3.-Equip\n4.-Atacar\n");
+        System.out.println("\nAcciones Posibles:\n1) Mover + direccion\n2) Interactuar + direccion\n3) Usar + indice\n4) Guardar\n5) Ayuda\n6) Salir\n");
     }
     public void writeNLines(int n)
     {

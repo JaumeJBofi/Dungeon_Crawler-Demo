@@ -5,15 +5,15 @@
  */
 package Mundo;
 
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 import java.util.List;
-import java.lang.Math ; // include solo por round
+import java.lang.Math; // include solo por round
 import Models.Avatar;
 
-
+import java.io.FileWriter;
+import java.io.IOException;
 
 import Mundo.Dungeon;
 import Foundation.Coordinate;
@@ -22,23 +22,26 @@ import Foundation.DIRECTIONS;
 import Foundation.CellInformation;
 import Foundation.CellInformation.CELLTYPE;
 import Foundation.CellInformation.CELLMODE;
+import Foundation.ISavable;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 /**
  *
  * @author Jauma
  */
-
 // Puede tambien referirse al mundo del Juego.
-public class DungeonManager {
+public class DungeonManager implements ISavable{
 
     private CellInformation[][] dungeonAccess;
     private CellInformation currenCellInfo;
 
     private List<Dungeon> dungeons;
+    private Dungeon textDungeon;
     private DIRECTIONS currentDirections;
     final private Random randomManager;
     private int activeDungeon;
-    
+
     private int totalDungeons;
 
     public DungeonManager(int varTotalDungeons) {
@@ -49,14 +52,12 @@ public class DungeonManager {
         currenCellInfo = new CellInformation();
         totalDungeons = varTotalDungeons;
     }
-    
-    public int GetTotalDungeons()
-    {
+
+    public int GetTotalDungeons() {
         return totalDungeons;
     }
-    
-    public void SetTotalDungeons(int varTotalDungeons)
-    {
+
+    public void SetTotalDungeons(int varTotalDungeons) {
         totalDungeons = varTotalDungeons;
     }
 
@@ -83,14 +84,12 @@ public class DungeonManager {
         }
     }
 
-
     ////
     public Dungeon GetActiveDungeon() {
         return dungeons.get(activeDungeon);
     }
-    
-    public int GetActiveDungeonIndex()
-    {
+
+    public int GetActiveDungeonIndex() {
         return activeDungeon;
     }
 
@@ -148,39 +147,36 @@ public class DungeonManager {
         }
         coord.SetX(coord.GetX() + xFactor);
         coord.SetY(coord.GetY() + yFactor);
-    }    
-    
-    
-    public int ChangeDungeon(Avatar player,boolean isNext){
-        if(isNext)
-        {
-            if(activeDungeon==totalDungeons-1) {
+    }
+
+    public int ChangeDungeon(Avatar player, boolean isNext) {
+        if (isNext) {
+            if (activeDungeon == totalDungeons - 1) {
                 return 1;
-                
+
             }
-            if(activeDungeon<dungeons.size()-1)
-            {
-                activeDungeon++;                
-            }else{
+            if (activeDungeon < dungeons.size() - 1) {
+                activeDungeon++;
+            } else {
                 Dungeon currDungeon = dungeons.get(activeDungeon); //si no es el ultimo calabozo, crea otro cala
                 CreateDungeonDistribution(randomManager.nextInt(50 - 25) + 25, randomManager.nextInt(50 - 25) + 25, currDungeon.GetPrcEnemies() + 0.075, currDungeon.GetLvlEnemies(),
-                currDungeon.GetPrcItem() + 0.025);
+                        currDungeon.GetPrcItem() + 0.025);
                 activeDungeon++;
-                player.SetPosition(dungeons.get(activeDungeon).GetAntPos().GetPoint());                
-            }           
-        }else
-        {
-            if(activeDungeon==0) return 0;
+                player.SetPosition(dungeons.get(activeDungeon).GetAntPos().GetPoint());
+            }
+        } else {
+            if (activeDungeon == 0) {
+                return 0;
+            }
             activeDungeon--;
-            player.SetPosition(dungeons.get(activeDungeon).GetSigPos().GetPoint());           
-        }        
+            player.SetPosition(dungeons.get(activeDungeon).GetSigPos().GetPoint());
+        }
         return 0;
     }
-    
-    public void printDebugInfo(Avatar player)
-    {
+
+    public void printDebugInfo(Avatar player) {
         System.out.println("Informacion manager actual:\n");
-        System.out.format("Numero de dungeon activo: %d\n",activeDungeon);
+        System.out.format("Numero de dungeon activo: %d\n", activeDungeon);
         dungeons.get(activeDungeon).Render();
         System.out.println("Informacion laberinto actual:\n");
         dungeons.get(activeDungeon).printDebugInfo();
@@ -189,8 +185,8 @@ public class DungeonManager {
         System.out.println("");
     }
 
-    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, int worldlvlEnemies,double varprcItems) {
-        Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies,varprcItems);
+    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, int worldlvlEnemies, double varprcItems) {
+        Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies, varprcItems);
         theDungeon.SetM(M);
         theDungeon.SetN(N);
         M = theDungeon.GetM();
@@ -207,9 +203,13 @@ public class DungeonManager {
         // el numero de conexiones. De esta manera podemos saber si es que es una habitacion.
         Coordinate currentPoint = new Coordinate(M, N);
         int x = randomManager.nextInt(M - 3) + 1;
-        if(x%2==0) x++;
+        if (x % 2 == 0) {
+            x++;
+        }
         int y = randomManager.nextInt(N - 3) + 1;
-        if(y%2==0) y++;
+        if (y % 2 == 0) {
+            y++;
+        }
 
         currentPoint.SetX(x);
         currentPoint.SetY(y);
@@ -220,15 +220,15 @@ public class DungeonManager {
 
         dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
         dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.ANTERIOR);
-        
+
         //Seteo la posicion del Anterior punto
         theDungeon.SetAntPos(currentPoint.GetPoint());
-        
+
         myStack.push(currentPoint.GetPoint());
         boolean firstPop = true;
         int numCellAdentro = 1;
         int numEnemies = 0;
-        
+
         while (!myStack.isEmpty()) {
             currentPoint = myStack.peek();
             if (checkAdjCells(currentPoint)) {
@@ -236,34 +236,36 @@ public class DungeonManager {
                 // Marcar camino y a V
                 advanceInDirection(currentPoint, currentDirections, 1);
                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
-                
-                if(Math.random()<=theDungeon.GetPrcEnemies()){
+
+                if (Math.random() <= theDungeon.GetPrcEnemies()) {
                     dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);
                     /////////////////////////    MI LINEA :v   ////////////////////////7
                     theDungeon.addenemy(currentPoint.GetPoint());
                     numEnemies++;
-                }else
-                {
-                    if(Math.random()<=theDungeon.GetPrcItem()){
+                } else {
+                    if (Math.random() <= theDungeon.GetPrcItem()) {
                         int randomObject = randomManager.nextInt(3);
-                            switch (randomObject) {                          
+                        switch (randomObject) {
                             case 0: {
-                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.POTION);                                
-                            }break;
+                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.POTION);
+                            }
+                            break;
                             case 1: {
-                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.WEAPON);                                
-                            }break;     
-                            case 2:{
-                                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.ARMOR);   
-                            }break;                                
+                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.WEAPON);
+                            }
+                            break;
+                            case 2: {
+                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.ARMOR);
+                            }
+                            break;
                         }
-                    dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ARTIFACT);
-                    }else{
+                        dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ARTIFACT);
+                    } else {
                         dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.EMPTY);
                     }
-                }   
+                }
                 advanceInDirection(currentPoint, currentDirections, 1);
-                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);     
+                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
                 myStack.push(currentPoint.GetPoint());
             } else {
                 if (firstPop) {
@@ -273,12 +275,65 @@ public class DungeonManager {
                 }
                 myStack.pop();
             }
-        }       
+        }
         theDungeon.SetNumEnemies(numEnemies);
         dungeons.add(theDungeon);
         theDungeon.SetAccess(dungeonAccess);
         //Preg 2: Creamos los chambers con los enemies.
         theDungeon.SetUpChamber();
         return playerPoint;
+    }
+    
+    @Override
+    public void Save(FileWriter fw)
+    {
+        try {
+            fw.write("" + this.totalDungeons + "," + this.activeDungeon + "," + this.dungeons.size() + "\r\n");
+            for (int i = 0; i < dungeons.size(); i++) {
+                dungeons.get(i).Save(fw);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }        
+    }
+    
+    @Override
+    public void Load(FileReader lector, BufferedReader buffer)
+    {
+        try {
+            String linea = buffer.readLine();
+            String[] arr1 = linea.split(",");
+            System.out.println(arr1[0] + " " + arr1[1]);
+            int prueba1 = Integer.parseInt(arr1[0]);
+            int prueba2 = Integer.parseInt(arr1[0]);
+            totalDungeons = Integer.parseInt(arr1[0]);
+            activeDungeon = Integer.parseInt(arr1[1]);
+            int sizeDungeon = Integer.parseInt(arr1[2]);
+            for (int i = 0; i < sizeDungeon; i++) {
+//                linea = buffer.readLine();
+//                String[] arr2 = linea.split(",");
+                Dungeon auxDungeon = new Dungeon(0, 0, 0);
+                auxDungeon.Load(lector, buffer);
+                auxDungeon.SetUpChamber();
+                dungeons.add(auxDungeon);
+            }        
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }        
+    }
+    
+
+    public void Guardar_dungeons(FileWriter fw) {
+        try {
+            fw.write("" + this.totalDungeons + "," + this.activeDungeon + "," + this.dungeons.size() + "\r\n");
+            for (int i = 0; i < dungeons.size(); i++) {
+                dungeons.get(i).guardar(fw);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

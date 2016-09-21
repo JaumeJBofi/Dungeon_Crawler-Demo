@@ -1,0 +1,9 @@
+Pocion Pequenha,10
+Pocion Mediana,20
+Pocion Regeneracion Hipocratica,1000
+Pocion Oscura,55
+Pocion Triptana,30
+Pocion Nsaid,25
+Pocion Ergotam,15
+Pocion Butalbital,40
+Pocion Antiemet,35

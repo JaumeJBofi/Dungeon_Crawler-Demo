@@ -1,0 +1,2 @@
+Class-Path: Controllers.jar Models.jar Foundation.jar Artefactos.jar Interfaz.jar Mundo.jar
+Main-Class: gameproject.GameProject

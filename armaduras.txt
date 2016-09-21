@@ -1,0 +1,8 @@
+Armadura Liviana,5
+Armadura Mediana,12
+Armadura de la Maxima Proteccion,70
+Cota de Malla,3
+Armadura Lisa,7
+Armadura Cincelada,10
+Armadura Sugarloaf,14
+Armadura Wenceslao,22

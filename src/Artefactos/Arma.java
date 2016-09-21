@@ -5,6 +5,11 @@
  */
 package Artefactos;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  * @author Arthuro
@@ -35,6 +40,19 @@ public class Arma extends Artefacto{
     public int GetDanhoMax(){
         return danho_max;
     }
+    
+    @Override
+    public void Save(FileWriter fr)
+    {
+        
+    }
+    
+    @Override
+    public void Load(FileReader flectura, BufferedReader buffer)
+    {
+        
+    }
+    
        
      
     //Añadido por mi
@@ -47,6 +65,15 @@ public class Arma extends Artefacto{
     public void RenderStats()
     {
         System.out.format(" (%3d - %2d ATK)%-25s",this.danho_min ,this.danho_max," ");
+    }
+    
+    @Override
+    public void guardar_artefacto(FileWriter fr) {
+        try {
+            fr.write("W," + this.GetNombre() + ',' + danho_min + ',' +danho_max + "\r\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     public Arma copiar() {

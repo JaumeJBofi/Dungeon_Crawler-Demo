@@ -7,6 +7,10 @@ package Models;
 import Foundation.CellInformation;
 import Foundation.Coordinate;
 import Foundation.DIRECTIONS;
+import Foundation.ISavable;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -17,7 +21,7 @@ import java.util.Collections;
  *
  * @author Jauma
  */
-public abstract class Entity {
+public abstract class Entity implements ISavable{
 
     private Coordinate position;
     int hp; // vida actual
@@ -27,23 +31,30 @@ public abstract class Entity {
     protected int tamShowY;
     private DIRECTIONS lookDirection;
     private int strength;
+    private int base_armor;
        
   
-    public Entity(Coordinate varPosition,String varNombre,int varStrength){
-        hp = 100;
-        position = varPosition;    
-        generator = new Random();
-        nombre = varNombre;
-        strength = varStrength;
-    }
+//    public Entity(Coordinate varPosition, String varNombre, int varStrength){
+//        hp = 100;
+//        position = varPosition;    
+//        generator = new Random();
+//        nombre = varNombre;
+//        strength = varStrength;
+//        base_armor = 5;
+//    }
     
          //Modif
-    public Entity(Coordinate varPosition, String nomb, int vida,int varStrength) {
+    public Entity(Coordinate varPosition, String nomb, int vida,int varStrength, int varArmor) {
         hp = vida;
         position = varPosition;
         generator = new  Random();
         nombre = nomb;       
         strength = varStrength;
+        base_armor = varArmor;
+    }
+    
+    public int GetArmor() {
+        return base_armor;
     }
     
     final public int GetStrength()
@@ -74,8 +85,22 @@ public abstract class Entity {
         return position.GetX();
     }
     
+    final public void SetArmor(int varArmor){
+        base_armor = varArmor;
+    }
+    
     public int GetY(){
         return position.GetY();
+    }
+    
+    public void SetX(int varX)
+    {
+       position.SetX(varX);    
+    }
+    
+    public void SetY(int varY)
+    {
+        position.SetY(varY);
     }
     
     public void SetVida(int v) {
@@ -193,6 +218,8 @@ public abstract class Entity {
         }
         return validDir.get(generator.nextInt(validDir.size()));     
     }
-    
-
+        
+    public abstract void Save(FileWriter fr);
+        
+    public abstract void Load(FileReader flectura, BufferedReader buffer);
 }

@@ -5,6 +5,11 @@
  */
 package Artefactos;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  * @author Arthuro
@@ -37,5 +42,26 @@ public class Pocion extends Artefacto {
     public Pocion copiar() {
         Pocion nueva_pocion = new Pocion(this.GetNombre(), valor);
         return nueva_pocion;
+    }
+    
+    @Override
+    public void Save(FileWriter fr)
+    {
+        
+    }
+    
+    @Override
+    public void Load(FileReader flectura, BufferedReader buffer)
+    {
+        
+    }
+    
+    @Override
+    public void guardar_artefacto(FileWriter fr) {
+        try {
+            fr.write("P," + this.GetNombre() + ',' + valor + "\r\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -12,11 +12,12 @@ package Foundation;
 public class Options {
     
     public enum ACTION{
-        MOVE,EXIT,INTERACT,DEBUG,TELEPORT,ATTACK,HELP,EQUIP,NULA
+        MOVE,EXIT,INTERACT,DEBUG,TELEPORT,ATTACK,HELP,EQUIP,NULA,SAVE
     }    
     
     public DIRECTIONS path;    
-    public ACTION taken;                
+    public ACTION taken;    
+    public int indice_item;
     
     public Options(ACTION taken){
         this.taken = taken;
