@@ -31,7 +31,7 @@ public class Avatar extends Entity implements IDibujable,ISavable {
     private List<Artefacto> saco;
 
     public Avatar(Coordinate position, String varNombre) {
-        super(position, "Reiu", 100, 5, 5);
+        super(position, varNombre, 100, 5, 5);
         hp = 100; // digamos q sea 100
         vidaMaxima = 500; // la vida maxima en el juego, por ejemplo        
         tamShowX = 15;

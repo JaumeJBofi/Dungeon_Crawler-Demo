@@ -14,7 +14,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
-public class EnemyGenerator {
+final public class EnemyGenerator {
 
     final private Random randomManager;
     private List<Enemy> enemigos;

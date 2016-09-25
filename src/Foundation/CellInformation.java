@@ -9,8 +9,10 @@ package Foundation;
  * @author Jauma
  */
 public class CellInformation {
+    
+    //Preg 1 Lab2
     public enum CELLTYPE{
-        ADENTRO,PARED,ENEMY,ARTIFACT
+        ADENTRO,PARED,ENEMY,ARTIFACT,FRIEND
     }
     
     public enum CELLMODE{

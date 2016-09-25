@@ -11,11 +11,11 @@ import java.util.Stack;
 import java.util.List;
 import java.lang.Math; // include solo por round
 import Models.Avatar;
+import Facilidades.Aliado;
 
 import java.io.FileWriter;
 import java.io.IOException;
 
-import Mundo.Dungeon;
 import Foundation.Coordinate;
 import Foundation.DIRECTIONS;
 
@@ -160,8 +160,9 @@ public class DungeonManager implements ISavable {
             } else {
                 Dungeon currDungeon = dungeons.get(activeDungeon); //si no es el ultimo calabozo, crea otro cala
                 CreateDungeonDistribution(randomManager.nextInt(50 - 25) + 25, randomManager.nextInt(50 - 25) + 25, currDungeon.GetPrcEnemies() + 0.075, currDungeon.GetLvlEnemies(),
-                        currDungeon.GetPrcItem() + 0.025);
+                        currDungeon.GetPrcItem() + 0.025,null);
                 activeDungeon++;
+                GetActiveDungeon().SetDungeonNumber(activeDungeon);
                 player.SetPosition(dungeons.get(activeDungeon).GetAntPos().GetPoint());
             }
         } else {
@@ -184,9 +185,14 @@ public class DungeonManager implements ISavable {
         player.GetPosition().PrintCoordinate();
         System.out.println("");
     }
+    
+    
 
-    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, int worldlvlEnemies, double varprcItems) {
+    //Preg 1 Lab2
+    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, int worldlvlEnemies, double varprcItems,Aliado myFriend) {
         Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies, varprcItems);
+        theDungeon.SetDungeonNumber(activeDungeon);
+        
         theDungeon.SetM(M);
         theDungeon.SetN(N);
         M = theDungeon.GetM();
@@ -225,10 +231,12 @@ public class DungeonManager implements ISavable {
         theDungeon.SetAntPos(currentPoint.GetPoint());
 
         myStack.push(currentPoint.GetPoint());
-        boolean firstPop = true;
-        int numCellAdentro = 1;
+        boolean firstPop = true;        
+        
         int numEnemies = 0;
-
+        int numFriends = 0;
+        
+        int iterations = 0;
         while (!myStack.isEmpty()) {
             currentPoint = myStack.peek();
             if (checkAdjCells(currentPoint)) {
@@ -236,38 +244,49 @@ public class DungeonManager implements ISavable {
                 // Marcar camino y a V
                 advanceInDirection(currentPoint, currentDirections, 1);
                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
-
-                if (Math.random() <= theDungeon.GetPrcEnemies()) {
+                //Preg 1 Lab2
+                iterations++;
+                // Por cada 5 enemigos hay un aliado
+                if((numEnemies+numFriends+1)%5==0)
+                {
+                    theDungeon.AddAlly(currentPoint);
+                    dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CellInformation.CELLTYPE.FRIEND);  
+                    numFriends++;
+                }else
+                {
+                    if (Math.random() <= theDungeon.GetPrcEnemies()) {
                     dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);
                     /////////////////////////    MI LINEA :v   ////////////////////////7
                     theDungeon.addenemy(currentPoint.GetPoint());
                     numEnemies++;
-                } else {
-                    if (Math.random() <= theDungeon.GetPrcItem()) {
-                        int randomObject = randomManager.nextInt(3);
-                        switch (randomObject) {
-                            case 0: {
-                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.POTION);
-                            }
-                            break;
-                            case 1: {
-                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.WEAPON);
-                            }
-                            break;
-                            case 2: {
-                                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.ARMOR);
-                            }
-                            break;
-                        }
-                        dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ARTIFACT);
                     } else {
-                        dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.EMPTY);
-                    }
-                }
+                        if (Math.random() <= theDungeon.GetPrcItem()) {
+                            int randomObject = randomManager.nextInt(3);
+                            switch (randomObject) {
+                                case 0: {
+                                    dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.POTION);
+                                }
+                                break;
+                                case 1: {
+                                    dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.WEAPON);
+                                }
+                                break;
+                                case 2: {
+                                    dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.ARMOR);
+                                }
+                                break;
+                            }
+                            dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ARTIFACT);
+                        } else {
+                            dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetObject(CellInformation.CELLOBJECT.EMPTY);                                                                                                    
+                        }
+                    }                
+                }                
                 advanceInDirection(currentPoint, currentDirections, 1);
                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
                 myStack.push(currentPoint.GetPoint());
             } else {
+                iterations++;
                 if (firstPop) {
                     dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.SIGUENTE);
                     theDungeon.SetSigPos(currentPoint.GetPoint());
@@ -280,7 +299,7 @@ public class DungeonManager implements ISavable {
         dungeons.add(theDungeon);
         theDungeon.SetAccess(dungeonAccess);
         //Preg 2: Creamos los chambers con los enemies.
-        theDungeon.SetUpChamber();
+        theDungeon.SetUpChamber();        
         return playerPoint;
     }
 

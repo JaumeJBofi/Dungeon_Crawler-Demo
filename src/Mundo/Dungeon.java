@@ -5,16 +5,16 @@
  */
 package Mundo;
 
-import Artefactos.Arma;
 import Artefactos.Artefacto;
+import Controllers.AllyGenerator;
 import Foundation.CellInformation;
 import Foundation.Coordinate;
 import Controllers.ObjectGenerator;
 import java.util.List;
-import Models.Enemy;
 import Controllers.EnemyGenerator;
 import Foundation.DIRECTIONS;
 import Foundation.ISavable;
+import Facilidades.Aliado;
 import Models.Avatar;
 import Models.Enemy;
 import Models.IDibujable;
@@ -34,6 +34,7 @@ public class Dungeon implements IDibujable, ISavable {
 
     private int M;
     private int N;
+    private int dungeonNumber;
 
     private int minshowY;
     private int maxshowY;
@@ -48,6 +49,8 @@ public class Dungeon implements IDibujable, ISavable {
     private Coordinate sigPos;
 
     private int numEnemies;
+    private int numAliados;
+    private int maxNumAliados;
 
     //private CellInformation dungeonStatus;    
     private Chamber[][] layOutChamber;
@@ -55,7 +58,9 @@ public class Dungeon implements IDibujable, ISavable {
     private ObjectGenerator objManager;
 
     private List<Enemy> lista_enemigos;
+    private List<Aliado> lista_aliados;
     private EnemyGenerator enemygen;
+    private AllyGenerator allyGen;
 
     public Dungeon(double varprcEnemies, int varlvlEnemies, double varPrcItems) {
         // Momentaneamente el Laberinto no posee dimensiones       
@@ -65,10 +70,15 @@ public class Dungeon implements IDibujable, ISavable {
         SetPrcEnemies(varprcEnemies);
         SetPrcItems(varPrcItems);
         objManager = new ObjectGenerator(varlvlEnemies);
-        Scanner in = new Scanner(System.in);
-        in.nextLine();
+        Scanner in = new Scanner(System.in);        
+        
         enemygen = new EnemyGenerator();
         lista_enemigos = new ArrayList();
+        numEnemies = 0;
+        
+        // Ponemos memoria en allyGenerator cuando se nos pone el numero de nuestro Dungeon        
+        lista_aliados = new ArrayList();
+        numAliados = 0;
     }
 
     public int GetM() {
@@ -94,6 +104,17 @@ public class Dungeon implements IDibujable, ISavable {
         } else {
             N = varN;
         }
+    }
+    
+    public void SetDungeonNumber(int varNum)
+    {
+        allyGen = new AllyGenerator("Allies_" + Integer.toString(varNum)+".txt");
+        dungeonNumber = varNum;
+    }
+    
+    public int GetDungeonNumber()
+    {
+        return dungeonNumber;
     }
 
     final public double GetPrcEnemies() {
@@ -141,6 +162,21 @@ public class Dungeon implements IDibujable, ISavable {
         if (varNumEnemies > 0) {
             numEnemies = varNumEnemies;
         }
+    }
+    
+    public int GetNumAllies()
+    {
+        return numAliados;
+    }
+    
+    public void SetNumAllies(int varNumAliados)
+    {
+        numAliados = varNumAliados;
+    }
+    
+    public void SetMaxNumAllies(int varMaxNumAllies)
+    {
+        maxNumAliados = varMaxNumAllies;
     }
 
     public CellInformation GetCellInformation(int x, int y) {
@@ -340,6 +376,37 @@ public class Dungeon implements IDibujable, ISavable {
             }
         }
     }
+    
+        //Modif
+    public void addenemy(Coordinate pos) {
+        Enemy enemigo = enemygen.generar_enemigo();
+        enemigo.SetPosition(pos.GetPoint());
+        lista_enemigos.add(enemigo);
+    }
+    
+    public void AddAlly(Coordinate posCoordinate)
+    {
+        lista_aliados.add(new Aliado(posCoordinate,allyGen.GetName()));
+        numAliados++;
+    }
+    
+    public void FillFriend(Aliado myFriend)
+    {
+        // Que tenga un invetorio de 5 ... Definido Aca...
+        int N = 5;
+        // Tiene pociones para ayudarme. Puede ser cualquier cosa.
+        for(int i =0;i<N;i++)
+        {
+            myFriend.AddArtefact(objManager.GetRandomObject());
+        }        
+        
+        // Que guarde 10 Consejos;
+        N = 10;
+        for(int i = 0;i<10;i++)
+        {
+            
+        }
+    }
 
     public void KillInChamber(int xFactor, int yFactor, DIRECTIONS path) {
         switch (path) {
@@ -365,7 +432,6 @@ public class Dungeon implements IDibujable, ISavable {
         lista_enemigos.remove(currentEnemy);
         layOutChamber[xFactor][yFactor].GasEnemy();
         numEnemies--;
-
     }
 
     //# Preg 1
@@ -389,6 +455,28 @@ public class Dungeon implements IDibujable, ISavable {
                 }
             }
         }
+    }
+    
+    //Preg 1 Lab2
+    public void MoveAllies(int playerX,int playerY)
+    {
+        DIRECTIONS current;
+        for(Aliado currAliado : lista_aliados)
+        {
+            if ((current = currAliado.RandomMove(dungeonAccess, 1, playerX, playerY)) != DIRECTIONS.STAY) {
+            // Primero elimino de dungeon acess y lo saco de su cuarto. Luego muevo el enemigo y lo pongo
+            // en una nueva locación
+            dungeonAccess[currAliado.GetX()][currAliado.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
+
+            //Aun no esta en layout
+            layOutChamber[currAliado.GetX()][currAliado.GetY()].GasAlly();
+            currAliado.Move(current, 1);
+            dungeonAccess[currAliado.GetX()][currAliado.GetY()].SetType(CellInformation.CELLTYPE.FRIEND);
+
+            layOutChamber[currAliado.GetX()][currAliado.GetY()].SetAlly(currAliado);
+            //Aun no esta en layout            
+            }        
+        }                
     }
 
     // Preg 2
@@ -551,6 +639,9 @@ public class Dungeon implements IDibujable, ISavable {
                             case ENEMY:
                                 System.out.print("E");
                                 break;
+                            case FRIEND:
+                                System.out.print("F");                                    
+                                break;
                         }
                     }
                     break;
@@ -595,6 +686,9 @@ public class Dungeon implements IDibujable, ISavable {
                                     //System.out.print("E");
                                     fw.write("E");
                                     break;
+                                case FRIEND:
+                                    fw.write("F");
+                                    break;                                
                             }
                         }
                         break;
@@ -641,6 +735,9 @@ public class Dungeon implements IDibujable, ISavable {
                                 case ENEMY:
                                     System.out.print("E");
                                     break;
+                                case FRIEND:
+                                    System.out.print("F");
+                                    break;                                 
                             }
                         }
                         break;
@@ -662,13 +759,6 @@ public class Dungeon implements IDibujable, ISavable {
                 layOutChamber[i][j] = null;
             }
         }
-    }
-
-    //Modif
-    public void addenemy(Coordinate pos) {
-        Enemy enemigo = enemygen.generar_enemigo();
-        enemigo.SetPosition(pos.GetPoint());
-        lista_enemigos.add(enemigo);
     }
 
     public void Guardar_Render(FileWriter fw) {

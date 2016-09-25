@@ -44,7 +44,11 @@ public class Arma extends Artefacto{
     @Override
     public void Save(FileWriter fr)
     {
-        
+        try {
+            fr.write("W," + this.GetNombre() + ',' + danho_min + ',' +danho_max + "\r\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }        
     }
     
     @Override

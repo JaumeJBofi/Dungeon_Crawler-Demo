@@ -50,7 +50,11 @@ public class Armadura extends Artefacto {
     @Override
     public void Save(FileWriter fr)
     {
-        
+        try {
+            fr.write("A," + this.GetNombre() + ',' + defensa + "\r\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }        
     }
     
     @Override

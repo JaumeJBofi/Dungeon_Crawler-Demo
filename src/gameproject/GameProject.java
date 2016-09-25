@@ -13,6 +13,7 @@ import Models.Avatar;
 import Interfaz.Lore;
 import Foundation.Options;
 import Foundation.Options.ACTION;
+import Facilidades.Aliado;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -52,12 +53,11 @@ public class GameProject {
         int varM = randManager.nextInt(50 - 25) + 25;
         int varN = randManager.nextInt(35 - 25) + 25;
 
-        //Avatar player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3), 10, 6, 100, name, 10, 5);
-        //Avatar player = new Avatar(myManager.CreateDungeonDistribution(40,5,0.5,0),40,10);
 
         Avatar player = new Avatar(new Coordinate(0,0), 10, 6, 100, name, 10, 5);
                 
         System.out.println("Presione enter para empezar\n\nEscribe Load para cargar una partida anterior.");
+        Aliado myFriend;
         if (in.nextLine().compareToIgnoreCase("load") == 0) {
             try {
                     int[] coordinates = new int[2];
@@ -73,10 +73,14 @@ public class GameProject {
             } catch (IOException e) {
                 System.out.println("No hay ninguna partida guardada\n");
             }
+            // No necesariamente se llega aca
+            myFriend = new Aliado(new Coordinate(varM, varN), "Woody");
         } else {
              name = historia.IntroMenu(in);
             if(!name.equalsIgnoreCase("skip")&&!name.equalsIgnoreCase("")) historia.nacer(); 
-            player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3), 10, 6, 100, name, 10, 5);                                              
+            myFriend = new Aliado(new Coordinate(varM, varN), "Woody");            
+            player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3,myFriend), 10, 6, 100, name, 10, 5);                                                          
+            myManager.GetActiveDungeon().FillFriend(myFriend);
         }
         
         
@@ -114,13 +118,15 @@ public class GameProject {
                                 break;
                             case ENEMY:
                                 System.out.println("\n\nCuidado! Un enemigo? Preparate para una posible batalla");
-                                break;
+                                break;                            
                         }
                         System.out.println("");
                     }
                     //Esto hace que los enemigos se muevan
                     //# Preg 1
+                    //Preg 1 Lab2
                     myManager.GetActiveDungeon().MoveEnemies(player.GetX(), player.GetY());
+                    myManager.GetActiveDungeon().MoveAllies(player.GetX(), player.GetY());
                 }
                 break;
                 case INTERACT: {
@@ -148,6 +154,16 @@ public class GameProject {
                                 }
                             }
                             break;
+                            case FRIEND:
+                            {
+                                //Preg 1 Lab2
+                                System.out.println("\nHola Amigo, me llamo ");
+                                System.out.print(myFriend.GetNombre());
+                                System.out.print("\n y mi consejo es el siguiente:\n");
+                                myFriend.GiveAdvice();                                  
+                            }break;
+                                
+                                
                             default: {
                                 historia.writeNLines(20);
                                 System.out.println("\n\nNo puedes interactuar con esa casilla");
@@ -162,7 +178,10 @@ public class GameProject {
                     }
                     // Pregunta 1
                     //# Preg 1 Y todas las clases adentro ya estaban implementadas
+                    
+                    //Preg 1 Lab2
                     myManager.GetActiveDungeon().MoveEnemies(player.GetX(), player.GetY());
+                    myManager.GetActiveDungeon().MoveAllies(player.GetX(), player.GetY());
                 }
                 break;
                 case DEBUG: {

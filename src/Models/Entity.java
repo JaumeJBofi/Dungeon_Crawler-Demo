@@ -24,7 +24,7 @@ import java.util.Collections;
 public abstract class Entity implements ISavable{
 
     private Coordinate position;
-    int hp; // vida actual
+    public int hp; // vida actual
     private String nombre;
     static Random generator;
     protected int tamShowX;

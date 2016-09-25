@@ -7,6 +7,7 @@ package Mundo;
 import Artefactos.Artefacto;
 import Foundation.CellInformation;
 import Models.Enemy;
+import Facilidades.Aliado;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Chamber {
     // Aca podemos guardar info de enemigos, items, etc.
     
     private Enemy chamberEnemy;
+    private Aliado chamberAlly;
     private Artefacto chamberArtefact;
    
     public Chamber(){
@@ -34,20 +36,36 @@ public class Chamber {
         chamberEnemy = varEnemy;
     }
     
+    final public void SetAlly(Aliado varAlly)
+    {
+        chamberAlly = varAlly;        
+    }
+    
     public Enemy GetEnemy(){
         return chamberEnemy;
     }
     
-    //Pregunta 2
-    
+    //Pregunta 2    
     public Enemy ReleaseEnemy(){
         Enemy varEnemy = chamberEnemy;
         chamberEnemy = null;
         return varEnemy;
     }
     
+    public Aliado ReleaseAliado()
+    {
+        Aliado varAlly = chamberAlly;
+        chamberAlly = null;
+        return varAlly;
+    }
+    
     public void GasEnemy(){
         chamberEnemy = null;
+    }
+    
+    public void GasAlly()
+    {
+        chamberAlly = null;
     }
     
     final public void SetArtefact(Artefacto varArtefact){

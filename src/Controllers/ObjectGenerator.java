@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Artefactos.Arma;
 import Artefactos.Armadura;
+import Artefactos.Artefacto;
 import Artefactos.Pocion;
 import java.util.Random;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.*;
 
-public class ObjectGenerator {
+final public class ObjectGenerator {
 
     final private Random randomManager;
     int baseLvl;
@@ -25,34 +26,6 @@ public class ObjectGenerator {
     private List<Armadura> armaduras;
     private List<Pocion> pociones;
 
-//    public ObjectGenerator(int baseLvl) {
-//        randomManager = new Random();
-//        armas = new ArrayList();
-//        armaduras = new ArrayList();
-//        pociones = new ArrayList();
-//
-//        //Creo los objetos base
-//        Arma xd = new Arma("Espada Corta", 2, 5);
-//        armas.add(xd);
-//        xd = new Arma("Espada Mediana", 4, 10);
-//        armas.add(xd);
-//        xd = new Arma("Espada del Dolor Supremo", 50, 85);
-//        armas.add(xd);
-//
-//        Armadura yd = new Armadura("Armadura Liviana", 5);
-//        armaduras.add(yd);
-//        yd = new Armadura("Armadura Mediana", 12);
-//        armaduras.add(yd);
-//        yd = new Armadura("Armadura de la Maxima Proteccion", 70);
-//        armaduras.add(yd);
-//
-//        Pocion zd = new Pocion("Pocion Pequeña", 10);
-//        pociones.add(zd);
-//        zd = new Pocion("Pocion Mediana", 20);
-//        pociones.add(zd);
-//        zd = new Pocion("Pocion Regeneración Hipocrática", 1000);
-//        pociones.add(zd);
-//    }
     public ObjectGenerator(int baseLvl) {
 
         randomManager = new Random();
@@ -138,5 +111,29 @@ public class ObjectGenerator {
         pocion_en_lista = pociones.get(i);
         return pocion_en_lista.copiar();
     }
-
+    
+    public Artefacto GetRandomObject()
+    {
+        Artefacto art;
+        switch(randomManager.nextInt(3))
+        {
+            case 0:
+            {
+                art = generar_arma();                
+            }break;
+            case 1:
+            {
+                art = generar_armadura();                
+            }break;
+            case 2:
+            {
+                art = generar_pocion();                
+            }break;
+            default:
+            {
+                art = generar_pocion();
+            }break;
+        }
+        return  art;
+    }
 }

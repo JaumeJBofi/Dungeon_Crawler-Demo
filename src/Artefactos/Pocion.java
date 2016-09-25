@@ -47,7 +47,11 @@ public class Pocion extends Artefacto {
     @Override
     public void Save(FileWriter fr)
     {
-        
+        try {
+            fr.write("P," + this.GetNombre() + ',' + valor + "\r\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }        
     }
     
     @Override
