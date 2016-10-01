@@ -125,7 +125,7 @@ public class GameProject {
                     //Esto hace que los enemigos se muevan
                     //# Preg 1
                     //Preg 1 Lab2
-                    myManager.GetActiveDungeon().MoveEnemies(player.GetX(), player.GetY());
+                    myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
                     myManager.GetActiveDungeon().MoveAllies(player.GetX(), player.GetY());
                 }
                 break;
@@ -180,7 +180,7 @@ public class GameProject {
                     //# Preg 1 Y todas las clases adentro ya estaban implementadas
                     
                     //Preg 1 Lab2
-                    myManager.GetActiveDungeon().MoveEnemies(player.GetX(), player.GetY());
+                    myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
                     myManager.GetActiveDungeon().MoveAllies(player.GetX(), player.GetY());
                 }
                 break;
