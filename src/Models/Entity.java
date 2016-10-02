@@ -186,11 +186,19 @@ public abstract class Entity implements ISavable {
     public DIRECTIONS RandomMoveInteligente(CellInformation[][] dungeonAccess, int steps, int playerX, int playerY,int M, int N) {
         List<DIRECTIONS> validDir = new ArrayList();
         Coordinate varPointX  = new Coordinate(M,N);
+<<<<<<< HEAD
         Coordinate varPointY  = new Coordinate(M,N);        
         varPointX.SetX(position.GetX());
         varPointX.SetY(position.GetY());
         varPointY.SetX(position.GetX());
         varPointY.SetY(position.GetY());
+=======
+        Coordinate varPointY  = new Coordinate(M,N);
+        varPointX.SetX(position.GetPoint().GetX());
+        varPointX.SetY(position.GetPoint().GetY());
+        varPointY.SetX(position.GetPoint().GetX());
+        varPointY.SetY(position.GetPoint().GetY());
+>>>>>>> origin/master
 
         int x_location = varPointX.GetX() - playerX;
         int y_location = varPointX.GetY() - playerY;
