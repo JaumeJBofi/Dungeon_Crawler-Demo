@@ -5,6 +5,8 @@
  */
 package Controllers;
 
+import Facilidades.Aliado;
+import Foundation.Coordinate;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -17,9 +19,9 @@ import java.util.Random;
 final public class AllyGenerator {
     
     private String fileName;
-    private ArrayList<String> tipsPool;
-    private ArrayList<String> namesPool;
-    private Random randomManager;
+    final private ArrayList<String> tipsPool;
+    final private ArrayList<String> namesPool;
+    final private Random randomManager;
     private int numTips;
     private int numNames;
     
@@ -72,6 +74,26 @@ final public class AllyGenerator {
             hints.add(tipsPool.get(randomManager.nextInt(numTips)));
         }
         return hints;
+    }
+    
+    public void FillFriend(Aliado myFriend,ObjectGenerator objGen) {
+        // Que tenga un invetorio de 5 ... Definido Aca...
+        int N = 5;
+        // Tiene pociones para ayudarme. Puede ser cualquier cosa.
+        for (int i = 0; i < N; i++) {
+            myFriend.AddArtefact(objGen.GetRandomObject());
+        }
+
+        // Que guarde 10 Consejos;
+        N = 10;        
+        myFriend.AddAdvice(GiveHints(N));        
+    }
+    
+    public Aliado GetAlly(Coordinate position,ObjectGenerator objGen)
+    {
+        Aliado friend = new Aliado(position.GetPoint(), GetName());
+        FillFriend(friend, objGen);
+        return friend;
     }
     
     public String GetFileName()

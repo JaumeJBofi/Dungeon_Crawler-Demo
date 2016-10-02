@@ -70,4 +70,6 @@ public class CellInformation {
     public CELLOBJECT GetObject(){
         return OBJECT;
     }
+    
+    public Coordinate position;                        
 }

@@ -36,19 +36,19 @@ final public class EnemyGenerator {
             BufferedReader br = new BufferedReader(fr);
             Coordinate nulo = new Coordinate(0, 0);
             while (true) {
-                String linea = br.readLine();
+                String linea;
+                while((linea=br.readLine())!=null&&linea.equals(""));
                 if (linea == null) {
                     break;
                 }
                 String[] arr = linea.split(",");
                 Enemy enemigo = new Enemy(nulo, arr[0], Integer.parseInt(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), arr[4], Integer.parseInt(arr[5]));
-                enemigos.add(enemigo);
+                enemigos.add(enemigo);                
             }
             fr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public Enemy generar_enemigo() {

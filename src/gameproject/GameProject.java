@@ -77,10 +77,8 @@ public class GameProject {
             myFriend = new Aliado(new Coordinate(varM, varN), "Woody");
         } else {
              name = historia.IntroMenu(in);
-            if(!name.equalsIgnoreCase("skip")&&!name.equalsIgnoreCase("")) historia.nacer(); 
-            myFriend = new Aliado(new Coordinate(varM, varN), "Woody");            
-            player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3,myFriend), 10, 6, 100, name, 10, 5);                                                          
-            myManager.GetActiveDungeon().FillFriend(myFriend);
+            if(!name.equalsIgnoreCase("skip")&&!name.equalsIgnoreCase("")) historia.nacer();             
+            player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3), 10, 6, 100, name, 10, 5);                                                                      
         }
         
         
@@ -125,7 +123,7 @@ public class GameProject {
                     //Esto hace que los enemigos se muevan
                     //# Preg 1
                     //Preg 1 Lab2
-                    myManager.GetActiveDungeon().MoveEnemies(player.GetX(), player.GetY());
+                    myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
                     myManager.GetActiveDungeon().MoveAllies(player.GetX(), player.GetY());
                 }
                 break;
@@ -134,7 +132,7 @@ public class GameProject {
 
                         switch (nextCellInformation.GetType()) {
                             case ARTIFACT: {
-                                myManager.GetActiveDungeon().Interactuar(player, choiceTaken.path); // borra el artefacto de la matriz                                
+                                myManager.GetActiveDungeon().Interactuar(player, nextCellInformation.position); // borra el artefacto de la matriz                                
                                 historia.writeNLines(20);
                                 System.out.println("\n\n INTERACT CORRECTO");
                             }
@@ -143,7 +141,7 @@ public class GameProject {
                                 // #Preg 2:
                                 historia.writeNLines(20);
                                 // Podemos ponder en choice taken la posicion... luego podemos implementar eso
-                                if (myManager.GetActiveDungeon().Battle(player, choiceTaken.path)) {
+                                if (myManager.GetActiveDungeon().Battle(player, nextCellInformation.position)) {
                                     // Gana la batalla... No muere
                                 } else {
                                     System.out.println("Fin del juego. Ha muerto. Presione Enter\n");
@@ -157,10 +155,7 @@ public class GameProject {
                             case FRIEND:
                             {
                                 //Preg 1 Lab2
-                                System.out.println("\nHola Amigo, me llamo ");
-                                System.out.print(myFriend.GetNombre());
-                                System.out.print("\n y mi consejo es el siguiente:\n");
-                                myFriend.GiveAdvice();                                  
+                                myManager.GetActiveDungeon().GetFriendAdvice(nextCellInformation.position);
                             }break;
                                 
                                 
@@ -180,7 +175,7 @@ public class GameProject {
                     //# Preg 1 Y todas las clases adentro ya estaban implementadas
                     
                     //Preg 1 Lab2
-                    myManager.GetActiveDungeon().MoveEnemies(player.GetX(), player.GetY());
+                    myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
                     myManager.GetActiveDungeon().MoveAllies(player.GetX(), player.GetY());
                 }
                 break;
@@ -213,7 +208,7 @@ public class GameProject {
                                 // Random Text
                                 historia.writeNLines(20);
                                 System.out.println("\n\nHyaaa!!!\nTu ataque dio en el blanco...El enemigo se desvanece silenciosamente como si estuviera aliviado");                                
-                                myManager.GetActiveDungeon().KillInChamber(player.GetX(),player.GetY(),choiceTaken.path);
+                                myManager.GetActiveDungeon().KillInChamber(nextCellInformation.position);
                             }
                             break;
                             default: {

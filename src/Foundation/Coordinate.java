@@ -46,11 +46,7 @@ public class Coordinate {
     }
     
     public void SetX(int xVar){
-        if(InRangeX(xVar)){
-            x = xVar;            
-        }else{
-            //throw new IndexOutOfBoundsException();
-        }        
+        x = xVar;
     }
     
     public int GetY(){
@@ -58,11 +54,7 @@ public class Coordinate {
     }
     
     public void SetY(int yVar){
-        if(InRangeY(yVar)){
-            y = yVar;
-        }else{
-            //throw new IndexOutOfBoundsException();
-        }        
+        y = yVar;
     }
             
     public Coordinate GetPoint(){

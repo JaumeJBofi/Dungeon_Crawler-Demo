@@ -40,8 +40,6 @@ public class Aliado extends Entity{
 
     public Aliado(Coordinate position, int varTamShowX, int varTamShowY, int vida, String varNombre, int varStrength, int varArmor) {
         super(position, varNombre, vida, varStrength, varArmor);        
-//      SetTamShowX(tamShowX);
-//      SetTamShowY(tamShowY);
         tamShowX = varTamShowX;
         tamShowY = varTamShowY;        
         SetNombre(varNombre);
@@ -52,7 +50,9 @@ public class Aliado extends Entity{
     
     public void GiveAdvice()
     {
+        System.out.println("Hola, me llamo " + GetNombre() +" y este es mi consejo:");
         System.out.println(Consejos.get(currentAdvice));        
+        System.out.println("Nos vemos... Suerte!");
         currentAdvice = (currentAdvice + 1)%Consejos.size();        
     }
     

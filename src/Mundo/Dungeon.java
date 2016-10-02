@@ -50,7 +50,7 @@ public class Dungeon implements IDibujable, ISavable {
 
     private int numEnemies;
     private int numAliados;
-    private int maxNumAliados;
+    private int numArtifacts;    
 
     //private CellInformation dungeonStatus;    
     private Chamber[][] layOutChamber;
@@ -70,15 +70,18 @@ public class Dungeon implements IDibujable, ISavable {
         SetPrcEnemies(varprcEnemies);
         SetPrcItems(varPrcItems);
         objManager = new ObjectGenerator(varlvlEnemies);
-        Scanner in = new Scanner(System.in);        
-        
+        Scanner in = new Scanner(System.in);
+
         enemygen = new EnemyGenerator();
         lista_enemigos = new ArrayList();
         numEnemies = 0;
-        
+
         // Ponemos memoria en allyGenerator cuando se nos pone el numero de nuestro Dungeon        
         lista_aliados = new ArrayList();
         numAliados = 0;
+        
+        // Lista iría aca
+        numArtifacts = 0;
     }
 
     public int GetM() {
@@ -105,15 +108,13 @@ public class Dungeon implements IDibujable, ISavable {
             N = varN;
         }
     }
-    
-    public void SetDungeonNumber(int varNum)
-    {
-        allyGen = new AllyGenerator("Allies_" + Integer.toString(varNum)+".txt");
+
+    public void SetDungeonNumber(int varNum) {
+        allyGen = new AllyGenerator("Allies_" + Integer.toString(varNum) + ".txt");
         dungeonNumber = varNum;
     }
-    
-    public int GetDungeonNumber()
-    {
+
+    public int GetDungeonNumber() {
         return dungeonNumber;
     }
 
@@ -164,20 +165,24 @@ public class Dungeon implements IDibujable, ISavable {
         }
     }
     
-    public int GetNumAllies()
-    {
+    public void SetNumArtifacts(int varNumArtifacts){
+        if(varNumArtifacts>0){
+            numArtifacts = varNumArtifacts;
+        }
+    }
+    
+    public int GetNumArtifacts(){
+        return numArtifacts;
+    }
+
+    public int GetNumAllies() {
         return numAliados;
     }
-    
-    public void SetNumAllies(int varNumAliados)
-    {
+
+    public void SetNumAllies(int varNumAliados) {
         numAliados = varNumAliados;
     }
-    
-    public void SetMaxNumAllies(int varMaxNumAllies)
-    {
-        maxNumAliados = varMaxNumAllies;
-    }
+   
 
     public CellInformation GetCellInformation(int x, int y) {
         return dungeonAccess[x][y];
@@ -202,6 +207,36 @@ public class Dungeon implements IDibujable, ISavable {
 
     public void SetAccess(CellInformation access[][]) {
         dungeonAccess = access;
+    }
+           
+    // Llamada que se encarga de llenar una posicion y incrementar su
+    // lista
+    
+    public void SetEntityInChamber(CellInformation.CELLTYPE type,Coordinate myCoordinate)
+    {
+        dungeonAccess[myCoordinate.GetX()][myCoordinate.GetY()].SetType(type);
+        switch(type)
+        {            
+            case ENEMY:
+            {                
+                addenemy(myCoordinate);
+            }break;
+            case ARTIFACT:
+            {
+                numArtifacts++;
+                CellInformation.CELLOBJECT obj = objManager.GetRandomArtefactType(prcItems);
+                if(obj!=CellInformation.CELLOBJECT.EMPTY)
+                {
+                  dungeonAccess[myCoordinate.GetX()][myCoordinate.GetY()].SetObject(obj);  
+                }                
+            }break;
+            case FRIEND:
+            {                
+                AddAlly(myCoordinate);                
+            }break;
+            default:{                
+            }
+        }        
     }
 
     public Artefacto getObject(int x, int y) {
@@ -263,54 +298,21 @@ public class Dungeon implements IDibujable, ISavable {
     }
 
     /// agregado ////}
-    public void Interactuar(Avatar player, DIRECTIONS path) {
-        int xFactor = player.GetX(), yFactor = player.GetY();
-        switch (path) {
-            case BOT: {
-                yFactor += 1;
-            }
-            break;
-            case TOP: {
-                yFactor -= 1;
-            }
-            break;
-            case LEFT: {
-                xFactor -= 1;
-            }
-            break;
-            case RIGHT: {
-                xFactor += 1;
-            }
-        }
+    public void Interactuar(Avatar player, Coordinate pos) {         
         ///// deberia actualizar el access y borrar el objeto de la matriz
-        player.AddArtefact(getObject(xFactor, yFactor));
+        player.AddArtefact(getObject(pos.GetX(),pos.GetY()));
+    }
+    
+    public void GetFriendAdvice(Coordinate pose){
+        layOutChamber[pose.GetX()][pose.GetY()].GetAliado().GiveAdvice();
     }
 
-    public boolean Battle(Avatar player, DIRECTIONS path) {
-        // Preg 2
-        int xFactor = player.GetX(), yFactor = player.GetY();
-        switch (path) {
-            case BOT: {
-                yFactor += 1;
-            }
-            break;
-            case TOP: {
-                yFactor -= 1;
-            }
-            break;
-            case LEFT: {
-                xFactor -= 1;
-            }
-            break;
-            case RIGHT: {
-                xFactor += 1;
-            }
-        }
-        // #Pregunta 2
+    public boolean Battle(Avatar player, Coordinate pos) {
+       
         int playerHp = player.GetVida();
         int playerMax = player.GetVidaMaxima();
 
-        Enemy currentEnemy = layOutChamber[xFactor][yFactor].GetEnemy();
+        Enemy currentEnemy = layOutChamber[pos.GetX()][pos.GetY()].GetEnemy();
         int enemyHp = currentEnemy.GetVida();
 
         System.out.format("Comienza el Encuentro!\nNombre de Enemigo: %s\nDescripcion de Enemigo: %s\nAtaque: ( %d ATK)\n", currentEnemy.GetNombre(),
@@ -368,73 +370,62 @@ public class Dungeon implements IDibujable, ISavable {
             }
             if (currentEnemy.GetVida() == 0) {
                 System.out.println("El enemigo ha sido derrotado.\n");
-                dungeonAccess[xFactor][yFactor].SetType(CellInformation.CELLTYPE.ADENTRO);
+                dungeonAccess[pos.GetX()][pos.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
                 lista_enemigos.remove(currentEnemy);
-                layOutChamber[xFactor][yFactor].GasEnemy();
+                layOutChamber[pos.GetX()][pos.GetY()].GasEnemy();
                 numEnemies--;
                 return true;
             }
         }
     }
-    
-        //Modif
+
+    //Modif
     public void addenemy(Coordinate pos) {
         Enemy enemigo = enemygen.generar_enemigo();
         enemigo.SetPosition(pos.GetPoint());
         lista_enemigos.add(enemigo);
     }
-    
-    public void AddAlly(Coordinate posCoordinate)
-    {
-        lista_aliados.add(new Aliado(posCoordinate,allyGen.GetName()));
+
+    public void AddAlly(Coordinate posCoordinate) {
+        lista_aliados.add(allyGen.GetAlly(posCoordinate, objManager));
         numAliados++;
     }
+
     
-    public void FillFriend(Aliado myFriend)
-    {
-        // Que tenga un invetorio de 5 ... Definido Aca...
-        int N = 5;
-        // Tiene pociones para ayudarme. Puede ser cualquier cosa.
-        for(int i =0;i<N;i++)
-        {
-            myFriend.AddArtefact(objManager.GetRandomObject());
-        }        
-        
-        // Que guarde 10 Consejos;
-        N = 10;
-        for(int i = 0;i<10;i++)
-        {
-            
-        }
-    }
-
-    public void KillInChamber(int xFactor, int yFactor, DIRECTIONS path) {
-        switch (path) {
-            case BOT: {
-                yFactor += 1;
-            }
-            break;
-            case TOP: {
-                yFactor -= 1;
-            }
-            break;
-            case LEFT: {
-                xFactor -= 1;
-            }
-            break;
-            case RIGHT: {
-                xFactor += 1;
-            }
-        }
-
-        Enemy currentEnemy = layOutChamber[xFactor][yFactor].GetEnemy();
-        dungeonAccess[xFactor][yFactor].SetType(CellInformation.CELLTYPE.ADENTRO);
+    public void KillInChamber(Coordinate pos) {        
+        Enemy currentEnemy = layOutChamber[pos.GetX()][pos.GetY()].GetEnemy();
+        dungeonAccess[pos.GetX()][pos.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
         lista_enemigos.remove(currentEnemy);
-        layOutChamber[xFactor][yFactor].GasEnemy();
+        layOutChamber[pos.GetX()][pos.GetY()].GasEnemy();
         numEnemies--;
     }
 
-    //# Preg 1
+    public void MoveEnemiesInteligente(int playerX, int playerY) {
+        Enemy varEnemy;
+        DIRECTIONS current;
+        for (Enemy currEnemy : lista_enemigos) {
+            if ((current = currEnemy.RandomMoveInteligente(dungeonAccess, 1, playerX, playerY, M,N)) != DIRECTIONS.STAY) {
+                dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
+                layOutChamber[currEnemy.GetX()][currEnemy.GetY()].GasEnemy();
+                currEnemy.Move(current, 1);
+                dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);
+                layOutChamber[currEnemy.GetX()][currEnemy.GetY()].SetEnemy(currEnemy);
+            } else {
+                if ((current = currEnemy.RandomMove(dungeonAccess, 1, playerX, playerY,M,N)) != DIRECTIONS.STAY) {
+
+                    // Primero elimino de dungeon acess y lo saco de su cuarto. Luego muevo el enemigo y lo pongo
+                    // en una nueva locación
+                    dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
+                    layOutChamber[currEnemy.GetX()][currEnemy.GetY()].GasEnemy();
+                    currEnemy.Move(current, 1);
+                    dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);
+                    layOutChamber[currEnemy.GetX()][currEnemy.GetY()].SetEnemy(currEnemy);
+                }
+            }
+
+        }
+    }
+
     public void MoveEnemies(int playerX, int playerY) {
         Enemy varEnemy;
         DIRECTIONS current;
@@ -443,7 +434,7 @@ public class Dungeon implements IDibujable, ISavable {
             if (Math.random() <= 0.75) {
                 // Aca pueden presentarse errores.... Pero en el tiempo limita dificil que salga perfecto                
                 // Puede ser que no tenga donde moverse asi que se queda en el mismo lugar
-                if ((current = currEnemy.RandomMove(dungeonAccess, 1, playerX, playerY)) != DIRECTIONS.STAY) {
+                if ((current = currEnemy.RandomMove(dungeonAccess, 1, playerX, playerY,M,N)) != DIRECTIONS.STAY) {
 
                     // Primero elimino de dungeon acess y lo saco de su cuarto. Luego muevo el enemigo y lo pongo
                     // en una nueva locación
@@ -456,27 +447,36 @@ public class Dungeon implements IDibujable, ISavable {
             }
         }
     }
-    
+
     //Preg 1 Lab2
-    public void MoveAllies(int playerX,int playerY)
-    {
+    public void MoveAllies(int playerX, int playerY) {
         DIRECTIONS current;
-        for(Aliado currAliado : lista_aliados)
-        {
-            if ((current = currAliado.RandomMove(dungeonAccess, 1, playerX, playerY)) != DIRECTIONS.STAY) {
+        for (Aliado currAliado : lista_aliados) {
+            if ((current = currAliado.RandomMove(dungeonAccess, 1, playerX, playerY,M,N)) != DIRECTIONS.STAY) {
             // Primero elimino de dungeon acess y lo saco de su cuarto. Luego muevo el enemigo y lo pongo
-            // en una nueva locación
-            dungeonAccess[currAliado.GetX()][currAliado.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
+                // en una nueva locación
+                dungeonAccess[currAliado.GetX()][currAliado.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
 
-            //Aun no esta en layout
-            layOutChamber[currAliado.GetX()][currAliado.GetY()].GasAlly();
-            currAliado.Move(current, 1);
-            dungeonAccess[currAliado.GetX()][currAliado.GetY()].SetType(CellInformation.CELLTYPE.FRIEND);
+                //Aun no esta en layout
+                layOutChamber[currAliado.GetX()][currAliado.GetY()].GasAlly();
+                currAliado.Move(current, 1);
+                dungeonAccess[currAliado.GetX()][currAliado.GetY()].SetType(CellInformation.CELLTYPE.FRIEND);
 
-            layOutChamber[currAliado.GetX()][currAliado.GetY()].SetAlly(currAliado);
-            //Aun no esta en layout            
-            }        
-        }                
+                layOutChamber[currAliado.GetX()][currAliado.GetY()].SetAlly(currAliado);
+                //Aun no esta en layout            
+            }
+        }
+    }
+    
+    public void CheckConsistency()
+    {
+        for(int i = 0;i<M;i++)
+        {
+            for(int j = 0;j<N;j++)
+            {
+                
+            }
+        }
     }
 
     // Preg 2
@@ -486,12 +486,21 @@ public class Dungeon implements IDibujable, ISavable {
             // ACA ES DONDE CREO QUE SE CAE EL CODIGO!!!
             for (int j = 0; j < N; j++) {
                 //Esta linea hace que se caiga. La Comentada
-                //if(!dungeonAccess[i][j].isWal()) layOutChamber[i][j] = new Chamber();
-                layOutChamber[i][j] = new Chamber();
+                if(!dungeonAccess[i][j].isWall())
+                {
+                    layOutChamber[i][j] = new Chamber();
+                }else
+                {
+                    layOutChamber[i][j] = null;
+                }
+                //layOutChamber[i][j] = new Chamber();
             }
         }
         for (Enemy currEnemy : lista_enemigos) {
             layOutChamber[currEnemy.GetX()][currEnemy.GetY()].SetEnemy(currEnemy);
+        }
+        for(Aliado currAliado: lista_aliados){
+            layOutChamber[currAliado.GetX()][currAliado.GetY()].SetAlly(currAliado);
         }
     }
 
@@ -530,19 +539,19 @@ public class Dungeon implements IDibujable, ISavable {
             for (int j = 0; j < N; j++) {
                 linea = buffer.readLine();
                 //String[] arr1 = linea.split(",");
-               // System.out.print(space20);
+                // System.out.print(space20);
                 for (int i = 0; i < M; i++) {
                     CellInformation auxCelda = new CellInformation();
-                    switch( linea.charAt(i) ){
+                    switch (linea.charAt(i)) {
                         case '-':
-                            Coordinate auxAnt = new Coordinate(M,N);
+                            Coordinate auxAnt = new Coordinate(M, N);
                             auxAnt.SetX(i);
                             auxAnt.SetY(j);
                             antPos = auxAnt;
                             auxCelda.SetMode(CellInformation.CELLMODE.ANTERIOR);
                             break;
                         case '+':
-                            Coordinate auxSig = new Coordinate(M,N);
+                            Coordinate auxSig = new Coordinate(M, N);
                             auxSig.SetX(i);
                             auxSig.SetY(j);
                             sigPos = auxSig;
@@ -550,7 +559,7 @@ public class Dungeon implements IDibujable, ISavable {
                             break;
                         default:
                             auxCelda.SetMode(CellInformation.CELLMODE.NORMAL);
-                            switch( linea.charAt(i) ){
+                            switch (linea.charAt(i)) {
                                 case '#':
                                     auxCelda.SetType(CellInformation.CELLTYPE.PARED);
                                     break;
@@ -559,8 +568,8 @@ public class Dungeon implements IDibujable, ISavable {
                                     break;
                                 case 'E':
                                     auxCelda.SetType(CellInformation.CELLTYPE.ENEMY);
-                                   break;
-                                default :
+                                    break;
+                                default:
                                     auxCelda.SetType(CellInformation.CELLTYPE.ADENTRO);
                                     break;
                             }
@@ -569,7 +578,7 @@ public class Dungeon implements IDibujable, ISavable {
                     dungeonAccess[i][j] = auxCelda;
                 }
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -640,7 +649,7 @@ public class Dungeon implements IDibujable, ISavable {
                                 System.out.print("E");
                                 break;
                             case FRIEND:
-                                System.out.print("F");                                    
+                                System.out.print("F");
                                 break;
                         }
                     }
@@ -688,7 +697,7 @@ public class Dungeon implements IDibujable, ISavable {
                                     break;
                                 case FRIEND:
                                     fw.write("F");
-                                    break;                                
+                                    break;
                             }
                         }
                         break;
@@ -737,7 +746,7 @@ public class Dungeon implements IDibujable, ISavable {
                                     break;
                                 case FRIEND:
                                     System.out.print("F");
-                                    break;                                 
+                                    break;
                             }
                         }
                         break;

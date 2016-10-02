@@ -11,6 +11,7 @@ import Artefactos.Arma;
 import Artefactos.Armadura;
 import Artefactos.Artefacto;
 import Artefactos.Pocion;
+import Foundation.CellInformation;
 import java.util.Random;
 import java.io.IOException;
 ///////////////////////
@@ -110,6 +111,25 @@ final public class ObjectGenerator {
         int i = randomManager.nextInt(pociones.size());
         pocion_en_lista = pociones.get(i);
         return pocion_en_lista.copiar();
+    }
+    
+    public CellInformation.CELLOBJECT GetRandomArtefactType(double prcItem)
+    {
+        if (Math.random() <= prcItem) {
+            int randomObject = randomManager.nextInt(3);
+            switch (randomObject) {
+                case 0: {
+                    return CellInformation.CELLOBJECT.POTION;
+                }            
+                case 1: {
+                    return CellInformation.CELLOBJECT.WEAPON;
+                }            
+                case 2: {
+                    return CellInformation.CELLOBJECT.ARMOR;
+                }            
+            }
+        }
+        return CellInformation.CELLOBJECT.EMPTY;
     }
     
     public Artefacto GetRandomObject()

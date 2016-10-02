@@ -45,6 +45,11 @@ public class Chamber {
         return chamberEnemy;
     }
     
+    public Aliado GetAliado()
+    {
+        return chamberAlly;
+    }
+    
     //Pregunta 2    
     public Enemy ReleaseEnemy(){
         Enemy varEnemy = chamberEnemy;
