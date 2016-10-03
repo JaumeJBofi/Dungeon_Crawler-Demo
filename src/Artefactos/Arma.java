@@ -25,6 +25,12 @@ public class Arma extends Artefacto{
         danho_max = varDanoMax;        
     }
     
+    public Arma(Artefacto artBase,int varDanoMin,int varDanoMax){
+        super(artBase);
+        danho_max = varDanoMax;
+        danho_min = varDanoMin;        
+    }
+    
     public void SetDanhoMin(int min){
         danho_min = min;
     }
@@ -55,9 +61,7 @@ public class Arma extends Artefacto{
     public void Load(FileReader flectura, BufferedReader buffer)
     {
         
-    }
-    
-       
+    }           
      
     //Añadido por mi
     @Override

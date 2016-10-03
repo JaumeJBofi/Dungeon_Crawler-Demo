@@ -59,6 +59,8 @@ public class Dungeon implements IDibujable, ISavable {
 
     private List<Enemy> lista_enemigos;
     private List<Aliado> lista_aliados;
+    private List<Artefacto> lista_artefactos;
+    
     private EnemyGenerator enemygen;
     private AllyGenerator allyGen;
 
@@ -81,6 +83,7 @@ public class Dungeon implements IDibujable, ISavable {
         numAliados = 0;
         
         // Lista iría aca
+        lista_artefactos = new ArrayList<>();
         numArtifacts = 0;
     }
 
@@ -164,7 +167,6 @@ public class Dungeon implements IDibujable, ISavable {
             numEnemies = varNumEnemies;
         }
     }
-<<<<<<< HEAD
     
     public void SetNumArtifacts(int varNumArtifacts){
         if(varNumArtifacts>0){
@@ -182,19 +184,6 @@ public class Dungeon implements IDibujable, ISavable {
 
     public void SetNumAllies(int varNumAliados) {
         numAliados = varNumAliados;
-=======
-
-    public int GetNumAllies() {
-        return numAliados;
-    }
-
-    public void SetNumAllies(int varNumAliados) {
-        numAliados = varNumAliados;
-    }
-
-    public void SetMaxNumAllies(int varMaxNumAllies) {
-        maxNumAliados = varMaxNumAllies;
->>>>>>> origin/master
     }
    
 
@@ -226,7 +215,7 @@ public class Dungeon implements IDibujable, ISavable {
     // Llamada que se encarga de llenar una posicion y incrementar su
     // lista
     
-    public void SetEntityInChamber(CellInformation.CELLTYPE type,Coordinate myCoordinate)
+    public void SetEntityInChamber(CellInformation.CELLTYPE type,Coordinate myCoordinate,int level)
     {
         dungeonAccess[myCoordinate.GetX()][myCoordinate.GetY()].SetType(type);
         switch(type)
@@ -237,10 +226,11 @@ public class Dungeon implements IDibujable, ISavable {
             }break;
             case ARTIFACT:
             {
-                numArtifacts++;
+                AddArtifact(myCoordinate,level);                
                 CellInformation.CELLOBJECT obj = objManager.GetRandomArtefactType(prcItems);
                 if(obj!=CellInformation.CELLOBJECT.EMPTY)
                 {
+                    // No deberia de no pasar;
                   dungeonAccess[myCoordinate.GetX()][myCoordinate.GetY()].SetObject(obj);  
                 }                
             }break;
@@ -255,20 +245,8 @@ public class Dungeon implements IDibujable, ISavable {
 
     public Artefacto getObject(int x, int y) {
         dungeonAccess[x][y].SetType(CellInformation.CELLTYPE.ADENTRO);
-        switch (dungeonAccess[x][y].GetObject()) {
-            case WEAPON: {
-                return objManager.generar_arma();
-            }
-            case ARMOR: {
-                return objManager.generar_armadura();
-            }
-            case POTION: {
-                return objManager.generar_pocion();
-            }
-            default: {
-                return objManager.generar_pocion();
-            }
-        }
+        numArtifacts--;
+        return layOutChamber[x][y].ReleaseArtifact();
         // Deberiamos liberar la memoria de layout
     }
 
@@ -400,10 +378,14 @@ public class Dungeon implements IDibujable, ISavable {
         lista_enemigos.add(enemigo);
     }
 
-    public void AddAlly(Coordinate posCoordinate) {
-<<<<<<< HEAD
-        lista_aliados.add(allyGen.GetAlly(posCoordinate, objManager));
+    public void AddAlly(Coordinate pos) {
+        lista_aliados.add(allyGen.GetAlly(pos, objManager));
         numAliados++;
+    }
+    
+    public void AddArtifact(Coordinate pos,int level){
+        lista_artefactos.add(objManager.GetRandomObject(dungeonAccess[pos.GetX()][pos.GetY()].GetObject(),level,pos.GetX(),pos.GetY()));
+        numArtifacts++;
     }
 
     
@@ -413,25 +395,6 @@ public class Dungeon implements IDibujable, ISavable {
         lista_enemigos.remove(currentEnemy);
         layOutChamber[pos.GetX()][pos.GetY()].GasEnemy();
         numEnemies--;
-=======
-        lista_aliados.add(new Aliado(posCoordinate, allyGen.GetName()));
-        numAliados++;
-    }
-
-    public void FillFriend(Aliado myFriend) {
-        // Que tenga un invetorio de 5 ... Definido Aca...
-        int N = 5;
-        // Tiene pociones para ayudarme. Puede ser cualquier cosa.
-        for (int i = 0; i < N; i++) {
-            myFriend.AddArtefact(objManager.GetRandomObject());
-        }
-
-        // Que guarde 10 Consejos;
-        N = 10;
-        for (int i = 0; i < 10; i++) {
-
-        }
->>>>>>> origin/master
     }
 
     public void MoveEnemiesInteligente(int playerX, int playerY) {
@@ -460,35 +423,6 @@ public class Dungeon implements IDibujable, ISavable {
         }
     }
 
-<<<<<<< HEAD
-=======
-    public void MoveEnemiesInteligente(int playerX, int playerY) {
-        Enemy varEnemy;
-        DIRECTIONS current;
-        for (Enemy currEnemy : lista_enemigos) {
-            if ((current = currEnemy.RandomMoveInteligente(dungeonAccess, 1, playerX, playerY, M,N)) != DIRECTIONS.STAY) {
-                dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
-                layOutChamber[currEnemy.GetX()][currEnemy.GetY()].GasEnemy();
-                currEnemy.Move(current, 1);
-                dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);
-                layOutChamber[currEnemy.GetX()][currEnemy.GetY()].SetEnemy(currEnemy);
-            } else {
-                if ((current = currEnemy.RandomMove(dungeonAccess, 1, playerX, playerY,M,N)) != DIRECTIONS.STAY) {
-
-                    // Primero elimino de dungeon acess y lo saco de su cuarto. Luego muevo el enemigo y lo pongo
-                    // en una nueva locación
-                    dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
-                    layOutChamber[currEnemy.GetX()][currEnemy.GetY()].GasEnemy();
-                    currEnemy.Move(current, 1);
-                    dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);
-                    layOutChamber[currEnemy.GetX()][currEnemy.GetY()].SetEnemy(currEnemy);
-                }
-            }
-
-        }
-    }
-
->>>>>>> origin/master
     public void MoveEnemies(int playerX, int playerY) {
         Enemy varEnemy;
         DIRECTIONS current;
@@ -529,7 +463,6 @@ public class Dungeon implements IDibujable, ISavable {
                 //Aun no esta en layout            
             }
         }
-<<<<<<< HEAD
     }
     
     public void CheckConsistency()
@@ -538,11 +471,52 @@ public class Dungeon implements IDibujable, ISavable {
         {
             for(int j = 0;j<N;j++)
             {
+                switch(dungeonAccess[i][j].GetType())
+                {
+                    case FRIEND:
+                    {
+                        if(layOutChamber[i][j]==null)
+                        {
+                            System.out.println("Error Null Chamber: Position: " + i + " " + j);
+                        }else
+                        {
+                            if(layOutChamber[i][j].GetAliado()==null)
+                            {
+                                System.out.println("Error Null Ally: Position: " + i + " " + j);
+                            }
+                        }
+                    }break;
+                    case ENEMY:
+                    {
+                        if(layOutChamber[i][j]==null)
+                        {
+                            System.out.println("Error Null Chamber: Position: " + i + " " + j);
+                        }else
+                        {
+                            if(layOutChamber[i][j].GetEnemy()==null)
+                            {
+                                System.out.println("Error Null Enemy: Position: " + i + " " + j);
+                            }
+                        }                        
+                    }break;
+                    case ARTIFACT:
+                    {
+                        if(layOutChamber[i][j]==null)
+                        {
+                            System.out.println("Error Null Chamber: Position: " + i + " " + j);
+                        }else
+                        {
+                            if(layOutChamber[i][j].GetArtefacto()==null)
+                            {
+                                System.out.println("Error Null Artifact: Position: " + i + " " + j);
+                            }
+                        }
+                        
+                    }break;
+                }
                 
             }
         }
-=======
->>>>>>> origin/master
     }
 
     // Preg 2
@@ -567,6 +541,9 @@ public class Dungeon implements IDibujable, ISavable {
         }
         for(Aliado currAliado: lista_aliados){
             layOutChamber[currAliado.GetX()][currAliado.GetY()].SetAlly(currAliado);
+        }
+        for(Artefacto currArtifact: lista_artefactos){
+            layOutChamber[currArtifact.x][currArtifact.y].SetArtefact(currArtifact);
         }
     }
 

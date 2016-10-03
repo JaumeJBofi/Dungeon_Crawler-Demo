@@ -81,7 +81,7 @@ final public class AllyGenerator {
         int N = 5;
         // Tiene pociones para ayudarme. Puede ser cualquier cosa.
         for (int i = 0; i < N; i++) {
-            myFriend.AddArtefact(objGen.GetRandomObject());
+            myFriend.AddArtefact(objGen.GetRandomObject(objGen.GetRandomArtefactType(1),100,-1,-1));
         }
 
         // Que guarde 10 Consejos;

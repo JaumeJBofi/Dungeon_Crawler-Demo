@@ -78,7 +78,7 @@ public class GameProject {
         } else {
              name = historia.IntroMenu(in);
             if(!name.equalsIgnoreCase("skip")&&!name.equalsIgnoreCase("")) historia.nacer();             
-            player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3), 10, 6, 100, name, 10, 5);                                                                      
+            player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3,1), 10, 6, 100, name, 10, 5);                                                                      
         }
         
         
@@ -263,8 +263,10 @@ public class GameProject {
                 break;
             }
             System.out.format("Mundo Nr° %d de %d\n", myManager.GetActiveDungeonIndex() + 1, myManager.GetTotalDungeons());
-            Renderer.mostrarLaberinto(myManager.GetActiveDungeon(), player);
+            Renderer.mostrarLaberinto(myManager.GetActiveDungeon(), player);            
             historia.listaAcciones();
+            
+            myManager.GetActiveDungeon().CheckConsistency();
             //myManager.GetActiveDungeon().Render();
         }
     }

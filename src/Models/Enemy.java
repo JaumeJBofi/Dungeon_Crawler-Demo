@@ -17,14 +17,13 @@ import java.io.IOException;
  * @author Arthuro
  */
 public class Enemy extends Entity {
-
-    private int nivel;
+    
     private String description;
     private int armadura;
 
     //Coordinate position;
     public Enemy(Coordinate varPosition) {
-        super(varPosition, "Lament", 15, 5, 5);
+        super(varPosition, "Lament", 15, 5, 5,1);
         SetLookDirection(DIRECTIONS.BOT);
         nivel = 1;
         description = " ";
@@ -32,7 +31,7 @@ public class Enemy extends Entity {
 
     //Modif
     public Enemy(Coordinate varPosition, String nomb, int vida, int lvl, int initStrength, String varDescription, int varArmor) {
-        super(varPosition, nomb, vida, initStrength, varArmor);
+        super(varPosition, nomb, vida, initStrength, varArmor,1);
         SetLookDirection(DIRECTIONS.BOT);
         SetNivel(lvl);
         SetDescription(varDescription);
@@ -45,16 +44,7 @@ public class Enemy extends Entity {
     public String GetDescription() {
         return description;
     }
-
-    final public void SetNivel(int n) {
-        nivel = n;
-        SetStrength(GetStrength() * nivel);
-    }
-
-    public int GetNivel() {
-        return nivel;
-    }
-
+ 
     public Enemy copiar() {
         Enemy nuevo_enemigo = new Enemy(this.GetPosition(), this.GetNombre(), this.GetVida(), nivel, GetStrength(), GetDescription(), this.GetArmor());
         return nuevo_enemigo;

@@ -27,7 +27,7 @@ public class Aliado extends Entity{
     private List<Artefacto> saco;
           
     public Aliado(Coordinate position, String varNombre) {
-        super(position, varNombre, 100, 5, 5);
+        super(position, varNombre, 100, 5, 5,1);
         hp = 100; // digamos q sea 100        
         tamShowX = 15;
         tamShowY = 15;        
@@ -39,7 +39,7 @@ public class Aliado extends Entity{
     }
 
     public Aliado(Coordinate position, int varTamShowX, int varTamShowY, int vida, String varNombre, int varStrength, int varArmor) {
-        super(position, varNombre, vida, varStrength, varArmor);        
+        super(position, varNombre, vida, varStrength, varArmor,1);        
         tamShowX = varTamShowX;
         tamShowY = varTamShowY;        
         SetNombre(varNombre);

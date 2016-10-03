@@ -162,7 +162,7 @@ public class DungeonManager implements ISavable {
             } else {
                 Dungeon currDungeon = dungeons.get(activeDungeon); //si no es el ultimo calabozo, crea otro cala
                 CreateDungeonDistribution(randomManager.nextInt(50 - 25) + 25, randomManager.nextInt(50 - 25) + 25, currDungeon.GetPrcEnemies() + 0.075, currDungeon.GetLvlEnemies(),
-                        currDungeon.GetPrcItem() + 0.025);
+                        currDungeon.GetPrcItem() + 0.025,player.GetNivel());
                 activeDungeon++;
                 GetActiveDungeon().SetDungeonNumber(activeDungeon);
                 player.SetPosition(dungeons.get(activeDungeon).GetAntPos().GetPoint());
@@ -206,7 +206,7 @@ public class DungeonManager implements ISavable {
         }        
     }        
     //Preg 1 Lab2
-    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, int worldlvlEnemies, double varprcItems) {
+    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, int worldlvlEnemies, double varprcItems,int playerLvl) {
         Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies, varprcItems);
         theDungeon.SetDungeonNumber(activeDungeon);
         
@@ -259,7 +259,7 @@ public class DungeonManager implements ISavable {
 
                 // Marcar camino y a V
                 advanceInDirection(currentPoint, currentDirections, 1);
-                theDungeon.SetEntityInChamber(GetRandomType(theDungeon.GetPrcEnemies()),currentPoint);            
+                theDungeon.SetEntityInChamber(GetRandomType(theDungeon.GetPrcEnemies()),currentPoint,playerLvl);            
                 
                 advanceInDirection(currentPoint, currentDirections, 1);
                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);

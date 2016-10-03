@@ -17,9 +17,60 @@ import java.io.FileWriter;
 public abstract class Artefacto implements ISavable{
 
     protected String nombre;
+    private double prcAparition;
+    private int nivel;
+    private int vida;
+    private int ataque;
+    private int proteccion;
+    private int precio;
+    
+    // Tiene sentido ponerlo publico ya que cualquiera puede mover un objeto.
+    // Negativo significa que alguien lo esta llevando
+    public int x;
+    public int y;
 
     public Artefacto(String varNombre) {
         nombre = varNombre;
+        x = -1;
+        y = -1;
+    }
+    
+    public Artefacto(Artefacto artefacto)
+    {
+        SetNombre(artefacto.nombre);
+        SetPrcAparition(artefacto.prcAparition);
+        SetNivel(artefacto.nivel);
+        SetVida(artefacto.vida);
+        SetProteccion(artefacto.proteccion);
+        SetPosition(artefacto.x, artefacto.y);
+        SetPrecio(artefacto.precio);
+    }
+    
+    public void LoadArtefacto(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y){
+        SetNombre(_nombre);
+        SetPrcAparition(_prcAparicion);
+        SetNivel(_nivel);
+        SetAtaque(_ataque);
+        SetProteccion(_proteccion);
+        SetPosition(_x, _y);
+        SetPrecio(precio);
+    }
+    
+    final public void SetPrecio(int _precio)
+    {
+        precio = _precio;
+    }
+    
+    public int GetPrecio(int precio)
+    {
+        return precio;
+    }
+    
+    final public void SetPosition(int _x,int _y)
+    {
+        // No Coordenadas
+        x = _x;
+        y = _y;
     }
 
     // agregado 27/08/16 
@@ -27,11 +78,51 @@ public abstract class Artefacto implements ISavable{
         System.out.println("Nombre = " + nombre);
     }
 
-    public void SetNombre(String nombre) {
+    final public void SetNombre(String nombre) {
         this.nombre = nombre;
     }
     
     public abstract void guardar_artefacto(FileWriter fr);
+    
+    public double GetPrcAparition(){
+        return prcAparition;
+    }
+    
+    final public void SetPrcAparition(double  varPrcAparition){
+        prcAparition = varPrcAparition;
+    }
+    
+    public int GetNivel(){
+        return nivel;
+    }
+    
+    final public void SetNivel(int varNivel){
+        nivel = varNivel;
+    }
+    
+    final public void SetVida(int varVida){
+        vida = varVida;
+    }
+    
+    public int GetVida(){
+        return vida;
+    }
+    
+    final public void SetAtaque(int varAtaque){
+        ataque = varAtaque;
+    }
+    
+    public int GetAtaque(){
+        return ataque;         
+    }
+    
+    final public void SetProteccion(int varProteccion){
+        proteccion = varProteccion;
+    }
+    
+    public int GetProteccion(){
+        return proteccion;
+    }
     
     public abstract void RenderStats();
     

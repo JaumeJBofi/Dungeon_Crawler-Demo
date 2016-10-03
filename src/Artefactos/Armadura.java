@@ -15,35 +15,28 @@ import java.io.IOException;
  * @author Arthuro
  */
 public class Armadura extends Artefacto {
-
-    private int defensa;
-
+   
     public Armadura(String varNombre, int varDefensa) {
         super(varNombre);
-        SetDefensa(varDefensa);
+        SetProteccion(varDefensa);
     }
-
-    final public void SetDefensa(int def) {
-        defensa = def;
-    }
-
-    public int GetDefensa() {
-        return defensa;
-    }
-
+    
+    public Armadura(Artefacto art){
+        super(art);
+    }   
     //Añadido por mi
     @Override
     public void Render() {
-        System.out.format("%-30s (%-3d DEF)", this.GetNombre(),this.defensa);
+        System.out.format("%-30s (%-3d DEF)", this.GetNombre(),GetProteccion());
     }
     
     @Override
     public void RenderStats() {
-        System.out.format("(%-3d DEF) %-30s",this.defensa," ");
+        System.out.format("(%-3d DEF) %-30s",GetProteccion()," ");
     }
 
     public Armadura copiar() {
-        Armadura nueva_armadura = new Armadura(this.GetNombre(), defensa);
+        Armadura nueva_armadura = new Armadura(this.GetNombre(), GetProteccion());
         return nueva_armadura;
     }
     
@@ -51,7 +44,7 @@ public class Armadura extends Artefacto {
     public void Save(FileWriter fr)
     {
         try {
-            fr.write("A," + this.GetNombre() + ',' + defensa + "\r\n");
+            fr.write("A," + this.GetNombre() + ',' + GetProteccion() + "\r\n");
         } catch (IOException e) {
             e.printStackTrace();
         }        
@@ -67,7 +60,7 @@ public class Armadura extends Artefacto {
     @Override
     public void guardar_artefacto(FileWriter fr) {
         try {
-            fr.write("A," + this.GetNombre() + ',' + defensa + "\r\n");
+            fr.write("A," + this.GetNombre() + ',' + GetProteccion() + "\r\n");
         } catch (IOException e) {
             e.printStackTrace();
         }

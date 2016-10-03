@@ -32,6 +32,7 @@ public abstract class Entity implements ISavable {
     private DIRECTIONS lookDirection;
     private int strength;
     private int base_armor;
+    protected int nivel;
 
 //    public Entity(Coordinate varPosition, String varNombre, int varStrength){
 //        hp = 100;
@@ -42,13 +43,14 @@ public abstract class Entity implements ISavable {
 //        base_armor = 5;
 //    }
     //Modif
-    public Entity(Coordinate varPosition, String nomb, int vida, int varStrength, int varArmor) {
+    public Entity(Coordinate varPosition, String nomb, int vida, int varStrength, int varArmor,int _nivel) {
         hp = vida;
         position = varPosition;
         generator = new Random();
         nombre = nomb;
         strength = varStrength;
         base_armor = varArmor;
+        nivel = _nivel;
     }
 
     public int GetArmor() {
@@ -101,6 +103,15 @@ public abstract class Entity implements ISavable {
 
     public int GetVida() {
         return hp;
+    }
+    
+    final public void SetNivel(int n) {
+        nivel = n;
+        SetStrength(GetStrength() * nivel);
+    }
+
+    public int GetNivel() {
+        return nivel;
     }
 
     final public void SetNombre(String nombre) {
@@ -186,19 +197,11 @@ public abstract class Entity implements ISavable {
     public DIRECTIONS RandomMoveInteligente(CellInformation[][] dungeonAccess, int steps, int playerX, int playerY,int M, int N) {
         List<DIRECTIONS> validDir = new ArrayList();
         Coordinate varPointX  = new Coordinate(M,N);
-<<<<<<< HEAD
         Coordinate varPointY  = new Coordinate(M,N);        
         varPointX.SetX(position.GetX());
         varPointX.SetY(position.GetY());
         varPointY.SetX(position.GetX());
         varPointY.SetY(position.GetY());
-=======
-        Coordinate varPointY  = new Coordinate(M,N);
-        varPointX.SetX(position.GetPoint().GetX());
-        varPointX.SetY(position.GetPoint().GetY());
-        varPointY.SetX(position.GetPoint().GetX());
-        varPointY.SetY(position.GetPoint().GetY());
->>>>>>> origin/master
 
         int x_location = varPointX.GetX() - playerX;
         int y_location = varPointX.GetY() - playerY;

@@ -14,18 +14,24 @@ import Artefactos.Pocion;
 import Foundation.CellInformation;
 import java.util.Random;
 import java.io.IOException;
+import com.thoughtworks.xstream.XStream;
+
+
+
+
 ///////////////////////
 
 import java.io.BufferedReader;
 import java.io.*;
 
 final public class ObjectGenerator {
-
+    
     final private Random randomManager;
     int baseLvl;
     private List<Arma> armas;
     private List<Armadura> armaduras;
     private List<Pocion> pociones;
+    private ArrayList<Artefacto> artifactsPool;
 
     public ObjectGenerator(int baseLvl) {
 
@@ -33,8 +39,38 @@ final public class ObjectGenerator {
         armas = new ArrayList();
         armaduras = new ArrayList();
         pociones = new ArrayList();
+        artifactsPool = new ArrayList();
 
         //// leo el archivo de armas y ?????
+        //LoadTxtObjects();         // Already Loaded
+        try {
+        XStream xs = new XStream();
+        FileReader fr = new FileReader("Artefacts_XML.txt");
+        artifactsPool = (ArrayList<Artefacto>)xs.fromXML(fr);       
+        fr.close();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }    
+
+        // HardCoded for the damage..
+        for(Artefacto art:artifactsPool)
+        {
+            if(art instanceof Arma)
+            {
+                armas.add(new Arma(art,15,30));
+            }else if(art instanceof Armadura)
+            {
+                armaduras.add(new Armadura(art));
+            }else
+            {
+                pociones.add(new Pocion(art));
+            }
+        }
+        artifactsPool = null;
+    }    
+        
+    public void LoadTxtObjects()
+    {
         try {
             FileReader fr = new FileReader("armas.txt");
             BufferedReader br = new BufferedReader(fr);
@@ -47,6 +83,7 @@ final public class ObjectGenerator {
                 String[] arr = linea.split(",");
                 Arma weapon = new Arma(arr[0], Integer.parseInt(arr[1]), Integer.parseInt(arr[2]));
                 armas.add(weapon);
+                artifactsPool.add((Artefacto)weapon);
             }
             fr.close();
         } catch (IOException e) {
@@ -65,7 +102,7 @@ final public class ObjectGenerator {
                 Armadura armor = new Armadura(arr[0], Integer.parseInt(arr[1]));
 
                 armaduras.add(armor);
-
+                artifactsPool.add((Artefacto)armor);
             }
             fr.close();
         } catch (IOException e) {
@@ -84,31 +121,72 @@ final public class ObjectGenerator {
                 Pocion potion = new Pocion(arr[0], Integer.parseInt(arr[1]));
 
                 pociones.add(potion);
+                artifactsPool.add((Artefacto)potion);
 
             }
             fr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        XStream xs = new XStream();
+        try {
+        FileWriter fw = new FileWriter("Artefacts_XML.txt");        
+        String temp = xs.toXML(artifactsPool);
+        fw.write(temp);
+        fw.close();
+        } catch (IOException e) {
+        System.out.println(e.toString());
+        }        
     }
 
-    public Arma generar_arma() {
+    public Arma generar_arma(int levelCap) {
         Arma arma_en_lista;
+        double prcToPass = Math.random();
+        int searchTimes = 10;
+        
         int i = randomManager.nextInt(armas.size());
+        
+        while((searchTimes!=0)&&armas.get(i).GetPrcAparition()<prcToPass)
+        {
+            searchTimes--;
+            i = randomManager.nextInt(armas.size());
+        }
+        
         arma_en_lista = armas.get(i);
         return arma_en_lista.copiar();
     }
 
-    public Armadura generar_armadura() {
+    public Armadura generar_armadura(int levelCap) {
         Armadura armadura_en_lista;
+        double prcToPass = Math.random();
+        int searchTimes = 10;
+        
         int i = randomManager.nextInt(armaduras.size());
+        
+        while((searchTimes!=0)&&armaduras.get(i).GetPrcAparition()<prcToPass)
+        {
+            searchTimes--;
+            i = randomManager.nextInt(armaduras.size());
+        }
+        
         armadura_en_lista = armaduras.get(i);
         return armadura_en_lista.copiar();
     }
 
-    public Pocion generar_pocion() {
-        Pocion pocion_en_lista;
+
+    public Pocion generar_pocion(int levelCap) {
+        Pocion pocion_en_lista;        
+        double prcToPass = Math.random();
+        int searchTimes = 10;
+        
         int i = randomManager.nextInt(pociones.size());
+        
+        while((searchTimes!=0)&&pociones.get(i).GetPrcAparition()<prcToPass)
+        {
+            searchTimes--;
+            i = randomManager.nextInt(pociones.size());
+        }
         pocion_en_lista = pociones.get(i);
         return pocion_en_lista.copiar();
     }
@@ -132,28 +210,30 @@ final public class ObjectGenerator {
         return CellInformation.CELLOBJECT.EMPTY;
     }
     
-    public Artefacto GetRandomObject()
+    public Artefacto GetRandomObject(CellInformation.CELLOBJECT objType, int level,int _x,int _y)
     {
         Artefacto art;
-        switch(randomManager.nextInt(3))
+        switch(objType)
         {
-            case 0:
+            case WEAPON:
             {
-                art = generar_arma();                
+                art = generar_arma(level);                                
             }break;
-            case 1:
+            case ARMOR:
             {
-                art = generar_armadura();                
+                art = generar_armadura(level);                
             }break;
-            case 2:
+            case POTION:
             {
-                art = generar_pocion();                
+                art = generar_pocion(level);                
             }break;
             default:
             {
-                art = generar_pocion();
+                art = generar_pocion(level);
             }break;
         }
+        art.x = _x;
+        art.y = _y;
         return  art;
     }
 }

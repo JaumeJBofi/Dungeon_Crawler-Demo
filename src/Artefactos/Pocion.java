@@ -15,32 +15,29 @@ import java.io.IOException;
  * @author Arthuro
  */
 public class Pocion extends Artefacto {
-    
-    private int valor; // por el momento es el valor de cura digamos
+        
     public Pocion(String varNombre,int varValor){ 
-        super(varNombre);
-        valor = varValor;
+        super(varNombre);        
     }
-    public void SetValor(int v){
-        valor = v;
-    }
-    public int GetValor(){
-        return valor;
+    
+    public  Pocion(Artefacto art)
+    {
+        super(art);
     }
             
     //Añadido por mi
     @Override
     public void Render() {
-        System.out.format("%-30s (%-3d HP) ", this.GetNombre(),this.valor);
+        System.out.format("%-30s (%-3d HP) ", this.GetNombre(),GetVida());
     }
     
     @Override
     public void RenderStats() {
-        System.out.format(" (%-3d HP)%-30s",this.valor," ");
+        System.out.format(" (%-3d HP)%-30s",GetVida()," ");
     }
     
     public Pocion copiar() {
-        Pocion nueva_pocion = new Pocion(this.GetNombre(), valor);
+        Pocion nueva_pocion = new Pocion(this.GetNombre(), GetVida());
         return nueva_pocion;
     }
     
@@ -48,7 +45,7 @@ public class Pocion extends Artefacto {
     public void Save(FileWriter fr)
     {
         try {
-            fr.write("P," + this.GetNombre() + ',' + valor + "\r\n");
+            fr.write("P," + this.GetNombre() + ',' + GetVida() + "\r\n");
         } catch (IOException e) {
             e.printStackTrace();
         }        
@@ -63,7 +60,7 @@ public class Pocion extends Artefacto {
     @Override
     public void guardar_artefacto(FileWriter fr) {
         try {
-            fr.write("P," + this.GetNombre() + ',' + valor + "\r\n");
+            fr.write("P," + this.GetNombre() + ',' + GetVida() + "\r\n");
         } catch (IOException e) {
             e.printStackTrace();
         }

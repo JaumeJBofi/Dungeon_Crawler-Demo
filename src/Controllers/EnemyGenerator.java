@@ -23,14 +23,6 @@ final public class EnemyGenerator {
         randomManager = new Random();
         enemigos = new ArrayList();
 
-//        Coordinate nulo = new Coordinate(0, 0);
-//        //Creo los objetos base
-//        Enemy xd = new Enemy(nulo, "xd", 5, 1, 10, "Un Enemigo", 5);
-//        enemigos.add(xd);
-//        xd = new Enemy(nulo, "yd", 10, 1, 15, "Un Enemigo", 5);
-//        enemigos.add(xd);
-//        xd = new Enemy(nulo, "zd", 15, 1, 20, "Un Enemigo", 5);
-//        enemigos.add(xd);
         try {
             FileReader fr = new FileReader("enemigos.txt");
             BufferedReader br = new BufferedReader(fr);

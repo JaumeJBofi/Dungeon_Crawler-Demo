@@ -15,7 +15,3 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
-
-* text=auto 
-# Have git change every .groovy and .java file to crlf
-*.java text eol=lf
