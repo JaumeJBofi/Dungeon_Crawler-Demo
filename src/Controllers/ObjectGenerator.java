@@ -70,7 +70,7 @@ final public class ObjectGenerator {
     }    
         
     public void LoadTxtObjects()
-    {
+    {        
         try {
             FileReader fr = new FileReader("armas.txt");
             BufferedReader br = new BufferedReader(fr);
@@ -82,8 +82,12 @@ final public class ObjectGenerator {
                 }
                 String[] arr = linea.split(",");
                 Arma weapon = new Arma(arr[0], Integer.parseInt(arr[1]), Integer.parseInt(arr[2]));
-                armas.add(weapon);
-                artifactsPool.add((Artefacto)weapon);
+                armas.add(weapon);                         
+                
+//                Artefacto art = new Artefacto(" ");
+//                art.LoadArtefacto(weapon.GetNombre(),weapon.GetPrcAparition(),weapon.GetNivel(),weapon.GetVida(),
+//                        weapon.GetAtaque(),weapon.GetProteccion(),weapon.GetPrecio(baseLvl),weapon.x, weapon.y);
+                artifactsPool.add(weapon);
             }
             fr.close();
         } catch (IOException e) {
@@ -102,7 +106,11 @@ final public class ObjectGenerator {
                 Armadura armor = new Armadura(arr[0], Integer.parseInt(arr[1]));
 
                 armaduras.add(armor);
-                artifactsPool.add((Artefacto)armor);
+                
+//                Artefacto art = new Artefacto(" ");
+//                art.LoadArtefacto(armor.GetNombre(),armor.GetPrcAparition(),armor.GetNivel(),armor.GetVida(),
+//                        armor.GetAtaque(),armor.GetProteccion(),armor.GetPrecio(baseLvl),armor.x, armor.y);
+                artifactsPool.add(armor);                                
             }
             fr.close();
         } catch (IOException e) {
@@ -121,7 +129,13 @@ final public class ObjectGenerator {
                 Pocion potion = new Pocion(arr[0], Integer.parseInt(arr[1]));
 
                 pociones.add(potion);
-                artifactsPool.add((Artefacto)potion);
+//                
+//                Artefacto art = new Artefacto(" ");
+//                art.LoadArtefacto(potion.GetNombre(),potion.GetPrcAparition(),potion.GetNivel(),potion.GetVida(),
+//                        potion.GetAtaque(),potion.GetProteccion(),potion.GetPrecio(baseLvl),potion.x, potion.y);
+//                artifactsPool.add(art);
+                
+                artifactsPool.add(potion);
 
             }
             fr.close();

@@ -14,7 +14,7 @@ import java.io.FileWriter;
  *
  * @author Arthuro
  */
-public abstract class Artefacto implements ISavable{
+public class Artefacto implements ISavable{
 
     protected String nombre;
     private double prcAparition;
@@ -82,7 +82,10 @@ public abstract class Artefacto implements ISavable{
         this.nombre = nombre;
     }
     
-    public abstract void guardar_artefacto(FileWriter fr);
+    public void guardar_artefacto(FileWriter fr)
+    {
+        
+    }
     
     public double GetPrcAparition(){
         return prcAparition;
@@ -124,13 +127,22 @@ public abstract class Artefacto implements ISavable{
         return proteccion;
     }
     
-    public abstract void RenderStats();
+    public void RenderStats()
+    {
+        
+    }
     
     @Override
-    public abstract void Save(FileWriter fr);
+    public void Save(FileWriter fr)
+    {
+        
+    }
     
     @Override
-    public  abstract void Load(FileReader flectura, BufferedReader buffer);
+    public  void Load(FileReader flectura, BufferedReader buffer)
+    {
+        
+    }
 
     public String GetNombre() {
         return nombre;
