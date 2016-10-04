@@ -686,8 +686,17 @@ public class Dungeon implements IDibujable, ISavable {
                                 System.out.print(" ");
                                 break;
                             case ARTIFACT:
-                                System.out.print("A");
-                                break;
+                            {
+                                switch(dungeonAccess[i][j].GetObject())
+                                {
+                                    case WEAPON: System.out.print("W");
+                                        break;
+                                    case POTION: System.out.print("P");
+                                        break;
+                                    case ARMOR:  System.out.print("A");
+                                        break;
+                                }                            
+                            }break;
                             case ENEMY:
                                 System.out.print("E");
                                 break;

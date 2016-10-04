@@ -31,6 +31,11 @@ public class Artefacto implements ISavable{
 
     public Artefacto(String varNombre) {
         nombre = varNombre;
+        nivel = 1;       
+        vida = 100;
+        ataque = 50;
+        proteccion = 60;
+        precio = 15;
         x = -1;
         y = -1;
     }
@@ -46,7 +51,12 @@ public class Artefacto implements ISavable{
         SetPrecio(artefacto.precio);
     }
     
-    public void LoadArtefacto(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y){
+    public Artefacto(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y)
+    {
+        LoadArtefacto(_nombre, _prcAparicion, _nivel, _vida, _ataque, _proteccion, precio, _x, _y);
+    }
+    
+    final public void LoadArtefacto(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y){
         SetNombre(_nombre);
         SetPrcAparition(_prcAparicion);
         SetNivel(_nivel);
@@ -54,6 +64,7 @@ public class Artefacto implements ISavable{
         SetProteccion(_proteccion);
         SetPosition(_x, _y);
         SetPrecio(precio);
+        SetVida(_vida);
     }
     
     final public void SetPrecio(int _precio)

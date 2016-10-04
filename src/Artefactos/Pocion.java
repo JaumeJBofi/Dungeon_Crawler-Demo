@@ -18,11 +18,17 @@ public class Pocion extends Artefacto {
         
     public Pocion(String varNombre,int varValor){ 
         super(varNombre);        
+        SetVida(varValor);
     }
     
     public  Pocion(Artefacto art)
     {
         super(art);
+    }
+    
+    public Pocion(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y)
+    {
+        super(_nombre, _prcAparicion, _nivel, _vida, _ataque, _proteccion, precio, _x, _y);        
     }
             
     //Añadido por mi

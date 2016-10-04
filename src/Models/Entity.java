@@ -34,14 +34,6 @@ public abstract class Entity implements ISavable {
     private int base_armor;
     protected int nivel;
 
-//    public Entity(Coordinate varPosition, String varNombre, int varStrength){
-//        hp = 100;
-//        position = varPosition;    
-//        generator = new Random();
-//        nombre = varNombre;
-//        strength = varStrength;
-//        base_armor = 5;
-//    }
     //Modif
     public Entity(Coordinate varPosition, String nomb, int vida, int varStrength, int varArmor,int _nivel) {
         hp = vida;

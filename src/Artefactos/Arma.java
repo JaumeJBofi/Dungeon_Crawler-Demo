@@ -31,6 +31,11 @@ public class Arma extends Artefacto{
         danho_min = varDanoMin;        
     }
     
+    public Arma(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y)
+    {
+        super(_nombre, _prcAparicion, _nivel, _vida, _ataque, _proteccion, precio, _x, _y);
+    }
+    
     public void SetDanhoMin(int min){
         danho_min = min;
     }

@@ -71,6 +71,9 @@ final public class ObjectGenerator {
         
     public void LoadTxtObjects()
     {        
+        // FORMATO ESTANDAR!
+        // NOMBRE,PRCAPARICION,
+        // String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y
         try {
             FileReader fr = new FileReader("armas.txt");
             BufferedReader br = new BufferedReader(fr);
@@ -81,12 +84,10 @@ final public class ObjectGenerator {
                     break;
                 }
                 String[] arr = linea.split(",");
-                Arma weapon = new Arma(arr[0], Integer.parseInt(arr[1]), Integer.parseInt(arr[2]));
+                Arma weapon = new Arma(arr[0], Double.parseDouble(arr[1]), Integer.parseInt(arr[2]),Integer.parseInt(arr[3]),Integer.parseInt(arr[4]),
+                        Integer.parseInt(arr[5]),Integer.parseInt(arr[6]),Integer.parseInt(arr[7]),Integer.parseInt(arr[8]));
                 armas.add(weapon);                         
-                
-//                Artefacto art = new Artefacto(" ");
-//                art.LoadArtefacto(weapon.GetNombre(),weapon.GetPrcAparition(),weapon.GetNivel(),weapon.GetVida(),
-//                        weapon.GetAtaque(),weapon.GetProteccion(),weapon.GetPrecio(baseLvl),weapon.x, weapon.y);
+
                 artifactsPool.add(weapon);
             }
             fr.close();
@@ -103,13 +104,10 @@ final public class ObjectGenerator {
                     break;
                 }
                 String[] arr = linea.split(",");
-                Armadura armor = new Armadura(arr[0], Integer.parseInt(arr[1]));
+                Armadura armor = new Armadura(arr[0], Double.parseDouble(arr[1]), Integer.parseInt(arr[2]),Integer.parseInt(arr[3]),Integer.parseInt(arr[4]),
+                        Integer.parseInt(arr[5]),Integer.parseInt(arr[6]),Integer.parseInt(arr[7]),Integer.parseInt(arr[8]));
 
-                armaduras.add(armor);
-                
-//                Artefacto art = new Artefacto(" ");
-//                art.LoadArtefacto(armor.GetNombre(),armor.GetPrcAparition(),armor.GetNivel(),armor.GetVida(),
-//                        armor.GetAtaque(),armor.GetProteccion(),armor.GetPrecio(baseLvl),armor.x, armor.y);
+                armaduras.add(armor);               
                 artifactsPool.add(armor);                                
             }
             fr.close();
@@ -121,20 +119,16 @@ final public class ObjectGenerator {
             BufferedReader br = new BufferedReader(fr);
 
             while (true) {
-                String linea = br.readLine();
+                String linea;
+                while((linea=br.readLine())!=null&&linea.equals(""));
                 if (linea == null) {
                     break;
                 }
                 String[] arr = linea.split(",");
-                Pocion potion = new Pocion(arr[0], Integer.parseInt(arr[1]));
+                Pocion potion = new Pocion(arr[0], Double.parseDouble(arr[1]), Integer.parseInt(arr[2]),Integer.parseInt(arr[3]),Integer.parseInt(arr[4]),
+                        Integer.parseInt(arr[5]),Integer.parseInt(arr[6]),Integer.parseInt(arr[7]),Integer.parseInt(arr[8]));
 
-                pociones.add(potion);
-//                
-//                Artefacto art = new Artefacto(" ");
-//                art.LoadArtefacto(potion.GetNombre(),potion.GetPrcAparition(),potion.GetNivel(),potion.GetVida(),
-//                        potion.GetAtaque(),potion.GetProteccion(),potion.GetPrecio(baseLvl),potion.x, potion.y);
-//                artifactsPool.add(art);
-                
+                pociones.add(potion);                
                 artifactsPool.add(potion);
 
             }
@@ -161,7 +155,7 @@ final public class ObjectGenerator {
         
         int i = randomManager.nextInt(armas.size());
         
-        while((searchTimes!=0)&&armas.get(i).GetPrcAparition()<prcToPass)
+        while((searchTimes!=0)&&armas.get(i).GetPrcAparition()<prcToPass&&armas.get(i).GetNivel()>levelCap)
         {
             searchTimes--;
             i = randomManager.nextInt(armas.size());
@@ -178,7 +172,7 @@ final public class ObjectGenerator {
         
         int i = randomManager.nextInt(armaduras.size());
         
-        while((searchTimes!=0)&&armaduras.get(i).GetPrcAparition()<prcToPass)
+        while((searchTimes!=0)&&armaduras.get(i).GetPrcAparition()<prcToPass&&armaduras.get(i).GetNivel()>levelCap)
         {
             searchTimes--;
             i = randomManager.nextInt(armaduras.size());
@@ -196,7 +190,7 @@ final public class ObjectGenerator {
         
         int i = randomManager.nextInt(pociones.size());
         
-        while((searchTimes!=0)&&pociones.get(i).GetPrcAparition()<prcToPass)
+        while((searchTimes!=0)&&pociones.get(i).GetPrcAparition()<prcToPass&&pociones.get(i).GetNivel()>levelCap)
         {
             searchTimes--;
             i = randomManager.nextInt(pociones.size());
