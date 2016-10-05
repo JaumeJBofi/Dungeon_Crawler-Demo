@@ -5,12 +5,15 @@
         <group>
             <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/Controllers/ObjectGenerator.java</file>
             <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/gameproject/GameProject.java</file>
-            <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/Mundo/DungeonManager.java</file>
-            <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/Artefactos/Artefacto.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/Facilidades/Aliado.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/Interfaz/Dibujador.java</file>
             <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/Controllers/EnemyGenerator.java</file>
             <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/Mundo/Dungeon.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/Controllers/Game.java</file>
             <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/Artefactos/Pocion.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/Controllers/AllyGenerator.java</file>
             <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/Artefactos/Armadura.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/Models/Entity.java</file>
             <file>file:/C:/Users/Jauma/Downloads/GameProject-master/GameProject-master/GameProject-master/src/Models/Avatar.java</file>
         </group>
     </open-files>

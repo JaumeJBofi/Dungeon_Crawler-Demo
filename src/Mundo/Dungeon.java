@@ -422,7 +422,6 @@ public class Dungeon implements IDibujable, ISavable {
                     layOutChamber[currEnemy.GetX()][currEnemy.GetY()].SetEnemy(currEnemy);
                 }
             }
-
         }
     }
 

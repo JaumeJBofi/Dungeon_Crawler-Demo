@@ -60,6 +60,8 @@ public class GameProject {
                     } catch (IOException e) {
                     System.out.println(e.toString());
                     }        
+                    
+                    System.out.println("Guardado Exitoso");
                 }
             }
     }

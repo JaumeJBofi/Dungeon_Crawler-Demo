@@ -26,7 +26,7 @@ public abstract class Entity implements ISavable {
     private Coordinate position;
     public int hp; // vida actual
     private String nombre;
-    static Random generator;
+    public static Random generator;
     protected int tamShowX;
     protected int tamShowY;
     private DIRECTIONS lookDirection;
