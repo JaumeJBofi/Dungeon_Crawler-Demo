@@ -1,22 +1,10 @@
-dasdas
-dasdasg
-ad
-fsadsad
-asda
-dsaasda
-sdasd
-sdas
-adasd
-
-****
-
-dasf
-dasd
-sda
-dasda
-dsad
-asda
-dsada
-sdasd
-dasdas
-dasdasdas
+Audrey Hepburn,100,1,15,10,10,5
+Maya Angelou,100,1,15,10,10,5
+Henry Ford,100,1,15,10,10,5
+Vince Lombardi,100,1,15,10,10,5
+Charles Swindoll,100,1,15,10,10,5
+Eleanor Roosevelt,100,1,15,10,10,5
+Oprah Winfrey,100,1,15,10,10,5
+Jimmy Dean,100,1,15,10,10,5
+Eleanor Roosevelt,100,1,15,10,10,5
+Theodore Roosevelt,100,1,15,10,10,5

@@ -5,12 +5,15 @@
  */
 package Controllers;
 
+import Artefactos.Artefacto;
 import Foundation.Coordinate;
 import java.util.ArrayList;
 import java.util.List;
 import Models.Enemy;
+import com.thoughtworks.xstream.XStream;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
@@ -22,8 +25,23 @@ final public class EnemyGenerator {
     public EnemyGenerator() {
         randomManager = new Random();
         enemigos = new ArrayList();
-
+        
+        //LoadEnemyTxt();
+        
         try {
+        XStream xs = new XStream();
+        FileReader fr = new FileReader("Enemy_XML.txt");
+        enemigos = (ArrayList<Enemy>)xs.fromXML(fr);       
+        fr.close();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }                           
+    }
+    
+    public void LoadEnemyTxt()
+    {
+        //Enemy(Coordinate varPosition, String nomb, int vida, int lvl, int initStrength, String varDescription, int varArmor)
+         try {
             FileReader fr = new FileReader("enemigos.txt");
             BufferedReader br = new BufferedReader(fr);
             Coordinate nulo = new Coordinate(0, 0);
@@ -40,7 +58,17 @@ final public class EnemyGenerator {
             fr.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }        
+         
+        XStream xs = new XStream();
+        try {
+        FileWriter fw = new FileWriter("Enemy_XML.txt");        
+        String temp = xs.toXML(enemigos);
+        fw.write(temp);
+        fw.close();
+        } catch (IOException e) {
+        System.out.println(e.toString());
+        }        
     }
 
     public Enemy generar_enemigo() {

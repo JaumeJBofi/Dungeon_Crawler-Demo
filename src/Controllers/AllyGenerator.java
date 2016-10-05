@@ -7,8 +7,12 @@ package Controllers;
 
 import Facilidades.Aliado;
 import Foundation.Coordinate;
+import Models.Enemy;
+import com.thoughtworks.xstream.XStream;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,50 +24,85 @@ final public class AllyGenerator {
     
     private String fileName;
     final private ArrayList<String> tipsPool;
-    final private ArrayList<String> namesPool;
+    private ArrayList<Aliado> allyPool;
     final private Random randomManager;
     private int numTips;
     private int numNames;
+      
     
-    public AllyGenerator(String varFileName)
+    public  AllyGenerator(String varFileName)
     {
         fileName = varFileName;
-        tipsPool = new ArrayList<>();
-        namesPool = new ArrayList<>();
+        tipsPool = new ArrayList<>();               
         numTips = 0;
         numNames = 0;
-        LoadHints(fileName);     
-        randomManager = new Random();        
+        randomManager = new Random();    
+        
+        LoadHints();     
+        //LoadAlliesFromTxt();
+                
+        try {
+        XStream xs = new XStream();
+        FileReader fr = new FileReader(fileName +"XML.txt");
+        allyPool = (ArrayList<Aliado>)xs.fromXML(fr);       
+        fr.close();
+        } catch (IOException e) {
+            System.out.println(e.toString());          
+        }                       
     }
     
-    public void LoadHints(String fileName)
+    public void LoadHints()
     {
         try {            
-            FileReader fr = new FileReader(fileName);
+            FileReader fr = new FileReader(fileName + "Hints.txt");
             BufferedReader in = new BufferedReader(fr);
             
             String buffer;            
-            while(!(buffer = in.readLine()).equals("****"))
+            while((buffer = in.readLine())!=null)
             {
                 tipsPool.add(buffer);
                 numTips++;
-            }
-            
-            while((buffer = in.readLine())!=null)
-            {
-                namesPool.add(buffer);
-                numNames++;
-            }
+            }                     
         } catch (Exception e) {
             System.err.println("Error Archivo: " + fileName + " no encontrado");
         }                                
     }       
     
-    public String GetName()
-    {
-        return namesPool.get(randomManager.nextInt(numNames));
+    public void LoadAlliesFromTxt()
+    {       
+        allyPool = new ArrayList<>();
+        try {            
+        FileReader fr = new FileReader(fileName + ".txt");
+        BufferedReader in = new BufferedReader(fr);
+        String buffer;
+        while((buffer = in.readLine())!=null)
+           {
+            String[] tokens = buffer.split(",");
+            
+            // La coordenada sera seteada por el mapa
+            Coordinate newCoord = new Coordinate(0, 0);
+            
+            // Aliado(Coordinate position, String varNombre, int vida,int nivel, int varStrength, int varArmor,int maxInventorio,int maxConsejos)
+            Aliado newAlly = new Aliado(newCoord,tokens[0],Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]),Integer.parseInt(tokens[3]),Integer.parseInt(tokens[4]),
+                    Integer.parseInt(tokens[5]),Integer.parseInt(tokens[6]));            
+            allyPool.add(newAlly);
+            numNames++;
+           }   
+        } catch (Exception e) {
+            System.err.println("Error Archivo: " + fileName + " no encontrado");
+        }   
+        
+        XStream xs = new XStream();
+        try {
+        FileWriter fw = new FileWriter(fileName + "XML.txt");        
+        String temp = xs.toXML(allyPool);
+        fw.write(temp);
+        fw.close();
+        } catch (IOException e) {
+        System.out.println(e.toString());
+        }        
     }
-    
+      
     public ArrayList<String> GiveHints(int size)
     {
         // No tan elegante. Puede haber repetidos pero ehh...
@@ -78,20 +117,19 @@ final public class AllyGenerator {
     
     public void FillFriend(Aliado myFriend,ObjectGenerator objGen) {
         // Que tenga un invetorio de 5 ... Definido Aca...
-        int N = 5;
+        int N = myFriend.GetMaxInventory();
         // Tiene pociones para ayudarme. Puede ser cualquier cosa.
         for (int i = 0; i < N; i++) {
             myFriend.AddArtefact(objGen.GetRandomObject(objGen.GetRandomArtefactType(1),100,-1,-1));
-        }
-
-        // Que guarde 10 Consejos;
-        N = 10;        
-        myFriend.AddAdvice(GiveHints(N));        
+        }       
+        myFriend.AddAdvice(GiveHints(myFriend.GetMaxHints()));        
     }
     
     public Aliado GetAlly(Coordinate position,ObjectGenerator objGen)
     {
-        Aliado friend = new Aliado(position.GetPoint(), GetName());
+        int size = allyPool.size();
+        Aliado friend = allyPool.get(randomManager.nextInt(size)).copiar();
+        friend.SetPosition(position.GetPoint());
         FillFriend(friend, objGen);
         return friend;
     }

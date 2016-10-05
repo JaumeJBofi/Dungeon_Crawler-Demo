@@ -5,7 +5,10 @@
  */
 package Mundo;
 
+import Artefactos.Arma;
+import Artefactos.Armadura;
 import Artefactos.Artefacto;
+import Artefactos.Pocion;
 import Controllers.AllyGenerator;
 import Foundation.CellInformation;
 import Foundation.Coordinate;
@@ -113,7 +116,7 @@ public class Dungeon implements IDibujable, ISavable {
     }
 
     public void SetDungeonNumber(int varNum) {
-        allyGen = new AllyGenerator("Allies_" + Integer.toString(varNum) + ".txt");
+        allyGen = new AllyGenerator("Allies_" + Integer.toString(varNum));
         dungeonNumber = varNum;
     }
 
@@ -226,13 +229,13 @@ public class Dungeon implements IDibujable, ISavable {
             }break;
             case ARTIFACT:
             {
-                AddArtifact(myCoordinate,level);                
                 CellInformation.CELLOBJECT obj = objManager.GetRandomArtefactType(prcItems);
                 if(obj!=CellInformation.CELLOBJECT.EMPTY)
                 {
                     // No deberia de no pasar;
                   dungeonAccess[myCoordinate.GetX()][myCoordinate.GetY()].SetObject(obj);  
-                }                
+                }            
+                AddArtifact(myCoordinate,level);                                    
             }break;
             case FRIEND:
             {                
@@ -509,6 +512,32 @@ public class Dungeon implements IDibujable, ISavable {
                             if(layOutChamber[i][j].GetArtefacto()==null)
                             {
                                 System.out.println("Error Null Artifact: Position: " + i + " " + j);
+                            }else{
+                                switch(dungeonAccess[i][j].GetObject())
+                                {
+                                    case WEAPON:
+                                    {
+                                        if(!(layOutChamber[i][j].GetArtefacto() instanceof Arma))
+                                        {
+                                            System.out.println("Error Mistach Artifact: Arma: " + i + " " + j);
+                                        }                                                
+                                    }break;
+                                    case POTION:
+                                    {
+                                        if(!(layOutChamber[i][j].GetArtefacto() instanceof Pocion))
+                                        {
+                                            System.out.println("Error Mistach Artifact: Pocion: " + i + " " + j);
+                                        }    
+                                        
+                                    }break;
+                                    case ARMOR:
+                                    {
+                                        if(!(layOutChamber[i][j].GetArtefacto() instanceof Armadura))
+                                        {
+                                            System.out.println("Error Mistach Artifact: Armadura: " + i + " " + j);
+                                        }                                            
+                                    }break;
+                                }
                             }
                         }
                         
@@ -549,11 +578,12 @@ public class Dungeon implements IDibujable, ISavable {
 
     public void TeleportPlayer(Avatar player, int x, int y) {
         player.SetPosition(x, y);
-        Enemy currentEnemy = layOutChamber[x][y].GetEnemy();
-        dungeonAccess[x][y].SetType(CellInformation.CELLTYPE.ADENTRO);
-        lista_enemigos.remove(currentEnemy);
-        layOutChamber[x][y].GasEnemy();
-        numEnemies--;
+        
+//        Enemy currentEnemy = layOutChamber[x][y].GetEnemy();
+//        dungeonAccess[x][y].SetType(CellInformation.CELLTYPE.ADENTRO);
+//        lista_enemigos.remove(currentEnemy);
+//        layOutChamber[x][y].GasEnemy();
+//        numEnemies--;
     }
 
     // Implementacion de ISavable!

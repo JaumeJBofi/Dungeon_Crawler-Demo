@@ -25,6 +25,8 @@ public class Aliado extends Entity{
     public ArrayList<String> Consejos;
     public int currentAdvice;
     private List<Artefacto> saco;
+    private int _maxInventorio;
+    private int _maxConsejos;
           
     public Aliado(Coordinate position, String varNombre) {
         super(position, varNombre, 100, 5, 5,1);
@@ -38,15 +40,16 @@ public class Aliado extends Entity{
         saco = new ArrayList();        
     }
 
-    public Aliado(Coordinate position, int varTamShowX, int varTamShowY, int vida, String varNombre, int varStrength, int varArmor) {
+    public Aliado(Coordinate position, String varNombre, int vida,int nivel, int varStrength, int varArmor,int maxInventorio,int maxConsejos) {
         super(position, varNombre, vida, varStrength, varArmor,1);        
-        tamShowX = varTamShowX;
-        tamShowY = varTamShowY;        
-        SetNombre(varNombre);
-        
+        tamShowX = 15;
+        tamShowY = 15;                
+        _maxConsejos = maxConsejos;
+        _maxInventorio = maxInventorio;
         currentAdvice = 0;
         saco = new ArrayList();        
     }        
+       
     
     public void GiveAdvice()
     {
@@ -61,6 +64,17 @@ public class Aliado extends Entity{
         saco.add(a);
     }
     
+    public int GetMaxInventory()
+    {
+        return _maxInventorio;
+    }
+    
+    public int GetMaxHints()
+    {
+        return _maxConsejos;
+    }
+    
+    
     public void AddAdvice(String tip)
     {
         Consejos.add(tip);        
@@ -69,6 +83,11 @@ public class Aliado extends Entity{
     public void AddAdvice(ArrayList<String> advices)
     {
         Consejos = advices;
+    }
+    
+    public Aliado copiar()
+    {
+        return new Aliado(GetPosition().GetPoint(), GetNombre(),GetVida(),GetNivel(),GetStrength(),GetArmor(),GetMaxInventory(),GetMaxHints());
     }
 
     public Integer getSizeSaco() {

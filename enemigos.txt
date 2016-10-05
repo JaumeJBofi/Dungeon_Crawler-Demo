@@ -1,5 +1,6 @@
-xd,5,1,10,Un enemigo,5
-
-yd,10,1,15,Un enemigo,5
-
-zd,15,1,20,Un enemigo,5
+Ancient Ancestor,5,1,10,Kiropero que consume el pavor de quienes tienen la misfortuna de encontrarlo,4
+Quimera,10,1,15,Amalgamanacion de lo que fueron una vez animales e inclusive humanos,10
+Esper,15,1,20,Humano nacido con habilidades especiales. Sin embargo; esa carga lo hace emocionalmente inestable,15
+Goblin,3,2,25,Desde la forga de Mordor. Un organismo creado para la batalla,5
+Kepli,35,1,50,Demonio de lagos. Extremadamente peligroso e impredecible,13
+Dragon,25,1,20,Reptil del mas alto rango. Resistente a ataques fisicos y magicos,15

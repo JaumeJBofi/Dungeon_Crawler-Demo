@@ -19,7 +19,7 @@ public class Dibujador {
     //La direccion hacia la cual mira el jugador
     private DIRECTIONS direccion;
     //scanner sirve para leer
-    Scanner scanner;
+    public Scanner scanner;
 
     //Constructor
     public Dibujador() {
@@ -29,7 +29,7 @@ public class Dibujador {
 
     //funcion que muestra el menu, devuelve la accion que se realizo
     public Options mostrarMenu(Options choice) {
-        //Se pide una accion a realizar
+        //Se pide una accion a realizar        
         System.out.println("\nDefinir accion:\t");
         String input = scanner.nextLine();
         //Si se pide salir se termina el programa
