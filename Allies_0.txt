@@ -1,10 +1,5 @@
-Audrey Hepburn,100,1,15,10,10,5
-Maya Angelou,100,1,15,10,10,5
-Henry Ford,100,1,15,10,10,5
-Vince Lombardi,100,1,15,10,10,5
-Charles Swindoll,100,1,15,10,10,5
-Eleanor Roosevelt,100,1,15,10,10,5
-Oprah Winfrey,100,1,15,10,10,5
-Jimmy Dean,100,1,15,10,10,5
-Eleanor Roosevelt,100,1,15,10,10,5
-Theodore Roosevelt,100,1,15,10,10,5
+ALIADOS:2
+ALIADO:Audrey Hepburn/CONSEJOS:5@Primer Consejo.1@Segundo Consejo1.2@Tercer Consejo1
+ALIADO:Maya Angelou/CONSEJOS:5@Primer Consejo2.1@Segundo Consejo2.2@Tercer Consejo2
+ALIADO:Henry Ford/CONSEJOS:5@Primer Consejo3.1@Segundo Consejo3.2@Tercer Consejo3
+ALIADO:Eleanor Roosevelt/CONSEJOS:5@Primer Consejo4.1@Segundo Consejo4.2@Tercer Consejo4

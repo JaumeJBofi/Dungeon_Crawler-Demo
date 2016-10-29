@@ -30,7 +30,7 @@ final public class EnemyGenerator {
         
         try {
         XStream xs = new XStream();
-        FileReader fr = new FileReader("Enemy_XML.txt");
+        FileReader fr = new FileReader("Enemy_XML.xml");
         enemigos = (ArrayList<Enemy>)xs.fromXML(fr);       
         fr.close();
         } catch (IOException e) {
@@ -62,7 +62,7 @@ final public class EnemyGenerator {
          
         XStream xs = new XStream();
         try {
-        FileWriter fw = new FileWriter("Enemy_XML.txt");        
+        FileWriter fw = new FileWriter("Enemy_XML.xml");        
         String temp = xs.toXML(enemigos);
         fw.write(temp);
         fw.close();

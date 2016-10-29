@@ -69,6 +69,21 @@ public class Coordinate {
         System.out.format("Posiciones:  x = %d  y = %d\n",x,y);
     }
     
+    public void AddX(int _x)
+    {
+        if(InRangeX(x+_x))
+        {
+            x += _x;
+        }
+    }
+    
+    public void AddY(int _y)
+    {
+        if(InRangeY(y+_y))
+        {
+            y += _y;
+        }
+    }     
     public boolean IsEqual(Coordinate Point)
     {
         return ((Point.GetX()==x)&&(Point.GetY()==y));

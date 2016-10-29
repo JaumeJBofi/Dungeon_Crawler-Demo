@@ -1,0 +1,67 @@
+<list>
+  <Facilidades.Aliado>
+    <position>
+      <M>0</M>
+      <N>0</N>
+      <x>0</x>
+      <y>0</y>
+    </position>
+    <hp>100</hp>
+    <nombre>Audrey Hepburn</nombre>
+    <tamShowX>15</tamShowX>
+    <tamShowY>15</tamShowY>
+    <strength>5</strength>
+    <base__armor>5</base__armor>
+    <nivel>1</nivel>
+    <currentTilePositionX>0</currentTilePositionX>
+    <currentTilePositionY>0</currentTilePositionY>
+    <Consejos>
+      <Foundation.Tip>
+        <__advice>Segundo Consejo1</__advice>
+        <__nivel>1</__nivel>
+      </Foundation.Tip>
+      <Foundation.Tip>
+        <__advice>Tercer Consejo1</__advice>
+        <__nivel>2</__nivel>
+      </Foundation.Tip>
+      <Foundation.Tip>
+        <__advice>Primer Consejo</__advice>
+        <__nivel>5</__nivel>
+      </Foundation.Tip>
+    </Consejos>
+    <currentAdvice>0</currentAdvice>
+    <saco/>
+    <__maxInventorio>5</__maxInventorio>
+    <__maxConsejos>5</__maxConsejos>
+  </Facilidades.Aliado>
+  <Facilidades.Aliado>
+    <position reference="../../Facilidades.Aliado/position"/>
+    <hp>100</hp>
+    <nombre>Maya Angelou</nombre>
+    <tamShowX>15</tamShowX>
+    <tamShowY>15</tamShowY>
+    <strength>5</strength>
+    <base__armor>5</base__armor>
+    <nivel>1</nivel>
+    <currentTilePositionX>0</currentTilePositionX>
+    <currentTilePositionY>0</currentTilePositionY>
+    <Consejos>
+      <Foundation.Tip>
+        <__advice>Segundo Consejo2</__advice>
+        <__nivel>1</__nivel>
+      </Foundation.Tip>
+      <Foundation.Tip>
+        <__advice>Tercer Consejo2</__advice>
+        <__nivel>2</__nivel>
+      </Foundation.Tip>
+      <Foundation.Tip>
+        <__advice>Primer Consejo2</__advice>
+        <__nivel>5</__nivel>
+      </Foundation.Tip>
+    </Consejos>
+    <currentAdvice>0</currentAdvice>
+    <saco/>
+    <__maxInventorio>5</__maxInventorio>
+    <__maxConsejos>5</__maxConsejos>
+  </Facilidades.Aliado>
+</list>

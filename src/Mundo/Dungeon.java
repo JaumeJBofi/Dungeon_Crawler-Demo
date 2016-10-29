@@ -21,6 +21,7 @@ import Facilidades.Aliado;
 import Models.Avatar;
 import Models.Enemy;
 import Models.IDibujable;
+import Models.Player;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,6 +30,12 @@ import java.io.*;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
+// Graphics imports begin
+
+import java.awt.*;
+
+// Graphics imports end
 /**
  *
  * @author Jauma
@@ -37,6 +44,11 @@ public class Dungeon implements IDibujable, ISavable {
 
     private int M;
     private int N;
+    private int tileSizeX;
+    private int tileSizeY;
+    private int visionTileSizeX;
+    private int visionTileSizeY;
+    
     private int dungeonNumber;
 
     private int minshowY;
@@ -64,6 +76,8 @@ public class Dungeon implements IDibujable, ISavable {
     private List<Aliado> lista_aliados;
     private List<Artefacto> lista_artefactos;
     
+    private List<Player> lista_Players;
+    
     private EnemyGenerator enemygen;
     private AllyGenerator allyGen;
 
@@ -88,11 +102,13 @@ public class Dungeon implements IDibujable, ISavable {
         // Lista iría aca
         lista_artefactos = new ArrayList<>();
         numArtifacts = 0;
+        
+        lista_Players = new ArrayList<>();    
     }
 
     public int GetM() {
         return M;
-    }
+    }        
 
     // Recordar que las dimensiones deben ser impares
     final public void SetM(int varM) {
@@ -113,6 +129,11 @@ public class Dungeon implements IDibujable, ISavable {
         } else {
             N = varN;
         }
+    }
+    
+    public void AddPlayer(Player p)
+    {
+        lista_Players.add(p);
     }
 
     public void SetDungeonNumber(int varNum) {
@@ -467,6 +488,15 @@ public class Dungeon implements IDibujable, ISavable {
         }
     }
     
+    public void act()
+    {       
+        
+        for(Player p: lista_Players)
+        {
+            p.act(dungeonAccess);
+        }
+    }
+    
     public void CheckConsistency()
     {
         for(int i = 0;i<M;i++)
@@ -546,6 +576,14 @@ public class Dungeon implements IDibujable, ISavable {
             }
         }
     }
+    
+    public void SetUpMapSize(int _M,int _N,int WIDTH,int HEIGHT)
+    {
+        SetM(_M);
+        SetN(_N);        
+        tileSizeX = (int)WIDTH/M;
+        tileSizeY = (int)HEIGHT/N;        
+    }
 
     // Preg 2
     public void SetUpChamber() {
@@ -576,13 +614,7 @@ public class Dungeon implements IDibujable, ISavable {
     }
 
     public void TeleportPlayer(Avatar player, int x, int y) {
-        player.SetPosition(x, y);
-        
-//        Enemy currentEnemy = layOutChamber[x][y].GetEnemy();
-//        dungeonAccess[x][y].SetType(CellInformation.CELLTYPE.ADENTRO);
-//        lista_enemigos.remove(currentEnemy);
-//        layOutChamber[x][y].GasEnemy();
-//        numEnemies--;
+        player.SetPosition(x, y);        
     }
 
     // Implementacion de ISavable!
@@ -738,6 +770,105 @@ public class Dungeon implements IDibujable, ISavable {
                 }
             }
             System.out.print("\n");
+        }
+    }
+    
+    public void Render(Graphics g,int posX,int posY,int tamShowX,int tamShowY,boolean plus) {
+         
+        visionTileSizeX = tileSizeX;
+        visionTileSizeY = tileSizeY;             
+        
+        g.setColor(Color.BLACK);    
+        for (int j = 0; j < N; j++) {       
+            for (int i = 0; i < M; i++) {
+                if ((i == posX) && (j == posY)) {
+                    g.fillOval(i*visionTileSizeX+visionTileSizeX, j*visionTileSizeY + visionTileSizeY, visionTileSizeX*2, visionTileSizeY*2);
+                } else {
+                    CellInformation factor = dungeonAccess[i][j];
+                    switch (factor.GetMode()) {
+                        case SIGUENTE:                        
+                            break;
+                        case ANTERIOR:                         
+                            break;
+                        default: {
+                            switch (factor.GetType()) {
+                                case PARED:
+                                    g.fillRect(i*visionTileSizeX, j*visionTileSizeY, visionTileSizeX, visionTileSizeY);
+                                    break;
+                                case ADENTRO:
+                                   
+                                    break;
+                                case ARTIFACT:
+                                {
+                                    switch(dungeonAccess[i][j].GetObject())
+                                    {
+                                        case WEAPON: 
+                                            break;
+                                        case POTION: 
+                                            break;
+                                        case ARMOR:  
+                                            break;
+                                    }                            
+                                }break;
+                                case ENEMY:                                 
+                                    break;
+                                case FRIEND:                                   
+                                    break;
+                            }
+                        }
+                        break;
+                    }
+                }    
+            }          
+        }
+    }
+    
+    public void Render(Graphics g,int posX,int posY,int tamShowX,int tamShowY) {
+         
+        visionTileSizeX = 12;
+        visionTileSizeY = 12;             
+        
+        g.setColor(Color.BLACK);
+        inicializarDatosMostrarMapa(posY, posX, tamShowX, tamShowY);
+        int varI = 0;
+        int varJ = 0;
+        for (int j = minshowY; j < maxshowY; j++,varJ++) {
+            for (int i = minshowX; i < maxshowX; i++,varI++) {
+                varI = 0;
+                if ((i == posX) && (j == posY)) {
+                    g.fillOval(varI*visionTileSizeX+visionTileSizeX, varJ*visionTileSizeY + visionTileSizeY, visionTileSizeX*2, visionTileSizeY*2);
+                } else {
+                    CellInformation factor = dungeonAccess[i][j];
+                    switch (factor.GetMode()) {
+                        case SIGUENTE:
+                            //System.out.print("+");
+                            break;
+                        case ANTERIOR:
+                            //System.out.print("-");
+                            break;
+                        default: {
+                            switch (factor.GetType()) {
+                                case PARED:
+                                    g.fillRect(varI*visionTileSizeX, varJ*visionTileSizeY, visionTileSizeX, visionTileSizeY);
+                                    break;
+                                case ADENTRO:
+                                    //System.out.print(" ");
+                                    break;
+                                case ARTIFACT:
+                                    //System.out.print("A");
+                                    break;
+                                case ENEMY:
+                                    //System.out.print("E");
+                                    break;
+                                case FRIEND:
+                                    //System.out.print("F");
+                                    break;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }            
         }
     }
 

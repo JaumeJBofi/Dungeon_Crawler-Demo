@@ -26,44 +26,9 @@ public class GameProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        Game game = new Game();      
-        Scanner in = new Scanner(System.in);        
-
-       System.out.println("Presione enter para empezar\n\nEscribe Load para cargar una partida anterior.");        
-        if (in.nextLine().compareToIgnoreCase("load") == 0) {
-             try {
-                XStream xs = new XStream();
-                FileReader fr = new FileReader("SaveFile.txt");
-                game = (Game)xs.fromXML(fr);       
-                fr.close();
-                } catch (IOException e) {
-                    System.out.println(e.toString());          
-                }
-             game.LoadedStandar();
-            // No necesariamente se llega aca            
-        } else {
-            
-            game.LoadNewGame();                        
-        }
-        Options.ACTION taken;
-        while((taken = game.Run())!=Options.ACTION.EXIT)
-            {                
-                if(taken==Options.ACTION.SAVE)
-                {
-                    XStream xs = new XStream();
-                    try {
-                    FileWriter fw = new FileWriter("SaveFile.txt");        
-                    String temp = xs.toXML(game);
-                    fw.write(temp);
-                    fw.close();
-                    } catch (IOException e) {
-                    System.out.println(e.toString());
-                    }        
-                    
-                    System.out.println("Guardado Exitoso");
-                }
-            }
+        Game severLayers = new Game();
+        severLayers.GetWindow().setVisible(true);        
+        severLayers.startGame();        
     }
 
 }

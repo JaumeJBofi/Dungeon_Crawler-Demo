@@ -33,6 +33,9 @@ public abstract class Entity implements ISavable {
     private int strength;
     private int base_armor;
     protected int nivel;
+    
+    protected int currentTilePositionX;
+    protected int currentTilePositionY;
 
     //Modif
     public Entity(Coordinate varPosition, String nomb, int vida, int varStrength, int varArmor,int _nivel) {
@@ -160,7 +163,7 @@ public abstract class Entity implements ISavable {
            // System.err.println("Move out of bounds");
             System.exit(1);
         }
-    }
+    }        
 
     public void ThinkMove(Coordinate coord, DIRECTIONS dir, int steps) {
         int xFactor = 0, yFactor = 0;
@@ -184,6 +187,50 @@ public abstract class Entity implements ISavable {
         }
         coord.SetX(coord.GetX() + xFactor);
         coord.SetY(coord.GetY() + yFactor);
+    }
+    
+    public Coordinate ThinkMove(DIRECTIONS dir,int steps)
+    {
+        Coordinate pos = position.GetPoint();
+        int xFactor = 0, yFactor = 0;
+        switch (dir) {
+            case BOT: {
+                yFactor += steps;
+            }
+            break;
+            case TOP: {
+                yFactor -= steps;
+            }
+            break;
+            case LEFT: {
+                xFactor -= steps;
+            }
+            break;
+            case RIGHT: {
+                xFactor += steps;
+            }
+            break;
+        }
+        pos.AddX(xFactor);
+        pos.AddY(yFactor);
+        return pos.GetPoint();
+    }
+    
+    public Coordinate CheckDungeonCollision(CellInformation[][] dungeonAccess,DIRECTIONS dir,int steps)
+    {
+        Coordinate move = ThinkMove(dir,steps);
+        
+        int _x = move.GetX();
+        int _y = move.GetY();
+        
+        CellInformation.CELLTYPE cellInfo = dungeonAccess[_x][_y].GetType();
+        if(cellInfo!=CellInformation.CELLTYPE.PARED&&cellInfo!=CellInformation.CELLTYPE.ENEMY&&
+                cellInfo!=CellInformation.CELLTYPE.FRIEND&&cellInfo!=CellInformation.CELLTYPE.ARTIFACT)
+        {
+            return move;
+        }else{
+            return null;
+        }                
     }
 
     public DIRECTIONS RandomMoveInteligente(CellInformation[][] dungeonAccess, int steps, int playerX, int playerY,int M, int N) {

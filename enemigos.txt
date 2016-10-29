@@ -4,3 +4,4 @@ Esper,15,1,20,Humano nacido con habilidades especiales. Sin embargo; esa carga l
 Goblin,3,2,25,Desde la forga de Mordor. Un organismo creado para la batalla,5
 Kepli,35,1,50,Demonio de lagos. Extremadamente peligroso e impredecible,13
 Dragon,25,1,20,Reptil del mas alto rango. Resistente a ataques fisicos y magicos,15
+Juancho,99,1,20,Tquero mejicano,15

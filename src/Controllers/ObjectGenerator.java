@@ -45,7 +45,7 @@ final public class ObjectGenerator {
         //LoadTxtObjects();         // Already Loaded
         try {
         XStream xs = new XStream();
-        FileReader fr = new FileReader("Artefacts_XML.txt");
+        FileReader fr = new FileReader("Artefacts_XML.xml");
         artifactsPool = (ArrayList<Artefacto>)xs.fromXML(fr);       
         fr.close();
         } catch (IOException e) {
@@ -139,7 +139,7 @@ final public class ObjectGenerator {
         
         XStream xs = new XStream();
         try {
-        FileWriter fw = new FileWriter("Artefacts_XML.txt");        
+        FileWriter fw = new FileWriter("Artefacts_XML.xml");        
         String temp = xs.toXML(artifactsPool);
         fw.write(temp);
         fw.close();

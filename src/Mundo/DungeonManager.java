@@ -41,16 +41,22 @@ public class DungeonManager implements ISavable {
     private DIRECTIONS currentDirections;
     final private Random randomManager;
     private int activeDungeon;
+    
+    private int WIDTH;
+    private int HEIGHT;
+    
 
     private int totalDungeons;
 
-    public DungeonManager(int varTotalDungeons) {
+    public DungeonManager(int varTotalDungeons,int _width,int _height) {
 
         randomManager = new Random();
         dungeons = new ArrayList();
         activeDungeon = dungeons.size();
         currenCellInfo = new CellInformation();
         totalDungeons = varTotalDungeons;
+        WIDTH = _width;
+        HEIGHT = _height;
     }
 
     public int GetTotalDungeons() {
@@ -210,8 +216,7 @@ public class DungeonManager implements ISavable {
         Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies, varprcItems);
         theDungeon.SetDungeonNumber(activeDungeon);
         
-        theDungeon.SetM(M);
-        theDungeon.SetN(N);
+        theDungeon.SetUpMapSize(M,N,WIDTH,HEIGHT);        
         M = theDungeon.GetM();
         N = theDungeon.GetN();
 
@@ -219,6 +224,7 @@ public class DungeonManager implements ISavable {
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
                 dungeonAccess[i][j] = new CellInformation();
+                dungeonAccess[i][j].SetType(CELLTYPE.PARED);
             }
         }        
         theDungeon.SetAccess(dungeonAccess);
@@ -272,11 +278,9 @@ public class DungeonManager implements ISavable {
                 }
                 myStack.pop();
             }
-        }
+        }        
         theDungeon.SetNumEnemies(numEnemies);
-        dungeons.add(theDungeon);
-        // theDungeon.SetAccess(dungeonAccess); The access is already linked
-        //Preg 2: Creamos los chambers con los enemies.
+        dungeons.add(theDungeon);        
         theDungeon.SetUpChamber();        
         return playerPoint;
     }
