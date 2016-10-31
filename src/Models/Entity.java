@@ -9,6 +9,7 @@ import Foundation.CellInformation;
 import Foundation.Coordinate;
 import Foundation.DIRECTIONS;
 import Foundation.ISavable;
+import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -21,7 +22,7 @@ import java.util.Collections;
  *
  * @author Jauma
  */
-public abstract class Entity implements ISavable {
+public abstract class Entity implements ISavable, IDibujable {
 
     private Coordinate position;
     public int hp; // vida actual
@@ -361,6 +362,23 @@ public abstract class Entity implements ISavable {
             //Collections.shuffle(validDir, new Random());
         }
         return validDir.get(generator.nextInt(validDir.size()));
+    }
+    
+     public void Render()
+     {
+         
+     }
+    public void Render(Graphics g)
+    {
+        
+    }
+    public void LoadComponents()
+    {
+        
+    }
+    public void Dispose()
+    {
+        
     }
 
     public abstract void Save(FileWriter fr);

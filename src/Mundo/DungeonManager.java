@@ -41,6 +41,7 @@ public class DungeonManager implements ISavable {
     private DIRECTIONS currentDirections;
     final private Random randomManager;
     private int activeDungeon;
+    private int activePlayer;
     
     private int WIDTH;
     private int HEIGHT;
@@ -168,7 +169,7 @@ public class DungeonManager implements ISavable {
             } else {
                 Dungeon currDungeon = dungeons.get(activeDungeon); //si no es el ultimo calabozo, crea otro cala
                 CreateDungeonDistribution(randomManager.nextInt(50 - 25) + 25, randomManager.nextInt(50 - 25) + 25, currDungeon.GetPrcEnemies() + 0.075, currDungeon.GetLvlEnemies(),
-                        currDungeon.GetPrcItem() + 0.025,player.GetNivel());
+                        currDungeon.GetPrcItem() + 0.025,player.GetNivel());                
                 activeDungeon++;
                 GetActiveDungeon().SetDungeonNumber(activeDungeon);
                 player.SetPosition(dungeons.get(activeDungeon).GetAntPos().GetPoint());

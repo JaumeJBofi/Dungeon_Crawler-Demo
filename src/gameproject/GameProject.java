@@ -6,15 +6,6 @@
 package gameproject;
 
 import Controllers.Game;
-import Facilidades.Aliado;
-import Foundation.Options;
-import com.thoughtworks.xstream.XStream;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  *
@@ -26,6 +17,10 @@ public class GameProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        // Welcome Screen ?
+        
+        //Game Screnn
         Game severLayers = new Game();
         severLayers.GetWindow().setVisible(true);        
         severLayers.startGame();        

@@ -18,6 +18,7 @@ import Foundation.CellInformation;
 import Foundation.Coordinate;
 import Foundation.DIRECTIONS;
 import Foundation.ISavable;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -31,7 +32,7 @@ import java.util.Random;
  *
  * @author Arthuro
  */
-public abstract class Player extends Entity implements IDibujable,ISavable {
+public abstract class Player extends Entity implements ISavable {
 
     private int vidaMaxima;
     private Arma arma_equip;
@@ -297,6 +298,11 @@ public abstract class Player extends Entity implements IDibujable,ISavable {
                 System.out.println();
             }
         }
+    }
+    
+    public void Render(Graphics g)
+    {
+        
     }
     
     @Override

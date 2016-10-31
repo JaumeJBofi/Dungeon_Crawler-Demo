@@ -23,8 +23,8 @@ public abstract class Stage implements  Runnable,KeyListener,
                         ComponentListener,WindowStateListener,
                         WindowFocusListener,WindowListener{
     
-    protected static int WIDTH = 960;
-    protected static int HEIGHT = 640;
+    protected static int WIDTH = 1366;
+    protected static int HEIGHT = 680;
     
     protected Thread _animator;
     protected Thread _movements;
@@ -117,6 +117,9 @@ public abstract class Stage implements  Runnable,KeyListener,
         _component.addFocusListener(this);
         // listen for component mouse motion
         _component.addMouseMotionListener(this);
+        
+        _window.addWindowListener(this);
+        _window.addWindowStateListener(this);
 // end of capture components EVENTS ---------------
     }
     

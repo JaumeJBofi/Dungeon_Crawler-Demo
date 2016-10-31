@@ -13,7 +13,10 @@ import Models.Avatar;
 import Interfaz.Lore;
 import Foundation.Options;
 import Facilidades.Aliado;
+import Foundation.ObjectConverter;
 import Models.Entity;
+import Models.IDibujable;
+import Models.Sprite;
 import java.util.Random;
 import java.util.Scanner;
 import Models.Stage;
@@ -24,32 +27,39 @@ import com.sun.media.sound.AudioFileSoundbankReader;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.security.auth.login.Configuration;
 import javax.swing.*;
+import org.omg.CORBA.Environment;
 // Graphics imports end
 
 /**
  *
  * @author Jauma
  */
-public class Game extends Stage{
+public final class Game extends Stage{
+    
     private Random randManager;
-    private Scanner in;
- 
+  
     //Lore nos ayuda a narrar la historia
     private Lore historia;
-    private DungeonManager myManager;
-    
+    private DungeonManager myManager;   
     public int varM;
     public int varN;
     
     Dibujador Renderer;
-
     Options choiceTaken;
-
-    CellInformation nextCellInformation;
-    
+    CellInformation nextCellInformation;    
     // Puede ser un arreglo
     Avatar player;
+    IDibujable currentScene;
+    HashMap<String,ObjectConverter> configuration = new HashMap<>();
+    
+    private boolean introScreen;
     
     public CellInformation.CELLTYPE GetWall(int i,int j)
     {
@@ -57,9 +67,10 @@ public class Game extends Stage{
     }
     public void LoadNewGame()
     {
+        // No utilizado... 
+        
         randManager = new Random();
-        in = new Scanner(System.in);
-        historia = new Lore();
+  
         myManager = new DungeonManager(randManager.nextInt(7 - 3) + 3,WIDTH,HEIGHT);
         varM = randManager.nextInt(50 - 25) + 25;
         varN = randManager.nextInt(35 - 25) + 25;
@@ -82,32 +93,46 @@ public class Game extends Stage{
     }
     
     public Game(){
-        super(SCREENMODE.JFRAME);
-        SetFPS(80);
-        setSize(960-6, 640-6);
-        randManager = new Random();
-        historia = new Lore();
+        super(SCREENMODE.JFRAME);   
         
-        myManager = new DungeonManager(randManager.nextInt(7 - 3) + 3,WIDTH,HEIGHT);
-        varM = randManager.nextInt(50 - 25) + 25;
-        varN = randManager.nextInt(35 - 25) + 25;
-        
-        Renderer = new Dibujador();
-        
-        choiceTaken = new Options(Options.ACTION.INTERACT);    
+        Renderer = new Dibujador();        
+        choiceTaken = new Options(Options.ACTION.INTERACT);            
         nextCellInformation = new CellInformation();
         
+        loadConfigurationFile(configuration);
+        SetFPS((configuration.get("FPS").GetInt()));  
+        setSize((configuration.get("WIDTH").GetInt()),(configuration.get("HEIGHT").GetInt()));  
+        randManager = new Random();
+        
+        loadMainSheets();
+        
+        historia = new Lore();
+        
+        myManager = new DungeonManager(randManager.nextInt(configuration.get("MAXDUNGEONS").GetInt() - 
+                configuration.get("MINDUNGEONS").GetInt()) + configuration.get("MINDUNGEONS").GetInt(),WIDTH,HEIGHT);
+        varM = randManager.nextInt((configuration.get("MAXMAP_X").GetInt()) - (configuration.get("MINMAP_X").GetInt())) + 
+                (configuration.get("MAXMAP_Y").GetInt());
+        varN = randManager.nextInt((configuration.get("MAXMAP_Y").GetInt()) - (configuration.get("MINMAP_Y").GetInt())) + 
+                (configuration.get("MINMAP_Y").GetInt());
+        
+               
         String name = " ";
         // Poner historia?? Opciones.
-        player = new Avatar(null, 10, 6, 100, name, 10, 5);   
-        setSize(960-6, 640-6);
+        // Var TamShow 10 y 6 anterior
+        player = new Avatar(null,configuration.get("TAMSHOW_X").GetInt(),configuration.get("TAMSHOW_Y").GetInt(),
+                configuration.get("HP_INI").GetInt(), name, configuration.get("STRENGTH_INI").GetInt(), configuration.get("ARMOR_INI").GetInt());                 
+        GetWindow().setResizable(false);
     }
     
     @Override
     public synchronized void InitStage()
     {
-        player.SetPosition(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3,1));        
+        // 5 Level, 0.3 ItemsPRC, 1 Player Level
+        player.SetPosition(myManager.CreateDungeonDistribution(varM, varN, configuration.get("PRCENEMY").GetDouble(),
+                configuration.get("WORLDLEVEL").GetInt(),configuration.get("ITEMPRC").GetDouble(),configuration.get("PLAYERLVL").GetInt()));        
         myManager.GetActiveDungeon().AddPlayer(player);
+        //currentScene = myManager.GetActiveDungeon();        
+        currentScene = historia;
     }
     
     @Override
@@ -122,8 +147,8 @@ public class Game extends Stage{
     public synchronized void RenderStage(Graphics g)
     {
         g.setColor(Color.WHITE);
-        g.fillRect(0, 0, WIDTH,HEIGHT);
-        myManager.GetActiveDungeon().Render(g,player.GetX(),player.GetY(),player.GetTamShowX(),player.GetTamShowY(),true);        
+        g.fillRect(0, 0, WIDTH,HEIGHT);               
+        currentScene.Render(g);
     }
     
     @Override
@@ -135,6 +160,57 @@ public class Game extends Stage{
     public void keyReleased(KeyEvent e) {
         player.keyReleased(e);
     }
+        
+    
+    @Override
+    public void windowClosing(WindowEvent e) 
+    {	
+        gameOver = true;
+        running = false;
+        try {
+            _animator.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.exit(0);        
+    }
+    
+    public void loadConfigurationFile(HashMap<String,ObjectConverter> configHash)
+    {
+          try {            
+            FileReader fr = new FileReader("Config.txt");
+            BufferedReader in = new BufferedReader(fr);
+            
+            String buffer;            
+            while((buffer = in.readLine())!=null)
+            {
+               String[] tokens = buffer.split(";");
+               String key = tokens[0];
+               String value = tokens[1];                    
+               configHash.put(key, new ObjectConverter(value));               
+            }                     
+        } catch (Exception e) {
+            System.err.println("Error Archivo: " +"Config.txt" + " no encontrado");
+        }                                        
+    }
+    
+    public void loadMainSheets()
+    {
+        try {            
+            FileReader fr = new FileReader("MainSheets.txt");
+            BufferedReader in = new BufferedReader(fr);
+            
+            String buffer;            
+            while((buffer = in.readLine())!=null)
+            {               
+               Sprite.putInMainSheet(buffer);
+            }                     
+        } catch (Exception e) {
+            System.err.println("Error Archivo: " +"Config.txt" + " no encontrado");
+        }                             
+    }
+    
+    
         
     public Options.ACTION Run()
     {

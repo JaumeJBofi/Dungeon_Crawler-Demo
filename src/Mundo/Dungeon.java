@@ -66,7 +66,8 @@ public class Dungeon implements IDibujable, ISavable {
     private int numEnemies;
     private int numAliados;
     private int numArtifacts;    
-
+    private int activePlayer;
+       
     //private CellInformation dungeonStatus;    
     private Chamber[][] layOutChamber;
     private CellInformation[][] dungeonAccess;
@@ -134,6 +135,19 @@ public class Dungeon implements IDibujable, ISavable {
     public void AddPlayer(Player p)
     {
         lista_Players.add(p);
+        // Dibujamos el ultimo agregado (Podemos setearlo y desahabilitar este comportamiento (Lo cambiamos cada vez
+        // que cambiamos el contexto del laberinto
+        activePlayer = lista_Players.size() - 1;
+    }
+    
+    public void SetActivePlayer(int i)
+    {
+        activePlayer = i;
+    }
+    
+    public int GetActivePlayer()
+    {
+        return activePlayer;
     }
 
     public void SetDungeonNumber(int varNum) {
@@ -773,11 +787,14 @@ public class Dungeon implements IDibujable, ISavable {
         }
     }
     
-    public void Render(Graphics g,int posX,int posY,int tamShowX,int tamShowY,boolean plus) {
+    public void Render(Graphics g) {
          
         visionTileSizeX = tileSizeX;
         visionTileSizeY = tileSizeY;             
         
+        int posX = lista_Players.get(activePlayer).GetX();
+        int posY = lista_Players.get(activePlayer).GetY();
+                     
         g.setColor(Color.BLACK);    
         for (int j = 0; j < N; j++) {       
             for (int i = 0; i < M; i++) {
