@@ -43,6 +43,8 @@ public class Sprite {
     
     protected ArrayList<Rectangle> bounds;
     
+    protected boolean resize = false;
+    
     public static void putInMainSheet(String info) throws IOException
     {
         ObjectConverter sheetInfo = new ObjectConverter(info);
@@ -74,6 +76,24 @@ public class Sprite {
         visible = true;
         active = true;        
         imgIndex = 0;        
+        bounds = new ArrayList<Rectangle>();          
+        resize = false;
+    }
+    
+     public Sprite(int _width,int _height)
+    {
+        x = 0;
+        y = 0;
+        z = 0;
+        
+        width = _width;
+        height = _height;
+        
+        resize = true;
+        
+        visible = true;
+        active = true;        
+        imgIndex = 0;        
         bounds = new ArrayList<Rectangle>();               
     }
     
@@ -91,7 +111,7 @@ public class Sprite {
     
     public void ProcessSpriteInfo(String infoString)
     {
-        // FORMAT : POS_X|POS_Y|POS_Z|WIDTH|HEIGHT|MAINSHEET|INI_X|INI_Y|UNIQUE:NUMSPRITES|SPRITENAME|SPRITELOCATION|SPRITENAME|SPRITELOCATION
+        // FORMAT : POS_X|POS_Y|POS_Z|WIDTH|HEIGHT|MAINSHEET|INI_X|INI_Y|UNIQUE|RESIZE:NUMSPRITES|SPRITENAME|SPRITELOCATION|SPRITENAME|SPRITELOCATION
         String[] tokens = infoString.split(":");
         ObjectConverter mainSettings = new ObjectConverter(tokens[0]);
         ObjectConverter spriteSettings = new ObjectConverter(tokens[1]);
@@ -103,16 +123,23 @@ public class Sprite {
         y = Integer.parseInt(mainSettings.GetNextPart());
         z = Integer.parseInt(mainSettings.GetNextPart());
         
-        width = Integer.parseInt(mainSettings.GetNextPart());
-        height = Integer.parseInt(mainSettings.GetNextPart());
+        if(!resize)
+        {
+            width = Integer.parseInt(mainSettings.GetNextPart());
+            height = Integer.parseInt(mainSettings.GetNextPart());            
+        }else{
+            Integer.parseInt(mainSettings.GetNextPart());
+            Integer.parseInt(mainSettings.GetNextPart());
+        }        
         
         mainSheet = mainSettings.GetNextPart();
         
         int posX = Integer.parseInt(mainSettings.GetNextPart());
         int posY = Integer.parseInt(mainSettings.GetNextPart());
         
-        boolean unique = Boolean.parseBoolean(mainSettings.GetNextPart());
-                                
+        boolean unique = Boolean.parseBoolean(mainSettings.GetNextPart());        
+        resize = Boolean.parseBoolean(mainSettings.GetNextPart()); 
+        
         BufferedImage sheet = IDibujable.spriteHash.get(mainSheet);
         
         int maxX = sheet.getWidth()/width;
@@ -127,13 +154,16 @@ public class Sprite {
         for(int i = 0;i<numSprites;i++)
         {            
             spritesNames[i] = spriteSettings.GetNextPart();
-            BufferedImage newSprite = IDibujable.gc.createCompatibleImage(width, height,sheet.getColorModel().getTransparency());
-            Graphics g;
-            g = newSprite.getGraphics();            
-            g.drawImage(sheet, posX, posY, width, height, null);    
-            
-            IDibujable.spriteHash.put(spritesNames[i],newSprite);
-            g.dispose();
+            if(!IDibujable.spriteHash.containsKey(spritesNames[i]))
+            {
+                BufferedImage newSprite = IDibujable.gc.createCompatibleImage(width, height,sheet.getColorModel().getTransparency());
+                Graphics g;
+                g = newSprite.getGraphics();            
+                g.drawImage(sheet, posX, posY, width, height, null);    
+
+                IDibujable.spriteHash.put(spritesNames[i],newSprite);
+                g.dispose();                            
+            }
             
             // If there is only one spriteSheet per Sprite delete it.
             setImage(spritesNames[i]);
@@ -148,9 +178,73 @@ public class Sprite {
             }           
         }                
     }        
+    
+    public void ProcessSpriteInfo(String infoString,boolean load)
+    {
+        // FORMAT : POS_X|POS_Y|POS_Z|WIDTH|HEIGHT|MAINSHEET|INI_X|INI_Y|UNIQUE|LOADED:NUMSPRITES|SPRITENAME|SPRITELOCATION|SPRITENAME|SPRITELOCATION
+        String[] tokens = infoString.split(":");
+        ObjectConverter mainSettings = new ObjectConverter(tokens[0]);
+        ObjectConverter spriteSettings = new ObjectConverter(tokens[1]);
+        
+        mainSettings.SetDelimiter("-");
+        spriteSettings.SetDelimiter("-");
+        
+        x = Integer.parseInt(mainSettings.GetNextPart());
+        y = Integer.parseInt(mainSettings.GetNextPart());
+        z = Integer.parseInt(mainSettings.GetNextPart());
+        
+        width = Integer.parseInt(mainSettings.GetNextPart());
+        height = Integer.parseInt(mainSettings.GetNextPart());              
+        
+        mainSheet = mainSettings.GetNextPart();
+        
+        int col = Integer.parseInt(mainSettings.GetNextPart());
+        int row = Integer.parseInt(mainSettings.GetNextPart());
+        
+        boolean unique = Boolean.parseBoolean(mainSettings.GetNextPart());        
+        resize = Boolean.parseBoolean(mainSettings.GetNextPart()); 
+                                       
+        
+        BufferedImage sheet = IDibujable.spriteHash.get(mainSheet);
+        
+        int maxX = sheet.getWidth()/width;
+        int maxY = sheet.getHeight()/height;
+                
+        int numSprites = Integer.parseInt(spriteSettings.GetNextPart());
+        spritesNames = new String[numSprites];           
+        
+        for(int i = 0;i<numSprites;i++)
+        {            
+            spritesNames[i] = spriteSettings.GetNextPart();
+            if(!IDibujable.spriteHash.containsKey(spritesNames[i])||load)
+            {
+                BufferedImage newSprite = IDibujable.gc.createCompatibleImage(width, height,sheet.getColorModel().getTransparency());
+                Graphics g;
+                g = newSprite.getGraphics(); 
+               g.drawImage(sheet, 0, 0, width, height,
+			col*width, row*height, (col*width)+width, (row*height)+height, null);            
+
+                IDibujable.spriteHash.put(spritesNames[i],newSprite);
+                g.dispose();                
+            }                        
+            // If there is only one spriteSheet per Sprite delete it.
+            setImage(spritesNames[i]);
+            if(unique) IDibujable.spriteHash.remove(mainSheet);                                   
+            
+            col++;
+             
+            if(col==maxX)
+            {
+                col = 0;
+                row++;                
+            }           
+        }                
+    }        
+    
     public void setImage(String name)
-    {        
+    {   
         currentImage = IDibujable.spriteHash.get(name);
+        if(resize) currentImage = (BufferedImage)currentImage.getScaledInstance(width, height, Image.SCALE_DEFAULT);        
     }
     
     public void paint(Graphics g) {
@@ -164,11 +258,17 @@ public class Sprite {
                 g.drawImage(currentImage, (int)x, (int)y, width, height, null);
         }
     }
-    
+        
     public boolean CheckClicked(MouseEvent e)
     {
         int posX = e.getX();
         int posY = e.getY();
         return ((posX>=x&&posX<=(x+width))&&(posY>=y&&posY<=(y+height)));
+    }
+    
+    public void SetPosition(int _x,int _y)
+    {
+        x = _x;
+        y = _y;
     }
 }

@@ -214,9 +214,11 @@ public class DungeonManager implements ISavable {
     //Preg 1 Lab2
     public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, int worldlvlEnemies, double varprcItems,int playerLvl) {
         Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies, varprcItems);
+        theDungeon.SetUpMapSize(M,N,WIDTH,HEIGHT);        
         theDungeon.SetDungeonNumber(activeDungeon);
         
-        theDungeon.SetUpMapSize(M,N,WIDTH,HEIGHT);        
+        // Inicializacion..
+        
         M = theDungeon.GetM();
         N = theDungeon.GetN();
 
@@ -247,7 +249,7 @@ public class DungeonManager implements ISavable {
 
         Stack<Coordinate> myStack = new Stack();
 
-        dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
+        dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);        
         dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.ANTERIOR);
 
         //Seteo la posicion del Anterior punto
@@ -265,10 +267,13 @@ public class DungeonManager implements ISavable {
 
                 // Marcar camino y a V
                 advanceInDirection(currentPoint, currentDirections, 1);
-                theDungeon.SetEntityInChamber(GetRandomType(theDungeon.GetPrcEnemies()),currentPoint,playerLvl);            
+                theDungeon.SetEntityInChamber(GetRandomType(theDungeon.GetPrcEnemies()),currentPoint,playerLvl);   
+                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
+                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.NORMAL);
                 
                 advanceInDirection(currentPoint, currentDirections, 1);
                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
+                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.NORMAL);
                 myStack.push(currentPoint.GetPoint());
             } else {                
                 if (firstPop) {
