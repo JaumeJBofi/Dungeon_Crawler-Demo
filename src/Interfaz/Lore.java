@@ -125,8 +125,8 @@ public final class Lore extends Stage implements IDibujable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void SetInteraccion(Options c) {
+    //@Override
+    public void SetInteraccion() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

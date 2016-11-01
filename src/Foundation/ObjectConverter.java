@@ -58,4 +58,27 @@ public class ObjectConverter {
     {
         return value.split(delim);
     }
+    
+    public CellInformation.CELLMODE GetNextPartMODE()
+    {
+        String valueString = GetNextPart();
+        
+        if(valueString.equals("PARED"))
+        {
+            return CellInformation.CELLMODE.PARED;
+        }
+        if(valueString.equals("NORMAL"))
+        {
+            return CellInformation.CELLMODE.NORMAL;
+        }
+        if(valueString.equals("ANTERIOR"))
+        {
+            return CellInformation.CELLMODE.ANTERIOR;
+        }
+        if(valueString.equals("SIGUIENTE"))
+        {
+            return CellInformation.CELLMODE.SIGUENTE;
+        }
+        return CellInformation.CELLMODE.NORMAL;
+    }    
 }

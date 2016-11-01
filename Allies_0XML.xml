@@ -9,6 +9,7 @@
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+    <resize>false</resize>
     <position>
       <M>0</M>
       <N>0</N>
@@ -53,6 +54,7 @@
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+    <resize>false</resize>
     <position reference="../../Facilidades.Aliado/position"/>
     <hp>100</hp>
     <nombre>Maya Angelou</nombre>

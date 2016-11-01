@@ -6,8 +6,6 @@
 package Models;
 
 // Graphics imports begin
-import Foundation.DIRECTIONS;
-import Foundation.Options;
 import com.sun.media.sound.AudioFileSoundbankReader;
 import java.awt.*;
 import java.awt.event.*;
@@ -44,15 +42,9 @@ public abstract class Stage implements Runnable, KeyListener,
 
     // For game pause. Animation does not stop
     protected volatile boolean pause = false;
-<<<<<<< HEAD
-        
-    protected BufferStrategy bs;
-    
-=======
 
     protected BufferStrategy bs;
 
->>>>>>> origin/master
     /* Number of frames with a delay of 0 ms before the
      * animation thread yields to other running threads. */
     protected static int NO_SLEEPS_FOR_YIELD = 15;
@@ -87,43 +79,34 @@ public abstract class Stage implements Runnable, KeyListener,
     protected GraphicsEnvironment ge;
     protected GraphicsDevice screenDevice;
     protected DisplayMode defaultDisplay;
-<<<<<<< HEAD
-    
+
     protected JFrame frame;
     protected JFrame frame2;
-    
-    
-    public Stage(SCREENMODE mode){
-        initTime = System.currentTimeMillis();        
-=======
 
     public Stage(SCREENMODE mode) {
         initTime = System.currentTimeMillis();
->>>>>>> origin/master
         SetFPS(80);
         ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         screenDevice = ge.getDefaultScreenDevice();
         switchMode(mode);
     }
-<<<<<<< HEAD
-    
-    public Stage(Stage owner)
-    {   
-        initTime = System.currentTimeMillis(); 
-        
-        _window = owner._window;                
+
+    public Stage(Stage owner) {
+        initTime = System.currentTimeMillis();
+
+        _window = owner._window;
         ge = owner.ge;
         screenDevice = owner.screenDevice;
         defaultDisplay = owner.defaultDisplay;
-        
-         _mode=SCREENMODE.JFRAME;
-        
+
+        _mode = SCREENMODE.JFRAME;
+
         initCanvas();
-        
+
         _mode = owner._mode;
-        SetFPS(owner.GetFPS());        
-        setSize(owner.GetWidth(), owner.GetHeight());  
-                                        
+        SetFPS(owner.GetFPS());
+        setSize(owner.GetWidth(), owner.GetHeight());
+
         _component.addMouseListener(this);
         // listen for component key events
         _component.setFocusable(true);
@@ -136,14 +119,10 @@ public abstract class Stage implements Runnable, KeyListener,
         // listen for component focus changed
         _component.addFocusListener(this);
         // listen for component mouse motion
-        _component.addMouseMotionListener(this);                  
+        _component.addMouseMotionListener(this);
     }
-    
-    public void switchMode(SCREENMODE mode){
-=======
 
     public void switchMode(SCREENMODE mode) {
->>>>>>> origin/master
         _mode = mode;
 
         switch (mode) {
@@ -185,13 +164,7 @@ public abstract class Stage implements Runnable, KeyListener,
         _component.addFocusListener(this);
         // listen for component mouse motion
         _component.addMouseMotionListener(this);
-<<<<<<< HEAD
-             
-=======
 
-        _window.addWindowListener(this);
-        _window.addWindowStateListener(this);
->>>>>>> origin/master
 // end of capture components EVENTS ---------------
     }
 
@@ -217,11 +190,7 @@ public abstract class Stage implements Runnable, KeyListener,
                 bs = _canvas.getBufferStrategy();
             }
         };
-<<<<<<< HEAD
-        _canvas.setIgnoreRepaint(true);            
-=======
         _canvas.setIgnoreRepaint(true);
->>>>>>> origin/master
         try { // Sleep to give time for the buffer strategy to be done.
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -234,67 +203,62 @@ public abstract class Stage implements Runnable, KeyListener,
         _window = new JFrame("The 7 layers");
         _window.addWindowFocusListener(this);
         _window.addWindowListener(this);
-<<<<<<< HEAD
-        _window.addWindowStateListener(this);       
-        _window.setIgnoreRepaint(true);  
-                                
-        _window.getContentPane().add(_component);                   
-        _window.setDefaultCloseOperation(EXIT_ON_CLOSE);        
-    }   
-    
-    public void changeWindowListener(Stage newStage)
-    {
-                
+        _window.addWindowStateListener(this);
+        _window.setIgnoreRepaint(true);
+
+        _window.getContentPane().add(_component);
+        _window.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    public void changeWindowListener(Stage newStage) {
+
         _window.removeWindowFocusListener(this);
         _window.removeWindowListener(this);
-        _window.removeWindowStateListener(this);  
-        
-        _window.addWindowFocusListener(newStage);        
-        _window.addWindowListener(newStage);        
-        _window.addWindowStateListener(newStage);        
-                                        
+        _window.removeWindowStateListener(this);
+
+        _window.addWindowFocusListener(newStage);
+        _window.addWindowListener(newStage);
+        _window.addWindowStateListener(newStage);
+
         _window.getContentPane().remove(_canvas);
-        
-        newStage._canvas.setVisible(true);                
+
+        newStage._canvas.setVisible(true);
         bs = newStage._canvas.getBufferStrategy();
-        _window.getContentPane().add(newStage._canvas);                           
+        _window.getContentPane().add(newStage._canvas);
     }
-    
-    public void ChangeStage(Stage newStage)
-    {
-        if(running == true)
-        {
+
+    public void ChangeStage(Stage newStage) {
+        if (running == true) {
             running = false;
-            class Joiner implements Runnable {           
-            Thread _s;
-            Joiner(Thread s) { _s = s; }
-            public void run() {
-            try {
-                    _s.join();
+            class Joiner implements Runnable {
+
+                Thread _s;
+
+                Joiner(Thread s) {
+                    _s = s;
+                }
+
+                public void run() {
+                    try {
+                        _s.join();
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Stage.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-            }                                       
+            }
             running = false;
             Thread waiter = new Thread(new Joiner(_animator));
-        }                
-        changeWindowListener(newStage);        
-        newStage.startGame();        
+        }
+        changeWindowListener(newStage);
+        newStage.startGame();
     }
-    
-    public void DoJoin(Thread target)
-    {
+
+    public void DoJoin(Thread target) {
         try {
             target.join();
         } catch (InterruptedException ex) {
             Logger.getLogger(Stage.class.getName()).log(Level.SEVERE, null, ex);
         }
-=======
-        _window.addWindowStateListener(this);
-        _window.setIgnoreRepaint(true);
-        _window.getContentPane().add(_canvas);
->>>>>>> origin/master
     }
 
     public void startGame() {
@@ -309,96 +273,6 @@ public abstract class Stage implements Runnable, KeyListener,
         running = false;
     }
 
-    private boolean modificarDireccion(String input, Options choice) {
-        //Revisa en que direccion debe ir
-        if (input.toLowerCase().endsWith("derecha")) {
-            choice.SetPath(DIRECTIONS.RIGHT);
-        } else if (input.toLowerCase().endsWith("izquierda")) {
-            choice.SetPath(DIRECTIONS.LEFT);
-        } else if (input.toLowerCase().endsWith("abajo")) {
-            choice.SetPath(DIRECTIONS.BOT);
-        } else if (input.toLowerCase().endsWith("arriba")) {
-            choice.SetPath(DIRECTIONS.TOP);
-        } //En caso que no de ninguna direccion devuelve falso
-        else {
-            return false;
-        }
-        //Se llego a definir una direccion
-        return true;
-    }
-
-    public static String[] alternativas = {"Mover izquierda", "Mover derecha", "Mover abajo",
-        "Mover arriba", "Interactuar izquierda", "Interactuar derecha", "Interactuar abajo", "Interactuar arriba",
-        "Usar", "Guardar", "Salir"};
-    public JFrame frame = new JFrame("Input Dialog");
-    public JFrame frame2 = new JFrame("Input number");
-
-    public void interactionUserBox() {
-        Options choice = new Options(Options.ACTION.NULA);
-
-        String input = (String) JOptionPane.showInputDialog(frame,
-                "Que deseas hacer?",
-                "Acciones",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                alternativas,
-                alternativas[0]);
-
-        if (input == null) {
-            choice.SetAction(Options.ACTION.NULA);
-
-        } else if (input.equalsIgnoreCase("Salir")) {
-            System.out.println("\n\nSesionFinalizada");
-            Exit();
-            return;
-        } //Si la instruccion comienza com mover
-        else if (input.toLowerCase().startsWith("mover")) {
-            choice.SetAction(Options.ACTION.MOVE);
-            if (!modificarDireccion(input, choice)) //Si no se modifico la direccion se entiende
-            //que no se dio bien la instruccion
-            {
-                choice.SetAction(Options.ACTION.NULA);
-            }
-        } else if (input.toLowerCase().startsWith("interactuar")) {
-            choice.SetAction(Options.ACTION.INTERACT);
-            //No es necesario ver si en verdad la direccion que se
-            //da es correcta
-            modificarDireccion(input, choice);
-        } //En caso que se desee debugear
-        //        else if (input.compareToIgnoreCase("sudo debug") == 0) {
-        //            choice.SetAction(Options.ACTION.DEBUG);
-        //        } //En caso que use teleport
-        //        else if (input.toLowerCase().startsWith("sudo teleport")) {
-        //            choice.SetAction(Options.ACTION.TELEPORT);
-        //        } //En caso que se desee equipar un objeto
-        else if (input.toLowerCase().startsWith("usar")) {
-
-            String numero = JOptionPane.showInputDialog(
-                    frame2,
-                    "Ingresa el numero del item a usar",
-                    "Escoger item",
-                    JOptionPane.WARNING_MESSAGE
-            );
-            int num;
-            try {
-                num = Integer.parseInt(numero);
-                choice.indice_item = num;
-                choice.SetAction(Options.ACTION.EQUIP);
-            } catch (NumberFormatException except) {
-                System.out.println("Indice no valido.");
-                choice.SetAction(Options.ACTION.NULA);
-                SetInteraccion(choice);
-            }
-
-        } else if (input.toLowerCase().startsWith("guardar")) {
-            choice.SetAction(Options.ACTION.SAVE);
-        } else {
-            choice.SetAction(Options.ACTION.NULA);
-        }
-
-        SetInteraccion(choice);
-    }
-
     @Override
     public void run() {
         if (bs == null) {
@@ -408,31 +282,25 @@ public abstract class Stage implements Runnable, KeyListener,
         long extraSleepTime = 0L, excessTime = 0L;
         int noSleeps = 0;
         InitStage();
-<<<<<<< HEAD
-        initTime = System.nanoTime();   
-=======
         initTime = System.nanoTime();
-
->>>>>>> origin/master
         running = true;
+        UpdateStage();
+        UpdateScreen();
         while (running) {
             beforeTime = System.nanoTime();
 
             int skips = 0;
-
             while (skips < MAX_FRAME_SKIPS && excessTime > period) {
                 excessTime -= period;
                 UpdateStage(); // Only update. not Render
                 skips++;
             }
             // Loop Game!
-            clearInteraccion();
+            interactionUserBox();
+            if(running == false) System.exit(0);
             UpdateStage();
             UpdateScreen();
-            interactionUserBox();
-            if (!running) {
-                System.exit(0);
-            }
+            clearInteraccion();
 
             afterTime = System.nanoTime();
             diff = afterTime - beforeTime;
@@ -453,7 +321,6 @@ public abstract class Stage implements Runnable, KeyListener,
                     noSleeps = 0;
                 }
             }
-
         }
         if (_mode == SCREENMODE.FSEM) // CloseFSem();
         {
@@ -481,7 +348,8 @@ public abstract class Stage implements Runnable, KeyListener,
 
     public abstract void clearInteraccion();
 
-    public abstract void SetInteraccion(Options c);
+//    public abstract void SetInteraccion(Options c);
+    public abstract void interactionUserBox();
 
     public abstract void UpdateStage();
 
@@ -679,45 +547,4 @@ public abstract class Stage implements Runnable, KeyListener,
 
     public void windowStateChanged(WindowEvent e) {
     }
-<<<<<<< HEAD
-   
-        
-        public abstract void interactionUserBox();
-        public abstract void clearInteraccion();
-        public abstract void SetInteraccion(Options c);
-        
-        public void keyTyped(KeyEvent e) {}
-	public void mouseClicked(MouseEvent e) {}
-	public void mouseEntered(MouseEvent e) {}
-	public void mouseExited(MouseEvent e) {}
-	public void mousePressed(MouseEvent e) {}
-	public void mouseReleased(MouseEvent e) {}
-	public void mouseDragged(MouseEvent e) {}
-	public void mouseMoved(MouseEvent e) {}
-	public void mouseWheelMoved(MouseWheelEvent e) {}
-	public void focusGained(FocusEvent e) {}
-	public void focusLost(FocusEvent e) {}
-	public void componentHidden(ComponentEvent e) {}
-	public void componentMoved(ComponentEvent e) {	
-	}
-        
-        
-	public void componentResized(ComponentEvent e) {		
-	}
-        
-	public void componentShown(ComponentEvent e) {}
-    	public void windowActivated(WindowEvent e) {}
-	public void windowClosed(WindowEvent e) {}
-	public void windowClosing(WindowEvent e) {		
-	}
-        
-	public void windowDeactivated(WindowEvent e) {}
-	public void windowDeiconified(WindowEvent e) {}
-	public void windowIconified(WindowEvent e) {}
-	public void windowOpened(WindowEvent e) {}
-	public void windowGainedFocus(WindowEvent e) {}
-	public void windowLostFocus(WindowEvent e) {}
-	public void windowStateChanged(WindowEvent e) {}
-=======
->>>>>>> origin/master
 }

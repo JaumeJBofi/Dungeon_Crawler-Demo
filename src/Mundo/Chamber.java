@@ -25,11 +25,14 @@ public class Chamber extends Sprite implements IDibujable{
     
     private Enemy chamberEnemy;
     private Aliado chamberAlly;
-    private Artefacto chamberArtefact;
-   
-    public Chamber(){
-        
-    }
+    private Artefacto chamberArtefact;       
+       
+    
+    public Chamber(String spriteInfo,int _width,int _height)
+    {
+        super(_width,_height);
+        LoadComponents(spriteInfo);
+    }    
     
     public Chamber(Enemy enemyResident,Artefacto artefactResident){
         SetArtefact(chamberArtefact);
@@ -95,14 +98,14 @@ public class Chamber extends Sprite implements IDibujable{
 
     @Override
     public void Render(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        paint(g);
     }
     
    
     @Override
     public void LoadComponents(String spriteInfo) {
         
-       ProcessSpriteInfo(spriteInfo);
+       ProcessSpriteInfo(spriteInfo);      
     }
 
     @Override

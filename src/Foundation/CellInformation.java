@@ -16,7 +16,7 @@ public class CellInformation {
     }
     
     public enum CELLMODE{
-        SIGUENTE,ANTERIOR,NORMAL
+        SIGUENTE,ANTERIOR,NORMAL,PARED
         //Podemos agregar diferentes tipos especiales de celdas o Laberintos.
     }
     
@@ -27,7 +27,7 @@ public class CellInformation {
     public CellInformation() {
     }
             
-    private CELLMODE MODE = CELLMODE.NORMAL;
+    private CELLMODE MODE = CELLMODE.PARED;
     private CELLTYPE TYPE = CELLTYPE.PARED; 
     private CELLOBJECT OBJECT = CELLOBJECT.EMPTY;
 

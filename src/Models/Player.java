@@ -29,9 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import Foundation.DIRECTIONS;
-import Foundation.Options;
-
 /**
  *
  * @author Arthuro
@@ -41,12 +38,12 @@ public abstract class Player extends Entity implements ISavable {
     private int vidaMaxima;
     private Arma arma_equip;
     private Armadura armadura_equip;
-    private List<Artefacto> saco;
+    private List<Artefacto> saco;    
     private int xp;
     private int currentTop;
 
     public Player(Coordinate position, String varNombre) {
-        super(position, varNombre, 100, 5, 5, 1);
+        super(position, varNombre, 100, 5, 5,1);
         hp = 100; // digamos q sea 100
         vidaMaxima = 500; // la vida maxima en el juego, por ejemplo        
         tamShowX = 15;
@@ -58,7 +55,7 @@ public abstract class Player extends Entity implements ISavable {
     }
 
     public Player(Coordinate position, int varTamShowX, int varTamShowY, int vida, String varNombre, int varStrength, int varArmor) {
-        super(position, varNombre, vida, varStrength, varArmor, 1);
+        super(position, varNombre, vida, varStrength, varArmor,1);
         vidaMaxima = 500; // la vida maxima en el juego, por ejemplo        
 //        SetTamShowX(tamShowX);
 //        SetTamShowY(tamShowY);
@@ -73,17 +70,20 @@ public abstract class Player extends Entity implements ISavable {
     public void SetVidaMaxima(int v) {
         vidaMaxima = v;
     }
-
-    public void GetExperience(int cant) {
+    
+    public void GetExperience(int cant)
+    {
         int var = xp + cant;
-        if (var >= currentTop) {
+        if(var>=currentTop)
+        {
             LvlUp();
-        } else {
+        }else{
             xp = var;
         }
     }
-
-    public void LvlUp() {
+    
+    public void LvlUp()
+    {
         nivel++;
         // Subimnos de stats ?
         xp = 0;
@@ -173,44 +173,40 @@ public abstract class Player extends Entity implements ISavable {
             return armadura_equip.GetProteccion();
         }
     }
-
-    public synchronized void act(CellInformation[][] dungeonAccess) {
-        movePlayer(dungeonAccess);
-    }
-
-    public void movePlayer(CellInformation[][] dungeonAccess) {
+    
+    public synchronized void act(CellInformation[][] dungeonAccess)
+    {   
+        movePlayer(dungeonAccess);                
+    }   
+    
+    public void movePlayer(CellInformation[][] dungeonAccess)
+    {        
         ArrayList<DIRECTIONS> dirs = GetMovedDirections();
-        for (DIRECTIONS dir : dirs) {
+        for(DIRECTIONS dir: dirs)
+        {
             Coordinate varCoord;
-            if ((varCoord = CheckDungeonCollision(dungeonAccess, dir, 1)) != null) {
+            if((varCoord = CheckDungeonCollision(dungeonAccess, dir, 1))!=null)
+            {
                 // check what is there.
                 SetX(varCoord.GetX());
                 SetY(varCoord.GetY());
             }
-        }
+        }                
     }
-
-    public ArrayList<DIRECTIONS> GetMovedDirections() {
+    
+    public ArrayList<DIRECTIONS> GetMovedDirections()
+    {
         ArrayList<DIRECTIONS> dirs = new ArrayList<>();
-
-        if (keyDownDown) {
-            dirs.add(DIRECTIONS.BOT);
-        }
-        if (keyLeftDown) {
-            dirs.add(DIRECTIONS.LEFT);
-        }
-        if (keyRightDown) {
-            dirs.add(DIRECTIONS.RIGHT);
-        }
-        if (keyTopDown) {
-            dirs.add(DIRECTIONS.TOP);
-        }
-
+        
+        if(keyDownDown)  dirs.add(DIRECTIONS.BOT);
+        if(keyLeftDown)  dirs.add(DIRECTIONS.LEFT);
+        if(keyRightDown) dirs.add(DIRECTIONS.RIGHT);
+        if(keyTopDown)   dirs.add(DIRECTIONS.TOP);
+        
         return dirs;
     }
-
     public abstract void createKeys();
-
+    
     public int keyLeft;
     public int keyRight;
     public int keyTop;
@@ -225,88 +221,39 @@ public abstract class Player extends Entity implements ISavable {
     public boolean keyTopDown = false;
     public boolean keyDownDown = false;
     public boolean keyInteractDown = false;
-
-    public boolean IsWalkingLeft() {
-        return keyLeftDown;
-    }
-
-    ;
-    public boolean IsWalkingRight() {
-        return keyRightDown;
-    }
-
-    ;
-    public boolean IsWalkingTop() {
-        return keyTopDown;
-    }
-
-    ;
-    public boolean IsWalkingDown() {
-        return keyDownDown;
-    }
-
-    ;
-    public boolean Interacting() {
-        return keyInteractDown;
-    }
-
-    ;       
     
-    //MOVE,EXIT,INTERACT,DEBUG,TELEPORT,ATTACK,HELP,EQUIP,NULA,SAVE
-    public synchronized void setFlags(Options c) {
-        switch (c.taken) {
-            case MOVE:
-                if (c.path == DIRECTIONS.TOP) {
-                    keyTopDown = true;
-                } else if (c.path == DIRECTIONS.RIGHT) {
-                    keyRightDown = true;
-                } else if (c.path == DIRECTIONS.LEFT) {
-                    keyLeftDown = true;
-                } else if (c.path == DIRECTIONS.BOT) {
-                    keyDownDown = true;
-                }
-                break;
-            case INTERACT:
-                keyInteractDown = true;
-                break;
-        }
-    }
-
-    public synchronized void clearFlags() {
-        keyLeftDown = false;
-        keyRightDown = false;
-        keyTopDown = false;
-        keyDownDown = false;
-        keyInteractDown = false;
-    }
-
+    public boolean IsWalkingLeft() {return keyLeftDown;};
+    public boolean IsWalkingRight() {return keyRightDown;};
+    public boolean IsWalkingTop() {return keyTopDown;};
+    public boolean IsWalkingDown() {return keyDownDown;};
+    public boolean Interacting() {return keyInteractDown;};       
+    
     public synchronized void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == keyTop) {
+    if (e.getKeyCode() == keyTop) {
             keyTopDown = true;
-        } else if (e.getKeyCode() == keyRight) {
+    } else if (e.getKeyCode() == keyRight) {
             keyRightDown = true;
-        } else if (e.getKeyCode() == keyLeft) {
+    } else if (e.getKeyCode() == keyLeft) {
             keyLeftDown = true;
-        } else if (e.getKeyCode() == keyDown) {
+    } else if (e.getKeyCode() == keyDown) {
             keyDownDown = true;
-        } else if (e.getKeyCode() == keyInteract) {
+    } else if (e.getKeyCode() == keyInteract) {
             keyInteractDown = true;
-        }
+    }
     }
 
     public synchronized void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == keyTop) {
+    if (e.getKeyCode() == keyTop) {
             keyTopDown = false;
-        } else if (e.getKeyCode() == keyRight) {
+    } else if (e.getKeyCode() == keyRight) {
             keyRightDown = false;
-        } else if (e.getKeyCode() == keyLeft) {
+    } else if (e.getKeyCode() == keyLeft) {
             keyLeftDown = false;
-        } else if (e.getKeyCode() == keyDown) {
+    } else if (e.getKeyCode() == keyDown) {
             keyDownDown = false;
-        } else if (e.getKeyCode() == keyInteract) {
+    } else if (e.getKeyCode() == keyInteract) {
             keyInteractDown = false;
         }
-<<<<<<< HEAD
     }
     
     //MOVE,EXIT,INTERACT,DEBUG,TELEPORT,ATTACK,HELP,EQUIP,NULA,SAVE
@@ -327,8 +274,6 @@ public abstract class Player extends Entity implements ISavable {
                 keyInteractDown = true;
                 break;
         }
-=======
->>>>>>> origin/master
     }
 
     public synchronized void clearFlags() {
@@ -385,13 +330,15 @@ public abstract class Player extends Entity implements ISavable {
             }
         }
     }
-
-    public void Render(Graphics g) {
-
+    
+    public void Render(Graphics g)
+    {
+        
     }
-
+    
     @Override
-    public void Save(FileWriter fr) {
+    public void Save(FileWriter fr)
+    {
         try {
             fr.write(this.GetNombre() + "\r\n");
             fr.write("" + this.GetX() + ',' + this.GetY() + ',');
@@ -413,10 +360,12 @@ public abstract class Player extends Entity implements ISavable {
             fr.write("" + w_index + ',' + a_index + "\r\n");
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }        
     }
-
-    public void Load(FileReader flectura, BufferedReader buffer, int[] coordinate) {
+    
+    
+    public void Load(FileReader flectura, BufferedReader buffer, int[] coordinate)
+    {
         try {
             String linea = buffer.readLine();
             this.SetNombre(linea);
@@ -463,11 +412,12 @@ public abstract class Player extends Entity implements ISavable {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }        
     }
 
     @Override
-    public void Load(FileReader flectura, BufferedReader buffer) {
+    public void Load(FileReader flectura, BufferedReader buffer)
+    {
         try {
             String linea = buffer.readLine();
             this.SetNombre(linea);
@@ -514,9 +464,9 @@ public abstract class Player extends Entity implements ISavable {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }        
     }
-
+    
     public void guardar_personaje(FileWriter fr) {
         try {
             fr.write(this.GetNombre() + "\r\n");
@@ -541,16 +491,7 @@ public abstract class Player extends Entity implements ISavable {
             e.printStackTrace();
         }
     }
-<<<<<<< HEAD
        
-=======
-
-    @Override
-    public void LoadComponents() {
-
-    }
-
->>>>>>> origin/master
     @Override
     public void Dispose() {
 

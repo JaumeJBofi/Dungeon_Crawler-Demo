@@ -18,10 +18,12 @@ import Controllers.EnemyGenerator;
 import Foundation.DIRECTIONS;
 import Foundation.ISavable;
 import Facilidades.Aliado;
+import Foundation.ObjectConverter;
 import Models.Avatar;
 import Models.Enemy;
 import Models.IDibujable;
 import Models.Player;
+import Models.Sprite;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,6 +37,7 @@ import java.io.IOException;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 
 // Graphics imports end
 /**
@@ -82,6 +85,8 @@ public class Dungeon implements IDibujable, ISavable {
     
     private EnemyGenerator enemygen;
     private AllyGenerator allyGen;
+    
+    private HashMap<CellInformation.CELLMODE,String> tilesInfo;
 
     public Dungeon(double varprcEnemies, int varlvlEnemies, double varPrcItems) {
         // Momentaneamente el Laberinto no posee dimensiones       
@@ -106,6 +111,7 @@ public class Dungeon implements IDibujable, ISavable {
         numArtifacts = 0;
         
         lista_Players = new ArrayList<>();    
+        tilesInfo = new HashMap<>();
     }
 
     public int GetM() {
@@ -152,10 +158,35 @@ public class Dungeon implements IDibujable, ISavable {
     }
 
     public void SetDungeonNumber(int varNum) {
+        
         allyGen = new AllyGenerator("Allies_" + Integer.toString(varNum));
-        dungeonNumber = varNum;
+        dungeonNumber = varNum;   
+        LoadTiles(varNum);                
     }
-
+    
+    public void LoadTiles(int varNum)
+    {
+        // Cargamos un txt por cada laberinto en que carga Sprites al Main Hash
+        // dependiendo del los 4 tipos de Modos (PARED;NORMAL:ANTERIOR ;SIGUIENTE)
+         try {            
+            FileReader fr = new FileReader("Dungeon_" + Integer.toString(varNum) + ".txt");
+            BufferedReader in = new BufferedReader(fr);                                              
+            String buffer;
+            while((buffer = in.readLine())!=null)
+            {
+                ObjectConverter ob = new ObjectConverter(buffer);
+                ob.SetDelimiter("#");
+                                
+                String spriteInfo;
+                
+                tilesInfo.put(ob.GetNextPartMODE(),(spriteInfo = ob.GetNextPart()));    
+                new Sprite().ProcessSpriteInfo(spriteInfo, true);
+            }                     
+        } catch (Exception e) {
+            System.err.println("Error Archivo: " + "Dungeon_" + Integer.toString(varNum) + ".txt" + " no encontrado");
+        }                                
+    }
+    
     public int GetDungeonNumber() {
         return dungeonNumber;
     }
@@ -623,14 +654,14 @@ public class Dungeon implements IDibujable, ISavable {
         for (int i = 0; i < M; i++) {
             // ACA ES DONDE CREO QUE SE CAE EL CODIGO!!!
             for (int j = 0; j < N; j++) {
-                //Esta linea hace que se caiga. La Comentada
-                if(!dungeonAccess[i][j].isWall())
+                //Esta linea hace que se caiga. La Comentada       
+                CellInformation.CELLMODE a = dungeonAccess[i][j].GetMode();
+                if(a!=CellInformation.CELLMODE.PARED)
                 {
-                    layOutChamber[i][j] = new Chamber();
-                }else
-                {
-                    layOutChamber[i][j] = null;
+                    int b = 5;
                 }
+                layOutChamber[i][j] = new Chamber(tilesInfo.get(a),tileSizeX,tileSizeY);     
+                layOutChamber[i][j].SetPosition(i*tileSizeX, j*tileSizeY);
                 //layOutChamber[i][j] = new Chamber();
             }
         }
@@ -772,6 +803,7 @@ public class Dungeon implements IDibujable, ISavable {
                     g.fillOval(i*visionTileSizeX+visionTileSizeX, j*visionTileSizeY + visionTileSizeY, visionTileSizeX*2, visionTileSizeY*2);
                 } else {
                     CellInformation factor = dungeonAccess[i][j];
+                    layOutChamber[i][j].Render(g);
                     switch (factor.GetMode()) {
                         case SIGUENTE:                        
                             break;
@@ -780,10 +812,10 @@ public class Dungeon implements IDibujable, ISavable {
                         default: {
                             switch (factor.GetType()) {
                                 case PARED:
-                                    g.fillRect(i*visionTileSizeX, j*visionTileSizeY, visionTileSizeX, visionTileSizeY);
+                                   
                                     break;
                                 case ADENTRO:
-                                   
+                                   layOutChamber[i][j].Render(g);
                                     break;
                                 case ARTIFACT:
                                 {
@@ -928,6 +960,7 @@ public class Dungeon implements IDibujable, ISavable {
 
     @Override
     public void LoadComponents(String spriteInfo) {
+        // Load BackGround and stuff
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
