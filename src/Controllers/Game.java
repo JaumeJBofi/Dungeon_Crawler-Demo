@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Foundation.DIRECTIONS;
 import Interfaz.Dibujador;
 import Mundo.DungeonManager;
 import Foundation.CellInformation;
@@ -37,134 +38,172 @@ import javax.swing.*;
 import org.omg.CORBA.Environment;
 // Graphics imports end
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  * @author Jauma
  */
-public final class Game extends Stage{
-    
+public final class Game extends Stage {
+
     private Random randManager;
-  
+
     //Lore nos ayuda a narrar la historia
     private Lore historia;
-    private DungeonManager myManager;   
+    private DungeonManager myManager;
     public int varM;
     public int varN;
-    
+
     Dibujador Renderer;
     Options choiceTaken;
-    CellInformation nextCellInformation;    
+    CellInformation nextCellInformation;
     // Puede ser un arreglo
     Avatar player;
     IDibujable currentScene;
-    HashMap<String,ObjectConverter> configuration = new HashMap<>();
-    
+    HashMap<String, ObjectConverter> configuration = new HashMap<>();
+
     private boolean introScreen;
-    
-    public CellInformation.CELLTYPE GetWall(int i,int j)
-    {
-        return myManager.GetActiveDungeon().GetCellInformation(i,j).GetType();
+
+    public CellInformation.CELLTYPE GetWall(int i, int j) {
+        return myManager.GetActiveDungeon().GetCellInformation(i, j).GetType();
     }
-    public void LoadNewGame()
-    {
+
+    public void LoadNewGame() {
         // No utilizado... 
-        
+
         randManager = new Random();
-  
-        myManager = new DungeonManager(randManager.nextInt(7 - 3) + 3,WIDTH,HEIGHT);
+
+        myManager = new DungeonManager(randManager.nextInt(7 - 3) + 3, WIDTH, HEIGHT);
         varM = randManager.nextInt(50 - 25) + 25;
         varN = randManager.nextInt(35 - 25) + 25;
-        
+
         Renderer = new Dibujador();
 
-        choiceTaken = new Options(Options.ACTION.INTERACT);    
-        
+        choiceTaken = new Options(Options.ACTION.INTERACT);
+
         String name = " ";
         //if(!name.equalsIgnoreCase("skip")&&!name.equalsIgnoreCase("")) historia.nacer();             
-        player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3,1), 10, 6, 100, name, 10, 5);   
-                
+        player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3, 1), 10, 6, 100, name, 10, 5);
+
     }
-    
-    public void LoadedStandar()
-    {
+
+    public void LoadedStandar() {
         Renderer.scanner.close();
         Renderer.scanner = new Scanner(System.in);
-        Entity.generator = new Random();        
+        Entity.generator = new Random();
     }
-    
-    public Game(){
-        super(SCREENMODE.JFRAME);   
-        
-        Renderer = new Dibujador();        
-        choiceTaken = new Options(Options.ACTION.INTERACT);            
+
+    public Game() {
+        super(SCREENMODE.JFRAME);
+
+        Renderer = new Dibujador();
+        choiceTaken = new Options(Options.ACTION.INTERACT);
         nextCellInformation = new CellInformation();
-        
+
         loadConfigurationFile(configuration);
-        SetFPS((configuration.get("FPS").GetInt()));  
-        setSize((configuration.get("WIDTH").GetInt()),(configuration.get("HEIGHT").GetInt()));  
+        SetFPS((configuration.get("FPS").GetInt()));
+        setSize((configuration.get("WIDTH").GetInt()), (configuration.get("HEIGHT").GetInt()));
         randManager = new Random();
-        
+
         loadMainSheets();
-        
+
         historia = new Lore();
-        
-        myManager = new DungeonManager(randManager.nextInt(configuration.get("MAXDUNGEONS").GetInt() - 
-                configuration.get("MINDUNGEONS").GetInt()) + configuration.get("MINDUNGEONS").GetInt(),WIDTH,HEIGHT);
-        varM = randManager.nextInt((configuration.get("MAXMAP_X").GetInt()) - (configuration.get("MINMAP_X").GetInt())) + 
-                (configuration.get("MAXMAP_Y").GetInt());
-        varN = randManager.nextInt((configuration.get("MAXMAP_Y").GetInt()) - (configuration.get("MINMAP_Y").GetInt())) + 
-                (configuration.get("MINMAP_Y").GetInt());
-        
-               
+
+        myManager = new DungeonManager(randManager.nextInt(configuration.get("MAXDUNGEONS").GetInt()
+                - configuration.get("MINDUNGEONS").GetInt()) + configuration.get("MINDUNGEONS").GetInt(), WIDTH, HEIGHT);
+        varM = randManager.nextInt((configuration.get("MAXMAP_X").GetInt()) - (configuration.get("MINMAP_X").GetInt()))
+                + (configuration.get("MAXMAP_Y").GetInt());
+        varN = randManager.nextInt((configuration.get("MAXMAP_Y").GetInt()) - (configuration.get("MINMAP_Y").GetInt()))
+                + (configuration.get("MINMAP_Y").GetInt());
+
         String name = " ";
         // Poner historia?? Opciones.
         // Var TamShow 10 y 6 anterior
-        player = new Avatar(null,configuration.get("TAMSHOW_X").GetInt(),configuration.get("TAMSHOW_Y").GetInt(),
-                configuration.get("HP_INI").GetInt(), name, configuration.get("STRENGTH_INI").GetInt(), configuration.get("ARMOR_INI").GetInt());                 
+        player = new Avatar(null, configuration.get("TAMSHOW_X").GetInt(), configuration.get("TAMSHOW_Y").GetInt(),
+                configuration.get("HP_INI").GetInt(), name, configuration.get("STRENGTH_INI").GetInt(), configuration.get("ARMOR_INI").GetInt());
         GetWindow().setResizable(false);
     }
-    
+
     @Override
-    public synchronized void InitStage()
-    {
+    public synchronized void InitStage() {
         // 5 Level, 0.3 ItemsPRC, 1 Player Level
         player.SetPosition(myManager.CreateDungeonDistribution(varM, varN, configuration.get("PRCENEMY").GetDouble(),
-                configuration.get("WORLDLEVEL").GetInt(),configuration.get("ITEMPRC").GetDouble(),configuration.get("PLAYERLVL").GetInt()));        
+                configuration.get("WORLDLEVEL").GetInt(), configuration.get("ITEMPRC").GetDouble(), configuration.get("PLAYERLVL").GetInt()));
         myManager.GetActiveDungeon().AddPlayer(player);
-        //currentScene = myManager.GetActiveDungeon();        
-        currentScene = historia;
+        currentScene = myManager.GetActiveDungeon();
+        //currentScene = historia;
     }
-    
+
+    public void guardar() {
+        try {
+            FileWriter fr = new FileWriter("partida.txt");
+            player.Save(fr);
+            myManager.Save(fr);
+            fr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("\nGuardado Exitoso!\nPresione Enter para continuar");
+    }
+
+    public void equipar(int n) {
+        if (n > 0) {
+            if (n <= player.getSizeSaco()) {
+                player.EquipItem(n - 1);
+            } else {
+                System.out.println("\nNo tienes ese item \n\n");
+            }
+        } else {
+            System.out.println("\nNo tienes item con numero negativo\n\n");
+        }
+    }
+
     @Override
-    public synchronized void UpdateStage()
-    {
+    public synchronized void SetInteraccion(Options c) {
+        if (c.taken == Options.ACTION.SAVE) {
+            guardar();
+        } else if (c.taken == Options.ACTION.EQUIP) {
+            int n = c.indice_item;
+            equipar(n);
+        } else {
+            player.setFlags(c);
+        }
+
+    }
+
+    @Override
+    public synchronized void clearInteraccion() {
+        player.clearFlags();
+    }
+
+    @Override
+    public synchronized void UpdateStage() {
         // Now with Graphics
         myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
-        myManager.GetActiveDungeon().act();        
+        myManager.GetActiveDungeon().act();
     }
-    
-    @Override 
-    public synchronized void RenderStage(Graphics g)
-    {
+
+    @Override
+    public synchronized void RenderStage(Graphics g) {
         g.setColor(Color.WHITE);
-        g.fillRect(0, 0, WIDTH,HEIGHT);               
+        g.fillRect(0, 0, WIDTH, HEIGHT);
         currentScene.Render(g);
     }
-    
+
     @Override
     public void keyPressed(KeyEvent e) {
         player.keyPressed(e);
     }
-    
+
     @Override
     public void keyReleased(KeyEvent e) {
         player.keyReleased(e);
     }
-        
-    
+
     @Override
-    public void windowClosing(WindowEvent e) 
-    {	
+    public void windowClosing(WindowEvent e) {
         gameOver = true;
         running = false;
         try {
@@ -172,48 +211,41 @@ public final class Game extends Stage{
         } catch (InterruptedException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.exit(0);        
+        System.exit(0);
     }
-    
-    public void loadConfigurationFile(HashMap<String,ObjectConverter> configHash)
-    {
-          try {            
+
+    public void loadConfigurationFile(HashMap<String, ObjectConverter> configHash) {
+        try {
             FileReader fr = new FileReader("Config.txt");
             BufferedReader in = new BufferedReader(fr);
-            
-            String buffer;            
-            while((buffer = in.readLine())!=null)
-            {
-               String[] tokens = buffer.split(";");
-               String key = tokens[0];
-               String value = tokens[1];                    
-               configHash.put(key, new ObjectConverter(value));               
-            }                     
+
+            String buffer;
+            while ((buffer = in.readLine()) != null) {
+                String[] tokens = buffer.split(";");
+                String key = tokens[0];
+                String value = tokens[1];
+                configHash.put(key, new ObjectConverter(value));
+            }
         } catch (Exception e) {
-            System.err.println("Error Archivo: " +"Config.txt" + " no encontrado");
-        }                                        
+            System.err.println("Error Archivo: " + "Config.txt" + " no encontrado");
+        }
     }
-    
-    public void loadMainSheets()
-    {
-        try {            
+
+    public void loadMainSheets() {
+        try {
             FileReader fr = new FileReader("MainSheets.txt");
             BufferedReader in = new BufferedReader(fr);
-            
-            String buffer;            
-            while((buffer = in.readLine())!=null)
-            {               
-               Sprite.putInMainSheet(buffer);
-            }                     
+
+            String buffer;
+            while ((buffer = in.readLine()) != null) {
+                Sprite.putInMainSheet(buffer);
+            }
         } catch (Exception e) {
-            System.err.println("Error Archivo: " +"Config.txt" + " no encontrado");
-        }                             
+            System.err.println("Error Archivo: " + "Config.txt" + " no encontrado");
+        }
     }
-    
-    
-        
-    public Options.ACTION Run()
-    {
+
+    public Options.ACTION Run() {
         // Aca hacemos random de las dimensiones
         //Tambien podemos ya ir creando los otros laberintos               
         myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
@@ -222,7 +254,7 @@ public final class Game extends Stage{
 //        Renderer.mostrarMenu(choiceTaken);
 //        switch (choiceTaken.taken) {
 //            case MOVE: {
-                //if (!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(), choiceTaken.path)).isWall()
+        //if (!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(), choiceTaken.path)).isWall()
 //                        && nextCellInformation.GetType() == CellInformation.CELLTYPE.ADENTRO) {
 //                    if (nextCellInformation.isNext() || nextCellInformation.isPrevious()) {
 //                        if (myManager.ChangeDungeon(player, nextCellInformation.isNext()) == 1) {
@@ -390,5 +422,5 @@ public final class Game extends Stage{
 //        //myManager.GetActiveDungeon().Render();
 //        
 //        return choiceTaken.taken;               
-    }    
+    }
 }
