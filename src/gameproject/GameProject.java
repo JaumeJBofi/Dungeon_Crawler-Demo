@@ -23,7 +23,8 @@ public class GameProject {
         //Game Screnn
         Game severLayers = new Game();
         severLayers.GetWindow().setVisible(true);        
-        severLayers.startGame();        
+        severLayers.GameStart();
+        
     }
 
 }

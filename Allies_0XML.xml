@@ -1,5 +1,14 @@
 <list>
   <Facilidades.Aliado>
+    <x>0.0</x>
+    <y>0.0</y>
+    <z>0</z>
+    <width>0</width>
+    <height>0</height>
+    <imgIndex>0</imgIndex>
+    <visible>true</visible>
+    <active>true</active>
+    <bounds/>
     <position>
       <M>0</M>
       <N>0</N>
@@ -35,6 +44,15 @@
     <__maxConsejos>5</__maxConsejos>
   </Facilidades.Aliado>
   <Facilidades.Aliado>
+    <x>0.0</x>
+    <y>0.0</y>
+    <z>0</z>
+    <width>0</width>
+    <height>0</height>
+    <imgIndex>0</imgIndex>
+    <visible>true</visible>
+    <active>true</active>
+    <bounds/>
     <position reference="../../Facilidades.Aliado/position"/>
     <hp>100</hp>
     <nombre>Maya Angelou</nombre>

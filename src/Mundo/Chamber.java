@@ -8,12 +8,15 @@ import Artefactos.Artefacto;
 import Foundation.CellInformation;
 import Models.Enemy;
 import Facilidades.Aliado;
+import Models.IDibujable;
+import Models.Sprite;
+import java.awt.Graphics;
 
 /**
  *
  * @author Jauma
  */
-public class Chamber {
+public class Chamber extends Sprite implements IDibujable{
     private CellInformation chamberStatus;        
     // The constructer will be used when creating the matrix of the maze and 
     // setting the CellType will be our initial concern
@@ -88,6 +91,23 @@ public class Chamber {
     
     public Artefacto GetArtefacto(){
         return chamberArtefact;
+    }
+
+    @Override
+    public void Render(Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+   
+    @Override
+    public void LoadComponents(String spriteInfo) {
+        
+       ProcessSpriteInfo(spriteInfo);
+    }
+
+    @Override
+    public void Dispose() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
             
 }

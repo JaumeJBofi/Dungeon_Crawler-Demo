@@ -7,6 +7,7 @@ package Models;
 
 import Foundation.ObjectConverter;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
@@ -113,11 +114,18 @@ public class Sprite {
         boolean unique = Boolean.parseBoolean(mainSettings.GetNextPart());
                                 
         BufferedImage sheet = IDibujable.spriteHash.get(mainSheet);
+        
+        int maxX = sheet.getWidth()/width;
+        int maxY = sheet.getHeight()/height;
                 
         int numSprites = Integer.parseInt(spriteSettings.GetNextPart());
         spritesNames = new String[numSprites];
+        
+        int row = 0;
+        int col = 0;
+        
         for(int i = 0;i<numSprites;i++)
-        {
+        {            
             spritesNames[i] = spriteSettings.GetNextPart();
             BufferedImage newSprite = IDibujable.gc.createCompatibleImage(width, height,sheet.getColorModel().getTransparency());
             Graphics g;
@@ -130,7 +138,14 @@ public class Sprite {
             // If there is only one spriteSheet per Sprite delete it.
             setImage(spritesNames[i]);
             if(unique) IDibujable.spriteHash.remove(mainSheet);                                   
-           
+            
+            posX += width;
+             
+            if(posX==maxX)
+            {
+                posX = 0;
+                posY += height;                
+            }           
         }                
     }        
     public void setImage(String name)
@@ -144,10 +159,16 @@ public class Sprite {
         }
     }
 
-
     public void paint(Graphics g, double x, double y) {
         if (visible) {
                 g.drawImage(currentImage, (int)x, (int)y, width, height, null);
         }
+    }
+    
+    public boolean CheckClicked(MouseEvent e)
+    {
+        int posX = e.getX();
+        int posY = e.getY();
+        return ((posX>=x&&posX<=(x+width))&&(posY>=y&&posY<=(y+height)));
     }
 }

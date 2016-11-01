@@ -1,76 +1,95 @@
-Rou
-27,13,100,500,10,6,10,5
-1
+ 
+51,3,100,500,10,6,5,5
+0
 -1,-1
-6,0,1
-37,31,10,16,22,32,0.15,5,0.3,39
-zd,Un enemigo,27,15,15,1,5,20
-zd,Un enemigo,27,18,15,1,5,20
-xd,Un enemigo,17,13,5,1,5,10
-zd,Un enemigo,17,11,15,1,5,20
-yd,Un enemigo,27,9,10,1,5,15
-xd,Un enemigo,25,4,5,1,5,10
-xd,Un enemigo,28,3,5,1,5,10
-yd,Un enemigo,29,8,10,1,5,15
-xd,Un enemigo,35,9,5,1,5,10
-xd,Un enemigo,29,20,5,1,5,10
-zd,Un enemigo,29,28,15,1,5,20
-yd,Un enemigo,33,27,10,1,5,15
-yd,Un enemigo,31,23,10,1,5,15
-zd,Un enemigo,32,29,15,1,5,20
-yd,Un enemigo,25,29,10,1,5,15
-xd,Un enemigo,25,27,5,1,5,10
-yd,Un enemigo,25,24,10,1,5,15
-xd,Un enemigo,20,21,5,1,5,10
-xd,Un enemigo,7,25,5,1,5,10
-zd,Un enemigo,1,29,15,1,5,20
-zd,Un enemigo,4,29,15,1,5,20
-zd,Un enemigo,10,29,15,1,5,20
-zd,Un enemigo,15,23,15,1,5,20
-zd,Un enemigo,19,25,15,1,5,20
-zd,Un enemigo,1,26,15,1,5,20
-xd,Un enemigo,5,21,5,1,5,10
-zd,Un enemigo,3,23,15,1,5,20
-yd,Un enemigo,10,17,10,1,5,15
-xd,Un enemigo,12,15,5,1,5,10
-zd,Un enemigo,13,14,15,1,5,20
-yd,Un enemigo,15,15,10,1,5,15
-xd,Un enemigo,17,15,5,1,5,10
-yd,Un enemigo,19,18,10,1,5,15
-xd,Un enemigo,21,19,5,1,5,10
-zd,Un enemigo,15,11,15,1,5,20
-zd,Un enemigo,23,6,15,1,5,20
-zd,Un enemigo,1,11,15,1,5,20
-xd,Un enemigo,1,15,5,1,5,10
-xd,Un enemigo,12,5,5,1,5,10
-#####################################
-#       #   A   # A   # A   # #     #
-#A# ##### # ##### ###A#A### #A# ### #
-# # A A A #     # # A #   # E #   # #
-#A# ########### # # # ###E###A### # #
-# A     #   E # A # #   # #     # # #
-####### #A### ##### ###E#A##### # # #
-#     # #   # #   #   # # A #+# # # #
-#A### # ### ### # ### #A### #E# # # #
-# #   # A # #   #   A # #  E#   A #E#
-# # #####A# # # #########A######### #
-#E# A     # # #E#E      A #  -#   # #
-# #########A# # # ######### ### # # #
-#   A   A A # # #E      #   # # # # #
-# # ##### ###E# ####### #A### #A# # #
-#E  #     # E #E EA # # #  E#   #   #
-##### #####A#A##### # # ### # #######
-#   # #   E # #   # # #   # # # A   #
-#A# ###A#######A#A#E#A### #E# #A### #
-#     #     #   # #  E  # A # # A # #
-###A# #####A# ###A###########E# # #A#
-# A #E    A # # #   E   A # A # # # #
-# ### #####A# # ####### ###A### # ###
-# #E  #   # # #E    # #   # #  E# A #
-# ##### # ### # # # #A###E#A####### #
-# #    E# A A # # #E    # # #     # #
-#E# ############# ##### # # # ### # #
-#   #     #     # #   # #E# # # #E# #
-# ###A### # ###A# # #A# # # #E#A#A#A#
-#E  E #   E # A   # #   #E  A # E   #
-#####################################
+4,0,1
+55,31,0,0,0,0,0.15,5,0.3,58
+Esper,Humano nacido con habilidades especiales. Sin embargo; esa carga lo hace emocionalmente inestable,53,2,15,1,15,20
+Esper,Humano nacido con habilidades especiales. Sin embargo; esa carga lo hace emocionalmente inestable,49,2,15,1,15,20
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,51,8,35,1,13,50
+Dragon,Reptil del mas alto rango. Resistente a ataques fisicos y magicos,45,14,25,1,15,20
+Esper,Humano nacido con habilidades especiales. Sin embargo; esa carga lo hace emocionalmente inestable,38,15,15,1,15,20
+Quimera,Amalgamanacion de lo que fueron una vez animales e inclusive humanos,35,20,10,1,10,15
+Ancient Ancestor,Kiropero que consume el pavor de quienes tienen la misfortuna de encontrarlo,28,21,5,1,4,10
+Quimera,Amalgamanacion de lo que fueron una vez animales e inclusive humanos,21,28,10,1,10,15
+Quimera,Amalgamanacion de lo que fueron una vez animales e inclusive humanos,9,24,10,1,10,15
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,19,22,35,1,13,50
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,22,21,35,1,13,50
+Ancient Ancestor,Kiropero que consume el pavor de quienes tienen la misfortuna de encontrarlo,25,22,5,1,4,10
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,26,17,35,1,13,50
+Dragon,Reptil del mas alto rango. Resistente a ataques fisicos y magicos,30,19,25,1,15,20
+Dragon,Reptil del mas alto rango. Resistente a ataques fisicos y magicos,33,14,25,1,15,20
+Juancho,Tquero mejicano,35,12,99,1,15,20
+Ancient Ancestor,Kiropero que consume el pavor de quienes tienen la misfortuna de encontrarlo,39,12,5,1,4,10
+Dragon,Reptil del mas alto rango. Resistente a ataques fisicos y magicos,45,8,25,1,15,20
+Esper,Humano nacido con habilidades especiales. Sin embargo; esa carga lo hace emocionalmente inestable,45,6,15,1,15,20
+Esper,Humano nacido con habilidades especiales. Sin embargo; esa carga lo hace emocionalmente inestable,44,5,15,1,15,20
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,41,4,35,1,13,50
+Dragon,Reptil del mas alto rango. Resistente a ataques fisicos y magicos,30,1,25,1,15,20
+Quimera,Amalgamanacion de lo que fueron una vez animales e inclusive humanos,27,6,10,1,10,15
+Juancho,Tquero mejicano,30,9,99,1,15,20
+Ancient Ancestor,Kiropero que consume el pavor de quienes tienen la misfortuna de encontrarlo,31,9,5,1,4,10
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,23,12,35,1,13,50
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,24,15,35,1,13,50
+Esper,Humano nacido con habilidades especiales. Sin embargo; esa carga lo hace emocionalmente inestable,24,9,15,1,15,20
+Esper,Humano nacido con habilidades especiales. Sin embargo; esa carga lo hace emocionalmente inestable,19,4,15,1,15,20
+Esper,Humano nacido con habilidades especiales. Sin embargo; esa carga lo hace emocionalmente inestable,16,7,15,1,15,20
+Ancient Ancestor,Kiropero que consume el pavor de quienes tienen la misfortuna de encontrarlo,17,6,5,1,4,10
+Dragon,Reptil del mas alto rango. Resistente a ataques fisicos y magicos,9,6,25,1,15,20
+Quimera,Amalgamanacion de lo que fueron una vez animales e inclusive humanos,10,13,10,1,10,15
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,5,14,35,1,13,50
+Ancient Ancestor,Kiropero que consume el pavor de quienes tienen la misfortuna de encontrarlo,1,14,5,1,4,10
+Goblin,Desde la forga de Mordor. Un organismo creado para la batalla,11,18,3,2,5,100
+Quimera,Amalgamanacion de lo que fueron una vez animales e inclusive humanos,11,16,10,1,10,15
+Dragon,Reptil del mas alto rango. Resistente a ataques fisicos y magicos,3,10,25,1,15,20
+Goblin,Desde la forga de Mordor. Un organismo creado para la batalla,7,8,3,2,5,100
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,6,7,35,1,13,50
+Dragon,Reptil del mas alto rango. Resistente a ataques fisicos y magicos,3,4,25,1,15,20
+Juancho,Tquero mejicano,4,1,99,1,15,20
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,13,2,35,1,13,50
+Juancho,Tquero mejicano,15,2,99,1,15,20
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,7,2,35,1,13,50
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,17,14,35,1,13,50
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,32,27,35,1,13,50
+Esper,Humano nacido con habilidades especiales. Sin embargo; esa carga lo hace emocionalmente inestable,34,23,15,1,15,20
+Kepli,Demonio de lagos. Extremadamente peligroso e impredecible,35,23,35,1,13,50
+Ancient Ancestor,Kiropero que consume el pavor de quienes tienen la misfortuna de encontrarlo,38,25,5,1,4,10
+Juancho,Tquero mejicano,49,24,99,1,15,20
+Ancient Ancestor,Kiropero que consume el pavor de quienes tienen la misfortuna de encontrarlo,53,16,5,1,4,10
+Ancient Ancestor,Kiropero que consume el pavor de quienes tienen la misfortuna de encontrarlo,46,21,5,1,4,10
+Goblin,Desde la forga de Mordor. Un organismo creado para la batalla,43,22,3,2,5,100
+Juancho,Tquero mejicano,43,20,99,1,15,20
+Ancient Ancestor,Kiropero que consume el pavor de quienes tienen la misfortuna de encontrarlo,52,25,5,1,4,10
+Dragon,Reptil del mas alto rango. Resistente a ataques fisicos y magicos,51,28,25,1,15,20
+Goblin,Desde la forga de Mordor. Un organismo creado para la batalla,38,29,3,2,5,100
+#######################################################
+#   E F       #     #     #   E     #       #   #     #
+#F#####E#####E#E# ###A### # #F####### ###F#A# ###E###E#
+#   # # #   #   # # A # # # # # A A #   # #   #   #-A #
+###E#F# #F# #######E### # # #F#A###A# ###E##### #######
+#   #   # #       # A   # # # # # #   #   # E # # A   #
+#A#######E#######E#A##### #E# # # ##### ### #E# ##### #
+# F   E # F # # E # #     # #   # A # #     # # #   # #
+# #####E### # # ###F# ###F# ##### # #A#######E# #A#E#F#
+# # A   # A # #   # # # E #   EE# #     F A # # A # # #
+###E### # ### ### # #A#########A# ####### ### ##### #F#
+#   #   #       #   # # A         # F   # # F   #   # #
+# #A#######F#######A# #E###########E###E### ##### ###A#
+# # # F # E # A   # # A # A A #   # #       #     # A #
+#E###E#F# ### ###E### ### # ### #E# ##### ###E##### #F#
+# A   # # # # #     # # E # #   #   # E #+#   # F A # #
+# #####A#F#E#A##### # # ##### ####### # ### ##### ###E#
+# #   #   # # #   # #   # E #   F #   #     #     # F #
+# ### #####E#A# # # ###A# #A#####A#A######### # #######
+#   A #     # # # # #   # #   E   # #     # # #     A #
+##### # ##### # #A# #####A#########E# ###F#E#F####### #
+#   # # #   # A # # # E # # E F     # #   # # E #   # #
+# # # # # # ##### #E#F# #E# #########F# ###E###A# #A# #
+# # # # # #       # # # # # # F   EEF # #   A F # # # #
+### #A# #E######### #F#F# # ###F#######A# #######E# # #
+#   #   # #   A   A A #   #   #   A # E # A #     # E #
+#A##### # ####### ####### ###F##### # ### ###F####### #
+# A   # #       #   # A #   # # E # # F # # A # F #   #
+# #A### ####### #####E# #####A# # # ###A###F### ###E###
+# # A       A #       # F A A   #   # E A A # A       #
+#######################################################

@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import Foundation.Tip;
+import java.awt.Graphics;
 
 /**
  *
@@ -136,5 +137,20 @@ public class Aliado extends Entity{
     public void Load(FileReader flectura, BufferedReader buffer)
     {
         
+    }
+
+    @Override
+    public void Render(Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void LoadComponents(String spriteInfo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void Dispose() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

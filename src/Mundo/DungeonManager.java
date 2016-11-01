@@ -162,7 +162,6 @@ public class DungeonManager implements ISavable {
         if (isNext) {
             if (activeDungeon == totalDungeons - 1) {
                 return 1;
-
             }
             if (activeDungeon < dungeons.size() - 1) {
                 activeDungeon++;
@@ -171,6 +170,7 @@ public class DungeonManager implements ISavable {
                 CreateDungeonDistribution(randomManager.nextInt(50 - 25) + 25, randomManager.nextInt(50 - 25) + 25, currDungeon.GetPrcEnemies() + 0.075, currDungeon.GetLvlEnemies(),
                         currDungeon.GetPrcItem() + 0.025,player.GetNivel());                
                 activeDungeon++;
+                currDungeon.AddPlayer(player);
                 GetActiveDungeon().SetDungeonNumber(activeDungeon);
                 player.SetPosition(dungeons.get(activeDungeon).GetAntPos().GetPoint());
             }
@@ -186,8 +186,7 @@ public class DungeonManager implements ISavable {
 
     public void printDebugInfo(Avatar player) {
         System.out.println("Informacion manager actual:\n");
-        System.out.format("Numero de dungeon activo: %d\n", activeDungeon);
-        dungeons.get(activeDungeon).Render();
+        System.out.format("Numero de dungeon activo: %d\n", activeDungeon);        
         System.out.println("Informacion laberinto actual:\n");
         dungeons.get(activeDungeon).printDebugInfo();
         System.out.println("Informacion de Jugador actual:\n");

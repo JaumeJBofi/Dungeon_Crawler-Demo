@@ -114,24 +114,7 @@ public class Dibujador {
         //Se llego a definir una direccion
         return true;
     }
-
-    //funcion que recibe un Dungeon y los datos del jugador
-    public void mostrarLaberinto(Dungeon theDungeon, Avatar player) {
-        //Muestro el calabozo
-        //Doy las coordenadas del jugador y el tamaño que debe mostrar
-        theDungeon.Render(player.GetX(), player.GetY(), player.GetTamShowX(), player.GetTamShowY());
-        //Muestro los datos del jugador
-        player.Render();
-    }
     
-    public void mostrarLaberinto(Dungeon theDungeon,Avatar player,Graphics g)
-    {
-        theDungeon.Render(player.GetX(), player.GetY(), player.GetTamShowX(), player.GetTamShowY());
-        //Muestro los datos del jugador
-        player.Render();
-    }
-
-    //????
     private boolean mostrarStats() {
         return true;
     }

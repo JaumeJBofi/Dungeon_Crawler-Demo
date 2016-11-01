@@ -22,7 +22,7 @@ import java.util.Collections;
  *
  * @author Jauma
  */
-public abstract class Entity implements ISavable, IDibujable {
+public abstract class Entity extends Sprite implements ISavable, IDibujable {
 
     private Coordinate position;
     public int hp; // vida actual
@@ -362,24 +362,7 @@ public abstract class Entity implements ISavable, IDibujable {
             //Collections.shuffle(validDir, new Random());
         }
         return validDir.get(generator.nextInt(validDir.size()));
-    }
-    
-     public void Render()
-     {
-         
-     }
-    public void Render(Graphics g)
-    {
-        
-    }
-    public void LoadComponents()
-    {
-        
-    }
-    public void Dispose()
-    {
-        
-    }
+    }    
 
     public abstract void Save(FileWriter fr);
 

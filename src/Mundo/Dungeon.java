@@ -34,6 +34,7 @@ import java.io.IOException;
 // Graphics imports begin
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 // Graphics imports end
 /**
@@ -502,6 +503,23 @@ public class Dungeon implements IDibujable, ISavable {
         }
     }
     
+    public void MovePlayersPressed(KeyEvent e)
+    {
+        for(Player p:lista_Players)
+        {
+            p.keyPressed(e);
+        }
+    }
+    
+    public void MovePlayersReleased(KeyEvent e)
+    {        
+        for(Player p:lista_Players)
+        {
+            p.keyReleased(e);
+        }        
+    }
+          
+    
     public void act()
     {       
         
@@ -738,55 +756,7 @@ public class Dungeon implements IDibujable, ISavable {
         }
     }
 
-    // Implementacion de IDibujable
-    public void Render() {
-        String space20 = new String(new char[40]).replace('\0', ' ');
-        for (int j = 0; j < N; j++) {
-            System.out.print(space20);
-            for (int i = 0; i < M; i++) {
-                CellInformation factor = dungeonAccess[i][j];
-                switch (factor.GetMode()) {
-                    case SIGUENTE:
-                        System.out.print("+");
-                        break;
-                    case ANTERIOR:
-                        System.out.print("-");
-                        break;
-                    default: {
-                        switch (factor.GetType()) {
-                            case PARED:
-                                System.out.print("#");
-                                break;
-                            case ADENTRO:
-                                System.out.print(" ");
-                                break;
-                            case ARTIFACT:
-                            {
-                                switch(dungeonAccess[i][j].GetObject())
-                                {
-                                    case WEAPON: System.out.print("W");
-                                        break;
-                                    case POTION: System.out.print("P");
-                                        break;
-                                    case ARMOR:  System.out.print("A");
-                                        break;
-                                }                            
-                            }break;
-                            case ENEMY:
-                                System.out.print("E");
-                                break;
-                            case FRIEND:
-                                System.out.print("F");
-                                break;
-                        }
-                    }
-                    break;
-                }
-            }
-            System.out.print("\n");
-        }
-    }
-    
+    // Implementacion de IDibujable  
     public void Render(Graphics g) {
          
         visionTileSizeX = tileSizeX;
@@ -827,7 +797,7 @@ public class Dungeon implements IDibujable, ISavable {
                                             break;
                                     }                            
                                 }break;
-                                case ENEMY:                                 
+                                case ENEMY:                                          
                                     break;
                                 case FRIEND:                                   
                                     break;
@@ -839,56 +809,7 @@ public class Dungeon implements IDibujable, ISavable {
             }          
         }
     }
-    
-    public void Render(Graphics g,int posX,int posY,int tamShowX,int tamShowY) {
-         
-        visionTileSizeX = 12;
-        visionTileSizeY = 12;             
-        
-        g.setColor(Color.BLACK);
-        inicializarDatosMostrarMapa(posY, posX, tamShowX, tamShowY);
-        int varI = 0;
-        int varJ = 0;
-        for (int j = minshowY; j < maxshowY; j++,varJ++) {
-            for (int i = minshowX; i < maxshowX; i++,varI++) {
-                varI = 0;
-                if ((i == posX) && (j == posY)) {
-                    g.fillOval(varI*visionTileSizeX+visionTileSizeX, varJ*visionTileSizeY + visionTileSizeY, visionTileSizeX*2, visionTileSizeY*2);
-                } else {
-                    CellInformation factor = dungeonAccess[i][j];
-                    switch (factor.GetMode()) {
-                        case SIGUENTE:
-                            //System.out.print("+");
-                            break;
-                        case ANTERIOR:
-                            //System.out.print("-");
-                            break;
-                        default: {
-                            switch (factor.GetType()) {
-                                case PARED:
-                                    g.fillRect(varI*visionTileSizeX, varJ*visionTileSizeY, visionTileSizeX, visionTileSizeY);
-                                    break;
-                                case ADENTRO:
-                                    //System.out.print(" ");
-                                    break;
-                                case ARTIFACT:
-                                    //System.out.print("A");
-                                    break;
-                                case ENEMY:
-                                    //System.out.print("E");
-                                    break;
-                                case FRIEND:
-                                    //System.out.print("F");
-                                    break;
-                            }
-                        }
-                        break;
-                    }
-                }
-            }            
-        }
-    }
-
+      
     // Escribe a un archivo de Texto
     public void Render(FileWriter fw) {
         try {
@@ -939,66 +860,7 @@ public class Dungeon implements IDibujable, ISavable {
             e.printStackTrace();
         }
     }
-
-    public void Render(int posX, int posY, int tamShowX, int tamShowY) {
-
-        String space20 = new String(new char[35]).replace('\0', ' ');
-        inicializarDatosMostrarMapa(posY, posX, tamShowX, tamShowY);
-        for (int j = minshowY; j < maxshowY; j++) {
-            System.out.print(space20);
-            for (int i = minshowX; i < maxshowX; i++) {
-
-                if ((i == posX) && (j == posY)) {
-                    System.out.print("H");
-                } else {
-                    CellInformation factor = dungeonAccess[i][j];
-                    switch (factor.GetMode()) {
-                        case SIGUENTE:
-                            System.out.print("+");
-                            break;
-                        case ANTERIOR:
-                            System.out.print("-");
-                            break;
-                        default: {
-                            switch (factor.GetType()) {
-                                case PARED:
-                                    System.out.print("#");
-                                    break;
-                                case ADENTRO:
-                                    System.out.print(" ");
-                                    break;
-                                case ARTIFACT:
-                                    System.out.print("A");
-                                    break;
-                                case ENEMY:
-                                    System.out.print("E");
-                                    break;
-                                case FRIEND:
-                                    System.out.print("F");
-                                    break;
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-            System.out.println(" ");
-        }
-    }
-
-    public void LoadComponents() {
-
-    }
-
-    public void Dispose() {
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                dungeonAccess[i][j] = null;
-                layOutChamber[i][j] = null;
-            }
-        }
-    }
-
+  
     public void Guardar_Render(FileWriter fw) {
 
         try {
@@ -1062,5 +924,15 @@ public class Dungeon implements IDibujable, ISavable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void LoadComponents(String spriteInfo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void Dispose() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -18,6 +18,7 @@ import Foundation.CellInformation;
 import Foundation.Coordinate;
 import Foundation.DIRECTIONS;
 import Foundation.ISavable;
+import Foundation.Options;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
@@ -252,8 +253,38 @@ public abstract class Player extends Entity implements ISavable {
             keyDownDown = false;
     } else if (e.getKeyCode() == keyInteract) {
             keyInteractDown = false;
+        }
     }
+    
+    //MOVE,EXIT,INTERACT,DEBUG,TELEPORT,ATTACK,HELP,EQUIP,NULA,SAVE
+    public synchronized void setFlags(Options c) {
+        switch (c.taken) {
+            case MOVE:
+                if (c.path == DIRECTIONS.TOP) {
+                    keyTopDown = true;
+                } else if (c.path == DIRECTIONS.RIGHT) {
+                    keyRightDown = true;
+                } else if (c.path == DIRECTIONS.LEFT) {
+                    keyLeftDown = true;
+                } else if (c.path == DIRECTIONS.BOT) {
+                    keyDownDown = true;
+                }
+                break;
+            case INTERACT:
+                keyInteractDown = true;
+                break;
+        }
     }
+
+    public synchronized void clearFlags() {
+        keyLeftDown = false;
+        keyRightDown = false;
+        keyTopDown = false;
+        keyDownDown = false;
+        keyInteractDown = false;
+    }
+    
+    
 
     public void Render() {
         // Son solo impresiones, nada brutal,
@@ -460,12 +491,7 @@ public abstract class Player extends Entity implements ISavable {
             e.printStackTrace();
         }
     }
-    
-    @Override
-    public void LoadComponents() {
-
-    }
-
+       
     @Override
     public void Dispose() {
 

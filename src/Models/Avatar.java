@@ -56,4 +56,9 @@ public class Avatar extends Player {
         super(position, varTamShowX, varTamShowY, vida, varNombre, varStrength, varArmor);
          createKeys();
     }    
+
+    @Override
+    public void LoadComponents(String spriteInfo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

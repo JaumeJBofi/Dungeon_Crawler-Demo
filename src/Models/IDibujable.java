@@ -16,10 +16,9 @@ import java.util.HashMap;
  * @author Jauma
  */
 public interface IDibujable {
-    // Maneja la implementacion de poder ser renderizado
-    public void Render();
+    // Maneja la implementacion de poder ser renderizado   
     public void Render(Graphics g);
-    public void LoadComponents();
+    public void LoadComponents(String spriteInfo);
     public void Dispose();    
     
     public GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();

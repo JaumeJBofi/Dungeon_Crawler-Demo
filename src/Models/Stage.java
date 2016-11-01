@@ -10,7 +10,11 @@ import com.sun.media.sound.AudioFileSoundbankReader;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import Foundation.Options;
 // Graphics imports end
 
 /**
@@ -40,7 +44,7 @@ public abstract class Stage implements  Runnable,KeyListener,
     // For game pause. Animation does not stop
     protected volatile boolean pause = false;
         
-    protected  BufferStrategy bs;
+    protected BufferStrategy bs;
     
     /* Number of frames with a delay of 0 ms before the
     * animation thread yields to other running threads. */
@@ -78,6 +82,9 @@ public abstract class Stage implements  Runnable,KeyListener,
     protected GraphicsDevice screenDevice;
     protected DisplayMode defaultDisplay;
     
+    protected JFrame frame;
+    protected JFrame frame2;
+    
     
     public Stage(SCREENMODE mode){
         initTime = System.currentTimeMillis();        
@@ -85,6 +92,38 @@ public abstract class Stage implements  Runnable,KeyListener,
         ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         screenDevice = ge.getDefaultScreenDevice();
         switchMode(mode);        
+    }
+    
+    public Stage(Stage owner)
+    {   
+        initTime = System.currentTimeMillis(); 
+        
+        _window = owner._window;                
+        ge = owner.ge;
+        screenDevice = owner.screenDevice;
+        defaultDisplay = owner.defaultDisplay;
+        
+         _mode=SCREENMODE.JFRAME;
+        
+        initCanvas();
+        
+        _mode = owner._mode;
+        SetFPS(owner.GetFPS());        
+        setSize(owner.GetWidth(), owner.GetHeight());  
+                                        
+        _component.addMouseListener(this);
+        // listen for component key events
+        _component.setFocusable(true);
+        _component.requestFocus();
+        _component.addKeyListener(this);
+        // listen for componente mouse wheel
+        _component.addMouseWheelListener(this);
+        // listen for component
+        _component.addComponentListener(this);
+        // listen for component focus changed
+        _component.addFocusListener(this);
+        // listen for component mouse motion
+        _component.addMouseMotionListener(this);                  
     }
     
     public void switchMode(SCREENMODE mode){
@@ -117,9 +156,7 @@ public abstract class Stage implements  Runnable,KeyListener,
         _component.addFocusListener(this);
         // listen for component mouse motion
         _component.addMouseMotionListener(this);
-        
-        _window.addWindowListener(this);
-        _window.addWindowStateListener(this);
+             
 // end of capture components EVENTS ---------------
     }
     
@@ -137,7 +174,7 @@ public abstract class Stage implements  Runnable,KeyListener,
                 bs = _canvas.getBufferStrategy();                
             }               
         };
-        _canvas.setIgnoreRepaint(true);        
+        _canvas.setIgnoreRepaint(true);            
         try { // Sleep to give time for the buffer strategy to be done.
             Thread.sleep(1000);            
         } catch (InterruptedException e) {
@@ -151,8 +188,60 @@ public abstract class Stage implements  Runnable,KeyListener,
         _window.addWindowFocusListener(this);
         _window.addWindowListener(this);
         _window.addWindowStateListener(this);       
-        _window.setIgnoreRepaint(true);            
-        _window.getContentPane().add(_canvas);                
+        _window.setIgnoreRepaint(true);  
+                                
+        _window.getContentPane().add(_component);                   
+        _window.setDefaultCloseOperation(EXIT_ON_CLOSE);        
+    }   
+    
+    public void changeWindowListener(Stage newStage)
+    {
+                
+        _window.removeWindowFocusListener(this);
+        _window.removeWindowListener(this);
+        _window.removeWindowStateListener(this);  
+        
+        _window.addWindowFocusListener(newStage);        
+        _window.addWindowListener(newStage);        
+        _window.addWindowStateListener(newStage);        
+                                        
+        _window.getContentPane().remove(_canvas);
+        
+        newStage._canvas.setVisible(true);                
+        bs = newStage._canvas.getBufferStrategy();
+        _window.getContentPane().add(newStage._canvas);                           
+    }
+    
+    public void ChangeStage(Stage newStage)
+    {
+        if(running == true)
+        {
+            running = false;
+            class Joiner implements Runnable {           
+            Thread _s;
+            Joiner(Thread s) { _s = s; }
+            public void run() {
+            try {
+                    _s.join();
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Stage.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }                                       
+            running = false;
+            Thread waiter = new Thread(new Joiner(_animator));
+        }                
+        changeWindowListener(newStage);        
+        newStage.startGame();        
+    }
+    
+    public void DoJoin(Thread target)
+    {
+        try {
+            target.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Stage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void startGame(){
@@ -174,8 +263,7 @@ public abstract class Stage implements  Runnable,KeyListener,
         long extraSleepTime = 0L, excessTime = 0L;
         int noSleeps = 0;
         InitStage();
-        initTime = System.nanoTime();
-        
+        initTime = System.nanoTime();   
         running = true;
         while(running){
             beforeTime = System.nanoTime();
@@ -343,6 +431,12 @@ public abstract class Stage implements  Runnable,KeyListener,
                     Exit();
             }
     }
+   
+        
+        public abstract void interactionUserBox();
+        public abstract void clearInteraccion();
+        public abstract void SetInteraccion(Options c);
+        
         public void keyTyped(KeyEvent e) {}
 	public void mouseClicked(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
