@@ -169,7 +169,7 @@ public class DungeonManager implements ISavable {
             } else {
                 Dungeon currDungeon = dungeons.get(activeDungeon); //si no es el ultimo calabozo, crea otro cala
                 CreateDungeonDistribution(randomManager.nextInt(50 - 25) + 25, randomManager.nextInt(50 - 25) + 25, currDungeon.GetPrcEnemies() + 0.075, currDungeon.GetLvlEnemies(),
-                        currDungeon.GetPrcItem() + 0.025,player.GetNivel());                
+                        currDungeon.GetPrcItem() + 0.025,player.GetNivel(),player.GetTamShowX(),player.GetTamShowY());                
                 activeDungeon++;
                 currDungeon.AddPlayer(player);
                 GetActiveDungeon().SetDungeonNumber(activeDungeon);
@@ -213,8 +213,8 @@ public class DungeonManager implements ISavable {
         }        
     }        
     //Preg 1 Lab2
-    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, int worldlvlEnemies, double varprcItems,int playerLvl) {
-        Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies, varprcItems,M,N,WIDTH,HEIGHT);        
+    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, int worldlvlEnemies, double varprcItems,int playerLvl,int tamShowX,int tamShowY) {
+        Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies, varprcItems,M,N,WIDTH,HEIGHT,tamShowX,tamShowY);        
         theDungeon.SetDungeonNumber(activeDungeon);
         
         // Inicializacion..
@@ -313,9 +313,9 @@ public class DungeonManager implements ISavable {
             activeDungeon = Integer.parseInt(arr1[1]);
             int sizeDungeon = Integer.parseInt(arr1[2]);
             for (int i = 0; i < sizeDungeon; i++) {
-                Dungeon auxDungeon = new Dungeon(0, 0, 0,1,1,1,1);
-                auxDungeon.Load(lector, buffer);
-                dungeons.add(auxDungeon);
+                //Dungeon auxDungeon = new Dungeon(0, 0, 0,1,1,1,1);
+                //auxDungeon.Load(lector, buffer);
+                //dungeons.add(auxDungeon);
             }
         } catch (IOException e) {
             e.printStackTrace();

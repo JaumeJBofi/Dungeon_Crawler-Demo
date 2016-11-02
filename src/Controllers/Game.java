@@ -89,7 +89,7 @@ public final class Game extends Stage{
         
         String name = " ";
         //if(!name.equalsIgnoreCase("skip")&&!name.equalsIgnoreCase("")) historia.nacer();             
-        player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3,1), 10, 6, 100, name, 10, 5);                   
+        //player = new Avatar(myManager.CreateDungeonDistribution(varM, varN, 0.15, 5, 0.3,1), 10, 6, 100, name, 10, 5);                   
     }
     
     public void GameStart()
@@ -141,7 +141,8 @@ public final class Game extends Stage{
     {
         // 5 Level, 0.3 ItemsPRC, 1 Player Level
         player.SetPosition(myManager.CreateDungeonDistribution(varM, varN, configuration.get("PRCENEMY").GetDouble(),
-                configuration.get("WORLDLEVEL").GetInt(),configuration.get("ITEMPRC").GetDouble(),configuration.get("PLAYERLVL").GetInt()));        
+                configuration.get("WORLDLEVEL").GetInt(),configuration.get("ITEMPRC").GetDouble(),configuration.get("PLAYERLVL").GetInt(),
+                player.GetTamShowX(),player.GetTamShowY()));        
         myManager.GetActiveDungeon().AddPlayer(player);
         //currentScene = myManager.GetActiveDungeon(); 
         _movements = new Thread(new Runnable() {
@@ -166,15 +167,14 @@ public final class Game extends Stage{
     public synchronized void UpdateStage()
     {
         // Now with Graphics
-        myManager.GetActiveDungeon().act();        
-        
+       
         if (choiceTaken.taken != Options.ACTION.NULA) {
             if (choiceTaken.taken == Options.ACTION.MOVE) {   
-               
+                       myManager.GetActiveDungeon().act();  
             }
             if (choiceTaken.taken == Options.ACTION.INTERACT) {
                 if (!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(), choiceTaken.path)).isWall()) {
-
+                            myManager.GetActiveDungeon().act();  
                     switch (nextCellInformation.GetType()) {
                         case ARTIFACT: {
                             myManager.GetActiveDungeon().Interactuar(player, nextCellInformation.position); // borra el artefacto de la matriz                                
@@ -205,9 +205,8 @@ public final class Game extends Stage{
     
     @Override 
     public synchronized void RenderStage(Graphics g)
-    {
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, WIDTH, HEIGHT);
+    {      
+        g.drawImage(IDibujable.spriteHash.get("BackGroundFog"), 0, 0,WIDTH,HEIGHT, null);
         if (battleFlag == true) {
                 //player.Mostrar_BarraInfo(g, 20);
                 if (myManager.GetActiveDungeon().BattleGraphic(player, nextCellInformation.position,g)) {
@@ -354,7 +353,7 @@ public final class Game extends Stage{
 
     public static String[] alternativas = {"Mover izquierda", "Mover derecha", "Mover abajo",
         "Mover arriba", "Interactuar izquierda", "Interactuar derecha", "Interactuar abajo", "Interactuar arriba",
-        "Usar", "Guardar", "Salir"};
+        "Usar", "Guardar", "Salir","Deshabilitar"};
     
         public synchronized void SetInteraccion() {
         //choiceTaken.taken = c.taken;
@@ -365,13 +364,13 @@ public final class Game extends Stage{
         } else if (choiceTaken.taken == Options.ACTION.EQUIP) {
             int n = choiceTaken.indice_item;
             equipar(n);
+            choiceTaken.SetAction(Options.ACTION.NULA);
         } else {
             player.setFlags(choiceTaken);
         }
     }
         
     public static int deshabilitado = 0;
-
     
     @Override
     public void interactionUserBox() {

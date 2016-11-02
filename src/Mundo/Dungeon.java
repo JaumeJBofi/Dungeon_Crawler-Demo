@@ -97,14 +97,14 @@ public class Dungeon implements IDibujable, ISavable {
     
     private HashMap<CellInformation.CELLMODE,String> tilesInfo;
 
-    public Dungeon(double varprcEnemies, int varlvlEnemies, double varPrcItems,int _M,int _N,int WIDTH,int HEIGHT) {
+    public Dungeon(double varprcEnemies, int varlvlEnemies, double varPrcItems,int _M,int _N,int WIDTH,int HEIGHT,int tamShowX,int tamShowY) {
         // Momentaneamente el Laberinto no posee dimensiones       
         M = 0;
         N = 0;
         SetLvlEnemies(varlvlEnemies);
         SetPrcEnemies(varprcEnemies);
         SetPrcItems(varPrcItems);
-        SetUpMapSize(_M,_N,WIDTH,HEIGHT);
+        SetUpMapSize(_M,_N,WIDTH,HEIGHT,tamShowX,tamShowY);
         
         objManager = new ObjectGenerator(varlvlEnemies,tileSizeX,tileSizeY);
         Scanner in = new Scanner(System.in);
@@ -331,35 +331,7 @@ public class Dungeon implements IDibujable, ISavable {
         // Deberiamos liberar la memoria de layout
     }
 
-    private void inicializarDatosMostrarMapa(int posY, int posX, int tamShowX, int tamShowY) {
-        tamShowX = (int) tamShowX / 2;
-        tamShowY = (int) tamShowY / 2;
-
-        if ((posY - tamShowY) > 0) {
-            minshowY = posY - tamShowY;
-        } else {
-            minshowY = 0;
-        }
-
-        if ((posX - tamShowX) > 0) {
-            minshowX = posX - tamShowX;
-        } else {
-            minshowX = 0;
-        }
-
-        if ((posY + tamShowY) < N) {
-            maxshowY = posY + tamShowY;
-        } else {
-            maxshowY = N;
-        }
-
-        if ((posX + tamShowX) < M) {
-            maxshowX = posX + tamShowX;
-        } else {
-            maxshowX = M;
-        }
-    }
-
+   
     public void printDebugInfo() {
         System.out.format("Numero de enemigos = %d\n", numEnemies);
         System.out.format("Nivel de los enemigos = %d\n", lvlEnemies);
@@ -738,12 +710,12 @@ public class Dungeon implements IDibujable, ISavable {
         }
     }
     
-    public void SetUpMapSize(int _M,int _N,int WIDTH,int HEIGHT)
+    public void SetUpMapSize(int _M,int _N,int WIDTH,int HEIGHT,int tamShowX,int tamShowY)
     {
         SetM(_M);
         SetN(_N);        
-        tileSizeX = (int)WIDTH/M;
-        tileSizeY = (int)HEIGHT/N;        
+        tileSizeX = (int)WIDTH/tamShowX;
+        tileSizeY = (int)HEIGHT/tamShowY;        
     }
 
     // Preg 2
@@ -882,38 +854,81 @@ public class Dungeon implements IDibujable, ISavable {
             e.printStackTrace();
         }
     }
+    
+     private void inicializarDatosMostrarMapa(int posY, int posX, int tamShowX, int tamShowY) {
+        tamShowX = (int) tamShowX / 2;
+        tamShowY = (int) tamShowY / 2;
+      
+        
+        minshowX = 0;
+        minshowY = 0;
+        maxshowX = 0;
+        maxshowY = 0;              
+        
+        if ((posY - tamShowY) > 0) {
+            minshowY += posY - tamShowY;
+        } else {
+            minshowY = 0; 
+            maxshowY -= (posY - tamShowY);
+        }
+
+        if ((posX - tamShowX) > 0) {
+            minshowX += posX - tamShowX;
+        } else {
+            minshowX = 0;
+            maxshowX -= (posX - tamShowX);
+        }
+
+        if ((posY + tamShowY) < N) {
+            maxshowY += posY + tamShowY;
+        } else {
+            maxshowY = N;
+            minshowY -= (N - (posY + tamShowY));
+        }
+
+        if ((posX + tamShowX) < M) {
+            maxshowX += posX + tamShowX;
+        } else {
+            maxshowX = M;
+            minshowX -= (M - (posX + tamShowX));
+        }
+    }
+
 
     // Implementacion de IDibujable  
     public void Render(Graphics g) {
-         
+      
+        
         visionTileSizeX = tileSizeX;
         visionTileSizeY = tileSizeY;             
         
         int posX = lista_Players.get(activePlayer).GetX();
-        int posY = lista_Players.get(activePlayer).GetY();
-                     
+        int posY = lista_Players.get(activePlayer).GetY();                           
+        inicializarDatosMostrarMapa(posY, posX, lista_Players.get(activePlayer).GetTamShowX(), lista_Players.get(activePlayer).GetTamShowY());
         g.setColor(Color.BLACK);    
-        for (int j = 0; j < N; j++) {       
-            for (int i = 0; i < M; i++) {
+        for (int j = minshowY; j < maxshowY; j++) {       
+            for (int i = minshowX; i < maxshowX; i++) {
                 CellInformation factor = dungeonAccess[i][j];
+                    layOutChamber[i][j].SetPositionDraw((i-minshowX)*tileSizeX, (j-minshowY)*tileSizeY);
                     layOutChamber[i][j].Render(g);                
                     switch (factor.GetType()) {                              
                             case ENEMY:      
                                 g.setColor(Color.RED);
-                                g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16);                                    
+                                g.fillOval((i-minshowX)*tileSizeX,  (j-minshowY)*tileSizeY, tileSizeX, tileSizeY);                                    
                                 break;
                             case FRIEND:                                   
                                 g.setColor(Color.YELLOW);
-                                g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16);                                    
+                                g.fillOval((i-minshowX)*tileSizeX,  (j-minshowY)*tileSizeY, tileSizeX,tileSizeY);                                    
                                 break;
                             }
                     if(layOutChamber[i][j].GetArtefacto()!=null)
                     {
+                        layOutChamber[i][j].GetArtefacto().SetPositionDraw((i-minshowX)*tileSizeX, (j-minshowY)*tileSizeY);
                         layOutChamber[i][j].GetArtefacto().Render(g);
                     }
                 if ((i == posX) && (j == posY)) {
                      g.setColor(Color.BLACK);
-                     g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16); 
+                     g.fillOval((i-minshowX)*tileSizeX,  (j-minshowY)*tileSizeY, tileSizeX, tileSizeY);
                 } 
             }          
         }
