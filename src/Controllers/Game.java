@@ -148,6 +148,8 @@ public final class Game extends Stage {
                 myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
             }
             if (choiceTaken.taken == Options.ACTION.INTERACT) {
+                myManager.GetActiveDungeon().act();
+                myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
                 if (!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(), choiceTaken.path)).isWall()) {
 
                     switch (nextCellInformation.GetType()) {
@@ -185,14 +187,15 @@ public final class Game extends Stage {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, WIDTH, HEIGHT);
         if (battleFlag == true) {
-                //player.Mostrar_BarraInfo(g, 20);
-                if (myManager.GetActiveDungeon().BattleGraphic(player, nextCellInformation.position,g)) {
-                } else {
-                    System.out.println("Fin del juego. Ha muerto. Presione Enter\n");
-                    Exit();
-                    System.exit(0);
-                }
+            //player.Mostrar_BarraInfo(g, 20);
+            if (myManager.GetActiveDungeon().BattleGraphic(player, nextCellInformation.position, g)) {
+            } else {
+                System.out.println("Fin del juego. Ha muerto. Presione Enter\n");
+                Exit();
+                System.exit(0);
+            }
             battleFlag = false;
+            choiceTaken.taken = Options.ACTION.NULA;
         }
         myManager.GetActiveDungeon().Render(g);
         player.Mostrar_BarraInfo(g, 20);
@@ -293,6 +296,7 @@ public final class Game extends Stage {
         } else if (choiceTaken.taken == Options.ACTION.EQUIP) {
             int n = choiceTaken.indice_item;
             equipar(n);
+            choiceTaken.taken = Options.ACTION.NULA;
         } else {
             player.setFlags(choiceTaken);
         }
