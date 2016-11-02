@@ -14,7 +14,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465122640</pData>
+          <pData>408352192</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType>
@@ -928,7 +928,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465119440</pData>
+          <pData>408350528</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -1674,7 +1674,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465118288</pData>
+          <pData>408352576</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -2420,7 +2420,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465121360</pData>
+          <pData>408352448</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -3166,7 +3166,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465124560</pData>
+          <pData>408355904</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -3912,7 +3912,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465122384</pData>
+          <pData>408351040</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -4658,7 +4658,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465123664</pData>
+          <pData>408349632</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -5404,7 +5404,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465123792</pData>
+          <pData>408356160</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -6150,7 +6150,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465122896</pData>
+          <pData>408354368</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -6896,7 +6896,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465125584</pData>
+          <pData>408354880</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -7642,7 +7642,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465117520</pData>
+          <pData>408352704</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -8388,7 +8388,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465124688</pData>
+          <pData>408353472</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -9134,7 +9134,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465119696</pData>
+          <pData>408349376</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -9880,7 +9880,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465118416</pData>
+          <pData>408356032</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -10624,7 +10624,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465118800</pData>
+          <pData>408348224</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -11368,7 +11368,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465118032</pData>
+          <pData>408348608</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -12112,7 +12112,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465118928</pData>
+          <pData>408349248</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -12856,7 +12856,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465125200</pData>
+          <pData>408355648</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -13600,7 +13600,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465121616</pData>
+          <pData>408355264</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -14344,7 +14344,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465119184</pData>
+          <pData>408349504</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -15088,7 +15088,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465119824</pData>
+          <pData>408354752</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -15832,7 +15832,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465120080</pData>
+          <pData>408355392</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -16576,7 +16576,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465119312</pData>
+          <pData>408349760</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -17320,7 +17320,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465120208</pData>
+          <pData>408350016</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -18064,7 +18064,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465122256</pData>
+          <pData>408351168</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -18808,7 +18808,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465117776</pData>
+          <pData>408353856</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -19552,7 +19552,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465124944</pData>
+          <pData>408351296</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -20296,7 +20296,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465125072</pData>
+          <pData>408353984</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -21040,7 +21040,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465120336</pData>
+          <pData>408353600</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -21784,7 +21784,7 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>465125328</pData>
+          <pData>408354624</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
