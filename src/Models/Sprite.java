@@ -22,7 +22,7 @@ public class Sprite {
     
     public static boolean drawBounds = false;
     
-    protected double x,y;
+    protected double posX,posY;
     
     //Profundidad del objecto
     protected int z;
@@ -33,7 +33,7 @@ public class Sprite {
     
     protected String mainSheet;
     
-    protected BufferedImage currentImage;
+    public BufferedImage currentImage;
     
     protected int imgIndex;
     
@@ -44,6 +44,8 @@ public class Sprite {
     protected ArrayList<Rectangle> bounds;
     
     protected boolean resize = false;
+    
+    public String spriteInfo;
     
     public static void putInMainSheet(String info) throws IOException
     {
@@ -66,8 +68,8 @@ public class Sprite {
     }
     public Sprite()
     {
-        x = 0;
-        y = 0;
+        posX = 0;
+        posY = 0;
         z = 0;
         
         width = 0;
@@ -82,8 +84,8 @@ public class Sprite {
     
      public Sprite(int _width,int _height)
     {
-        x = 0;
-        y = 0;
+        posX = 0;
+        posY = 0;
         z = 0;
         
         width = _width;
@@ -109,9 +111,22 @@ public class Sprite {
         return false;
     }
     
+    public void copySprite(Sprite se)
+    {
+        posX = se.posX;
+        posY = se.posY;
+        
+        spriteInfo = se.spriteInfo;
+        spritesNames = se.spritesNames;
+        currentImage = se.currentImage;
+                
+    
+        
+    }
     public void ProcessSpriteInfo(String infoString)
     {
         // FORMAT : POS_X|POS_Y|POS_Z|WIDTH|HEIGHT|MAINSHEET|INI_X|INI_Y|UNIQUE|RESIZE:NUMSPRITES|SPRITENAME|SPRITELOCATION|SPRITENAME|SPRITELOCATION
+        spriteInfo = infoString;
         String[] tokens = infoString.split(":");
         ObjectConverter mainSettings = new ObjectConverter(tokens[0]);
         ObjectConverter spriteSettings = new ObjectConverter(tokens[1]);
@@ -119,8 +134,8 @@ public class Sprite {
         mainSettings.SetDelimiter("-");
         spriteSettings.SetDelimiter("-");
         
-        x = Integer.parseInt(mainSettings.GetNextPart());
-        y = Integer.parseInt(mainSettings.GetNextPart());
+        posX = Integer.parseInt(mainSettings.GetNextPart());
+        posY = Integer.parseInt(mainSettings.GetNextPart());
         z = Integer.parseInt(mainSettings.GetNextPart());
         
         if(!resize)
@@ -134,11 +149,10 @@ public class Sprite {
         
         mainSheet = mainSettings.GetNextPart();
         
-        int posX = Integer.parseInt(mainSettings.GetNextPart());
-        int posY = Integer.parseInt(mainSettings.GetNextPart());
+        int col = Integer.parseInt(mainSettings.GetNextPart());
+        int row = Integer.parseInt(mainSettings.GetNextPart());
         
-        boolean unique = Boolean.parseBoolean(mainSettings.GetNextPart());        
-        resize = Boolean.parseBoolean(mainSettings.GetNextPart()); 
+        boolean unique = Boolean.parseBoolean(mainSettings.GetNextPart());                
         
         BufferedImage sheet = IDibujable.spriteHash.get(mainSheet);
         
@@ -146,10 +160,7 @@ public class Sprite {
         int maxY = sheet.getHeight()/height;
                 
         int numSprites = Integer.parseInt(spriteSettings.GetNextPart());
-        spritesNames = new String[numSprites];
-        
-        int row = 0;
-        int col = 0;
+        spritesNames = new String[numSprites];    
         
         for(int i = 0;i<numSprites;i++)
         {            
@@ -159,7 +170,8 @@ public class Sprite {
                 BufferedImage newSprite = IDibujable.gc.createCompatibleImage(width, height,sheet.getColorModel().getTransparency());
                 Graphics g;
                 g = newSprite.getGraphics();            
-                g.drawImage(sheet, posX, posY, width, height, null);    
+                g.drawImage(sheet, 0, 0, width, height,
+			col*width, row*height, (col*width)+width, (row*height)+height, null);      
 
                 IDibujable.spriteHash.put(spritesNames[i],newSprite);
                 g.dispose();                            
@@ -169,12 +181,12 @@ public class Sprite {
             setImage(spritesNames[i]);
             if(unique) IDibujable.spriteHash.remove(mainSheet);                                   
             
-            posX += width;
+            col++;
              
-            if(posX==maxX)
+            if(col==maxX)
             {
-                posX = 0;
-                posY += height;                
+                col = 0;
+                row++;                
             }           
         }                
     }        
@@ -182,6 +194,7 @@ public class Sprite {
     public void ProcessSpriteInfo(String infoString,boolean load)
     {
         // FORMAT : POS_X|POS_Y|POS_Z|WIDTH|HEIGHT|MAINSHEET|INI_X|INI_Y|UNIQUE|LOADED:NUMSPRITES|SPRITENAME|SPRITELOCATION|SPRITENAME|SPRITELOCATION
+        spriteInfo = infoString;
         String[] tokens = infoString.split(":");
         ObjectConverter mainSettings = new ObjectConverter(tokens[0]);
         ObjectConverter spriteSettings = new ObjectConverter(tokens[1]);
@@ -189,8 +202,8 @@ public class Sprite {
         mainSettings.SetDelimiter("-");
         spriteSettings.SetDelimiter("-");
         
-        x = Integer.parseInt(mainSettings.GetNextPart());
-        y = Integer.parseInt(mainSettings.GetNextPart());
+        posX = Integer.parseInt(mainSettings.GetNextPart());
+        posY = Integer.parseInt(mainSettings.GetNextPart());
         z = Integer.parseInt(mainSettings.GetNextPart());
         
         width = Integer.parseInt(mainSettings.GetNextPart());
@@ -201,8 +214,7 @@ public class Sprite {
         int col = Integer.parseInt(mainSettings.GetNextPart());
         int row = Integer.parseInt(mainSettings.GetNextPart());
         
-        boolean unique = Boolean.parseBoolean(mainSettings.GetNextPart());        
-        resize = Boolean.parseBoolean(mainSettings.GetNextPart()); 
+        boolean unique = Boolean.parseBoolean(mainSettings.GetNextPart());                
                                        
         
         BufferedImage sheet = IDibujable.spriteHash.get(mainSheet);
@@ -244,12 +256,24 @@ public class Sprite {
     public void setImage(String name)
     {   
         currentImage = IDibujable.spriteHash.get(name);
-        if(resize) currentImage = (BufferedImage)currentImage.getScaledInstance(width, height, Image.SCALE_DEFAULT);        
+        if(resize)
+        {
+            Image img = currentImage.getScaledInstance(width, height, Image.SCALE_DEFAULT);  
+            BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);  
+            Graphics2D bGr = bimage.createGraphics();
+            bGr.drawImage(img, 0, 0, null);
+            bGr.dispose();
+            currentImage = bimage;
+        }        
     }
     
     public void paint(Graphics g) {
+        if(currentImage==null) 
+        {
+            int a = 5;
+        }
         if (visible) {
-                g.drawImage(currentImage, (int)x, (int)y, width, height, null);
+                g.drawImage(currentImage, (int)posX, (int)posY, width, height, null);
         }
     }
 
@@ -261,14 +285,25 @@ public class Sprite {
         
     public boolean CheckClicked(MouseEvent e)
     {
-        int posX = e.getX();
-        int posY = e.getY();
-        return ((posX>=x&&posX<=(x+width))&&(posY>=y&&posY<=(y+height)));
+        int posXVar = e.getX();
+        int posYVar = e.getY();
+        return ((posXVar>=posX&&posX<=(posX+width))&&(posYVar>=posY&&posY<=(posY+height)));
     }
     
-    public void SetPosition(int _x,int _y)
+    public void SetPositionDraw(int _x,int _y)
     {
-        x = _x;
-        y = _y;
+        posX = _x;
+        posY = _y;
     }
+    
+    public void SetWidth(int _width)
+    {
+        width = _width;
+    }
+    
+    public void SetHeight(int _height)
+    {
+        height = _height;
+    }
+    
 }

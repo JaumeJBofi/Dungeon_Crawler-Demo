@@ -1,9 +1,9 @@
-Pocion Pequenha,0.8,1,10,0,0,15,-1,-1
-Pocion Mediana,0.7,1,50,0,0,25,-1,-1
-Pocion Regeneracion Hipocratica,0.6,5,35,0,0,35,-1,-1
-Pocion Oscura,0.5,5,15,0,0,35,-1,-1
-Pocion Triptana,0.6,5,45,0,0,55,-1,-1
-Pocion Nsaid,0.4,5,50,0,0,15,-1,-1
-Pocion Ergotam,0.3,5,30,0,0,25,-1,-1
-Pocion Butalbital,0.2,7,45,0,0,35,-1,-1
-Pocion Antiemet,0.5,8,50,0,0,25,-1,-1
+Pocion Pequenha,0.8,1,10,0,0,15,-1,-1,0-0-0-24-24-IconSet-0-6-FALSE:1-Pequena
+Pocion Mediana,0.7,1,50,0,0,25,-1,-1,0-0-0-24-24-IconSet-1-6-FALSE:1-Mediana
+Pocion Regeneracion Hipocratica,0.6,5,35,0,0,35,-1,-1,0-0-0-24-24-IconSet-2-6-FALSE:1-Hipo
+Pocion Oscura,0.5,5,15,0,0,35,-1,-1,0-0-0-24-24-IconSet-3-6-FALSE:1-Oscura
+Pocion Triptana,0.6,5,45,0,0,55,-1,-1,0-0-0-24-24-IconSet-4-6-FALSE:1-Triptana
+Pocion Nsaid,0.4,5,50,0,0,15,-1,-1,0-0-0-24-24-IconSet-5-6-FALSE:1-Nsaid
+Pocion Ergotam,0.3,5,30,0,0,25,-1,-1,0-0-0-24-24-IconSet-6-6-FALSE:1-Ergotam
+Pocion Butalbital,0.2,7,45,0,0,35,-1,-1,0-0-0-24-24-IconSet-7-6-FALSE:1-Butalbital
+Pocion Antiemet,0.5,8,50,0,0,25,-1,-1,0-0-0-24-24-IconSet-8-6-FALSE:1-Antiemet

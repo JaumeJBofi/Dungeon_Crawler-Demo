@@ -1,7 +1,7 @@
 <list>
   <Facilidades.Aliado>
-    <x>0.0</x>
-    <y>0.0</y>
+    <posX>0.0</posX>
+    <posY>0.0</posY>
     <z>0</z>
     <width>0</width>
     <height>0</height>
@@ -45,8 +45,8 @@
     <__maxConsejos>5</__maxConsejos>
   </Facilidades.Aliado>
   <Facilidades.Aliado>
-    <x>0.0</x>
-    <y>0.0</y>
+    <posX>0.0</posX>
+    <posY>0.0</posY>
     <z>0</z>
     <width>0</width>
     <height>0</height>

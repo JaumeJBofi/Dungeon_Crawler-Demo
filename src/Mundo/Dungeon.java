@@ -26,6 +26,15 @@ import Models.Player;
 import Models.Sprite;
 import java.util.ArrayList;
 import java.util.Scanner;
+import Foundation.Options;
+import Models.Stage;
+import static Controllers.Game.alternativas;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.*;
+
+import javax.swing.*;
+
 
 import java.io.BufferedReader;
 import java.io.*;
@@ -88,14 +97,16 @@ public class Dungeon implements IDibujable, ISavable {
     
     private HashMap<CellInformation.CELLMODE,String> tilesInfo;
 
-    public Dungeon(double varprcEnemies, int varlvlEnemies, double varPrcItems) {
+    public Dungeon(double varprcEnemies, int varlvlEnemies, double varPrcItems,int _M,int _N,int WIDTH,int HEIGHT) {
         // Momentaneamente el Laberinto no posee dimensiones       
         M = 0;
         N = 0;
         SetLvlEnemies(varlvlEnemies);
         SetPrcEnemies(varprcEnemies);
         SetPrcItems(varPrcItems);
-        objManager = new ObjectGenerator(varlvlEnemies);
+        SetUpMapSize(_M,_N,WIDTH,HEIGHT);
+        
+        objManager = new ObjectGenerator(varlvlEnemies,tileSizeX,tileSizeY);
         Scanner in = new Scanner(System.in);
 
         enemygen = new EnemyGenerator();
@@ -368,6 +379,93 @@ public class Dungeon implements IDibujable, ISavable {
     public void GetFriendAdvice(Coordinate pose){
         layOutChamber[pose.GetX()][pose.GetY()].GetAliado().GiveAdvice();
     }
+    
+    protected JFrame frame = new JFrame();
+    public static String[] alternativas = {"Atacar", "Huir", "Usar"};
+
+    public boolean BattleGraphic(Avatar player, Coordinate pos,Graphics g) {
+
+        int playerHp = player.GetVida();
+        int playerMax = player.GetVidaMaxima();
+
+        Enemy currentEnemy = layOutChamber[pos.GetX()][pos.GetY()].GetEnemy();
+        int enemyHp = currentEnemy.GetVida();
+
+        System.out.format("Comienza el Encuentro!\nNombre de Enemigo: %s\nDescripcion de Enemigo: %s\nAtaque: ( %d ATK)\n", currentEnemy.GetNombre(),
+                currentEnemy.GetDescription(), currentEnemy.GetStrength());
+        //Scanner in = new Scanner(System.in);
+
+        while (true) {
+            player.Mostrar_BarraInfo(g, 20);
+            String respuesta = (String) JOptionPane.showInputDialog(frame,
+                    "Que deseas hacer?",
+                    "Batalla",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    alternativas,
+                    alternativas[0]);
+            System.out.println("\n\n");
+            System.out.println(player.GetNombre() + ": " + player.GetVida() + "/" + player.GetVidaMaxima() + " HP");
+            System.out.println(currentEnemy.GetNombre() + ": " + currentEnemy.GetVida() + " HP");
+            System.out.print("Opciones: atacar, huir, usar.\n");
+            System.out.print("Comando: ");
+            if (respuesta.toLowerCase().startsWith("atacar")) {
+                int weaponDamage = player.GetEquipWeaponDamage() - currentEnemy.GetArmor();
+                int enemyDamage = currentEnemy.GetEnemyDamage() - player.GetEquipArmorProtection();
+                if (weaponDamage < 0) {
+                    weaponDamage = 0;
+                }
+                if (enemyDamage < 0) {
+                    enemyDamage = 0;
+                }
+                System.out.print("Recibes " + enemyDamage + " puntos de daño.\n");
+                player.ReciveDamage(enemyDamage);
+                System.out.print("El enemigo recibe " + weaponDamage + " puntos de daño.\n");
+                currentEnemy.ReciveDamage(weaponDamage);
+            } else if (respuesta.toLowerCase().startsWith("huir")) {
+                System.out.print("Huiste exitosamente.\n");
+                return true;
+            } else if (respuesta.toLowerCase().startsWith("usar")) {
+                JFrame frame2 = new JFrame();
+                String numero = JOptionPane.showInputDialog(
+                        frame2,
+                        "Ingresa el numero del item a usar",
+                        "Escoger item",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                int num = 0;
+                try {
+                    num = Integer.parseInt(numero);
+                } catch (NumberFormatException except) {
+                    System.out.println("Indice no valido.");
+                }
+
+                if (num > 0) {
+                    if (num <= player.getSizeSaco()) {
+                        player.EquipItem(num - 1);
+                    } else {
+                        System.out.println("\nNo tienes es indice de item en tu saco\n\n");
+                    }
+                } else {
+                    System.out.println("\nIngresaste Indice negativo en el saco\n\n");
+                }
+            } else {
+                System.out.println("Acción inválida.");
+            }
+            if (player.GetVida() == 0) {
+                return false;
+            }
+            if (currentEnemy.GetVida() == 0) {
+                System.out.println("El enemigo ha sido derrotado.\n");
+                dungeonAccess[pos.GetX()][pos.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
+                lista_enemigos.remove(currentEnemy);
+                layOutChamber[pos.GetX()][pos.GetY()].GasEnemy();
+                numEnemies--;
+                return true;
+            }
+        }
+    }
+
 
     public boolean Battle(Avatar player, Coordinate pos) {
        
@@ -655,13 +753,9 @@ public class Dungeon implements IDibujable, ISavable {
             // ACA ES DONDE CREO QUE SE CAE EL CODIGO!!!
             for (int j = 0; j < N; j++) {
                 //Esta linea hace que se caiga. La Comentada       
-                CellInformation.CELLMODE a = dungeonAccess[i][j].GetMode();
-                if(a!=CellInformation.CELLMODE.PARED)
-                {
-                    int b = 5;
-                }
+                CellInformation.CELLMODE a = dungeonAccess[i][j].GetMode();                
                 layOutChamber[i][j] = new Chamber(tilesInfo.get(a),tileSizeX,tileSizeY);     
-                layOutChamber[i][j].SetPosition(i*tileSizeX, j*tileSizeY);
+                layOutChamber[i][j].SetPositionDraw(i*tileSizeX, j*tileSizeY);
                 //layOutChamber[i][j] = new Chamber();
             }
         }
@@ -671,9 +765,11 @@ public class Dungeon implements IDibujable, ISavable {
         for(Aliado currAliado: lista_aliados){
             layOutChamber[currAliado.GetX()][currAliado.GetY()].SetAlly(currAliado);
         }
-        for(Artefacto currArtifact: lista_artefactos){
+        int i = 0;
+        for(Artefacto currArtifact: lista_artefactos){                     
             layOutChamber[currArtifact.x][currArtifact.y].SetArtefact(currArtifact);
         }
+        int y = 0;
     }
 
     public void TeleportPlayer(Avatar player, int x, int y) {
@@ -799,45 +895,26 @@ public class Dungeon implements IDibujable, ISavable {
         g.setColor(Color.BLACK);    
         for (int j = 0; j < N; j++) {       
             for (int i = 0; i < M; i++) {
-                if ((i == posX) && (j == posY)) {
-                    g.fillOval(i*visionTileSizeX+visionTileSizeX, j*visionTileSizeY + visionTileSizeY, visionTileSizeX*2, visionTileSizeY*2);
-                } else {
-                    CellInformation factor = dungeonAccess[i][j];
-                    layOutChamber[i][j].Render(g);
-                    switch (factor.GetMode()) {
-                        case SIGUENTE:                        
-                            break;
-                        case ANTERIOR:                         
-                            break;
-                        default: {
-                            switch (factor.GetType()) {
-                                case PARED:
-                                   
-                                    break;
-                                case ADENTRO:
-                                   layOutChamber[i][j].Render(g);
-                                    break;
-                                case ARTIFACT:
-                                {
-                                    switch(dungeonAccess[i][j].GetObject())
-                                    {
-                                        case WEAPON: 
-                                            break;
-                                        case POTION: 
-                                            break;
-                                        case ARMOR:  
-                                            break;
-                                    }                            
-                                }break;
-                                case ENEMY:                                          
-                                    break;
-                                case FRIEND:                                   
-                                    break;
+                CellInformation factor = dungeonAccess[i][j];
+                    layOutChamber[i][j].Render(g);                
+                    switch (factor.GetType()) {                              
+                            case ENEMY:      
+                                g.setColor(Color.RED);
+                                g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16);                                    
+                                break;
+                            case FRIEND:                                   
+                                g.setColor(Color.YELLOW);
+                                g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16);                                    
+                                break;
                             }
-                        }
-                        break;
+                    if(layOutChamber[i][j].GetArtefacto()!=null)
+                    {
+                        layOutChamber[i][j].GetArtefacto().Render(g);
                     }
-                }    
+                if ((i == posX) && (j == posY)) {
+                     g.setColor(Color.BLACK);
+                     g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16); 
+                } 
             }          
         }
     }

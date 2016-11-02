@@ -1,4 +1,4 @@
-PARED#0-64-0-64-64-Dungeon_1Sheet-2-1-FALSE-FALSE:1-Wall_1
-NORMAL#0-0-0-64-64-Dungeon_1Sheet-2-0-FALSE-FALSE:1-Normal_1
-SIGUIENTE#0-0-0-64-64-Dungeon_1Sheet-0-0-FALSE-FALSE:1-Next_1
-ANTERIOR#0-0-0-64-64-Dungeon_1Sheet-1-0-FALSE-FALSE:1-Ant_1
+PARED#0-64-0-64-64-Dungeon_1Sheet-2-1-FALSE:1-Wall_1
+NORMAL#0-0-0-64-64-Dungeon_1Sheet-2-0-FALSE:1-Normal_1
+SIGUIENTE#0-0-0-64-64-Dungeon_1Sheet-0-0-FALSE:1-Next_1
+ANTERIOR#0-0-0-64-64-Dungeon_1Sheet-1-0-FALSE:1-Ant_1

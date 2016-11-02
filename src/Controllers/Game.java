@@ -57,6 +57,7 @@ public final class Game extends Stage{
     private DungeonManager myManager;   
     public int varM;
     public int varN;
+    private boolean battleFlag = false;
     
     Dibujador Renderer;
     Options choiceTaken;
@@ -142,41 +143,101 @@ public final class Game extends Stage{
         player.SetPosition(myManager.CreateDungeonDistribution(varM, varN, configuration.get("PRCENEMY").GetDouble(),
                 configuration.get("WORLDLEVEL").GetInt(),configuration.get("ITEMPRC").GetDouble(),configuration.get("PLAYERLVL").GetInt()));        
         myManager.GetActiveDungeon().AddPlayer(player);
-        //currentScene = myManager.GetActiveDungeon();           
+        //currentScene = myManager.GetActiveDungeon(); 
+        _movements = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1);
+                    myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                }               
+            }
+        });        
+        _movements.start();
     }
     
     @Override
     public synchronized void UpdateStage()
     {
         // Now with Graphics
-        myManager.GetActiveDungeon().act();    
-        //myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());            
-        //interactionUserBox();
+        myManager.GetActiveDungeon().act();        
+        
+        if (choiceTaken.taken != Options.ACTION.NULA) {
+            if (choiceTaken.taken == Options.ACTION.MOVE) {               
+            }
+            if (choiceTaken.taken == Options.ACTION.INTERACT) {
+                if (!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(), choiceTaken.path)).isWall()) {
+
+                    switch (nextCellInformation.GetType()) {
+                        case ARTIFACT: {
+                            myManager.GetActiveDungeon().Interactuar(player, nextCellInformation.position); // borra el artefacto de la matriz                                
+                        }
+                        break;
+                        case ENEMY: {
+
+                            battleFlag = true;
+
+                        }
+                        break;
+                        case FRIEND: {
+                            myManager.GetActiveDungeon().GetFriendAdvice(nextCellInformation.position);
+                        }
+                        break;
+
+                        default: {
+                            System.out.println("\n\nNo puedes interactuar con esa casilla");
+
+                        }
+                        break;
+                    }
+                    System.out.println("");
+                } else {
+                    System.out.println("\n\nNo puedes interactuar con esa pared");
+                }
+            }
+        }
     }
     
     @Override 
     public synchronized void RenderStage(Graphics g)
     {
         g.setColor(Color.WHITE);
-        g.fillRect(0, 0, WIDTH,HEIGHT);           
+        g.fillRect(0, 0, WIDTH, HEIGHT);
+        if (battleFlag == true) {
+                //player.Mostrar_BarraInfo(g, 20);
+                if (myManager.GetActiveDungeon().BattleGraphic(player, nextCellInformation.position,g)) {
+                } else {
+                    System.out.println("Fin del juego. Ha muerto. Presione Enter\n");
+                    Exit();
+                    System.exit(0);
+                }
+            battleFlag = false;
+        }
         myManager.GetActiveDungeon().Render(g);
+        player.Mostrar_BarraInfo(g, 20);
     }
     
     @Override
     public void keyPressed(KeyEvent e) {
-       
+        int keyCode = e.getKeyCode();
+        if ((keyCode == KeyEvent.VK_ENTER) )
+        {
+            interactionEnable = true;
+        }
         myManager.GetActiveDungeon().MovePlayersPressed(e);
     }
     
     @Override
     public void keyReleased(KeyEvent e) {
+       
         myManager.GetActiveDungeon().MovePlayersReleased(e);
     }
     
     @Override
     public void mouseClicked(MouseEvent e) 
-    {
-        System.exit(0);                                
+    {                          
     }
                 
     @Override
@@ -292,71 +353,96 @@ public final class Game extends Stage{
         "Mover arriba", "Interactuar izquierda", "Interactuar derecha", "Interactuar abajo", "Interactuar arriba",
         "Usar", "Guardar", "Salir"};
     
-
-    public void interactionUserBox() {
-        Options choice = new Options(Options.ACTION.NULA);
-
-        String input = (String) JOptionPane.showInputDialog(frame,
-                "Que deseas hacer?",
-                "Acciones",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                alternativas,
-                alternativas[0]);
-
-        if (input == null) {
-            choice.SetAction(Options.ACTION.NULA);
-
-        } else if (input.equalsIgnoreCase("Salir")) {
-            System.out.println("\n\nSesionFinalizada");
-            Exit();
-            return;
-        } //Si la instruccion comienza com mover
-        else if (input.toLowerCase().startsWith("mover")) {
-            choice.SetAction(Options.ACTION.MOVE);
-            if (!modificarDireccion(input, choice)) //Si no se modifico la direccion se entiende
-            //que no se dio bien la instruccion
-            {
-                choice.SetAction(Options.ACTION.NULA);
-            }
-        } else if (input.toLowerCase().startsWith("interactuar")) {
-            choice.SetAction(Options.ACTION.INTERACT);
-            //No es necesario ver si en verdad la direccion que se
-            //da es correcta
-            modificarDireccion(input, choice);
-        } //En caso que se desee debugear
-        //        else if (input.compareToIgnoreCase("sudo debug") == 0) {
-        //            choice.SetAction(Options.ACTION.DEBUG);
-        //        } //En caso que use teleport
-        //        else if (input.toLowerCase().startsWith("sudo teleport")) {
-        //            choice.SetAction(Options.ACTION.TELEPORT);
-        //        } //En caso que se desee equipar un objeto
-        else if (input.toLowerCase().startsWith("usar")) {
-
-            String numero = JOptionPane.showInputDialog(
-                    frame2,
-                    "Ingresa el numero del item a usar",
-                    "Escoger item",
-                    JOptionPane.WARNING_MESSAGE
-            );
-            int num;
-            try {
-                num = Integer.parseInt(numero);
-                choice.indice_item = num;
-                choice.SetAction(Options.ACTION.EQUIP);
-            } catch (NumberFormatException except) {
-                System.out.println("Indice no valido.");
-                choice.SetAction(Options.ACTION.NULA);
-                SetInteraccion(choice);
-            }
-
-        } else if (input.toLowerCase().startsWith("guardar")) {
-            choice.SetAction(Options.ACTION.SAVE);
+        public synchronized void SetInteraccion() {
+        //choiceTaken.taken = c.taken;
+        if (choiceTaken.taken == Options.ACTION.NULA) {
+            //nothing
+        } else if (choiceTaken.taken == Options.ACTION.SAVE) {
+            guardar();
+        } else if (choiceTaken.taken == Options.ACTION.EQUIP) {
+            int n = choiceTaken.indice_item;
+            equipar(n);
         } else {
-            choice.SetAction(Options.ACTION.NULA);
+            player.setFlags(choiceTaken);
         }
-
-        SetInteraccion(choice);
     }
+        
+    public static int deshabilitado = 0;
+
+    
+    @Override
+    public void interactionUserBox() {
+        //Options choice = new Options(Options.ACTION.NULA);
+        String input = null;
+        if (deshabilitado == 0) { // si es falso
+            input = (String) JOptionPane.showInputDialog(frame,
+                    "Que deseas hacer?",
+                    "Acciones",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    alternativas,
+                    alternativas[0]);
+
+            if (input == null) {
+                choiceTaken.SetAction(Options.ACTION.NULA);
+
+            } else if (input.equalsIgnoreCase("Deshabilitar")) {
+                clearInteraccion();
+                deshabilitado = 1;
+                choiceTaken.SetAction(Options.ACTION.NULA);
+            } //Si la instruccion comienza com mover
+            else if (input.equalsIgnoreCase("Salir")) {
+                System.out.println("\n\nSesionFinalizada");
+                Exit();
+                return;
+            } //Si la instruccion comienza com mover
+            else if (input.toLowerCase().startsWith("mover")) {
+                choiceTaken.SetAction(Options.ACTION.MOVE);
+                if (!modificarDireccion(input, choiceTaken)) //Si no se modifico la direccion se entiende
+                //que no se dio bien la instruccion
+                {
+                    choiceTaken.SetAction(Options.ACTION.NULA);
+                }
+            } else if (input.toLowerCase().startsWith("interactuar")) {
+                choiceTaken.SetAction(Options.ACTION.INTERACT);
+                //No es necesario ver si en verdad la direccion que se
+                //da es correcta
+                modificarDireccion(input, choiceTaken);
+            } //En caso que se desee debugear
+            //        else if (input.compareToIgnoreCase("sudo debug") == 0) {
+            //            choice.SetAction(Options.ACTION.DEBUG);
+            //        } //En caso que use teleport
+            //        else if (input.toLowerCase().startsWith("sudo teleport")) {
+            //            choice.SetAction(Options.ACTION.TELEPORT);
+            //        } //En caso que se desee equipar un objeto
+            else if (input.toLowerCase().startsWith("usar")) {
+
+                String numero = JOptionPane.showInputDialog(
+                        frame2,
+                        "Ingresa el numero del item a usar",
+                        "Escoger item",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                int num;
+                try {
+                    num = Integer.parseInt(numero);
+                    choiceTaken.indice_item = num;
+                    choiceTaken.SetAction(Options.ACTION.EQUIP);
+                } catch (NumberFormatException except) {
+                    System.out.println("Indice no valido.");
+                    choiceTaken.SetAction(Options.ACTION.NULA);
+                    SetInteraccion();
+                }
+
+            } else if (input.toLowerCase().startsWith("guardar")) {
+                choiceTaken.SetAction(Options.ACTION.SAVE);
+            } else {
+                choiceTaken.SetAction(Options.ACTION.NULA);
+            }
+        }
+        SetInteraccion();
+        interactionEnable = false;
+    }
+
  
 }

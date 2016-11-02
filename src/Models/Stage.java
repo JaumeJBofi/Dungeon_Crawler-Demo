@@ -32,7 +32,7 @@ public abstract class Stage implements  Runnable,KeyListener,
     
     protected Thread _animator;
     protected Thread _movements;
-    
+    public volatile static  boolean interactionEnable = false;
     
     // Stop the animator
     protected volatile boolean running = false;
@@ -275,8 +275,15 @@ public abstract class Stage implements  Runnable,KeyListener,
                 skips++;                
             }
              // Loop Game!
+            if(interactionEnable)
+            {
+                interactionUserBox();               
+            }
+           
+            if(running == false) System.exit(0);
             UpdateStage();
             UpdateScreen();
+            clearInteraccion();
 
             afterTime = System.nanoTime();
             diff = afterTime - beforeTime;

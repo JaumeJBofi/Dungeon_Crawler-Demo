@@ -21,12 +21,33 @@ final public class EnemyGenerator {
 
     final private Random randomManager;
     private List<Enemy> enemigos;
+    private int tileSizeX;
+    private int tileSizeY;
 
     public EnemyGenerator() {
         randomManager = new Random();
         enemigos = new ArrayList();
         
         //LoadEnemyTxt();
+        
+        try {
+        XStream xs = new XStream();
+        FileReader fr = new FileReader("Enemy_XML.xml");
+        enemigos = (ArrayList<Enemy>)xs.fromXML(fr);       
+        fr.close();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }                           
+    }
+    
+    public EnemyGenerator(int _tileSizeX,int _tileSizeY) {
+        randomManager = new Random();
+        enemigos = new ArrayList();
+        
+        //LoadEnemyTxt();
+        
+        tileSizeX = _tileSizeX;
+        tileSizeY = _tileSizeY;
         
         try {
         XStream xs = new XStream();
@@ -52,7 +73,8 @@ final public class EnemyGenerator {
                     break;
                 }
                 String[] arr = linea.split(",");
-                Enemy enemigo = new Enemy(nulo, arr[0], Integer.parseInt(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), arr[4], Integer.parseInt(arr[5]));
+                Enemy enemigo = new Enemy(nulo, arr[0], Integer.parseInt(arr[1]), Integer.parseInt(arr[2]),
+                        Integer.parseInt(arr[3]), arr[4], Integer.parseInt(arr[5]));
                 enemigos.add(enemigo);                
             }
             fr.close();

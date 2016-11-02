@@ -36,7 +36,8 @@ public class DungeonManager implements ISavable {
     private CellInformation[][] dungeonAccess;
     private CellInformation currenCellInfo;
 
-    private List<Dungeon> dungeons;
+    // SuperFeo
+    private volatile List<Dungeon> dungeons;
     private Dungeon textDungeon;
     private DIRECTIONS currentDirections;
     final private Random randomManager;
@@ -213,8 +214,7 @@ public class DungeonManager implements ISavable {
     }        
     //Preg 1 Lab2
     public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, int worldlvlEnemies, double varprcItems,int playerLvl) {
-        Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies, varprcItems);
-        theDungeon.SetUpMapSize(M,N,WIDTH,HEIGHT);        
+        Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies, varprcItems,M,N,WIDTH,HEIGHT);        
         theDungeon.SetDungeonNumber(activeDungeon);
         
         // Inicializacion..
@@ -313,11 +313,10 @@ public class DungeonManager implements ISavable {
             activeDungeon = Integer.parseInt(arr1[1]);
             int sizeDungeon = Integer.parseInt(arr1[2]);
             for (int i = 0; i < sizeDungeon; i++) {
-                Dungeon auxDungeon = new Dungeon(0, 0, 0);
+                Dungeon auxDungeon = new Dungeon(0, 0, 0,1,1,1,1);
                 auxDungeon.Load(lector, buffer);
                 dungeons.add(auxDungeon);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,13 +1,13 @@
-Espada Corta,0.8,1,0,15,0,15,-1,-1
-Espada Mediana,0.7,1,0,15,0,15,-1,-1
-Espada del Dolor Supremo,0.2,1,0,25,0,15,-1,-1
-Maza de Cadena,0.6,1,0,15,0,25,-1,-1
-Martillo de Guerra,0.4,1,0,20,0,15,-1,-1
-Hacha de Batalla,0.3,1,0,20,0,15,-1,-1
-Espada Alfange,0.25,2,0,35,0,15,-1,-1
-La Alabarda,0.4,4,0,35,0,15,-1,-1
-Lanza Mediana,0.6,6,0,20,0,15,-1,-1
-Lanza Corta,0.8,3,0,10,0,15,-1,-1
-Lucero Del Alba,0.4,1,0,45,0,15,-1,-1
-Arma Bardiche,0.10,1,0,25,0,15,-1,-1
-Machete Militar,0.3,5,0,25,0,15,-1,-1
+Espada Corta,0.8,1,0,15,0,15,-1,-1,0-0-0-24-24-IconSet-1-0-FALSE:1-ECorta
+Espada Mediana,0.7,1,0,15,0,15,-1,-1,0-0-0-24-24-IconSet-2-0-FALSE:1-EMediana
+Espada del Dolor Supremo,0.2,1,0,25,0,15,-1,-1,0-0-0-24-24-IconSet-3-0-FALSE:1-EDolor
+Maza de Cadena,0.6,1,0,15,0,25,-1,-1,0-0-0-24-24-IconSet-4-0-FALSE:1-MCadena
+Martillo de Guerra,0.4,1,0,20,0,15,-1,-1,0-0-0-24-24-IconSet-5-0-FALSE:1-MGuerra
+Hacha de Batalla,0.3,1,0,20,0,15,-1,-1,0-0-0-24-24-IconSet-6-0-FALSE:1-HBatalla
+Espada Alfange,0.25,2,0,35,0,15,-1,-1,0-0-0-24-24-IconSet-7-0-FALSE:1-EAlafange
+La Alabarda,0.4,4,0,35,0,15,-1,-1,0-0-0-24-24-IconSet-8-0-FALSE:1-Alabarda
+Lanza Mediana,0.6,6,0,20,0,15,-1,-1,0-0-0-24-24-IconSet-9-0-FALSE:1-LMediana
+Lanza Corta,0.8,3,0,10,0,15,-1,-1,0-0-0-24-24-IconSet-10-0-FALSE:1-LCorta
+Lucero Del Alba,0.4,1,0,45,0,15,-1,-1,0-0-0-24-24-IconSet-11-0-FALSE:1-Alba
+Arma Bardiche,0.10,1,0,25,0,15,-1,-1,0-0-0-24-24-IconSet-12-0-FALSE:1-Bardiche
+Machete Militar,0.3,5,0,25,0,15,-1,-1,0-0-0-24-24-IconSet-13-0-FALSE:1-MMilitar

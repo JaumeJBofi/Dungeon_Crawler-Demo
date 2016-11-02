@@ -30,6 +30,8 @@ final public class AllyGenerator {
     private int numTips;
     private int numNames;
       
+     private int tileSizeX;
+    private int tileSizeY;
     
     public  AllyGenerator(String varFileName)
     {
@@ -38,6 +40,30 @@ final public class AllyGenerator {
         numTips = 0;
         numNames = 0;
         randomManager = new Random();    
+        
+        LoadHints();     
+        LoadAlliesFromTxt();
+                
+//        try {
+//        XStream xs = new XStream();
+//        FileReader fr = new FileReader(fileName +"XML.xml");
+//        allyPool = (ArrayList<Aliado>)xs.fromXML(fr);       
+//        fr.close();
+//        } catch (IOException e) {
+//            System.out.println(e.toString());          
+//        }                       
+    }
+    
+     public  AllyGenerator(String varFileName,int _tileSizeX,int _tileSizeY)
+    {
+        fileName = varFileName;
+        tipsPool = new ArrayList<>();               
+        numTips = 0;
+        numNames = 0;
+        randomManager = new Random();    
+        
+        tileSizeX = _tileSizeX;
+        tileSizeY = _tileSizeY;
         
         LoadHints();     
         LoadAlliesFromTxt();
