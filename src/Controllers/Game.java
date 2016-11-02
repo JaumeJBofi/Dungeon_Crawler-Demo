@@ -151,7 +151,7 @@ public final class Game extends Stage{
                 try {
                     while(true)
                     {
-                        Thread.sleep(500);
+                        Thread.sleep(1000);
                     myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
                     }
                     
@@ -167,12 +167,18 @@ public final class Game extends Stage{
     public synchronized void UpdateStage()
     {
         // Now with Graphics
+<<<<<<< HEAD
        
+=======
+      
+        
+>>>>>>> origin/master
         if (choiceTaken.taken != Options.ACTION.NULA) {
             if (choiceTaken.taken == Options.ACTION.MOVE) {   
                        myManager.GetActiveDungeon().act();  
             }
             if (choiceTaken.taken == Options.ACTION.INTERACT) {
+                        myManager.GetActiveDungeon().act();  
                 if (!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(), choiceTaken.path)).isWall()) {
                             myManager.GetActiveDungeon().act();  
                     switch (nextCellInformation.GetType()) {
@@ -209,13 +215,14 @@ public final class Game extends Stage{
         g.drawImage(IDibujable.spriteHash.get("BackGroundFog"), 0, 0,WIDTH,HEIGHT, null);
         if (battleFlag == true) {
                 //player.Mostrar_BarraInfo(g, 20);
-                if (myManager.GetActiveDungeon().BattleGraphic(player, nextCellInformation.position,g)) {
+               if (myManager.GetActiveDungeon().BattleGraphic(player, nextCellInformation.position,g, this.bs)) {
                 } else {
                     System.out.println("Fin del juego. Ha muerto. Presione Enter\n");
                     Exit();
                     System.exit(0);
                 }
             battleFlag = false;
+            choiceTaken.SetAction(Options.ACTION.NULA);
         }
         myManager.GetActiveDungeon().Render(g);
         player.Mostrar_BarraInfo(g, 20);
@@ -227,6 +234,7 @@ public final class Game extends Stage{
         if ((keyCode == KeyEvent.VK_ENTER) )
         {
             interactionEnable = true;
+            deshabilitado = 0;
         }
         myManager.GetActiveDungeon().MovePlayersPressed(e);
     }
@@ -443,7 +451,7 @@ public final class Game extends Stage{
             }
         }
         SetInteraccion();
-        interactionEnable = false;
+        interactionEnable = true;
     }
 
  
