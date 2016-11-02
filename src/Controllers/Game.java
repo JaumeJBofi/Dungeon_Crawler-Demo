@@ -148,14 +148,18 @@ public final class Game extends Stage{
             @Override
             public void run() {
                 try {
-                    Thread.sleep(1);
+                    while(true)
+                    {
+                        Thread.sleep(500);
                     myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
+                    }
+                    
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
                 }               
             }
-        });        
-        _movements.start();
+        });     
+       _movements.start();
     }
     
     @Override
@@ -165,7 +169,8 @@ public final class Game extends Stage{
         myManager.GetActiveDungeon().act();        
         
         if (choiceTaken.taken != Options.ACTION.NULA) {
-            if (choiceTaken.taken == Options.ACTION.MOVE) {               
+            if (choiceTaken.taken == Options.ACTION.MOVE) {   
+               
             }
             if (choiceTaken.taken == Options.ACTION.INTERACT) {
                 if (!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(), choiceTaken.path)).isWall()) {
@@ -176,9 +181,7 @@ public final class Game extends Stage{
                         }
                         break;
                         case ENEMY: {
-
                             battleFlag = true;
-
                         }
                         break;
                         case FRIEND: {
