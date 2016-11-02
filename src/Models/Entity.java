@@ -225,8 +225,9 @@ public abstract class Entity extends Sprite implements ISavable, IDibujable {
         int _y = move.GetY();
         
         CellInformation.CELLTYPE cellInfo = dungeonAccess[_x][_y].GetType();
-        if(cellInfo!=CellInformation.CELLTYPE.PARED&&cellInfo!=CellInformation.CELLTYPE.ENEMY&&
-                cellInfo!=CellInformation.CELLTYPE.FRIEND&&cellInfo!=CellInformation.CELLTYPE.ARTIFACT)
+        //if(cellInfo!=CellInformation.CELLTYPE.PARED&&cellInfo!=CellInformation.CELLTYPE.ENEMY&&
+        //        cellInfo!=CellInformation.CELLTYPE.FRIEND&&cellInfo!=CellInformation.CELLTYPE.ARTIFACT)
+        if(cellInfo == CellInformation.CELLTYPE.ADENTRO )
         {
             return move;
         }else{

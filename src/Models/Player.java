@@ -28,7 +28,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+import java.awt.Color;
+import java.awt.Font;
 /**
  *
  * @author Arthuro
@@ -466,6 +467,60 @@ public abstract class Player extends Entity implements ISavable {
             e.printStackTrace();
         }        
     }
+    
+    
+     public void Mostrar_BarraInfo(Graphics g, int x) {
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial Narrow", Font.PLAIN, 16));
+        g.drawString(" ------ STATS ------ ", x, 50);
+        g.setColor(Color.WHITE);
+        //g.drawString("Q1 se la come", 20, 70);
+        g.drawString(this.GetNombre(), x, 70);
+        g.drawString("  HP: " + this.hp + "/" + this.vidaMaxima, x, 90);
+        if (arma_equip == null) {
+            g.drawString("  Arma: Ninguno", x, 110);
+        } else {
+            g.drawString("  Arma: " + arma_equip.GetNombre(), x, 110);
+            //g.drawString("  Arma: " + arma_equip.GetNombre() + " (" + arma_equip.GetDanhoMin() + " - " + arma_equip.GetDanhoMax() + " ATK)", x, 110);
+        }
+        if (armadura_equip == null) {
+            g.drawString("  Armadura: Ninguno", x, 130);
+        } else {
+            g.drawString("  Armadura: " + armadura_equip.GetNombre(), x, 130);
+            //g.drawString("  Armadura: " + armadura_equip.GetNombre() + " (" + armadura_equip.GetProteccion() + " DEF)", x, 130);
+        }
+        Artefacto art;
+        int tamanho = saco.size();
+        g.drawString(" ------ ITEMS ------", x, 150);
+        if (tamanho == 0) {
+            g.drawString("  Vacio", x, 170);
+        } else {
+            for (int i = 0; i < tamanho; i++) {
+                art = saco.get(i);
+                if (art == arma_equip || art == armadura_equip) { //puse art en lugar de saco.get(i)
+                    g.drawString("  " + (i + 1) + ") " + art.GetNombre() + " E", x, 170 + (20 * i));
+                } else {
+                    g.drawString("  " + (i + 1) + ") " + art.GetNombre(), x, 170 + (20 * i));
+                }
+//                if (art instanceof Arma) {
+//                    if (art == arma_equip) {
+//                        g.drawString("  " + (i + 1) + ") " + art.GetNombre() + " (" + ((Arma) art).GetDanhoMin() + " - " + ((Arma) art).GetDanhoMax() + " ATK) E", x, 170 + (20 * i));
+//                    } else {
+//                        g.drawString("  " + (i + 1) + ") " + art.GetNombre() + " (" + ((Arma) art).GetDanhoMin() + " - " + ((Arma) art).GetDanhoMax() + " ATK)", x, 170 + (20 * i));
+//                    }
+//                } else if (art instanceof Armadura) {
+//                    if (art == armadura_equip) {
+//                        g.drawString("  " + (i + 1) + ") " + art.GetNombre() + " (" + ((Armadura) art).GetProteccion() + " DEF) E", x, 170 + (20 * i));
+//                    } else {
+//                        g.drawString("  " + (i + 1) + ") " + art.GetNombre() + " (" + ((Armadura) art).GetProteccion() + " DEF)", x, 170 + (20 * i));
+//                    }
+//                } else { //art instanceof Pocion
+//                    g.drawString("  " + (i + 1) + ") " + art.GetNombre() + " (" + ((Pocion) art).GetVida() + " HP)", x, 170 + (20 * i));
+//                }
+            }
+        }
+    }
+    
     
     public void guardar_personaje(FileWriter fr) {
         try {

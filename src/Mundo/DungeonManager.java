@@ -268,7 +268,7 @@ public class DungeonManager implements ISavable {
                 // Marcar camino y a V
                 advanceInDirection(currentPoint, currentDirections, 1);
                 theDungeon.SetEntityInChamber(GetRandomType(theDungeon.GetPrcEnemies()),currentPoint,playerLvl);   
-                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
+                //dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.NORMAL);
                 
                 advanceInDirection(currentPoint, currentDirections, 1);

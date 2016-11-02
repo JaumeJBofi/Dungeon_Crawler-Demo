@@ -15,15 +15,18 @@ import Foundation.Coordinate;
 import Controllers.ObjectGenerator;
 import java.util.List;
 import Controllers.EnemyGenerator;
+import static Controllers.Game.alternativas;
 import Foundation.DIRECTIONS;
 import Foundation.ISavable;
 import Facilidades.Aliado;
 import Foundation.ObjectConverter;
+import Foundation.Options;
 import Models.Avatar;
 import Models.Enemy;
 import Models.IDibujable;
 import Models.Player;
 import Models.Sprite;
+import Models.Stage;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,12 +35,12 @@ import java.io.*;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 // Graphics imports begin
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 // Graphics imports end
 /**
@@ -52,7 +55,7 @@ public class Dungeon implements IDibujable, ISavable {
     private int tileSizeY;
     private int visionTileSizeX;
     private int visionTileSizeY;
-    
+
     private int dungeonNumber;
 
     private int minshowY;
@@ -69,9 +72,9 @@ public class Dungeon implements IDibujable, ISavable {
 
     private int numEnemies;
     private int numAliados;
-    private int numArtifacts;    
+    private int numArtifacts;
     private int activePlayer;
-       
+
     //private CellInformation dungeonStatus;    
     private Chamber[][] layOutChamber;
     private CellInformation[][] dungeonAccess;
@@ -80,13 +83,13 @@ public class Dungeon implements IDibujable, ISavable {
     private List<Enemy> lista_enemigos;
     private List<Aliado> lista_aliados;
     private List<Artefacto> lista_artefactos;
-    
+
     private List<Player> lista_Players;
-    
+
     private EnemyGenerator enemygen;
     private AllyGenerator allyGen;
-    
-    private HashMap<CellInformation.CELLMODE,String> tilesInfo;
+
+    private HashMap<CellInformation.CELLMODE, String> tilesInfo;
 
     public Dungeon(double varprcEnemies, int varlvlEnemies, double varPrcItems) {
         // Momentaneamente el Laberinto no posee dimensiones       
@@ -105,18 +108,18 @@ public class Dungeon implements IDibujable, ISavable {
         // Ponemos memoria en allyGenerator cuando se nos pone el numero de nuestro Dungeon        
         lista_aliados = new ArrayList();
         numAliados = 0;
-        
+
         // Lista iría aca
         lista_artefactos = new ArrayList<>();
         numArtifacts = 0;
-        
-        lista_Players = new ArrayList<>();    
+
+        lista_Players = new ArrayList<>();
         tilesInfo = new HashMap<>();
     }
 
     public int GetM() {
         return M;
-    }        
+    }
 
     // Recordar que las dimensiones deben ser impares
     final public void SetM(int varM) {
@@ -138,55 +141,50 @@ public class Dungeon implements IDibujable, ISavable {
             N = varN;
         }
     }
-    
-    public void AddPlayer(Player p)
-    {
+
+    public void AddPlayer(Player p) {
         lista_Players.add(p);
         // Dibujamos el ultimo agregado (Podemos setearlo y desahabilitar este comportamiento (Lo cambiamos cada vez
         // que cambiamos el contexto del laberinto
         activePlayer = lista_Players.size() - 1;
     }
-    
-    public void SetActivePlayer(int i)
-    {
+
+    public void SetActivePlayer(int i) {
         activePlayer = i;
     }
-    
-    public int GetActivePlayer()
-    {
+
+    public int GetActivePlayer() {
         return activePlayer;
     }
 
     public void SetDungeonNumber(int varNum) {
-        
+
         allyGen = new AllyGenerator("Allies_" + Integer.toString(varNum));
-        dungeonNumber = varNum;   
-        LoadTiles(varNum);                
+        dungeonNumber = varNum;
+        LoadTiles(varNum);
     }
-    
-    public void LoadTiles(int varNum)
-    {
+
+    public void LoadTiles(int varNum) {
         // Cargamos un txt por cada laberinto en que carga Sprites al Main Hash
         // dependiendo del los 4 tipos de Modos (PARED;NORMAL:ANTERIOR ;SIGUIENTE)
-         try {            
+        try {
             FileReader fr = new FileReader("Dungeon_" + Integer.toString(varNum) + ".txt");
-            BufferedReader in = new BufferedReader(fr);                                              
+            BufferedReader in = new BufferedReader(fr);
             String buffer;
-            while((buffer = in.readLine())!=null)
-            {
+            while ((buffer = in.readLine()) != null) {
                 ObjectConverter ob = new ObjectConverter(buffer);
                 ob.SetDelimiter("#");
-                                
+
                 String spriteInfo;
-                
-                tilesInfo.put(ob.GetNextPartMODE(),(spriteInfo = ob.GetNextPart()));    
+
+                tilesInfo.put(ob.GetNextPartMODE(), (spriteInfo = ob.GetNextPart()));
                 new Sprite().ProcessSpriteInfo(spriteInfo, true);
-            }                     
+            }
         } catch (Exception e) {
             System.err.println("Error Archivo: " + "Dungeon_" + Integer.toString(varNum) + ".txt" + " no encontrado");
-        }                                
+        }
     }
-    
+
     public int GetDungeonNumber() {
         return dungeonNumber;
     }
@@ -237,14 +235,14 @@ public class Dungeon implements IDibujable, ISavable {
             numEnemies = varNumEnemies;
         }
     }
-    
-    public void SetNumArtifacts(int varNumArtifacts){
-        if(varNumArtifacts>0){
+
+    public void SetNumArtifacts(int varNumArtifacts) {
+        if (varNumArtifacts > 0) {
             numArtifacts = varNumArtifacts;
         }
     }
-    
-    public int GetNumArtifacts(){
+
+    public int GetNumArtifacts() {
         return numArtifacts;
     }
 
@@ -255,7 +253,6 @@ public class Dungeon implements IDibujable, ISavable {
     public void SetNumAllies(int varNumAliados) {
         numAliados = varNumAliados;
     }
-   
 
     public CellInformation GetCellInformation(int x, int y) {
         return dungeonAccess[x][y];
@@ -281,36 +278,32 @@ public class Dungeon implements IDibujable, ISavable {
     public void SetAccess(CellInformation access[][]) {
         dungeonAccess = access;
     }
-           
+
     // Llamada que se encarga de llenar una posicion y incrementar su
     // lista
-    
-    public void SetEntityInChamber(CellInformation.CELLTYPE type,Coordinate myCoordinate,int level)
-    {
+    public void SetEntityInChamber(CellInformation.CELLTYPE type, Coordinate myCoordinate, int level) {
         dungeonAccess[myCoordinate.GetX()][myCoordinate.GetY()].SetType(type);
-        switch(type)
-        {            
-            case ENEMY:
-            {                
+        switch (type) {
+            case ENEMY: {
                 addenemy(myCoordinate);
-            }break;
-            case ARTIFACT:
-            {
-                CellInformation.CELLOBJECT obj = objManager.GetRandomArtefactType(prcItems);
-                if(obj!=CellInformation.CELLOBJECT.EMPTY)
-                {
-                    // No deberia de no pasar;
-                  dungeonAccess[myCoordinate.GetX()][myCoordinate.GetY()].SetObject(obj);  
-                }            
-                AddArtifact(myCoordinate,level);                                    
-            }break;
-            case FRIEND:
-            {                
-                AddAlly(myCoordinate);                
-            }break;
-            default:{                
             }
-        }        
+            break;
+            case ARTIFACT: {
+                CellInformation.CELLOBJECT obj = objManager.GetRandomArtefactType(prcItems);
+                if (obj != CellInformation.CELLOBJECT.EMPTY) {
+                    // No deberia de no pasar;
+                    dungeonAccess[myCoordinate.GetX()][myCoordinate.GetY()].SetObject(obj);
+                }
+                AddArtifact(myCoordinate, level);
+            }
+            break;
+            case FRIEND: {
+                AddAlly(myCoordinate);
+            }
+            break;
+            default: {
+            }
+        }
     }
 
     public Artefacto getObject(int x, int y) {
@@ -360,17 +353,103 @@ public class Dungeon implements IDibujable, ISavable {
     }
 
     /// agregado ////}
-    public void Interactuar(Avatar player, Coordinate pos) {         
+    public void Interactuar(Avatar player, Coordinate pos) {
         ///// deberia actualizar el access y borrar el objeto de la matriz
-        player.AddArtefact(getObject(pos.GetX(),pos.GetY()));
+        player.AddArtefact(getObject(pos.GetX(), pos.GetY()));
     }
-    
-    public void GetFriendAdvice(Coordinate pose){
+
+    public void GetFriendAdvice(Coordinate pose) {
         layOutChamber[pose.GetX()][pose.GetY()].GetAliado().GiveAdvice();
     }
 
+    protected JFrame frame = new JFrame();
+    public static String[] alternativas = {"Atacar", "Huir", "Usar"};
+
+    public boolean BattleGraphic(Avatar player, Coordinate pos,Graphics g) {
+
+        int playerHp = player.GetVida();
+        int playerMax = player.GetVidaMaxima();
+
+        Enemy currentEnemy = layOutChamber[pos.GetX()][pos.GetY()].GetEnemy();
+        int enemyHp = currentEnemy.GetVida();
+
+        System.out.format("Comienza el Encuentro!\nNombre de Enemigo: %s\nDescripcion de Enemigo: %s\nAtaque: ( %d ATK)\n", currentEnemy.GetNombre(),
+                currentEnemy.GetDescription(), currentEnemy.GetStrength());
+        //Scanner in = new Scanner(System.in);
+
+        while (true) {
+            player.Mostrar_BarraInfo(g, 20);
+            String respuesta = (String) JOptionPane.showInputDialog(frame,
+                    "Que deseas hacer?",
+                    "Batalla",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    alternativas,
+                    alternativas[0]);
+            System.out.println("\n\n");
+            System.out.println(player.GetNombre() + ": " + player.GetVida() + "/" + player.GetVidaMaxima() + " HP");
+            System.out.println(currentEnemy.GetNombre() + ": " + currentEnemy.GetVida() + " HP");
+            System.out.print("Opciones: atacar, huir, usar.\n");
+            System.out.print("Comando: ");
+            if (respuesta.toLowerCase().startsWith("atacar")) {
+                int weaponDamage = player.GetEquipWeaponDamage() - currentEnemy.GetArmor();
+                int enemyDamage = currentEnemy.GetEnemyDamage() - player.GetEquipArmorProtection();
+                if (weaponDamage < 0) {
+                    weaponDamage = 0;
+                }
+                if (enemyDamage < 0) {
+                    enemyDamage = 0;
+                }
+                System.out.print("Recibes " + enemyDamage + " puntos de daño.\n");
+                player.ReciveDamage(enemyDamage);
+                System.out.print("El enemigo recibe " + weaponDamage + " puntos de daño.\n");
+                currentEnemy.ReciveDamage(weaponDamage);
+            } else if (respuesta.toLowerCase().startsWith("huir")) {
+                System.out.print("Huiste exitosamente.\n");
+                return true;
+            } else if (respuesta.toLowerCase().startsWith("usar")) {
+                JFrame frame2 = new JFrame();
+                String numero = JOptionPane.showInputDialog(
+                        frame2,
+                        "Ingresa el numero del item a usar",
+                        "Escoger item",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                int num = 0;
+                try {
+                    num = Integer.parseInt(numero);
+                } catch (NumberFormatException except) {
+                    System.out.println("Indice no valido.");
+                }
+
+                if (num > 0) {
+                    if (num <= player.getSizeSaco()) {
+                        player.EquipItem(num - 1);
+                    } else {
+                        System.out.println("\nNo tienes es indice de item en tu saco\n\n");
+                    }
+                } else {
+                    System.out.println("\nIngresaste Indice negativo en el saco\n\n");
+                }
+            } else {
+                System.out.println("Acción inválida.");
+            }
+            if (player.GetVida() == 0) {
+                return false;
+            }
+            if (currentEnemy.GetVida() == 0) {
+                System.out.println("El enemigo ha sido derrotado.\n");
+                dungeonAccess[pos.GetX()][pos.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
+                lista_enemigos.remove(currentEnemy);
+                layOutChamber[pos.GetX()][pos.GetY()].GasEnemy();
+                numEnemies--;
+                return true;
+            }
+        }
+    }
+
     public boolean Battle(Avatar player, Coordinate pos) {
-       
+
         int playerHp = player.GetVida();
         int playerMax = player.GetVidaMaxima();
 
@@ -452,14 +531,13 @@ public class Dungeon implements IDibujable, ISavable {
         lista_aliados.add(allyGen.GetAlly(pos, objManager));
         numAliados++;
     }
-    
-    public void AddArtifact(Coordinate pos,int level){
-        lista_artefactos.add(objManager.GetRandomObject(dungeonAccess[pos.GetX()][pos.GetY()].GetObject(),level,pos.GetX(),pos.GetY()));
+
+    public void AddArtifact(Coordinate pos, int level) {
+        lista_artefactos.add(objManager.GetRandomObject(dungeonAccess[pos.GetX()][pos.GetY()].GetObject(), level, pos.GetX(), pos.GetY()));
         numArtifacts++;
     }
 
-    
-    public void KillInChamber(Coordinate pos) {        
+    public void KillInChamber(Coordinate pos) {
         Enemy currentEnemy = layOutChamber[pos.GetX()][pos.GetY()].GetEnemy();
         dungeonAccess[pos.GetX()][pos.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
         lista_enemigos.remove(currentEnemy);
@@ -471,14 +549,14 @@ public class Dungeon implements IDibujable, ISavable {
         Enemy varEnemy;
         DIRECTIONS current;
         for (Enemy currEnemy : lista_enemigos) {
-            if ((current = currEnemy.RandomMoveInteligente(dungeonAccess, 1, playerX, playerY, M,N)) != DIRECTIONS.STAY) {
+            if ((current = currEnemy.RandomMoveInteligente(dungeonAccess, 1, playerX, playerY, M, N)) != DIRECTIONS.STAY) {
                 dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
                 layOutChamber[currEnemy.GetX()][currEnemy.GetY()].GasEnemy();
                 currEnemy.Move(current, 1);
                 dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);
                 layOutChamber[currEnemy.GetX()][currEnemy.GetY()].SetEnemy(currEnemy);
             } else {
-                if ((current = currEnemy.RandomMove(dungeonAccess, 1, playerX, playerY,M,N)) != DIRECTIONS.STAY) {
+                if ((current = currEnemy.RandomMove(dungeonAccess, 1, playerX, playerY, M, N)) != DIRECTIONS.STAY) {
 
                     // Primero elimino de dungeon acess y lo saco de su cuarto. Luego muevo el enemigo y lo pongo
                     // en una nueva locación
@@ -500,7 +578,7 @@ public class Dungeon implements IDibujable, ISavable {
             if (Math.random() <= 0.75) {
                 // Aca pueden presentarse errores.... Pero en el tiempo limita dificil que salga perfecto                
                 // Puede ser que no tenga donde moverse asi que se queda en el mismo lugar
-                if ((current = currEnemy.RandomMove(dungeonAccess, 1, playerX, playerY,M,N)) != DIRECTIONS.STAY) {
+                if ((current = currEnemy.RandomMove(dungeonAccess, 1, playerX, playerY, M, N)) != DIRECTIONS.STAY) {
 
                     // Primero elimino de dungeon acess y lo saco de su cuarto. Luego muevo el enemigo y lo pongo
                     // en una nueva locación
@@ -518,8 +596,8 @@ public class Dungeon implements IDibujable, ISavable {
     public void MoveAllies(int playerX, int playerY) {
         DIRECTIONS current;
         for (Aliado currAliado : lista_aliados) {
-            if ((current = currAliado.RandomMove(dungeonAccess, 1, playerX, playerY,M,N)) != DIRECTIONS.STAY) {
-            // Primero elimino de dungeon acess y lo saco de su cuarto. Luego muevo el enemigo y lo pongo
+            if ((current = currAliado.RandomMove(dungeonAccess, 1, playerX, playerY, M, N)) != DIRECTIONS.STAY) {
+                // Primero elimino de dungeon acess y lo saco de su cuarto. Luego muevo el enemigo y lo pongo
                 // en una nueva locación
                 dungeonAccess[currAliado.GetX()][currAliado.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
 
@@ -533,119 +611,94 @@ public class Dungeon implements IDibujable, ISavable {
             }
         }
     }
-    
-    public void MovePlayersPressed(KeyEvent e)
-    {
-        for(Player p:lista_Players)
-        {
+
+    public void MovePlayersPressed(KeyEvent e) {
+        for (Player p : lista_Players) {
             p.keyPressed(e);
         }
     }
-    
-    public void MovePlayersReleased(KeyEvent e)
-    {        
-        for(Player p:lista_Players)
-        {
+
+    public void MovePlayersReleased(KeyEvent e) {
+        for (Player p : lista_Players) {
             p.keyReleased(e);
-        }        
+        }
     }
-          
-    
-    public void act()
-    {       
-        
-        for(Player p: lista_Players)
-        {
+
+    public void act() {
+
+        for (Player p : lista_Players) {
             p.act(dungeonAccess);
         }
     }
-    
-    public void CheckConsistency()
-    {
-        for(int i = 0;i<M;i++)
-        {
-            for(int j = 0;j<N;j++)
-            {
-                switch(dungeonAccess[i][j].GetType())
-                {
-                    case FRIEND:
-                    {
-                        if(layOutChamber[i][j]==null)
-                        {
+
+    public void CheckConsistency() {
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                switch (dungeonAccess[i][j].GetType()) {
+                    case FRIEND: {
+                        if (layOutChamber[i][j] == null) {
                             System.out.println("Error Null Chamber: Position: " + i + " " + j);
-                        }else
-                        {
-                            if(layOutChamber[i][j].GetAliado()==null)
-                            {
+                        } else {
+                            if (layOutChamber[i][j].GetAliado() == null) {
                                 System.out.println("Error Null Ally: Position: " + i + " " + j);
                             }
                         }
-                    }break;
-                    case ENEMY:
-                    {
-                        if(layOutChamber[i][j]==null)
-                        {
+                    }
+                    break;
+                    case ENEMY: {
+                        if (layOutChamber[i][j] == null) {
                             System.out.println("Error Null Chamber: Position: " + i + " " + j);
-                        }else
-                        {
-                            if(layOutChamber[i][j].GetEnemy()==null)
-                            {
+                        } else {
+                            if (layOutChamber[i][j].GetEnemy() == null) {
                                 System.out.println("Error Null Enemy: Position: " + i + " " + j);
                             }
-                        }                        
-                    }break;
-                    case ARTIFACT:
-                    {
-                        if(layOutChamber[i][j]==null)
-                        {
+                        }
+                    }
+                    break;
+                    case ARTIFACT: {
+                        if (layOutChamber[i][j] == null) {
                             System.out.println("Error Null Chamber: Position: " + i + " " + j);
-                        }else
-                        {
-                            if(layOutChamber[i][j].GetArtefacto()==null)
-                            {
+                        } else {
+                            if (layOutChamber[i][j].GetArtefacto() == null) {
                                 System.out.println("Error Null Artifact: Position: " + i + " " + j);
-                            }else{
-                                switch(dungeonAccess[i][j].GetObject())
-                                {
-                                    case WEAPON:
-                                    {
-                                        if(!(layOutChamber[i][j].GetArtefacto() instanceof Arma))
-                                        {
+                            } else {
+                                switch (dungeonAccess[i][j].GetObject()) {
+                                    case WEAPON: {
+                                        if (!(layOutChamber[i][j].GetArtefacto() instanceof Arma)) {
                                             System.out.println("Error Mistach Artifact: Arma: " + i + " " + j);
-                                        }                                                
-                                    }break;
-                                    case POTION:
-                                    {
-                                        if(!(layOutChamber[i][j].GetArtefacto() instanceof Pocion))
-                                        {
+                                        }
+                                    }
+                                    break;
+                                    case POTION: {
+                                        if (!(layOutChamber[i][j].GetArtefacto() instanceof Pocion)) {
                                             System.out.println("Error Mistach Artifact: Pocion: " + i + " " + j);
-                                        }    
-                                        
-                                    }break;
-                                    case ARMOR:
-                                    {
-                                        if(!(layOutChamber[i][j].GetArtefacto() instanceof Armadura))
-                                        {
+                                        }
+
+                                    }
+                                    break;
+                                    case ARMOR: {
+                                        if (!(layOutChamber[i][j].GetArtefacto() instanceof Armadura)) {
                                             System.out.println("Error Mistach Artifact: Armadura: " + i + " " + j);
-                                        }                                            
-                                    }break;
+                                        }
+                                    }
+                                    break;
                                 }
                             }
                         }
-                        
-                    }break;
+
+                    }
+                    break;
                 }
-                
+
             }
         }
     }
-    
-    public void SetUpMapSize(int _M,int _N,int WIDTH,int HEIGHT)
-    {
+
+    public void SetUpMapSize(int _M, int _N, int WIDTH, int HEIGHT) {
         SetM(_M);
-        SetN(_N);        
-        tileSizeX = (int)WIDTH/M;
-        tileSizeY = (int)HEIGHT/N;        
+        SetN(_N);
+        tileSizeX = (int) WIDTH / M;
+        tileSizeY = (int) HEIGHT / N;
     }
 
     // Preg 2
@@ -656,28 +709,27 @@ public class Dungeon implements IDibujable, ISavable {
             for (int j = 0; j < N; j++) {
                 //Esta linea hace que se caiga. La Comentada       
                 CellInformation.CELLMODE a = dungeonAccess[i][j].GetMode();
-                if(a!=CellInformation.CELLMODE.PARED)
-                {
+                if (a != CellInformation.CELLMODE.PARED) {
                     int b = 5;
                 }
-                layOutChamber[i][j] = new Chamber(tilesInfo.get(a),tileSizeX,tileSizeY);     
-                layOutChamber[i][j].SetPosition(i*tileSizeX, j*tileSizeY);
+                layOutChamber[i][j] = new Chamber(tilesInfo.get(a), tileSizeX, tileSizeY);
+                layOutChamber[i][j].SetPosition(i * tileSizeX, j * tileSizeY);
                 //layOutChamber[i][j] = new Chamber();
             }
         }
         for (Enemy currEnemy : lista_enemigos) {
             layOutChamber[currEnemy.GetX()][currEnemy.GetY()].SetEnemy(currEnemy);
         }
-        for(Aliado currAliado: lista_aliados){
+        for (Aliado currAliado : lista_aliados) {
             layOutChamber[currAliado.GetX()][currAliado.GetY()].SetAlly(currAliado);
         }
-        for(Artefacto currArtifact: lista_artefactos){
+        for (Artefacto currArtifact : lista_artefactos) {
             layOutChamber[currArtifact.x][currArtifact.y].SetArtefact(currArtifact);
         }
     }
 
     public void TeleportPlayer(Avatar player, int x, int y) {
-        player.SetPosition(x, y);        
+        player.SetPosition(x, y);
     }
 
     // Implementacion de ISavable!
@@ -789,59 +841,73 @@ public class Dungeon implements IDibujable, ISavable {
 
     // Implementacion de IDibujable  
     public void Render(Graphics g) {
-         
+
         visionTileSizeX = tileSizeX;
-        visionTileSizeY = tileSizeY;             
-        
+        visionTileSizeY = tileSizeY;
+
         int posX = lista_Players.get(activePlayer).GetX();
         int posY = lista_Players.get(activePlayer).GetY();
-                     
-        g.setColor(Color.BLACK);    
-        for (int j = 0; j < N; j++) {       
+
+        g.setColor(Color.BLACK);
+        for (int j = 0; j < N; j++) {
             for (int i = 0; i < M; i++) {
                 if ((i == posX) && (j == posY)) {
-                    g.fillOval(i*visionTileSizeX+visionTileSizeX, j*visionTileSizeY + visionTileSizeY, visionTileSizeX*2, visionTileSizeY*2);
+                    g.fillOval(i * visionTileSizeX + visionTileSizeX, j * visionTileSizeY + visionTileSizeY, visionTileSizeX * 2, visionTileSizeY * 2);
                 } else {
                     CellInformation factor = dungeonAccess[i][j];
                     layOutChamber[i][j].Render(g);
                     switch (factor.GetMode()) {
-                        case SIGUENTE:                        
+                        case SIGUENTE:
+                            g.setColor(Color.YELLOW);
+                            g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16);
                             break;
-                        case ANTERIOR:                         
+                        case ANTERIOR:
+                            g.setColor(Color.ORANGE);
+                            g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16);
                             break;
                         default: {
                             switch (factor.GetType()) {
                                 case PARED:
-                                   
+                                    g.setColor(Color.BLUE);
+                                    g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16);
                                     break;
                                 case ADENTRO:
-                                   layOutChamber[i][j].Render(g);
+                                    layOutChamber[i][j].Render(g);
                                     break;
-                                case ARTIFACT:
-                                {
-                                    switch(dungeonAccess[i][j].GetObject())
-                                    {
-                                        case WEAPON: 
+                                case ARTIFACT: {
+                                    switch (dungeonAccess[i][j].GetObject()) {
+                                        case WEAPON:
+                                            g.setColor(Color.GREEN);
+                                            g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16);
                                             break;
-                                        case POTION: 
+                                        case POTION:
+                                            g.setColor(Color.GREEN);
+                                            g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16);
                                             break;
-                                        case ARMOR:  
+                                        case ARMOR:
+                                            g.setColor(Color.GREEN);
+                                            g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16);
                                             break;
-                                    }                            
-                                }break;
-                                case ENEMY:                                          
+                                    }
+                                }
+                                break;
+                                case ENEMY:
+                                    g.setColor(Color.RED);
+                                    g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16);
                                     break;
-                                case FRIEND:                                   
+                                case FRIEND:
+                                    g.setColor(Color.PINK);
+                                    g.fillOval(i * visionTileSizeX, j * visionTileSizeY, 16, 16);
                                     break;
                             }
                         }
                         break;
                     }
-                }    
-            }          
+                }
+            }
         }
     }
-      
+
     // Escribe a un archivo de Texto
     public void Render(FileWriter fw) {
         try {
@@ -892,7 +958,7 @@ public class Dungeon implements IDibujable, ISavable {
             e.printStackTrace();
         }
     }
-  
+
     public void Guardar_Render(FileWriter fw) {
 
         try {

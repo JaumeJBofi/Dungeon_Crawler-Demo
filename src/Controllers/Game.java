@@ -65,6 +65,7 @@ public final class Game extends Stage {
     HashMap<String, ObjectConverter> configuration = new HashMap<>();
 
     private boolean introScreen;
+    private boolean battleFlag = false;
 
     public CellInformation.CELLTYPE GetWall(int i, int j) {
         return myManager.GetActiveDungeon().GetCellInformation(i, j).GetType();
@@ -142,8 +143,40 @@ public final class Game extends Stage {
     public synchronized void UpdateStage() {
         // Now with Graphics
         if (choiceTaken.taken != Options.ACTION.NULA) {
-            myManager.GetActiveDungeon().act();
-            myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
+            if (choiceTaken.taken == Options.ACTION.MOVE) {
+                myManager.GetActiveDungeon().act();
+                myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
+            }
+            if (choiceTaken.taken == Options.ACTION.INTERACT) {
+                if (!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(), choiceTaken.path)).isWall()) {
+
+                    switch (nextCellInformation.GetType()) {
+                        case ARTIFACT: {
+                            myManager.GetActiveDungeon().Interactuar(player, nextCellInformation.position); // borra el artefacto de la matriz                                
+                        }
+                        break;
+                        case ENEMY: {
+
+                            battleFlag = true;
+
+                        }
+                        break;
+                        case FRIEND: {
+                            myManager.GetActiveDungeon().GetFriendAdvice(nextCellInformation.position);
+                        }
+                        break;
+
+                        default: {
+                            System.out.println("\n\nNo puedes interactuar con esa casilla");
+
+                        }
+                        break;
+                    }
+                    System.out.println("");
+                } else {
+                    System.out.println("\n\nNo puedes interactuar con esa pared");
+                }
+            }
         }
     }
 
@@ -151,7 +184,18 @@ public final class Game extends Stage {
     public synchronized void RenderStage(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, WIDTH, HEIGHT);
+        if (battleFlag == true) {
+                //player.Mostrar_BarraInfo(g, 20);
+                if (myManager.GetActiveDungeon().BattleGraphic(player, nextCellInformation.position,g)) {
+                } else {
+                    System.out.println("Fin del juego. Ha muerto. Presione Enter\n");
+                    Exit();
+                    System.exit(0);
+                }
+            battleFlag = false;
+        }
         myManager.GetActiveDungeon().Render(g);
+        player.Mostrar_BarraInfo(g, 20);
     }
 
     @Override
