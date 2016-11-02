@@ -150,7 +150,7 @@ public final class Game extends Stage{
                 try {
                     while(true)
                     {
-                        Thread.sleep(500);
+                        Thread.sleep(1000);
                     myManager.GetActiveDungeon().MoveEnemiesInteligente(player.GetX(), player.GetY());
                     }
                     
@@ -166,13 +166,14 @@ public final class Game extends Stage{
     public synchronized void UpdateStage()
     {
         // Now with Graphics
-        myManager.GetActiveDungeon().act();        
+      
         
         if (choiceTaken.taken != Options.ACTION.NULA) {
             if (choiceTaken.taken == Options.ACTION.MOVE) {   
-               
+                       myManager.GetActiveDungeon().act();  
             }
             if (choiceTaken.taken == Options.ACTION.INTERACT) {
+                        myManager.GetActiveDungeon().act();  
                 if (!(nextCellInformation = myManager.ValidMoveAndChange(player.GetPosition(), choiceTaken.path)).isWall()) {
 
                     switch (nextCellInformation.GetType()) {
@@ -210,13 +211,14 @@ public final class Game extends Stage{
         g.fillRect(0, 0, WIDTH, HEIGHT);
         if (battleFlag == true) {
                 //player.Mostrar_BarraInfo(g, 20);
-                if (myManager.GetActiveDungeon().BattleGraphic(player, nextCellInformation.position,g)) {
+               if (myManager.GetActiveDungeon().BattleGraphic(player, nextCellInformation.position,g, this.bs)) {
                 } else {
                     System.out.println("Fin del juego. Ha muerto. Presione Enter\n");
                     Exit();
                     System.exit(0);
                 }
             battleFlag = false;
+            choiceTaken.SetAction(Options.ACTION.NULA);
         }
         myManager.GetActiveDungeon().Render(g);
         player.Mostrar_BarraInfo(g, 20);
@@ -228,6 +230,7 @@ public final class Game extends Stage{
         if ((keyCode == KeyEvent.VK_ENTER) )
         {
             interactionEnable = true;
+            deshabilitado = 0;
         }
         myManager.GetActiveDungeon().MovePlayersPressed(e);
     }
@@ -354,7 +357,7 @@ public final class Game extends Stage{
 
     public static String[] alternativas = {"Mover izquierda", "Mover derecha", "Mover abajo",
         "Mover arriba", "Interactuar izquierda", "Interactuar derecha", "Interactuar abajo", "Interactuar arriba",
-        "Usar", "Guardar", "Salir"};
+        "Usar", "Guardar", "Salir","Deshabilitar"};
     
         public synchronized void SetInteraccion() {
         //choiceTaken.taken = c.taken;
@@ -365,6 +368,7 @@ public final class Game extends Stage{
         } else if (choiceTaken.taken == Options.ACTION.EQUIP) {
             int n = choiceTaken.indice_item;
             equipar(n);
+            choiceTaken.SetAction(Options.ACTION.NULA);
         } else {
             player.setFlags(choiceTaken);
         }
@@ -444,7 +448,7 @@ public final class Game extends Stage{
             }
         }
         SetInteraccion();
-        interactionEnable = false;
+        interactionEnable = true;
     }
 
  

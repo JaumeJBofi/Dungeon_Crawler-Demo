@@ -14,12 +14,12 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408352192</pData>
+          <pData>189320816</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType>
-            <uniqueID>11</uniqueID>
-            <desc>Integer ARGB Premultiplied</desc>
+            <uniqueID>10</uniqueID>
+            <desc>Integer ARGB</desc>
             <next>
               <uniqueID>8</uniqueID>
               <desc>Any Integer DCM</desc>
@@ -37,7 +37,7 @@
               </next>
               <pixelConverter reference="../next/next/pixelConverter"/>
             </next>
-            <pixelConverter class="sun.awt.image.PixelConverter$ArgbPre">
+            <pixelConverter class="sun.awt.image.PixelConverter$Argb">
               <alphaMask>-16777216</alphaMask>
             </pixelConverter>
           </surfaceType>
@@ -52,7 +52,7 @@
             </nBits>
             <transparency>3</transparency>
             <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
+            <isAlphaPremultiplied>false</isAlphaPremultiplied>
             <numComponents>4</numComponents>
             <numColorComponents>3</numColorComponents>
             <colorSpace class="java.awt.color.ICC_ColorSpace">
@@ -157,7 +157,7 @@
                 </next>
               </compositeType>
               <destType reference="../../../surfaceType/next/next"/>
-              <pNativePrim>1391324704</pNativePrim>
+              <pNativePrim>1876880928</pNativePrim>
             </drawLineLoop>
             <fillRectLoop>
               <methodSignature>FillRect(...)</methodSignature>
@@ -165,7 +165,7 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
-              <pNativePrim>1391324480</pNativePrim>
+              <pNativePrim>1876880704</pNativePrim>
             </fillRectLoop>
             <drawRectLoop>
               <methodSignature>DrawRect(...)</methodSignature>
@@ -173,7 +173,7 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
-              <pNativePrim>1391324760</pNativePrim>
+              <pNativePrim>1876880984</pNativePrim>
             </drawRectLoop>
             <drawPolygonsLoop>
               <methodSignature>DrawPolygons(...)</methodSignature>
@@ -181,7 +181,7 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
-              <pNativePrim>1391324816</pNativePrim>
+              <pNativePrim>1876881040</pNativePrim>
             </drawPolygonsLoop>
             <drawPathLoop>
               <methodSignature>DrawPath(...)</methodSignature>
@@ -189,7 +189,7 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
-              <pNativePrim>1391324872</pNativePrim>
+              <pNativePrim>1876881096</pNativePrim>
             </drawPathLoop>
             <fillPathLoop>
               <methodSignature>FillPath(...)</methodSignature>
@@ -197,7 +197,7 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
-              <pNativePrim>1391324928</pNativePrim>
+              <pNativePrim>1876881152</pNativePrim>
             </fillPathLoop>
             <fillSpansLoop>
               <methodSignature>FillSpans(...)</methodSignature>
@@ -205,7 +205,7 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
-              <pNativePrim>1391324536</pNativePrim>
+              <pNativePrim>1876880760</pNativePrim>
             </fillSpansLoop>
             <fillParallelogramLoop>
               <methodSignature>FillParallelogram(...)</methodSignature>
@@ -213,7 +213,7 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
-              <pNativePrim>1391324592</pNativePrim>
+              <pNativePrim>1876880816</pNativePrim>
             </fillParallelogramLoop>
             <drawParallelogramLoop>
               <methodSignature>DrawParallelogram(...)</methodSignature>
@@ -221,7 +221,7 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
-              <pNativePrim>1391324648</pNativePrim>
+              <pNativePrim>1876880872</pNativePrim>
             </drawParallelogramLoop>
             <drawGlyphListLoop>
               <methodSignature>DrawGlyphList(...)</methodSignature>
@@ -229,28 +229,28 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
-              <pNativePrim>1391325376</pNativePrim>
+              <pNativePrim>1876881600</pNativePrim>
             </drawGlyphListLoop>
             <drawGlyphListAALoop>
               <methodSignature>DrawGlyphListAA(...)</methodSignature>
-              <uniqueID>269160484</uniqueID>
+              <uniqueID>269094948</uniqueID>
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType"/>
-              <pNativePrim>1391348416</pNativePrim>
+              <pNativePrim>1876901936</pNativePrim>
             </drawGlyphListAALoop>
             <drawGlyphListLCDLoop>
               <methodSignature>DrawGlyphListLCD(...)</methodSignature>
-              <uniqueID>285937700</uniqueID>
+              <uniqueID>285872164</uniqueID>
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType"/>
-              <pNativePrim>1391348472</pNativePrim>
+              <pNativePrim>1876901992</pNativePrim>
             </drawGlyphListLCDLoop>
           </solidloops>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
+      <imageType>2</imageType>
       <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
@@ -893,7 +893,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -928,62 +927,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408350528</pData>
+          <pData>189322608</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -996,8 +944,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -1639,7 +1587,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -1674,62 +1621,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408352576</pData>
+          <pData>189324784</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -1742,8 +1638,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -2385,7 +2281,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -2420,62 +2315,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408352448</pData>
+          <pData>189324272</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -2488,8 +2332,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -3131,7 +2975,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -3166,62 +3009,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408355904</pData>
+          <pData>189327600</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -3234,8 +3026,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -3877,7 +3669,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -3912,62 +3703,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408351040</pData>
+          <pData>189327216</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -3980,8 +3720,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -4623,7 +4363,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -4658,62 +4397,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408349632</pData>
+          <pData>189326576</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -4726,8 +4414,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -5369,7 +5057,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -5404,62 +5091,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408356160</pData>
+          <pData>189326064</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -5472,8 +5108,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -6115,7 +5751,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -6150,62 +5785,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408354368</pData>
+          <pData>189325424</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -6218,8 +5802,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -6861,7 +6445,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -6896,62 +6479,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408354880</pData>
+          <pData>189322736</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -6964,8 +6496,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -7607,7 +7139,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -7642,62 +7173,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408352704</pData>
+          <pData>189322352</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -7710,8 +7190,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -8353,7 +7833,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -8388,62 +7867,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408353472</pData>
+          <pData>189321840</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -8456,8 +7884,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -9099,7 +8527,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -9134,62 +8561,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408349376</pData>
+          <pData>189321968</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -9202,8 +8578,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -9845,7 +9221,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -9880,62 +9255,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408356032</pData>
+          <pData>189325936</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -9948,8 +9272,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -10591,7 +9915,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -10624,62 +9947,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408348224</pData>
+          <pData>189322992</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -10692,8 +9964,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -11335,7 +10607,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -11368,62 +10639,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408348608</pData>
+          <pData>189323120</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -11436,8 +10656,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -12079,7 +11299,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -12112,62 +11331,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408349248</pData>
+          <pData>189323248</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -12180,8 +11348,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -12823,7 +11991,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -12856,62 +12023,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408355648</pData>
+          <pData>189324912</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -12924,8 +12040,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -13567,7 +12683,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -13600,62 +12715,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408355264</pData>
+          <pData>189325552</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -13668,8 +12732,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -14311,7 +13375,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -14344,62 +13407,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408349504</pData>
+          <pData>189326320</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -14412,8 +13424,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -15055,7 +14067,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -15088,62 +14099,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408354752</pData>
+          <pData>189319664</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -15156,8 +14116,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -15799,7 +14759,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -15832,62 +14791,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408355392</pData>
+          <pData>189326704</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -15900,8 +14808,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -16543,7 +15451,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -16576,62 +15483,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408349760</pData>
+          <pData>189326960</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -16644,8 +15500,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -17287,7 +16143,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -17320,62 +16175,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408350016</pData>
+          <pData>189327088</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -17388,8 +16192,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -18031,7 +16835,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -18064,62 +16867,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408351168</pData>
+          <pData>189300080</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -18132,8 +16884,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -18775,7 +17527,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -18808,62 +17559,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408353856</pData>
+          <pData>189298160</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -18876,8 +17576,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -19519,7 +18219,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -19552,62 +18251,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408351296</pData>
+          <pData>189297008</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -19620,8 +18268,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -20263,7 +18911,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -20296,62 +18943,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408353984</pData>
+          <pData>189296368</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -20364,8 +18960,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -21007,7 +19603,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -21040,62 +19635,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408353600</pData>
+          <pData>189302640</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -21108,8 +19652,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -21751,7 +20295,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
@@ -21784,62 +20327,11 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
-          <pData>408354624</pData>
+          <pData>189299952</pData>
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
-          <colorModel class="java.awt.image.DirectColorModel">
-            <pData>0</pData>
-            <pixel__bits>32</pixel__bits>
-            <nBits>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-              <int>8</int>
-            </nBits>
-            <transparency>3</transparency>
-            <supportsAlpha>true</supportsAlpha>
-            <isAlphaPremultiplied>true</isAlphaPremultiplied>
-            <numComponents>4</numComponents>
-            <numColorComponents>3</numColorComponents>
-            <colorSpace class="java.awt.color.ICC_ColorSpace" reference="../../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel/colorSpace"/>
-            <colorSpaceType>5</colorSpaceType>
-            <maxBits>8</maxBits>
-            <is__sRGB>true</is__sRGB>
-            <transferType>3</transferType>
-            <maskArray>
-              <int>16711680</int>
-              <int>65280</int>
-              <int>255</int>
-              <int>-16777216</int>
-            </maskArray>
-            <maskOffsets>
-              <int>16</int>
-              <int>8</int>
-              <int>0</int>
-              <int>24</int>
-            </maskOffsets>
-            <scaleFactors>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-              <float>1.0</float>
-            </scaleFactors>
-            <red__mask>16711680</red__mask>
-            <green__mask>65280</green__mask>
-            <blue__mask>255</blue__mask>
-            <alpha__mask>-16777216</alpha__mask>
-            <red__offset>16</red__offset>
-            <green__offset>8</green__offset>
-            <blue__offset>0</blue__offset>
-            <alpha__offset>24</alpha__offset>
-            <red__scale>0</red__scale>
-            <green__scale>0</green__scale>
-            <blue__scale>0</blue__scale>
-            <alpha__scale>0</alpha__scale>
-            <is__LinearRGB>false</is__LinearRGB>
-            <lRGBprecision>0</lRGBprecision>
-          </colorModel>
+          <colorModel class="java.awt.image.DirectColorModel" reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
           <disposerReferent/>
           <stateDelegate>
             <theState>STABLE</theState>
@@ -21852,8 +20344,8 @@
           <solidloops reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/solidloops"/>
         </sdDefault>
       </surfaceManager>
-      <imageType>3</imageType>
-      <colorModel class="java.awt.image.DirectColorModel" reference="../surfaceManager/sdDefault/colorModel"/>
+      <imageType>2</imageType>
+      <colorModel class="java.awt.image.DirectColorModel" reference="../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/colorModel"/>
       <raster class="sun.awt.image.IntegerInterleavedRaster">
         <sampleModel class="java.awt.image.SinglePixelPackedSampleModel">
           <width>24</width>
@@ -22495,7 +20987,6 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
-      <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
