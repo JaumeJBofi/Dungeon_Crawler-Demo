@@ -7,6 +7,7 @@ package Models;
 
 import Foundation.Coordinate;
 import Foundation.DIRECTIONS;
+import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -36,6 +37,22 @@ public class Enemy extends Entity {
         SetNivel(lvl);
         SetDescription(varDescription);
     }
+    
+    public Enemy(Coordinate varPosition, String nomb, int vida, int lvl, int initStrength, String varDescription, int varArmor,String spriteInfo,
+                    int tileSizeX,int tileSizeY) {
+        super(varPosition, nomb, vida, initStrength, varArmor,1,spriteInfo,tileSizeX,tileSizeY);
+        SetLookDirection(DIRECTIONS.BOT);
+        SetNivel(lvl);
+        SetDescription(varDescription);
+    }
+    
+    public Enemy(Enemy baseEnemy)
+    {
+        super(baseEnemy);
+        copySprite(baseEnemy);
+        SetLookDirection(DIRECTIONS.BOT);
+        SetDescription(baseEnemy.GetDescription());
+    }
 
     final public void SetDescription(String varDesc) {
         description = varDesc;
@@ -45,8 +62,14 @@ public class Enemy extends Entity {
         return description;
     }
  
-    public Enemy copiar() {
-        Enemy nuevo_enemigo = new Enemy(this.GetPosition(), this.GetNombre(), this.GetVida(), nivel, GetStrength(), GetDescription(), this.GetArmor());
+//    public Enemy copiar() {
+//        Enemy nuevo_enemigo = new Enemy(this.GetPosition(), this.GetNombre(), this.GetVida(), nivel, GetStrength(), GetDescription(), this.GetArmor());
+//        return nuevo_enemigo;
+//    }
+    
+    public Enemy copiar()
+    {
+        Enemy nuevo_enemigo = new Enemy(this);       
         return nuevo_enemigo;
     }
 
@@ -93,6 +116,21 @@ public class Enemy extends Entity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void LoadComponents(String spriteInfo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void Render(Graphics g) {
+        paint(g);
+    }
+
+    @Override
+    public void Dispose() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

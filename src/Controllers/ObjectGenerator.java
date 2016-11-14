@@ -32,6 +32,8 @@ final public class ObjectGenerator {
     private List<Armadura> armaduras;
     private List<Pocion> pociones;
     private ArrayList<Artefacto> artifactsPool;
+    private int tileSizeX;
+    private int tileSizeY;
 
     public ObjectGenerator(int baseLvl) {
 
@@ -42,30 +44,72 @@ final public class ObjectGenerator {
         artifactsPool = new ArrayList();
 
         //// leo el archivo de armas y ?????
-        //LoadTxtObjects();         // Already Loaded
-        try {
-        XStream xs = new XStream();
-        FileReader fr = new FileReader("Artefacts_XML.txt");
-        artifactsPool = (ArrayList<Artefacto>)xs.fromXML(fr);       
-        fr.close();
-        } catch (IOException e) {
-            System.out.println(e.toString());
-        }    
+        LoadTxtObjects();         // Already Loaded
+//        try {
+//        XStream xs = new XStream();
+//        FileReader fr = new FileReader("Artefacts_XML.xml");
+//        artifactsPool = (ArrayList<Artefacto>)xs.fromXML(fr);       
+//        fr.close();
+//        } catch (IOException e) {
+//            System.out.println(e.toString());
+//        }    
 
         // HardCoded for the damage..
-        for(Artefacto art:artifactsPool)
-        {
-            if(art instanceof Arma)
-            {
-                armas.add(new Arma(art,15,30));
-            }else if(art instanceof Armadura)
-            {
-                armaduras.add(new Armadura(art));
-            }else
-            {
-                pociones.add(new Pocion(art));
-            }
-        }
+//        for(Artefacto art:artifactsPool)
+//        {
+//            if(art instanceof Arma)
+//            {
+//                armas.add(new Arma(art,15,30));
+//            }else if(art instanceof Armadura)
+//            {
+//                armaduras.add(new Armadura(art));
+//            }else
+//            {
+//                pociones.add(new Pocion(art));
+//            }
+//        }
+        artifactsPool = null;
+        
+        tileSizeX = 32;
+        tileSizeY = 32;
+    }    
+    
+    public ObjectGenerator(int baseLvl,int _tileSizeX,int _tileSizeY) {
+
+        randomManager = new Random();
+        armas = new ArrayList();
+        armaduras = new ArrayList();
+        pociones = new ArrayList();
+        artifactsPool = new ArrayList();
+
+        tileSizeX = _tileSizeX;
+        tileSizeY = _tileSizeY;
+        
+        //// leo el archivo de armas y ?????
+        LoadTxtObjects();         // Already Loaded
+//        try {
+//        XStream xs = new XStream();
+//        FileReader fr = new FileReader("Artefacts_XML.xml");
+//        artifactsPool = (ArrayList<Artefacto>)xs.fromXML(fr);       
+//        fr.close();
+//        } catch (IOException e) {
+//            System.out.println(e.toString());
+//        }    
+//
+//        // HardCoded for the damage..
+//        for(Artefacto art:artifactsPool)
+//        {
+//            if(art instanceof Arma)
+//            {
+//                armas.add(new Arma(art,15,30));
+//            }else if(art instanceof Armadura)
+//            {
+//                armaduras.add(new Armadura(art));
+//            }else
+//            {
+//                pociones.add(new Pocion(art));
+//            }
+//        }
         artifactsPool = null;
     }    
         
@@ -85,7 +129,7 @@ final public class ObjectGenerator {
                 }
                 String[] arr = linea.split(",");
                 Arma weapon = new Arma(arr[0], Double.parseDouble(arr[1]), Integer.parseInt(arr[2]),Integer.parseInt(arr[3]),Integer.parseInt(arr[4]),
-                        Integer.parseInt(arr[5]),Integer.parseInt(arr[6]),Integer.parseInt(arr[7]),Integer.parseInt(arr[8]));
+                        Integer.parseInt(arr[5]),Integer.parseInt(arr[6]),Integer.parseInt(arr[7]),Integer.parseInt(arr[8]),arr[9],(int)tileSizeX,(int)tileSizeY);
                 armas.add(weapon);                         
 
                 artifactsPool.add(weapon);
@@ -105,7 +149,7 @@ final public class ObjectGenerator {
                 }
                 String[] arr = linea.split(",");
                 Armadura armor = new Armadura(arr[0], Double.parseDouble(arr[1]), Integer.parseInt(arr[2]),Integer.parseInt(arr[3]),Integer.parseInt(arr[4]),
-                        Integer.parseInt(arr[5]),Integer.parseInt(arr[6]),Integer.parseInt(arr[7]),Integer.parseInt(arr[8]));
+                        Integer.parseInt(arr[5]),Integer.parseInt(arr[6]),Integer.parseInt(arr[7]),Integer.parseInt(arr[8]),arr[9],(int)tileSizeX,(int)tileSizeY);                
 
                 armaduras.add(armor);               
                 artifactsPool.add(armor);                                
@@ -126,7 +170,7 @@ final public class ObjectGenerator {
                 }
                 String[] arr = linea.split(",");
                 Pocion potion = new Pocion(arr[0], Double.parseDouble(arr[1]), Integer.parseInt(arr[2]),Integer.parseInt(arr[3]),Integer.parseInt(arr[4]),
-                        Integer.parseInt(arr[5]),Integer.parseInt(arr[6]),Integer.parseInt(arr[7]),Integer.parseInt(arr[8]));
+                        Integer.parseInt(arr[5]),Integer.parseInt(arr[6]),Integer.parseInt(arr[7]),Integer.parseInt(arr[8]),arr[9],(int)tileSizeX,(int)tileSizeY);
 
                 pociones.add(potion);                
                 artifactsPool.add(potion);
@@ -139,7 +183,7 @@ final public class ObjectGenerator {
         
         XStream xs = new XStream();
         try {
-        FileWriter fw = new FileWriter("Artefacts_XML.txt");        
+        FileWriter fw = new FileWriter("Artefacts_XML.xml");        
         String temp = xs.toXML(artifactsPool);
         fw.write(temp);
         fw.close();
@@ -162,6 +206,8 @@ final public class ObjectGenerator {
         }
         
         arma_en_lista = armas.get(i);
+        arma_en_lista.SetHeight(tileSizeY);
+        arma_en_lista.SetWidth(tileSizeX);
         return arma_en_lista.copiar();
     }
 
@@ -179,6 +225,8 @@ final public class ObjectGenerator {
         }
         
         armadura_en_lista = armaduras.get(i);
+        armadura_en_lista.SetWidth(tileSizeX);
+        armadura_en_lista.SetHeight(tileSizeY);
         return armadura_en_lista.copiar();
     }
 
@@ -196,6 +244,8 @@ final public class ObjectGenerator {
             i = randomManager.nextInt(pociones.size());
         }
         pocion_en_lista = pociones.get(i);
+        pocion_en_lista.SetWidth(tileSizeX);
+        pocion_en_lista.SetHeight(tileSizeY);
         return pocion_en_lista.copiar();
     }
     
@@ -241,7 +291,8 @@ final public class ObjectGenerator {
             }break;
         }
         art.x = _x;
-        art.y = _y;
+        art.y = _y;  
+        art.SetPositionDraw(_x*tileSizeX, _y*tileSizeY);
         return  art;
     }
 }

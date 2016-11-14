@@ -8,12 +8,15 @@ import Artefactos.Artefacto;
 import Foundation.CellInformation;
 import Models.Enemy;
 import Facilidades.Aliado;
+import Models.IDibujable;
+import Models.Sprite;
+import java.awt.Graphics;
 
 /**
  *
  * @author Jauma
  */
-public class Chamber {
+public class Chamber extends Sprite implements IDibujable{
     private CellInformation chamberStatus;        
     // The constructer will be used when creating the matrix of the maze and 
     // setting the CellType will be our initial concern
@@ -22,10 +25,19 @@ public class Chamber {
     
     private Enemy chamberEnemy;
     private Aliado chamberAlly;
-    private Artefacto chamberArtefact;
-   
-    public Chamber(){
-        
+    private Artefacto chamberArtefact;       
+       
+    
+    public Chamber(String spriteInfo,int _width,int _height)
+    {
+        super(_width,_height);
+        LoadComponents(spriteInfo);
+    }
+
+    public Chamber(Sprite base,int _width,int _height)
+    {
+        super(_width,_height);
+        copySprite(base);
     }
     
     public Chamber(Enemy enemyResident,Artefacto artefactResident){
@@ -84,10 +96,35 @@ public class Chamber {
     {
         chamberAlly = null;
     }
+    
+    public Sprite GetInhabitant()
+    {
+        if(chamberEnemy!=null) return chamberEnemy;
+        if(chamberArtefact!=null) return chamberArtefact;
+        if(chamberAlly!=null) return chamberAlly;
+        return null;
+    }
      
     
     public Artefacto GetArtefacto(){
         return chamberArtefact;
+    }
+
+    @Override
+    public void Render(Graphics g) {
+        paint(g);
+    }
+    
+   
+    @Override
+    public void LoadComponents(String spriteInfo) {
+        
+       ProcessSpriteInfo(spriteInfo);      
+    }
+
+    @Override
+    public void Dispose() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
             
 }

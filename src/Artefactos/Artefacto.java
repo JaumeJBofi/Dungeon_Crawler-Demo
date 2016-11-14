@@ -6,6 +6,9 @@
 package Artefactos;
 
 import Foundation.ISavable;
+import Models.IDibujable;
+import Models.Sprite;
+import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,7 +17,7 @@ import java.io.FileWriter;
  *
  * @author Arthuro
  */
-public class Artefacto implements ISavable{
+public abstract class Artefacto extends Sprite implements ISavable,IDibujable{
 
     protected String nombre;
     private double prcAparition;
@@ -22,7 +25,7 @@ public class Artefacto implements ISavable{
     private int vida;
     private int ataque;
     private int proteccion;
-    private int precio;
+    private int precio;    
     
     // Tiene sentido ponerlo publico ya que cualquiera puede mover un objeto.
     // Negativo significa que alguien lo esta llevando
@@ -42,21 +45,23 @@ public class Artefacto implements ISavable{
     
     public Artefacto(Artefacto artefacto)
     {
+        super(artefacto.width, artefacto.height);        
         SetNombre(artefacto.nombre);
         SetPrcAparition(artefacto.prcAparition);
         SetNivel(artefacto.nivel);
         SetVida(artefacto.vida);
         SetProteccion(artefacto.proteccion);
         SetPosition(artefacto.x, artefacto.y);
-        SetPrecio(artefacto.precio);
+        SetPrecio(artefacto.precio);        
     }
     
-    public Artefacto(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y)
-    {
+    public Artefacto(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y,
+            int _SizeX,int _SizeY)   { 
+        super(_SizeX, _SizeY);      
         LoadArtefacto(_nombre, _prcAparicion, _nivel, _vida, _ataque, _proteccion, precio, _x, _y);
     }
     
-    final public void LoadArtefacto(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y){
+    final public void LoadArtefacto(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y){       
         SetNombre(_nombre);
         SetPrcAparition(_prcAparicion);
         SetNivel(_nivel);
@@ -158,4 +163,11 @@ public class Artefacto implements ISavable{
     public String GetNombre() {
         return nombre;
     }    
+    
+    @Override
+    public void Render(Graphics g)
+    {
+        paint(g);
+    }
+  
 }

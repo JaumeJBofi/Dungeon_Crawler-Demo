@@ -13,6 +13,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+import Foundation.Tip;
+import java.awt.Graphics;
 
 /**
  *
@@ -22,11 +24,11 @@ import java.util.List;
 //Preg 1 Lab2
 public class Aliado extends Entity{
     
-    public ArrayList<String> Consejos;
+    public ArrayList<Tip> Consejos;
     public int currentAdvice;
     private List<Artefacto> saco;
-    private int _maxInventorio;
-    private int _maxConsejos;
+    private int _maxInventorio = 5;
+    private int _maxConsejos = 5;    
           
     public Aliado(Coordinate position, String varNombre) {
         super(position, varNombre, 100, 5, 5,1);
@@ -35,9 +37,25 @@ public class Aliado extends Entity{
         tamShowY = 15;        
         SetNombre(varNombre);
         Consejos = new ArrayList<>();
-        
-        currentAdvice = 0;
         saco = new ArrayList();        
+        
+        currentAdvice = 0;        
+        _maxConsejos = 5;
+        _maxInventorio = 5;
+    }
+    
+    public Aliado(Coordinate position, String varNombre,String spriteInfo,int tileSizeX,int tileSizeY) {
+        super(position, varNombre, 100, 5, 5,1,spriteInfo,tileSizeX,tileSizeY);
+        hp = 100; // digamos q sea 100        
+        tamShowX = 15;
+        tamShowY = 15;        
+        SetNombre(varNombre);
+        Consejos = new ArrayList<>();
+        saco = new ArrayList();        
+        
+        currentAdvice = 0;        
+        _maxConsejos = 5;
+        _maxInventorio = 5;
     }
 
     public Aliado(Coordinate position, String varNombre, int vida,int nivel, int varStrength, int varArmor,int maxInventorio,int maxConsejos) {
@@ -49,12 +67,42 @@ public class Aliado extends Entity{
         currentAdvice = 0;
         saco = new ArrayList();        
     }        
-       
+    
+    public Aliado(Coordinate position, String varNombre, int vida,int nivel, int varStrength, int varArmor,int maxInventorio,int maxConsejos,ArrayList<Tip> _consejos) {
+        super(position, varNombre, vida, varStrength, varArmor,1);        
+        tamShowX = 15;
+        tamShowY = 15;                
+        _maxConsejos = maxConsejos;
+        _maxInventorio = maxInventorio;
+        currentAdvice = 0;
+        Consejos = new ArrayList<Tip>();
+        
+        for(Tip myTip:_consejos){
+            Consejos.add(myTip.copiar());
+        }        
+        saco = new ArrayList();        
+    }
+    
+    public Aliado(Aliado base)
+    {
+        super(base);   
+        copySprite(base);
+        tamShowX = 15;
+        tamShowY = 15;      
+        _maxConsejos = base._maxConsejos;
+        _maxInventorio = base._maxInventorio;
+        currentAdvice = 0;
+        Consejos = new ArrayList<Tip>();
+        for(Tip myTip:base.Consejos){
+            Consejos.add(myTip.copiar());
+        }        
+        saco = new ArrayList();   
+    }
     
     public void GiveAdvice()
     {
         System.out.println("Hola, me llamo " + GetNombre() +" y este es mi consejo:");
-        System.out.println(Consejos.get(currentAdvice));        
+        System.out.println(Consejos.get(currentAdvice).GetAdvice());        
         System.out.println("Nos vemos... Suerte!");
         currentAdvice = (currentAdvice + 1)%Consejos.size();        
     }
@@ -74,20 +122,35 @@ public class Aliado extends Entity{
         return _maxConsejos;
     }
     
-    
-    public void AddAdvice(String tip)
+    // Preg 2 Lab 3 Aca se ordena!...
+    public void AddAdvice(Tip tip)
     {
-        Consejos.add(tip);        
+        int numConsejos = Consejos.size();
+        int i = 0;
+        while(i<numConsejos)
+        {
+            if(Consejos.get(i).GetNivel()<tip.GetNivel())
+            {
+                i++;
+            }else
+            {
+                break;
+            }
+        }
+        Consejos.add(i,tip);        
     }
     
     public void AddAdvice(ArrayList<String> advices)
     {
-        Consejos = advices;
+        for(String advice: advices)
+        {
+            Consejos.add(new Tip(advice,1));
+        }        
     }
     
     public Aliado copiar()
     {
-        return new Aliado(GetPosition().GetPoint(), GetNombre(),GetVida(),GetNivel(),GetStrength(),GetArmor(),GetMaxInventory(),GetMaxHints());
+        return new Aliado(this);
     }
 
     public Integer getSizeSaco() {
@@ -104,5 +167,20 @@ public class Aliado extends Entity{
     public void Load(FileReader flectura, BufferedReader buffer)
     {
         
+    }
+
+    @Override
+    public void Render(Graphics g) {
+        paint(g);
+    }
+
+    @Override
+    public void LoadComponents(String spriteInfo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void Dispose() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

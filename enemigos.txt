@@ -1,6 +1,7 @@
-Ancient Ancestor,5,1,10,Kiropero que consume el pavor de quienes tienen la misfortuna de encontrarlo,4
-Quimera,10,1,15,Amalgamanacion de lo que fueron una vez animales e inclusive humanos,10
-Esper,15,1,20,Humano nacido con habilidades especiales. Sin embargo; esa carga lo hace emocionalmente inestable,15
-Goblin,3,2,25,Desde la forga de Mordor. Un organismo creado para la batalla,5
-Kepli,35,1,50,Demonio de lagos. Extremadamente peligroso e impredecible,13
-Dragon,25,1,20,Reptil del mas alto rango. Resistente a ataques fisicos y magicos,15
+Ancient Ancestor,5,1,10,Kiropero que consume el pavor de quienes tienen la misfortuna de encontrarlo,4,0-0-0-24-32-Enemies_1Sheet-9-0-FALSE-3-4:12-*AAN
+Quimera,10,1,15,Amalgamanacion de lo que fueron una vez animales e inclusive humanos,10,0-0-0-24-32-Enemies_1Sheet-6-4-FALSE-3-4:12-*CHI
+Esper,15,1,20,Humano nacido con habilidades especiales. Sin embargo; esa carga lo hace emocionalmente inestable,15,0-0-0-24-32-Enemies_1Sheet-9-4-FALSE-3-4:12-*ESP
+Goblin,3,2,25,Desde la forga de Mordor. Un organismo creado para la batalla,5,0-0-0-24-32-Enemies_2Sheet-6-0-FALSE-3-4:12-*GBL
+Kepli,35,1,50,Demonio de lagos. Extremadamente peligroso e impredecible,13,0-0-0-24-32-Enemies_2Sheet-6-4-FALSE-3-4:12-*KEP
+Dragon,25,1,20,Reptil del mas alto rango. Resistente a ataques fisicos y magicos,15,0-0-0-24-32-Enemies_1Sheet-3-0-FALSE-3-4:12-*DRG
+Juancho,99,1,20,Tquero mejicano,15,0-0-0-24-32-Enemies_2Sheet-9-4-TRUE-3-4:12-*JNCH

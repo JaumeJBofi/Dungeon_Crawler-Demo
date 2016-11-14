@@ -18,17 +18,40 @@ import Controllers.EnemyGenerator;
 import Foundation.DIRECTIONS;
 import Foundation.ISavable;
 import Facilidades.Aliado;
+import Foundation.ObjectConverter;
 import Models.Avatar;
 import Models.Enemy;
 import Models.IDibujable;
+import Models.Player;
+import Models.Sprite;
 import java.util.ArrayList;
 import java.util.Scanner;
+import Foundation.Options;
+import Models.Stage;
+import static Controllers.Game.alternativas;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.*;
+import java.util.Timer;
+
+import javax.swing.*;
+
 
 import java.io.BufferedReader;
 import java.io.*;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
+// Graphics imports begin
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.TimerTask;
+import javafx.util.Pair;
+
+// Graphics imports end
 /**
  *
  * @author Jauma
@@ -37,6 +60,11 @@ public class Dungeon implements IDibujable, ISavable {
 
     private int M;
     private int N;
+    private int tileSizeX;
+    private int tileSizeY;
+    private int visionTileSizeX;
+    private int visionTileSizeY;
+    
     private int dungeonNumber;
 
     private int minshowY;
@@ -54,7 +82,11 @@ public class Dungeon implements IDibujable, ISavable {
     private int numEnemies;
     private int numAliados;
     private int numArtifacts;    
-
+    private int activePlayer;
+    
+    private Timer myTime;
+    public volatile int TimeCount = 0;
+       
     //private CellInformation dungeonStatus;    
     private Chamber[][] layOutChamber;
     private CellInformation[][] dungeonAccess;
@@ -64,20 +96,44 @@ public class Dungeon implements IDibujable, ISavable {
     private List<Aliado> lista_aliados;
     private List<Artefacto> lista_artefactos;
     
+    private List<Player> lista_Players;
+    
     private EnemyGenerator enemygen;
     private AllyGenerator allyGen;
+    
+    private HashMap<String,Sprite> tilesSpriteBase;
+    
+    public long tStart;
 
-    public Dungeon(double varprcEnemies, int varlvlEnemies, double varPrcItems) {
+    public long tEnd;
+    public long tDelta;
+    public double elapsedSeconds;
+
+    public Dungeon(double varprcEnemies, int varlvlEnemies, double varPrcItems,int _M,int _N,int WIDTH,int HEIGHT,int tamShowX,int tamShowY) {
         // Momentaneamente el Laberinto no posee dimensiones       
         M = 0;
         N = 0;
+        long tStart = System.currentTimeMillis();    
+
+        myTime = new Timer();
+    
+        
+        myTime.schedule(new TimerTask() {
+            @Override
+            public void run() {                
+                TimeCount++;
+            }
+        }, 0, 1000);
+                
         SetLvlEnemies(varlvlEnemies);
         SetPrcEnemies(varprcEnemies);
         SetPrcItems(varPrcItems);
-        objManager = new ObjectGenerator(varlvlEnemies);
+        SetUpMapSize(_M,_N,WIDTH,HEIGHT,tamShowX,tamShowY);
+        
+        objManager = new ObjectGenerator(varlvlEnemies,tileSizeX,tileSizeY);
         Scanner in = new Scanner(System.in);
 
-        enemygen = new EnemyGenerator();
+        enemygen = new EnemyGenerator(tileSizeX,tileSizeY);
         lista_enemigos = new ArrayList();
         numEnemies = 0;
 
@@ -88,11 +144,14 @@ public class Dungeon implements IDibujable, ISavable {
         // Lista iría aca
         lista_artefactos = new ArrayList<>();
         numArtifacts = 0;
+        
+        lista_Players = new ArrayList<>();    
+        tilesSpriteBase = new HashMap<>();
     }
 
     public int GetM() {
         return M;
-    }
+    }        
 
     // Recordar que las dimensiones deben ser impares
     final public void SetM(int varM) {
@@ -114,12 +173,56 @@ public class Dungeon implements IDibujable, ISavable {
             N = varN;
         }
     }
-
-    public void SetDungeonNumber(int varNum) {
-        allyGen = new AllyGenerator("Allies_" + Integer.toString(varNum));
-        dungeonNumber = varNum;
+    
+    public void AddPlayer(Player p)
+    {
+        lista_Players.add(p);
+        // Dibujamos el ultimo agregado (Podemos setearlo y desahabilitar este comportamiento (Lo cambiamos cada vez
+        // que cambiamos el contexto del laberinto
+        activePlayer = lista_Players.size() - 1;
+    }
+    
+    public void SetActivePlayer(int i)
+    {
+        activePlayer = i;
+    }
+    
+    public int GetActivePlayer()
+    {
+        return activePlayer;
     }
 
+    public void SetDungeonNumber(int varNum) {
+        
+        allyGen = new AllyGenerator("Allies_" + Integer.toString(varNum),tileSizeX,tileSizeY);
+        dungeonNumber = varNum;   
+        LoadTiles(varNum);                
+    }
+    
+    public void LoadTiles(int varNum)
+    {
+        // Cargamos un txt por cada laberinto en que carga Sprites al Main Hash
+        // dependiendo del los 4 tipos de Modos (PARED;NORMAL:ANTERIOR ;SIGUIENTE)
+         try {            
+            FileReader fr = new FileReader("Dungeon_" + Integer.toString(varNum) + ".txt");
+            BufferedReader in = new BufferedReader(fr);                                              
+            String buffer;
+            while((buffer = in.readLine())!=null)
+            {
+                ObjectConverter ob = new ObjectConverter(buffer);
+                ob.SetDelimiter("#");
+                                                
+                String tileName = ob.GetNextPart();
+                String spriteInfo = ob.GetNextPart();
+                Sprite tileSprite = new Sprite();
+                tileSprite.ProcessSpriteInfo(spriteInfo, true);
+                tilesSpriteBase.put(tileName,tileSprite);                    
+            }                     
+        } catch (Exception e) {
+            System.err.println("Error Archivo: " + "Dungeon_" + Integer.toString(varNum) + ".txt" + " no encontrado");
+        }                                
+    }
+    
     public int GetDungeonNumber() {
         return dungeonNumber;
     }
@@ -253,35 +356,7 @@ public class Dungeon implements IDibujable, ISavable {
         // Deberiamos liberar la memoria de layout
     }
 
-    private void inicializarDatosMostrarMapa(int posY, int posX, int tamShowX, int tamShowY) {
-        tamShowX = (int) tamShowX / 2;
-        tamShowY = (int) tamShowY / 2;
-
-        if ((posY - tamShowY) > 0) {
-            minshowY = posY - tamShowY;
-        } else {
-            minshowY = 0;
-        }
-
-        if ((posX - tamShowX) > 0) {
-            minshowX = posX - tamShowX;
-        } else {
-            minshowX = 0;
-        }
-
-        if ((posY + tamShowY) < N) {
-            maxshowY = posY + tamShowY;
-        } else {
-            maxshowY = N;
-        }
-
-        if ((posX + tamShowX) < M) {
-            maxshowX = posX + tamShowX;
-        } else {
-            maxshowX = M;
-        }
-    }
-
+   
     public void printDebugInfo() {
         System.out.format("Numero de enemigos = %d\n", numEnemies);
         System.out.format("Nivel de los enemigos = %d\n", lvlEnemies);
@@ -301,6 +376,96 @@ public class Dungeon implements IDibujable, ISavable {
     public void GetFriendAdvice(Coordinate pose){
         layOutChamber[pose.GetX()][pose.GetY()].GetAliado().GiveAdvice();
     }
+    
+    protected JFrame frame = new JFrame();
+    public static String[] alternativas = {"Atacar", "Huir", "Usar"};
+
+    public boolean BattleGraphic(Avatar player, Coordinate pos,Graphics g) {
+
+        int playerHp = player.GetVida();
+        int playerMax = player.GetVidaMaxima();
+
+        Enemy currentEnemy = layOutChamber[pos.GetX()][pos.GetY()].GetEnemy();
+        int enemyHp = currentEnemy.GetVida();
+
+        System.out.format("Comienza el Encuentro!\nNombre de Enemigo: %s\nDescripcion de Enemigo: %s\nAtaque: ( %d ATK)\n", currentEnemy.GetNombre(),
+                currentEnemy.GetDescription(), currentEnemy.GetStrength());
+        //Scanner in = new Scanner(System.in);
+
+        while (true) {         
+            int count = TimeCount;
+            int sec = count % 60 ;
+            int min = (int)(count / 60);
+            g.drawString("T Transcurrido: " + "Min: " + String.valueOf(min) + " Seg: " + String.valueOf(sec),1175,20);
+            String respuesta = (String) JOptionPane.showInputDialog(frame,
+                    "Que deseas hacer?",
+                    "Batalla",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    alternativas,
+                    alternativas[0]);
+            System.out.println("\n\n");
+            System.out.println(player.GetNombre() + ": " + player.GetVida() + "/" + player.GetVidaMaxima() + " HP");
+            System.out.println(currentEnemy.GetNombre() + ": " + currentEnemy.GetVida() + " HP");
+            System.out.print("Opciones: atacar, huir, usar.\n");
+            System.out.print("Comando: ");
+            if (respuesta.toLowerCase().startsWith("atacar")) {
+                int weaponDamage = player.GetEquipWeaponDamage() - currentEnemy.GetArmor();
+                int enemyDamage = currentEnemy.GetEnemyDamage() - player.GetEquipArmorProtection();
+                if (weaponDamage < 0) {
+                    weaponDamage = 0;
+                }
+                if (enemyDamage < 0) {
+                    enemyDamage = 0;
+                }
+                System.out.print("Recibes " + enemyDamage + " puntos de daño.\n");
+                player.ReciveDamage(enemyDamage);
+                System.out.print("El enemigo recibe " + weaponDamage + " puntos de daño.\n");
+                currentEnemy.ReciveDamage(weaponDamage);
+            } else if (respuesta.toLowerCase().startsWith("huir")) {
+                System.out.print("Huiste exitosamente.\n");
+                return true;
+            } else if (respuesta.toLowerCase().startsWith("usar")) {
+                JFrame frame2 = new JFrame();
+                String numero = JOptionPane.showInputDialog(
+                        frame2,
+                        "Ingresa el numero del item a usar",
+                        "Escoger item",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                int num = 0;
+                try {
+                    num = Integer.parseInt(numero);
+                } catch (NumberFormatException except) {
+                    System.out.println("Indice no valido.");
+                }
+
+                if (num > 0) {
+                    if (num <= player.getSizeSaco()) {
+                        player.EquipItem(num - 1);
+                    } else {
+                        System.out.println("\nNo tienes es indice de item en tu saco\n\n");
+                    }
+                } else {
+                    System.out.println("\nIngresaste Indice negativo en el saco\n\n");
+                }
+            } else {
+                System.out.println("Acción inválida.");
+            }
+            if (player.GetVida() == 0) {
+                return false;
+            }
+            if (currentEnemy.GetVida() == 0) {
+                System.out.println("El enemigo ha sido derrotado.\n");
+                dungeonAccess[pos.GetX()][pos.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
+                lista_enemigos.remove(currentEnemy);
+                layOutChamber[pos.GetX()][pos.GetY()].GasEnemy();
+                numEnemies--;
+                return true;
+            }
+        }
+    }
+
 
     public boolean Battle(Avatar player, Coordinate pos) {
        
@@ -378,6 +543,7 @@ public class Dungeon implements IDibujable, ISavable {
     public void addenemy(Coordinate pos) {
         Enemy enemigo = enemygen.generar_enemigo();
         enemigo.SetPosition(pos.GetPoint());
+        enemigo.SetPositionDraw(pos.GetX()*tileSizeX, pos.GetY()*tileSizeY);        
         lista_enemigos.add(enemigo);
     }
 
@@ -408,6 +574,7 @@ public class Dungeon implements IDibujable, ISavable {
                 dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
                 layOutChamber[currEnemy.GetX()][currEnemy.GetY()].GasEnemy();
                 currEnemy.Move(current, 1);
+                currEnemy.NextPosition(current);
                 dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);
                 layOutChamber[currEnemy.GetX()][currEnemy.GetY()].SetEnemy(currEnemy);
             } else {
@@ -416,8 +583,9 @@ public class Dungeon implements IDibujable, ISavable {
                     // Primero elimino de dungeon acess y lo saco de su cuarto. Luego muevo el enemigo y lo pongo
                     // en una nueva locación
                     dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
-                    layOutChamber[currEnemy.GetX()][currEnemy.GetY()].GasEnemy();
+                    layOutChamber[currEnemy.GetX()][currEnemy.GetY()].GasEnemy();                  
                     currEnemy.Move(current, 1);
+                    currEnemy.NextPosition(current);
                     dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);
                     layOutChamber[currEnemy.GetX()][currEnemy.GetY()].SetEnemy(currEnemy);
                 }
@@ -438,8 +606,9 @@ public class Dungeon implements IDibujable, ISavable {
                     // Primero elimino de dungeon acess y lo saco de su cuarto. Luego muevo el enemigo y lo pongo
                     // en una nueva locación
                     dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ADENTRO);
-                    layOutChamber[currEnemy.GetX()][currEnemy.GetY()].GasEnemy();
+                    layOutChamber[currEnemy.GetX()][currEnemy.GetY()].GasEnemy();                    
                     currEnemy.Move(current, 1);
+                    currEnemy.NextPosition(current);
                     dungeonAccess[currEnemy.GetX()][currEnemy.GetY()].SetType(CellInformation.CELLTYPE.ENEMY);
                     layOutChamber[currEnemy.GetX()][currEnemy.GetY()].SetEnemy(currEnemy);
                 }
@@ -459,11 +628,38 @@ public class Dungeon implements IDibujable, ISavable {
                 //Aun no esta en layout
                 layOutChamber[currAliado.GetX()][currAliado.GetY()].GasAlly();
                 currAliado.Move(current, 1);
+                currAliado.NextPosition(current);
                 dungeonAccess[currAliado.GetX()][currAliado.GetY()].SetType(CellInformation.CELLTYPE.FRIEND);
 
                 layOutChamber[currAliado.GetX()][currAliado.GetY()].SetAlly(currAliado);
                 //Aun no esta en layout            
             }
+        }
+    }
+    
+    public void MovePlayersPressed(KeyEvent e)
+    {
+        for(Player p:lista_Players)
+        {
+            p.keyPressed(e);
+        }
+    }
+    
+    public void MovePlayersReleased(KeyEvent e)
+    {        
+        for(Player p:lista_Players)
+        {
+            p.keyReleased(e);
+        }        
+    }
+          
+    
+    public void act()
+    {       
+        
+        for(Player p: lista_Players)
+        {
+            p.act(dungeonAccess);
         }
     }
     
@@ -546,6 +742,14 @@ public class Dungeon implements IDibujable, ISavable {
             }
         }
     }
+    
+    public void SetUpMapSize(int _M,int _N,int WIDTH,int HEIGHT,int tamShowX,int tamShowY)
+    {
+        SetM(_M);
+        SetN(_N);        
+        tileSizeX = (int)WIDTH/tamShowX;
+        tileSizeY = (int)HEIGHT/tamShowY;        
+    }
 
     // Preg 2
     public void SetUpChamber() {
@@ -553,14 +757,25 @@ public class Dungeon implements IDibujable, ISavable {
         for (int i = 0; i < M; i++) {
             // ACA ES DONDE CREO QUE SE CAE EL CODIGO!!!
             for (int j = 0; j < N; j++) {
-                //Esta linea hace que se caiga. La Comentada
-                if(!dungeonAccess[i][j].isWall())
+                //Esta linea hace que se caiga. La Comentada                       
+                // Depending on the position change the current Frame
+                Chamber newChamb = null;
+                if(dungeonAccess[i][j].GetMode()==CellInformation.CELLMODE.ANTERIOR||
+                        dungeonAccess[i][j].GetMode()==CellInformation.CELLMODE.SIGUENTE)
                 {
-                    layOutChamber[i][j] = new Chamber();
+                    newChamb = new Chamber(tilesSpriteBase.get("ANTSIG"),tileSizeX,tileSizeY);  
+                    if(dungeonAccess[i][j].GetMode()==CellInformation.CELLMODE.SIGUENTE)
+                    {
+                        newChamb.SetCurrentFrame(0);
+                    }
                 }else
                 {
-                    layOutChamber[i][j] = null;
-                }
+                    newChamb = new Chamber(tilesSpriteBase.get("DTILES"),tileSizeX,tileSizeY);                    
+                    newChamb.SetCurrentFrame(getTileFrame(i, j));
+                    newChamb.SetPositionDraw(i*tileSizeX, j*tileSizeY);                
+                }     
+                newChamb.SetPositionDraw(i*tileSizeX, j*tileSizeY);
+                layOutChamber[i][j] = newChamb;                
                 //layOutChamber[i][j] = new Chamber();
             }
         }
@@ -570,20 +785,143 @@ public class Dungeon implements IDibujable, ISavable {
         for(Aliado currAliado: lista_aliados){
             layOutChamber[currAliado.GetX()][currAliado.GetY()].SetAlly(currAliado);
         }
-        for(Artefacto currArtifact: lista_artefactos){
+        int i = 0;
+        for(Artefacto currArtifact: lista_artefactos){                     
             layOutChamber[currArtifact.x][currArtifact.y].SetArtefact(currArtifact);
+        }     
+    }
+    
+    public void GetDirection(int i,int j,int [] myDir)
+    {
+        // 0 LEFT
+        // 1 RIGHT
+        // 2 TOP
+        // 3 BOT
+        
+        if(i==-1&&j==0)
+        {
+            myDir[0] = 1;
+            return;
         }
+        if(i==1&&j==0)
+        {
+            myDir[1] = 1;
+            return;
+        }
+        if(j==-1&&i==0)
+        {
+            myDir[2] = 1;
+            return;
+        }
+        if(j==1&&i==0)
+        {
+            myDir[3] = 1;                           
+        }
+    }
+    
+    public int getTileFrame(int i,int j)
+    {
+        if(dungeonAccess[i][j].GetMode()==CellInformation.CELLMODE.NORMAL) return 0;
+        int nFree = 0;    
+        int[] myDir = new int[4];
+        
+//        for(int m = i - 1;m<=i+1;m++)
+//        {
+//            for(int n = j - 1;n<=j+1;n++)
+//            {
+//                if(m<0||m>=M||n<0||n>=N) continue;
+//                if(m==i&&n==j) continue;
+//                if(dungeonAccess[m][n].GetMode()==CellInformation.CELLMODE.PARED) 
+//                {
+//                    nFree++;
+//                    GetDirection(m-i, n-j, myDir);
+//                }
+//            }
+//        }
+        if(!(i-1<0)&&dungeonAccess[i-1][j].GetMode()==CellInformation.CELLMODE.PARED) 
+        {
+            nFree++;
+            GetDirection(-1,0, myDir);
+        }
+         
+        if(!(i+1>=M)&&dungeonAccess[i+1][j].GetMode()==CellInformation.CELLMODE.PARED) 
+        {
+            nFree++;
+            GetDirection(1,0, myDir);
+        }
+          
+        if(!(j-1<0)&&dungeonAccess[i][j-1].GetMode()==CellInformation.CELLMODE.PARED) 
+        {
+            nFree++;
+            GetDirection(0,-1, myDir);
+        }
+           
+        if(!(j+1>=N)&&dungeonAccess[i][j+1].GetMode()==CellInformation.CELLMODE.PARED) 
+        {
+            nFree++;
+            GetDirection(0,1, myDir);
+        }
+        switch(nFree)
+        {
+            case 1:
+            {               
+                if(myDir[0]==1) return 12;              
+                if(myDir[1]==1) return 14;
+                if(myDir[2]==1) return 11;
+                if(myDir[3]==1) return 13;
+                
+            }
+            case 2:
+            {
+                if(myDir[0]==1)
+                {
+                    if(myDir[1]==1)
+                    {
+                        return 10;
+                    }else
+                    {
+                        if(myDir[2]==1)
+                        {
+                            return 4;
+                        }else
+                        {
+                            return 2;
+                        }                        
+                    }
+                }
+                if(myDir[1]==1)
+                {
+                    if(myDir[2]==1)
+                    {
+                        return 3;
+                    }else
+                    {
+                        return 1;
+                    }                    
+                }                
+                if(myDir[2]==1)
+                {
+                     if(myDir[3]==1)
+                    {
+                        return 5;
+                    }                    
+                }                
+            }case 3:
+            {
+                if(myDir[0]==0) return 6;
+                if(myDir[1]==0) return 7;
+                if(myDir[2]==0) return 9;
+                if(myDir[3]==0) return 8;
+            }
+        }
+        return 0;
     }
 
     public void TeleportPlayer(Avatar player, int x, int y) {
-        player.SetPosition(x, y);
-        
-//        Enemy currentEnemy = layOutChamber[x][y].GetEnemy();
-//        dungeonAccess[x][y].SetType(CellInformation.CELLTYPE.ADENTRO);
-//        lista_enemigos.remove(currentEnemy);
-//        layOutChamber[x][y].GasEnemy();
-//        numEnemies--;
+        player.SetPosition(x, y);        
     }
+    
+    
 
     // Implementacion de ISavable!
     @Override
@@ -691,56 +1029,80 @@ public class Dungeon implements IDibujable, ISavable {
             e.printStackTrace();
         }
     }
+    
+     private void inicializarDatosMostrarMapa(int posY, int posX, int tamShowX, int tamShowY) {
+        tamShowX = (int) tamShowX / 2;
+        tamShowY = (int) tamShowY / 2;
+      
+        
+        minshowX = 0;
+        minshowY = 0;
+        maxshowX = 0;
+        maxshowY = 0;              
+        
+        if ((posY - tamShowY) > 0) {
+            minshowY += posY - tamShowY;
+        } else {
+            minshowY = 0; 
+            maxshowY -= (posY - tamShowY);
+        }
 
-    // Implementacion de IDibujable
-    public void Render() {
-        String space20 = new String(new char[40]).replace('\0', ' ');
-        for (int j = 0; j < N; j++) {
-            System.out.print(space20);
-            for (int i = 0; i < M; i++) {
-                CellInformation factor = dungeonAccess[i][j];
-                switch (factor.GetMode()) {
-                    case SIGUENTE:
-                        System.out.print("+");
-                        break;
-                    case ANTERIOR:
-                        System.out.print("-");
-                        break;
-                    default: {
-                        switch (factor.GetType()) {
-                            case PARED:
-                                System.out.print("#");
-                                break;
-                            case ADENTRO:
-                                System.out.print(" ");
-                                break;
-                            case ARTIFACT:
-                            {
-                                switch(dungeonAccess[i][j].GetObject())
-                                {
-                                    case WEAPON: System.out.print("W");
-                                        break;
-                                    case POTION: System.out.print("P");
-                                        break;
-                                    case ARMOR:  System.out.print("A");
-                                        break;
-                                }                            
-                            }break;
-                            case ENEMY:
-                                System.out.print("E");
-                                break;
-                            case FRIEND:
-                                System.out.print("F");
-                                break;
-                        }
-                    }
-                    break;
-                }
-            }
-            System.out.print("\n");
+        if ((posX - tamShowX) > 0) {
+            minshowX += posX - tamShowX;
+        } else {
+            minshowX = 0;
+            maxshowX -= (posX - tamShowX);
+        }
+
+        if ((posY + tamShowY) < N) {
+            maxshowY += posY + tamShowY;
+        } else {
+            maxshowY = N;
+            minshowY -= (N - (posY + tamShowY));
+        }
+
+        if ((posX + tamShowX) < M) {
+            maxshowX += posX + tamShowX;
+        } else {
+            maxshowX = M;
+            minshowX -= (M - (posX + tamShowX));
         }
     }
 
+
+    // Implementacion de IDibujable  
+    public void Render(Graphics g) {
+              
+        visionTileSizeX = tileSizeX;
+        visionTileSizeY = tileSizeY;     
+        
+        int posX = lista_Players.get(activePlayer).GetX();
+        int posY = lista_Players.get(activePlayer).GetY();                           
+        inicializarDatosMostrarMapa(posY, posX, lista_Players.get(activePlayer).GetTamShowX(), lista_Players.get(activePlayer).GetTamShowY());      
+        
+        g.setColor(Color.BLACK);    
+        for (int j = minshowY; j < maxshowY; j++) {       
+            for (int i = minshowX; i < maxshowX; i++) {
+                CellInformation factor = dungeonAccess[i][j];
+                    layOutChamber[i][j].SetPositionDraw((i-minshowX)*tileSizeX, (j-minshowY)*tileSizeY);
+                    layOutChamber[i][j].Render(g);                
+                                 
+                    Sprite renderEntity = layOutChamber[i][j].GetInhabitant();
+                    
+                    if(renderEntity!=null)
+                    {
+                        renderEntity.SetPositionDraw((i-minshowX)*tileSizeX, (j-minshowY)*tileSizeY);
+                        renderEntity.paint(g);
+                    }                                      
+            }          
+        }
+        // LABORATORIO 4 - PREG 1
+        // Pintamos al aliado dependiendo de los valores del delta.
+        lista_Players.get(activePlayer).SetPositionDraw((posX-minshowX)*tileSizeX + lista_Players.get(activePlayer).movXDelta, 
+                (posY-minshowY)*tileSizeY + lista_Players.get(activePlayer).movYDelta);        
+        lista_Players.get(activePlayer).Render(g);
+    }
+      
     // Escribe a un archivo de Texto
     public void Render(FileWriter fw) {
         try {
@@ -791,66 +1153,7 @@ public class Dungeon implements IDibujable, ISavable {
             e.printStackTrace();
         }
     }
-
-    public void Render(int posX, int posY, int tamShowX, int tamShowY) {
-
-        String space20 = new String(new char[35]).replace('\0', ' ');
-        inicializarDatosMostrarMapa(posY, posX, tamShowX, tamShowY);
-        for (int j = minshowY; j < maxshowY; j++) {
-            System.out.print(space20);
-            for (int i = minshowX; i < maxshowX; i++) {
-
-                if ((i == posX) && (j == posY)) {
-                    System.out.print("H");
-                } else {
-                    CellInformation factor = dungeonAccess[i][j];
-                    switch (factor.GetMode()) {
-                        case SIGUENTE:
-                            System.out.print("+");
-                            break;
-                        case ANTERIOR:
-                            System.out.print("-");
-                            break;
-                        default: {
-                            switch (factor.GetType()) {
-                                case PARED:
-                                    System.out.print("#");
-                                    break;
-                                case ADENTRO:
-                                    System.out.print(" ");
-                                    break;
-                                case ARTIFACT:
-                                    System.out.print("A");
-                                    break;
-                                case ENEMY:
-                                    System.out.print("E");
-                                    break;
-                                case FRIEND:
-                                    System.out.print("F");
-                                    break;
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-            System.out.println(" ");
-        }
-    }
-
-    public void LoadComponents() {
-
-    }
-
-    public void Dispose() {
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                dungeonAccess[i][j] = null;
-                layOutChamber[i][j] = null;
-            }
-        }
-    }
-
+  
     public void Guardar_Render(FileWriter fw) {
 
         try {
@@ -914,5 +1217,16 @@ public class Dungeon implements IDibujable, ISavable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void LoadComponents(String spriteInfo) {
+        // Load BackGround and stuff
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void Dispose() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

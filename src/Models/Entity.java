@@ -9,6 +9,7 @@ import Foundation.CellInformation;
 import Foundation.Coordinate;
 import Foundation.DIRECTIONS;
 import Foundation.ISavable;
+import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -21,7 +22,7 @@ import java.util.Collections;
  *
  * @author Jauma
  */
-public abstract class Entity implements ISavable {
+public abstract class Entity extends Sprite implements ISavable, IDibujable {
 
     private Coordinate position;
     public int hp; // vida actual
@@ -33,6 +34,12 @@ public abstract class Entity implements ISavable {
     private int strength;
     private int base_armor;
     protected int nivel;
+    
+    protected int currentTilePositionX;
+    protected int currentTilePositionY;
+    
+    public int _Dx;
+    public int _Dy;
 
     //Modif
     public Entity(Coordinate varPosition, String nomb, int vida, int varStrength, int varArmor,int _nivel) {
@@ -43,6 +50,31 @@ public abstract class Entity implements ISavable {
         strength = varStrength;
         base_armor = varArmor;
         nivel = _nivel;
+    }
+    
+     public Entity(Coordinate varPosition, String nomb, int vida, int varStrength, int varArmor,int _nivel,String spriteInfo,
+             int _tileSizeX,int _tileSizeY) {
+        super(_tileSizeX,_tileSizeY);
+        
+        ProcessSpriteInfo(spriteInfo, true);
+        hp = vida;
+        position = varPosition;
+        generator = new Random();
+        nombre = nomb;
+        strength = varStrength;
+        base_armor = varArmor;
+        nivel = _nivel;
+    }
+    
+    public Entity(Entity base)
+    {
+        hp = base.hp;
+        position = base.GetPosition();
+        generator = new Random();
+        nombre = base.GetNombre();
+        strength = base.GetStrength();
+        base_armor = base.GetArmor();
+        nivel = base.GetNivel();
     }
 
     public int GetArmor() {
@@ -160,7 +192,7 @@ public abstract class Entity implements ISavable {
            // System.err.println("Move out of bounds");
             System.exit(1);
         }
-    }
+    }        
 
     public void ThinkMove(Coordinate coord, DIRECTIONS dir, int steps) {
         int xFactor = 0, yFactor = 0;
@@ -184,6 +216,50 @@ public abstract class Entity implements ISavable {
         }
         coord.SetX(coord.GetX() + xFactor);
         coord.SetY(coord.GetY() + yFactor);
+    }
+    
+    public Coordinate ThinkMove(DIRECTIONS dir,int steps)
+    {
+        Coordinate pos = position.GetPoint();
+        int xFactor = 0, yFactor = 0;
+        switch (dir) {
+            case BOT: {
+                yFactor += steps;
+            }
+            break;
+            case TOP: {
+                yFactor -= steps;
+            }
+            break;
+            case LEFT: {
+                xFactor -= steps;
+            }
+            break;
+            case RIGHT: {
+                xFactor += steps;
+            }
+            break;
+        }
+        pos.AddX(xFactor);
+        pos.AddY(yFactor);
+        return pos.GetPoint();
+    }
+    
+    public Coordinate CheckDungeonCollision(CellInformation[][] dungeonAccess,DIRECTIONS dir,int steps)
+    {
+        Coordinate move = ThinkMove(dir,steps);
+        
+        int _x = move.GetX();
+        int _y = move.GetY();
+        
+        CellInformation.CELLTYPE cellInfo = dungeonAccess[_x][_y].GetType();
+        if(cellInfo!=CellInformation.CELLTYPE.PARED&&cellInfo!=CellInformation.CELLTYPE.ENEMY&&
+                cellInfo!=CellInformation.CELLTYPE.ARTIFACT)
+        {
+            return move;
+        }else{
+            return null;
+        }                
     }
 
     public DIRECTIONS RandomMoveInteligente(CellInformation[][] dungeonAccess, int steps, int playerX, int playerY,int M, int N) {
@@ -314,7 +390,7 @@ public abstract class Entity implements ISavable {
             //Collections.shuffle(validDir, new Random());
         }
         return validDir.get(generator.nextInt(validDir.size()));
-    }
+    }    
 
     public abstract void Save(FileWriter fr);
 

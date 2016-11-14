@@ -5,6 +5,7 @@
  */
 package Artefactos;
 
+import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -27,13 +28,16 @@ public class Arma extends Artefacto{
     
     public Arma(Artefacto artBase,int varDanoMin,int varDanoMax){
         super(artBase);
+        copySprite(artBase);
         danho_max = varDanoMax;
         danho_min = varDanoMin;        
     }
     
-    public Arma(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y)
+    public Arma(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y,
+            String spriteInfo,int _SizeX,int _SizeY)
     {
-        super(_nombre, _prcAparicion, _nivel, _vida, _ataque, _proteccion, precio, _x, _y);
+        super(_nombre, _prcAparicion, _nivel, _vida, _ataque, _proteccion, precio, _x, _y,_SizeX,_SizeY);
+        ProcessSpriteInfo(spriteInfo,true);
     }
     
     public void SetDanhoMin(int min){
@@ -90,7 +94,17 @@ public class Arma extends Artefacto{
     }
     
     public Arma copiar() {
-        Arma nueva_arma = new Arma(this.GetNombre(), danho_min, danho_max);
+        Arma nueva_arma = new Arma(this, danho_min, danho_max);
         return nueva_arma;
+    }
+  
+    @Override
+    public void LoadComponents(String spriteInfo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void Dispose() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

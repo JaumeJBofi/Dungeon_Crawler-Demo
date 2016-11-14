@@ -36,21 +36,29 @@ public class DungeonManager implements ISavable {
     private CellInformation[][] dungeonAccess;
     private CellInformation currenCellInfo;
 
-    private List<Dungeon> dungeons;
+    // SuperFeo
+    private volatile List<Dungeon> dungeons;
     private Dungeon textDungeon;
     private DIRECTIONS currentDirections;
     final private Random randomManager;
     private int activeDungeon;
+    private int activePlayer;
+    
+    private int WIDTH;
+    private int HEIGHT;
+    
 
     private int totalDungeons;
 
-    public DungeonManager(int varTotalDungeons) {
+    public DungeonManager(int varTotalDungeons,int _width,int _height) {
 
         randomManager = new Random();
         dungeons = new ArrayList();
         activeDungeon = dungeons.size();
         currenCellInfo = new CellInformation();
         totalDungeons = varTotalDungeons;
+        WIDTH = _width;
+        HEIGHT = _height;
     }
 
     public int GetTotalDungeons() {
@@ -155,15 +163,15 @@ public class DungeonManager implements ISavable {
         if (isNext) {
             if (activeDungeon == totalDungeons - 1) {
                 return 1;
-
             }
             if (activeDungeon < dungeons.size() - 1) {
                 activeDungeon++;
             } else {
                 Dungeon currDungeon = dungeons.get(activeDungeon); //si no es el ultimo calabozo, crea otro cala
                 CreateDungeonDistribution(randomManager.nextInt(50 - 25) + 25, randomManager.nextInt(50 - 25) + 25, currDungeon.GetPrcEnemies() + 0.075, currDungeon.GetLvlEnemies(),
-                        currDungeon.GetPrcItem() + 0.025,player.GetNivel());
+                        currDungeon.GetPrcItem() + 0.025,player.GetNivel(),player.GetTamShowX(),player.GetTamShowY());                
                 activeDungeon++;
+                currDungeon.AddPlayer(player);
                 GetActiveDungeon().SetDungeonNumber(activeDungeon);
                 player.SetPosition(dungeons.get(activeDungeon).GetAntPos().GetPoint());
             }
@@ -179,8 +187,7 @@ public class DungeonManager implements ISavable {
 
     public void printDebugInfo(Avatar player) {
         System.out.println("Informacion manager actual:\n");
-        System.out.format("Numero de dungeon activo: %d\n", activeDungeon);
-        dungeons.get(activeDungeon).Render();
+        System.out.format("Numero de dungeon activo: %d\n", activeDungeon);        
         System.out.println("Informacion laberinto actual:\n");
         dungeons.get(activeDungeon).printDebugInfo();
         System.out.println("Informacion de Jugador actual:\n");
@@ -206,12 +213,12 @@ public class DungeonManager implements ISavable {
         }        
     }        
     //Preg 1 Lab2
-    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, int worldlvlEnemies, double varprcItems,int playerLvl) {
-        Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies, varprcItems);
+    public Coordinate CreateDungeonDistribution(int M, int N, double worldprcEnemies, int worldlvlEnemies, double varprcItems,int playerLvl,int tamShowX,int tamShowY) {
+        Dungeon theDungeon = new Dungeon(worldprcEnemies, worldlvlEnemies, varprcItems,M,N,WIDTH,HEIGHT,tamShowX,tamShowY);        
         theDungeon.SetDungeonNumber(activeDungeon);
         
-        theDungeon.SetM(M);
-        theDungeon.SetN(N);
+        // Inicializacion..
+        
         M = theDungeon.GetM();
         N = theDungeon.GetN();
 
@@ -219,6 +226,7 @@ public class DungeonManager implements ISavable {
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
                 dungeonAccess[i][j] = new CellInformation();
+                dungeonAccess[i][j].SetType(CELLTYPE.PARED);
             }
         }        
         theDungeon.SetAccess(dungeonAccess);
@@ -241,7 +249,7 @@ public class DungeonManager implements ISavable {
 
         Stack<Coordinate> myStack = new Stack();
 
-        dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
+        dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);        
         dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.ANTERIOR);
 
         //Seteo la posicion del Anterior punto
@@ -259,10 +267,12 @@ public class DungeonManager implements ISavable {
 
                 // Marcar camino y a V
                 advanceInDirection(currentPoint, currentDirections, 1);
-                theDungeon.SetEntityInChamber(GetRandomType(theDungeon.GetPrcEnemies()),currentPoint,playerLvl);            
-                
+                theDungeon.SetEntityInChamber(GetRandomType(theDungeon.GetPrcEnemies()),currentPoint,playerLvl);   
+                //dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
+                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.NORMAL);                
                 advanceInDirection(currentPoint, currentDirections, 1);
                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
+                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.NORMAL);
                 myStack.push(currentPoint.GetPoint());
             } else {                
                 if (firstPop) {
@@ -272,11 +282,9 @@ public class DungeonManager implements ISavable {
                 }
                 myStack.pop();
             }
-        }
+        }        
         theDungeon.SetNumEnemies(numEnemies);
-        dungeons.add(theDungeon);
-        // theDungeon.SetAccess(dungeonAccess); The access is already linked
-        //Preg 2: Creamos los chambers con los enemies.
+        dungeons.add(theDungeon);        
         theDungeon.SetUpChamber();        
         return playerPoint;
     }
@@ -304,11 +312,10 @@ public class DungeonManager implements ISavable {
             activeDungeon = Integer.parseInt(arr1[1]);
             int sizeDungeon = Integer.parseInt(arr1[2]);
             for (int i = 0; i < sizeDungeon; i++) {
-                Dungeon auxDungeon = new Dungeon(0, 0, 0);
-                auxDungeon.Load(lector, buffer);
-                dungeons.add(auxDungeon);
+                //Dungeon auxDungeon = new Dungeon(0, 0, 0,1,1,1,1);
+                //auxDungeon.Load(lector, buffer);
+                //dungeons.add(auxDungeon);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }

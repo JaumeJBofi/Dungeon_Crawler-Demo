@@ -1,0 +1,4 @@
+3
+0-0-0-1920-1080-GameBackgroundSheet-0-0-TRUE-0-0:1-IntroBack
+1025-500-0-300-200-StartButomSheet-0-0-TRUE-0-0:1-StartButom
+375-210-0-663-106-TittleSprite-0-0-TRUE-0-0:1-TittleS

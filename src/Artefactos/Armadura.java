@@ -5,6 +5,7 @@
  */
 package Artefactos;
 
+import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -21,13 +22,16 @@ public class Armadura extends Artefacto {
         SetProteccion(varDefensa);
     }
     
-    public Armadura(Artefacto art){
+    public Armadura(Artefacto art){        
         super(art);
+        copySprite(art);
     }   
     
-     public Armadura(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y)
+     public Armadura(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y,
+             String spriteInfo,int _SizeX,int _SizeY)
     {
-        super(_nombre, _prcAparicion, _nivel, _vida, _ataque, _proteccion, precio, _x, _y);        
+        super(_nombre, _prcAparicion, _nivel, _vida, _ataque, _proteccion, precio, _x, _y,_SizeX,_SizeY);     
+        ProcessSpriteInfo(spriteInfo,true);        
     }
     
     //Añadido por mi
@@ -42,7 +46,7 @@ public class Armadura extends Artefacto {
     }
 
     public Armadura copiar() {
-        Armadura nueva_armadura = new Armadura(this.GetNombre(), GetProteccion());
+        Armadura nueva_armadura = new Armadura(this);
         return nueva_armadura;
     }
     
@@ -70,5 +74,16 @@ public class Armadura extends Artefacto {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    @Override
+    public void LoadComponents(String spriteInfo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void Dispose() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
