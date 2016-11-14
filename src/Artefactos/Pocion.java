@@ -38,7 +38,11 @@ public class Pocion extends Artefacto {
             String spriteInfo,int _SizeX,int _SizeY)
     {
         super(_nombre, _prcAparicion, _nivel, _vida, _ataque, _proteccion, precio, _x, _y,_SizeX,_SizeY); 
+<<<<<<< HEAD
         ProcessSpriteInfo(spriteInfo,true);
+=======
+        ProcessSpriteInfo(spriteInfo);
+>>>>>>> origin/master
     }
             
     //Añadido por mi

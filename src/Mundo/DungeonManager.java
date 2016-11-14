@@ -269,7 +269,12 @@ public class DungeonManager implements ISavable {
                 advanceInDirection(currentPoint, currentDirections, 1);
                 theDungeon.SetEntityInChamber(GetRandomType(theDungeon.GetPrcEnemies()),currentPoint,playerLvl);   
                 //dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
+<<<<<<< HEAD
                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.NORMAL);                
+=======
+                dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.NORMAL);
+                
+>>>>>>> origin/master
                 advanceInDirection(currentPoint, currentDirections, 1);
                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetType(CELLTYPE.ADENTRO);
                 dungeonAccess[currentPoint.GetX()][currentPoint.GetY()].SetMode(CELLMODE.NORMAL);

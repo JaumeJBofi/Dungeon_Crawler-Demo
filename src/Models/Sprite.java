@@ -5,7 +5,10 @@
  */
 package Models;
 
+<<<<<<< HEAD
 import Foundation.DIRECTIONS;
+=======
+>>>>>>> origin/master
 import Foundation.ObjectConverter;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -44,6 +47,7 @@ public class Sprite {
     
     protected ArrayList<Rectangle> bounds;
     
+<<<<<<< HEAD
     public boolean resize = false;
     
     public String spriteInfo;
@@ -55,6 +59,12 @@ public class Sprite {
     int maxX;
     int maxY;
     
+=======
+    protected boolean resize = false;
+    
+    public String spriteInfo;
+    
+>>>>>>> origin/master
     public static void putInMainSheet(String info) throws IOException
     {
         ObjectConverter sheetInfo = new ObjectConverter(info);
@@ -86,8 +96,12 @@ public class Sprite {
         visible = true;
         active = true;        
         imgIndex = 0;        
+<<<<<<< HEAD
         bounds = new ArrayList<Rectangle>();      
         dirMap = new HashMap();
+=======
+        bounds = new ArrayList<Rectangle>();          
+>>>>>>> origin/master
         resize = false;
     }
     
@@ -96,7 +110,11 @@ public class Sprite {
         posX = 0;
         posY = 0;
         z = 0;
+<<<<<<< HEAD
                 
+=======
+        
+>>>>>>> origin/master
         width = _width;
         height = _height;
         
@@ -105,8 +123,11 @@ public class Sprite {
         visible = true;
         active = true;        
         imgIndex = 0;        
+<<<<<<< HEAD
         
         dirMap = new HashMap();
+=======
+>>>>>>> origin/master
         bounds = new ArrayList<Rectangle>();               
     }
     
@@ -129,10 +150,16 @@ public class Sprite {
         
         spriteInfo = se.spriteInfo;
         spritesNames = se.spritesNames;
+<<<<<<< HEAD
         currentImage = se.currentImage;       
         dirMap = se.dirMap;
         maxX = se.maxX;
         maxY = se.maxY;
+=======
+        currentImage = se.currentImage;
+                
+    
+>>>>>>> origin/master
         
     }
     public void ProcessSpriteInfo(String infoString)
@@ -143,6 +170,7 @@ public class Sprite {
         ObjectConverter mainSettings = new ObjectConverter(tokens[0]);
         ObjectConverter spriteSettings = new ObjectConverter(tokens[1]);
         
+<<<<<<< HEAD
         // Mas Generico
         java.util.List<DIRECTIONS> dirSheet = new ArrayList<>();
         
@@ -151,6 +179,8 @@ public class Sprite {
         dirSheet.add(DIRECTIONS.BOT);
         dirSheet.add(DIRECTIONS.LEFT);
         
+=======
+>>>>>>> origin/master
         mainSettings.SetDelimiter("-");
         spriteSettings.SetDelimiter("-");
         
@@ -171,13 +201,17 @@ public class Sprite {
         
         int col = Integer.parseInt(mainSettings.GetNextPart());
         int row = Integer.parseInt(mainSettings.GetNextPart());
+<<<<<<< HEAD
         int iniCol = col;
         int iniRow = row;
+=======
+>>>>>>> origin/master
         
         boolean unique = Boolean.parseBoolean(mainSettings.GetNextPart());                
         
         BufferedImage sheet = IDibujable.spriteHash.get(mainSheet);
         
+<<<<<<< HEAD
         int specificMaxX = Integer.parseInt(mainSettings.GetNextPart());
         int specificMaxY = Integer.parseInt(mainSettings.GetNextPart());
         if(specificMaxX==0&&specificMaxY==0)
@@ -217,6 +251,17 @@ public class Sprite {
            }            
                                 
             dirList.add(spritesNames[i]);
+=======
+        int maxX = sheet.getWidth()/width;
+        int maxY = sheet.getHeight()/height;
+                
+        int numSprites = Integer.parseInt(spriteSettings.GetNextPart());
+        spritesNames = new String[numSprites];    
+        
+        for(int i = 0;i<numSprites;i++)
+        {            
+            spritesNames[i] = spriteSettings.GetNextPart();
+>>>>>>> origin/master
             if(!IDibujable.spriteHash.containsKey(spritesNames[i]))
             {
                 BufferedImage newSprite = IDibujable.gc.createCompatibleImage(width, height,sheet.getColorModel().getTransparency());
@@ -231,6 +276,7 @@ public class Sprite {
             
             // If there is only one spriteSheet per Sprite delete it.
             setImage(spritesNames[i]);
+<<<<<<< HEAD
             if(unique) IDibujable.spriteHash.remove(mainSheet);                                               
             col++;             
             if(numSprites!=1&&(col==(maxX+iniCol)))
@@ -238,10 +284,20 @@ public class Sprite {
                 dirMap.put(dirSheet.get(row-iniRow), dirList);
                 dirList = new ArrayList<>();
                 col = iniCol;
+=======
+            if(unique) IDibujable.spriteHash.remove(mainSheet);                                   
+            
+            col++;
+             
+            if(col==maxX)
+            {
+                col = 0;
+>>>>>>> origin/master
                 row++;                
             }           
         }                
     }        
+<<<<<<< HEAD
         
     public void NextPosition(DIRECTIONS d)
     {
@@ -249,6 +305,9 @@ public class Sprite {
         imgIndex++;     
         if(imgIndex==maxX) imgIndex = 0;
     }
+=======
+    
+>>>>>>> origin/master
     public void ProcessSpriteInfo(String infoString,boolean load)
     {
         // FORMAT : POS_X|POS_Y|POS_Z|WIDTH|HEIGHT|MAINSHEET|INI_X|INI_Y|UNIQUE|LOADED:NUMSPRITES|SPRITENAME|SPRITELOCATION|SPRITENAME|SPRITELOCATION
@@ -257,6 +316,7 @@ public class Sprite {
         ObjectConverter mainSettings = new ObjectConverter(tokens[0]);
         ObjectConverter spriteSettings = new ObjectConverter(tokens[1]);
         
+<<<<<<< HEAD
            
         java.util.List<DIRECTIONS> dirSheet = new ArrayList<>();
         dirSheet.add(DIRECTIONS.TOP);
@@ -264,6 +324,8 @@ public class Sprite {
         dirSheet.add(DIRECTIONS.BOT);
         dirSheet.add(DIRECTIONS.LEFT);
         
+=======
+>>>>>>> origin/master
         mainSettings.SetDelimiter("-");
         spriteSettings.SetDelimiter("-");
         
@@ -278,14 +340,19 @@ public class Sprite {
         
         int col = Integer.parseInt(mainSettings.GetNextPart());
         int row = Integer.parseInt(mainSettings.GetNextPart());
+<<<<<<< HEAD
         int iniCol = col;
         int iniRow = row;
           
+=======
+        
+>>>>>>> origin/master
         boolean unique = Boolean.parseBoolean(mainSettings.GetNextPart());                
                                        
         
         BufferedImage sheet = IDibujable.spriteHash.get(mainSheet);
         
+<<<<<<< HEAD
         int specificMaxX = Integer.parseInt(mainSettings.GetNextPart());
         int specificMaxY = Integer.parseInt(mainSettings.GetNextPart());
         if(specificMaxX==0&&specificMaxY==0)
@@ -297,10 +364,15 @@ public class Sprite {
             maxX = specificMaxX;
             maxY = specificMaxY;            
         }
+=======
+        int maxX = sheet.getWidth()/width;
+        int maxY = sheet.getHeight()/height;
+>>>>>>> origin/master
                 
         int numSprites = Integer.parseInt(spriteSettings.GetNextPart());
         spritesNames = new String[numSprites];           
         
+<<<<<<< HEAD
         
         String baseName = spriteSettings.PeekNextPart();
         String convertName = "Default";
@@ -323,6 +395,11 @@ public class Sprite {
             }       
             
             dirList.add(spritesNames[i]);
+=======
+        for(int i = 0;i<numSprites;i++)
+        {            
+            spritesNames[i] = spriteSettings.GetNextPart();
+>>>>>>> origin/master
             if(!IDibujable.spriteHash.containsKey(spritesNames[i])||load)
             {
                 BufferedImage newSprite = IDibujable.gc.createCompatibleImage(width, height,sheet.getColorModel().getTransparency());
@@ -340,16 +417,23 @@ public class Sprite {
             
             col++;
              
+<<<<<<< HEAD
             if(numSprites!=1&&(col==(maxX+iniCol)))
             {              
                 dirMap.put(dirSheet.get(row-iniRow), dirList);                
                 dirList = new ArrayList<>();
                 col = iniCol;
+=======
+            if(col==maxX)
+            {
+                col = 0;
+>>>>>>> origin/master
                 row++;                
             }           
         }                
     }        
     
+<<<<<<< HEAD
     public void SetCurrentFrame(int frame)
     {
         imgIndex = (frame)%spritesNames.length;
@@ -357,6 +441,8 @@ public class Sprite {
         // Si es la �ltima imagen del array imgNames...       
     }
     
+=======
+>>>>>>> origin/master
     public void setImage(String name)
     {   
         currentImage = IDibujable.spriteHash.get(name);
@@ -371,6 +457,7 @@ public class Sprite {
         }        
     }
     
+<<<<<<< HEAD
     public void Resize()
     {
          Image img = currentImage.getScaledInstance(width, height, Image.SCALE_DEFAULT);  
@@ -383,6 +470,13 @@ public class Sprite {
     }
     
     public void paint(Graphics g) {    
+=======
+    public void paint(Graphics g) {
+        if(currentImage==null) 
+        {
+            int a = 5;
+        }
+>>>>>>> origin/master
         if (visible) {
                 g.drawImage(currentImage, (int)posX, (int)posY, width, height, null);
         }
@@ -398,7 +492,11 @@ public class Sprite {
     {
         int posXVar = e.getX();
         int posYVar = e.getY();
+<<<<<<< HEAD
         return ((posXVar>=posX&&posXVar<=(posX+width))&&(posYVar>=posY&&posYVar<=(posY+height)));
+=======
+        return ((posXVar>=posX&&posX<=(posX+width))&&(posYVar>=posY&&posY<=(posY+height)));
+>>>>>>> origin/master
     }
     
     public void SetPositionDraw(int _x,int _y)

@@ -6,7 +6,10 @@
 package gameproject;
 
 import Controllers.Game;
+<<<<<<< HEAD
 import Models.Sprite;
+=======
+>>>>>>> origin/master
 
 /**
  *
@@ -19,7 +22,12 @@ public class GameProject {
      */ 
     public static void main(String[] args) {
         
+<<<<<<< HEAD
         // Welcome Screen ?        
+=======
+        // Welcome Screen ?
+        
+>>>>>>> origin/master
         //Game Screnn
         Game severLayers = new Game();
         severLayers.GetWindow().setVisible(true);        

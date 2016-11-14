@@ -56,8 +56,12 @@ public abstract class Artefacto extends Sprite implements ISavable,IDibujable{
     }
     
     public Artefacto(String _nombre,double _prcAparicion,int _nivel,int _vida,int _ataque,int _proteccion,int precio,int _x,int _y,
+<<<<<<< HEAD
             int _SizeX,int _SizeY)   { 
         super(_SizeX, _SizeY);      
+=======
+            int _SizeX,int _SizeY)   {     
+>>>>>>> origin/master
         LoadArtefacto(_nombre, _prcAparicion, _nivel, _vida, _ataque, _proteccion, precio, _x, _y);
     }
     

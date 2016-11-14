@@ -14,7 +14,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>412853760</pData>
+=======
+<<<<<<< HEAD
+          <pData>399745568</pData>
+=======
+          <pData>189320816</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType>
@@ -157,7 +165,11 @@
                 </next>
               </compositeType>
               <destType reference="../../../surfaceType/next/next"/>
+<<<<<<< HEAD
               <pNativePrim>1829039648</pNativePrim>
+=======
+              <pNativePrim>1876880928</pNativePrim>
+>>>>>>> origin/master
             </drawLineLoop>
             <fillRectLoop>
               <methodSignature>FillRect(...)</methodSignature>
@@ -165,7 +177,11 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
+<<<<<<< HEAD
               <pNativePrim>1829039424</pNativePrim>
+=======
+              <pNativePrim>1876880704</pNativePrim>
+>>>>>>> origin/master
             </fillRectLoop>
             <drawRectLoop>
               <methodSignature>DrawRect(...)</methodSignature>
@@ -173,7 +189,11 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
+<<<<<<< HEAD
               <pNativePrim>1829039704</pNativePrim>
+=======
+              <pNativePrim>1876880984</pNativePrim>
+>>>>>>> origin/master
             </drawRectLoop>
             <drawPolygonsLoop>
               <methodSignature>DrawPolygons(...)</methodSignature>
@@ -181,7 +201,11 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
+<<<<<<< HEAD
               <pNativePrim>1829039760</pNativePrim>
+=======
+              <pNativePrim>1876881040</pNativePrim>
+>>>>>>> origin/master
             </drawPolygonsLoop>
             <drawPathLoop>
               <methodSignature>DrawPath(...)</methodSignature>
@@ -189,7 +213,11 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
+<<<<<<< HEAD
               <pNativePrim>1829039816</pNativePrim>
+=======
+              <pNativePrim>1876881096</pNativePrim>
+>>>>>>> origin/master
             </drawPathLoop>
             <fillPathLoop>
               <methodSignature>FillPath(...)</methodSignature>
@@ -197,7 +225,11 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
+<<<<<<< HEAD
               <pNativePrim>1829039872</pNativePrim>
+=======
+              <pNativePrim>1876881152</pNativePrim>
+>>>>>>> origin/master
             </fillPathLoop>
             <fillSpansLoop>
               <methodSignature>FillSpans(...)</methodSignature>
@@ -205,7 +237,11 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
+<<<<<<< HEAD
               <pNativePrim>1829039480</pNativePrim>
+=======
+              <pNativePrim>1876880760</pNativePrim>
+>>>>>>> origin/master
             </fillSpansLoop>
             <fillParallelogramLoop>
               <methodSignature>FillParallelogram(...)</methodSignature>
@@ -213,7 +249,11 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
+<<<<<<< HEAD
               <pNativePrim>1829039536</pNativePrim>
+=======
+              <pNativePrim>1876880816</pNativePrim>
+>>>>>>> origin/master
             </fillParallelogramLoop>
             <drawParallelogramLoop>
               <methodSignature>DrawParallelogram(...)</methodSignature>
@@ -221,7 +261,11 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
+<<<<<<< HEAD
               <pNativePrim>1829039592</pNativePrim>
+=======
+              <pNativePrim>1876880872</pNativePrim>
+>>>>>>> origin/master
             </drawParallelogramLoop>
             <drawGlyphListLoop>
               <methodSignature>DrawGlyphList(...)</methodSignature>
@@ -229,7 +273,11 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType/next/next"/>
+<<<<<<< HEAD
               <pNativePrim>1829040320</pNativePrim>
+=======
+              <pNativePrim>1876881600</pNativePrim>
+>>>>>>> origin/master
             </drawGlyphListLoop>
             <drawGlyphListAALoop>
               <methodSignature>DrawGlyphListAA(...)</methodSignature>
@@ -237,7 +285,11 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType"/>
+<<<<<<< HEAD
               <pNativePrim>1829060656</pNativePrim>
+=======
+              <pNativePrim>1876901936</pNativePrim>
+>>>>>>> origin/master
             </drawGlyphListAALoop>
             <drawGlyphListLCDLoop>
               <methodSignature>DrawGlyphListLCD(...)</methodSignature>
@@ -245,7 +297,11 @@
               <sourceType reference="../../drawLineLoop/sourceType"/>
               <compositeType reference="../../drawLineLoop/compositeType"/>
               <destType reference="../../../surfaceType"/>
+<<<<<<< HEAD
               <pNativePrim>1829060712</pNativePrim>
+=======
+              <pNativePrim>1876901992</pNativePrim>
+>>>>>>> origin/master
             </drawGlyphListLCDLoop>
           </solidloops>
         </sdDefault>
@@ -893,18 +949,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-1-0-FALSE-0-0:1-ECorta</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-1-0-FALSE:1-ECorta</spriteInfo>
+>>>>>>> origin/master
     <nombre>Espada Corta</nombre>
     <prcAparition>0.8</prcAparition>
     <nivel>1</nivel>
@@ -932,7 +996,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>412857728</pData>
+=======
+<<<<<<< HEAD
+          <pData>399748896</pData>
+=======
+          <pData>189322608</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -1592,18 +1664,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-2-0-FALSE-0-0:1-EMediana</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-2-0-FALSE:1-EMediana</spriteInfo>
+>>>>>>> origin/master
     <nombre>Espada Mediana</nombre>
     <prcAparition>0.7</prcAparition>
     <nivel>1</nivel>
@@ -1631,7 +1711,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>412860160</pData>
+=======
+<<<<<<< HEAD
+          <pData>399742112</pData>
+=======
+          <pData>189324784</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -2291,18 +2379,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-3-0-FALSE-0-0:1-EDolor</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-3-0-FALSE:1-EDolor</spriteInfo>
+>>>>>>> origin/master
     <nombre>Espada del Dolor Supremo</nombre>
     <prcAparition>0.2</prcAparition>
     <nivel>1</nivel>
@@ -2330,7 +2426,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>412856832</pData>
+=======
+<<<<<<< HEAD
+          <pData>399745312</pData>
+=======
+          <pData>189324272</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -2990,18 +3094,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-4-0-FALSE-0-0:1-MCadena</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-4-0-FALSE:1-MCadena</spriteInfo>
+>>>>>>> origin/master
     <nombre>Maza de Cadena</nombre>
     <prcAparition>0.6</prcAparition>
     <nivel>1</nivel>
@@ -3029,7 +3141,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>412860288</pData>
+=======
+<<<<<<< HEAD
+          <pData>399747616</pData>
+=======
+          <pData>189327600</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -3689,18 +3809,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-5-0-FALSE-0-0:1-MGuerra</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-5-0-FALSE:1-MGuerra</spriteInfo>
+>>>>>>> origin/master
     <nombre>Martillo de Guerra</nombre>
     <prcAparition>0.4</prcAparition>
     <nivel>1</nivel>
@@ -3728,7 +3856,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>412861056</pData>
+=======
+<<<<<<< HEAD
+          <pData>399744672</pData>
+=======
+          <pData>189327216</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -4388,18 +4524,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-6-0-FALSE-0-0:1-HBatalla</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-6-0-FALSE:1-HBatalla</spriteInfo>
+>>>>>>> origin/master
     <nombre>Hacha de Batalla</nombre>
     <prcAparition>0.3</prcAparition>
     <nivel>1</nivel>
@@ -4427,7 +4571,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>412861568</pData>
+=======
+<<<<<<< HEAD
+          <pData>399749024</pData>
+=======
+          <pData>189326576</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -5087,18 +5239,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-7-0-FALSE-0-0:1-EAlafange</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-7-0-FALSE:1-EAlafange</spriteInfo>
+>>>>>>> origin/master
     <nombre>Espada Alfange</nombre>
     <prcAparition>0.25</prcAparition>
     <nivel>2</nivel>
@@ -5126,7 +5286,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>412854656</pData>
+=======
+<<<<<<< HEAD
+          <pData>399741216</pData>
+=======
+          <pData>189326064</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -5786,18 +5954,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-8-0-FALSE-0-0:1-Alabarda</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-8-0-FALSE:1-Alabarda</spriteInfo>
+>>>>>>> origin/master
     <nombre>La Alabarda</nombre>
     <prcAparition>0.4</prcAparition>
     <nivel>4</nivel>
@@ -5825,7 +6001,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>412856704</pData>
+=======
+<<<<<<< HEAD
+          <pData>399747360</pData>
+=======
+          <pData>189325424</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -6485,18 +6669,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-9-0-FALSE-0-0:1-LMediana</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-9-0-FALSE:1-LMediana</spriteInfo>
+>>>>>>> origin/master
     <nombre>Lanza Mediana</nombre>
     <prcAparition>0.6</prcAparition>
     <nivel>6</nivel>
@@ -6524,7 +6716,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>412867968</pData>
+=======
+<<<<<<< HEAD
+          <pData>399741472</pData>
+=======
+          <pData>189322736</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -7184,18 +7384,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-10-0-FALSE-0-0:1-LCorta</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-10-0-FALSE:1-LCorta</spriteInfo>
+>>>>>>> origin/master
     <nombre>Lanza Corta</nombre>
     <prcAparition>0.8</prcAparition>
     <nivel>3</nivel>
@@ -7223,7 +7431,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478903072</pData>
+=======
+<<<<<<< HEAD
+          <pData>399745952</pData>
+=======
+          <pData>189322352</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -7883,18 +8099,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-11-0-FALSE-0-0:1-Alba</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-11-0-FALSE:1-Alba</spriteInfo>
+>>>>>>> origin/master
     <nombre>Lucero Del Alba</nombre>
     <prcAparition>0.4</prcAparition>
     <nivel>1</nivel>
@@ -7922,7 +8146,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478903712</pData>
+=======
+<<<<<<< HEAD
+          <pData>399745696</pData>
+=======
+          <pData>189321840</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -8582,18 +8814,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-12-0-FALSE-0-0:1-Bardiche</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-12-0-FALSE:1-Bardiche</spriteInfo>
+>>>>>>> origin/master
     <nombre>Arma Bardiche</nombre>
     <prcAparition>0.1</prcAparition>
     <nivel>1</nivel>
@@ -8621,7 +8861,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478898976</pData>
+=======
+<<<<<<< HEAD
+          <pData>399741600</pData>
+=======
+          <pData>189321968</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -9281,18 +9529,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-13-0-FALSE-0-0:1-MMilitar</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-13-0-FALSE:1-MMilitar</spriteInfo>
+>>>>>>> origin/master
     <nombre>Machete Militar</nombre>
     <prcAparition>0.3</prcAparition>
     <nivel>5</nivel>
@@ -9320,7 +9576,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478897568</pData>
+=======
+<<<<<<< HEAD
+          <pData>399743520</pData>
+=======
+          <pData>189325936</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -9980,18 +10244,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-1-3-FALSE-0-0:1-ArmaduraLiv</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-1-3-FALSE:1-ArmaduraLiv</spriteInfo>
+>>>>>>> origin/master
     <nombre>Armadura Liviana</nombre>
     <prcAparition>0.8</prcAparition>
     <nivel>1</nivel>
@@ -10017,7 +10289,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478901920</pData>
+=======
+<<<<<<< HEAD
+          <pData>399744416</pData>
+=======
+          <pData>189322992</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -10677,18 +10957,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-2-3-FALSE-0-0:1-ArmaduraMediana</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-2-3-FALSE:1-ArmaduraMediana</spriteInfo>
+>>>>>>> origin/master
     <nombre>Armadura Mediana</nombre>
     <prcAparition>0.6</prcAparition>
     <nivel>1</nivel>
@@ -10714,7 +11002,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478902048</pData>
+=======
+<<<<<<< HEAD
+          <pData>399741728</pData>
+=======
+          <pData>189323120</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -11374,18 +11670,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-3-3-FALSE-0-0:1-ArmaduraM</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-3-3-FALSE:1-ArmaduraM</spriteInfo>
+>>>>>>> origin/master
     <nombre>Armadura de la Maxima Proteccion</nombre>
     <prcAparition>0.3</prcAparition>
     <nivel>1</nivel>
@@ -11411,7 +11715,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478902176</pData>
+=======
+<<<<<<< HEAD
+          <pData>399744928</pData>
+=======
+          <pData>189323248</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -12071,18 +12383,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-4-3-FALSE-0-0:1-CotaC</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-4-3-FALSE:1-CotaC</spriteInfo>
+>>>>>>> origin/master
     <nombre>Cota de Malla</nombre>
     <prcAparition>0.4</prcAparition>
     <nivel>1</nivel>
@@ -12108,7 +12428,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478898336</pData>
+=======
+<<<<<<< HEAD
+          <pData>399745056</pData>
+=======
+          <pData>189324912</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -12768,18 +13096,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-5-3-FALSE-0-0:1-ArmaduraL</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-5-3-FALSE:1-ArmaduraL</spriteInfo>
+>>>>>>> origin/master
     <nombre>Armadura Lisa</nombre>
     <prcAparition>0.6</prcAparition>
     <nivel>1</nivel>
@@ -12805,7 +13141,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478900256</pData>
+=======
+<<<<<<< HEAD
+          <pData>399746080</pData>
+=======
+          <pData>189325552</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -13465,18 +13809,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-6-3-FALSE-0-0:1-ArmaduraC</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-6-3-FALSE:1-ArmaduraC</spriteInfo>
+>>>>>>> origin/master
     <nombre>Armadura Cincelada</nombre>
     <prcAparition>0.2</prcAparition>
     <nivel>3</nivel>
@@ -13502,7 +13854,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478898464</pData>
+=======
+<<<<<<< HEAD
+          <pData>399746208</pData>
+=======
+          <pData>189326320</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -14162,18 +14522,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-7-3-FALSE-0-0:1-ArmaduraS</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-7-3-FALSE:1-ArmaduraS</spriteInfo>
+>>>>>>> origin/master
     <nombre>Armadura Sugarloaf</nombre>
     <prcAparition>0.3</prcAparition>
     <nivel>2</nivel>
@@ -14199,7 +14567,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478896928</pData>
+=======
+<<<<<<< HEAD
+          <pData>399743904</pData>
+=======
+          <pData>189319664</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -14859,18 +15235,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-8-3-FALSE-0-0:1-ArmaduraW</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-8-3-FALSE:1-ArmaduraW</spriteInfo>
+>>>>>>> origin/master
     <nombre>Armadura Wenceslao</nombre>
     <prcAparition>0.3</prcAparition>
     <nivel>5</nivel>
@@ -14896,7 +15280,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478897312</pData>
+=======
+<<<<<<< HEAD
+          <pData>399746720</pData>
+=======
+          <pData>189326704</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -15556,18 +15948,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-0-6-FALSE-0-0:1-Pequena</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-0-6-FALSE:1-Pequena</spriteInfo>
+>>>>>>> origin/master
     <nombre>Pocion Pequenha</nombre>
     <prcAparition>0.8</prcAparition>
     <nivel>1</nivel>
@@ -15593,7 +15993,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478903840</pData>
+=======
+<<<<<<< HEAD
+          <pData>399741344</pData>
+=======
+          <pData>189326960</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -16253,18 +16661,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-1-6-FALSE-0-0:1-Mediana</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-1-6-FALSE:1-Mediana</spriteInfo>
+>>>>>>> origin/master
     <nombre>Pocion Mediana</nombre>
     <prcAparition>0.7</prcAparition>
     <nivel>1</nivel>
@@ -16290,7 +16706,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478900512</pData>
+=======
+<<<<<<< HEAD
+          <pData>399746336</pData>
+=======
+          <pData>189327088</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -16950,18 +17374,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-2-6-FALSE-0-0:1-Hipo</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-2-6-FALSE:1-Hipo</spriteInfo>
+>>>>>>> origin/master
     <nombre>Pocion Regeneracion Hipocratica</nombre>
     <prcAparition>0.6</prcAparition>
     <nivel>5</nivel>
@@ -16987,7 +17419,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478904224</pData>
+=======
+<<<<<<< HEAD
+          <pData>399742496</pData>
+=======
+          <pData>189300080</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -17647,18 +18087,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-3-6-FALSE-0-0:1-Oscura</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-3-6-FALSE:1-Oscura</spriteInfo>
+>>>>>>> origin/master
     <nombre>Pocion Oscura</nombre>
     <prcAparition>0.5</prcAparition>
     <nivel>5</nivel>
@@ -17684,7 +18132,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478899872</pData>
+=======
+<<<<<<< HEAD
+          <pData>399746976</pData>
+=======
+          <pData>189298160</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -18344,18 +18800,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-4-6-FALSE-0-0:1-Triptana</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-4-6-FALSE:1-Triptana</spriteInfo>
+>>>>>>> origin/master
     <nombre>Pocion Triptana</nombre>
     <prcAparition>0.6</prcAparition>
     <nivel>5</nivel>
@@ -18381,7 +18845,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478903328</pData>
+=======
+<<<<<<< HEAD
+          <pData>399746464</pData>
+=======
+          <pData>189297008</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -19041,18 +19513,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-5-6-FALSE-0-0:1-Nsaid</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-5-6-FALSE:1-Nsaid</spriteInfo>
+>>>>>>> origin/master
     <nombre>Pocion Nsaid</nombre>
     <prcAparition>0.4</prcAparition>
     <nivel>5</nivel>
@@ -19078,7 +19558,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478903968</pData>
+=======
+<<<<<<< HEAD
+          <pData>399748128</pData>
+=======
+          <pData>189296368</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -19738,18 +20226,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-6-6-FALSE-0-0:1-Ergotam</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-6-6-FALSE:1-Ergotam</spriteInfo>
+>>>>>>> origin/master
     <nombre>Pocion Ergotam</nombre>
     <prcAparition>0.3</prcAparition>
     <nivel>5</nivel>
@@ -19775,7 +20271,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478900768</pData>
+=======
+<<<<<<< HEAD
+          <pData>399741984</pData>
+=======
+          <pData>189302640</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -20435,18 +20939,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-7-6-FALSE-0-0:1-Butalbital</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-7-6-FALSE:1-Butalbital</spriteInfo>
+>>>>>>> origin/master
     <nombre>Pocion Butalbital</nombre>
     <prcAparition>0.2</prcAparition>
     <nivel>7</nivel>
@@ -20472,7 +20984,15 @@
       <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
         <bImg reference="../.."/>
         <sdDefault class="sun.awt.image.BufImgSurfaceData">
+<<<<<<< HEAD
           <pData>478904736</pData>
+=======
+<<<<<<< HEAD
+          <pData>399740960</pData>
+=======
+          <pData>189299952</pData>
+>>>>>>> origin/master
+>>>>>>> origin/master
           <valid>true</valid>
           <surfaceLost>false</surfaceLost>
           <surfaceType reference="../../../../../Artefactos.Arma/currentImage/surfaceManager/sdDefault/surfaceType"/>
@@ -21132,18 +21652,26 @@
         <maxX>24</maxX>
         <maxY>24</maxY>
       </raster>
+<<<<<<< HEAD
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
+=======
+>>>>>>> origin/master
     </currentImage>
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-24-IconSet-8-6-FALSE-0-0:1-Antiemet</spriteInfo>
     <dirMap/>
     <currentInd>0</currentInd>
     <maxX>16</maxX>
     <maxY>20</maxY>
+=======
+    <resize>false</resize>
+    <spriteInfo>0-0-0-24-24-IconSet-8-6-FALSE:1-Antiemet</spriteInfo>
+>>>>>>> origin/master
     <nombre>Pocion Antiemet</nombre>
     <prcAparition>0.5</prcAparition>
     <nivel>8</nivel>

@@ -25,16 +25,28 @@ import java.util.logging.Logger;
  * @author SERGIO
  */
 public final class Lore extends Stage implements IDibujable{
+<<<<<<< HEAD
                   
+=======
+                
+    private BufferedImage diplay;
+>>>>>>> origin/master
     private String loreConfiguration;
     
     private Sprite background;    
     private Sprite buttomStart;        
+<<<<<<< HEAD
     private Sprite tittleScreen;
     
     private Stage _owner;
     
     public Lore(Stage owner){  
+=======
+    
+    private Game _owner;
+    
+    public Lore(Game owner){  
+>>>>>>> origin/master
         super(owner);
         _owner = owner;
         loadLoreFile();    
@@ -43,7 +55,10 @@ public final class Lore extends Stage implements IDibujable{
     public void Render(Graphics g) {                
         background.paint(g);
         buttomStart.paint(g);                
+<<<<<<< HEAD
         tittleScreen.paint(g);
+=======
+>>>>>>> origin/master
     }
      
     final public void LoadComponents(String[] spriteInfo) {
@@ -53,8 +68,11 @@ public final class Lore extends Stage implements IDibujable{
         background.ProcessSpriteInfo(spriteInfo[0]);
         buttomStart = new Sprite();
         buttomStart.ProcessSpriteInfo(spriteInfo[1]);
+<<<<<<< HEAD
         tittleScreen = new Sprite();
         tittleScreen.ProcessSpriteInfo(spriteInfo[2]);
+=======
+>>>>>>> origin/master
     }
     
     public void loadLoreFile()
@@ -127,7 +145,11 @@ public final class Lore extends Stage implements IDibujable{
         
     }
 
+<<<<<<< HEAD
    //@Override
+=======
+    @Override
+>>>>>>> origin/master
     public void SetInteraccion(Options c) {
         
     }

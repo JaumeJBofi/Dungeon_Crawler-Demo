@@ -1,5 +1,6 @@
 GameBackgroundSheet-GameBackground.jpg
 StartButomSheet-StartButom.jpg
+<<<<<<< HEAD
 IconSet-iconsetff7.png
 Jugador1-Hero.png
 SalirB-oie_Wh94GrGmuJeU.png
@@ -12,3 +13,7 @@ TittleSprite-Tittle.png
 PlayerSheet1-CharSheet1.png
 PlayerSheet2-CharSheet2.png
 BackgroundCC-CCBackGround.jpg
+=======
+Dungeon_1Sheet-tiles_op.png
+IconSet-iconsetff7.png
+>>>>>>> origin/master

@@ -37,6 +37,7 @@ public class Aliado extends Entity{
         tamShowY = 15;        
         SetNombre(varNombre);
         Consejos = new ArrayList<>();
+<<<<<<< HEAD
         saco = new ArrayList();        
         
         currentAdvice = 0;        
@@ -51,6 +52,8 @@ public class Aliado extends Entity{
         tamShowY = 15;        
         SetNombre(varNombre);
         Consejos = new ArrayList<>();
+=======
+>>>>>>> origin/master
         saco = new ArrayList();        
         
         currentAdvice = 0;        
@@ -82,6 +85,7 @@ public class Aliado extends Entity{
         }        
         saco = new ArrayList();        
     }
+<<<<<<< HEAD
     
     public Aliado(Aliado base)
     {
@@ -98,6 +102,8 @@ public class Aliado extends Entity{
         }        
         saco = new ArrayList();   
     }
+=======
+>>>>>>> origin/master
     
     public void GiveAdvice()
     {
@@ -150,7 +156,11 @@ public class Aliado extends Entity{
     
     public Aliado copiar()
     {
+<<<<<<< HEAD
         return new Aliado(this);
+=======
+        return new Aliado(GetPosition().GetPoint(), GetNombre(),GetVida(),GetNivel(),GetStrength(),GetArmor(),GetMaxInventory(),GetMaxHints(),Consejos);
+>>>>>>> origin/master
     }
 
     public Integer getSizeSaco() {
@@ -171,7 +181,11 @@ public class Aliado extends Entity{
 
     @Override
     public void Render(Graphics g) {
+<<<<<<< HEAD
         paint(g);
+=======
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> origin/master
     }
 
     @Override

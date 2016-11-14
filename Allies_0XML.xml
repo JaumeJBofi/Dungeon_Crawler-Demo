@@ -3,6 +3,7 @@
     <posX>0.0</posX>
     <posY>0.0</posY>
     <z>0</z>
+<<<<<<< HEAD
     <width>24</width>
     <height>32</height>
     <spritesNames>
@@ -1098,10 +1099,15 @@
       </raster>
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
+=======
+    <width>0</width>
+    <height>0</height>
+>>>>>>> origin/master
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-32-Allies_1Sheet-0-0-FALSE-3-4:12-*OLDMAN</spriteInfo>
     <dirMap>
@@ -1141,6 +1147,9 @@
     <currentInd>0</currentInd>
     <maxX>3</maxX>
     <maxY>4</maxY>
+=======
+    <resize>false</resize>
+>>>>>>> origin/master
     <position>
       <M>0</M>
       <N>0</N>
@@ -1156,8 +1165,11 @@
     <nivel>1</nivel>
     <currentTilePositionX>0</currentTilePositionX>
     <currentTilePositionY>0</currentTilePositionY>
+<<<<<<< HEAD
     <__Dx>0</__Dx>
     <__Dy>0</__Dy>
+=======
+>>>>>>> origin/master
     <Consejos>
       <Foundation.Tip>
         <__advice>Segundo Consejo1</__advice>
@@ -1181,6 +1193,7 @@
     <posX>0.0</posX>
     <posY>0.0</posY>
     <z>0</z>
+<<<<<<< HEAD
     <width>24</width>
     <height>32</height>
     <spritesNames>
@@ -2057,10 +2070,15 @@
       </raster>
       <isAlphaPremultiplied>false</isAlphaPremultiplied>
     </currentImage>
+=======
+    <width>0</width>
+    <height>0</height>
+>>>>>>> origin/master
     <imgIndex>0</imgIndex>
     <visible>true</visible>
     <active>true</active>
     <bounds/>
+<<<<<<< HEAD
     <resize>true</resize>
     <spriteInfo>0-0-0-24-32-Allies_1Sheet-3-0-FALSE-3-4:12-*OLDWMAN</spriteInfo>
     <dirMap>
@@ -2100,6 +2118,9 @@
     <currentInd>0</currentInd>
     <maxX>3</maxX>
     <maxY>4</maxY>
+=======
+    <resize>false</resize>
+>>>>>>> origin/master
     <position reference="../../Facilidades.Aliado/position"/>
     <hp>100</hp>
     <nombre>Maya Angelou</nombre>
@@ -2110,8 +2131,11 @@
     <nivel>1</nivel>
     <currentTilePositionX>0</currentTilePositionX>
     <currentTilePositionY>0</currentTilePositionY>
+<<<<<<< HEAD
     <__Dx>0</__Dx>
     <__Dy>0</__Dy>
+=======
+>>>>>>> origin/master
     <Consejos>
       <Foundation.Tip>
         <__advice>Segundo Consejo2</__advice>
@@ -2131,6 +2155,7 @@
     <__maxInventorio>5</__maxInventorio>
     <__maxConsejos>5</__maxConsejos>
   </Facilidades.Aliado>
+<<<<<<< HEAD
   <Facilidades.Aliado>
     <posX>0.0</posX>
     <posY>0.0</posY>
@@ -4039,4 +4064,6 @@
     <__maxInventorio>5</__maxInventorio>
     <__maxConsejos>5</__maxConsejos>
   </Facilidades.Aliado>
+=======
+>>>>>>> origin/master
 </list>

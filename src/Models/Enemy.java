@@ -125,7 +125,11 @@ public class Enemy extends Entity {
 
     @Override
     public void Render(Graphics g) {
+<<<<<<< HEAD
         paint(g);
+=======
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> origin/master
     }
 
     @Override

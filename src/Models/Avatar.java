@@ -50,10 +50,17 @@ public class Avatar extends Player {
     @Override
     public void createKeys()
     {
+<<<<<<< HEAD
         keyDown = KeyEvent.VK_S;
         keyTop = KeyEvent.VK_W;
         keyRight = KeyEvent.VK_D;
         keyLeft = KeyEvent.VK_A;        
+=======
+        keyDown = KeyEvent.VK_DOWN;
+        keyTop = KeyEvent.VK_UP;
+        keyRight = KeyEvent.VK_RIGHT;
+        keyLeft = KeyEvent.VK_LEFT;        
+>>>>>>> origin/master
     }
 
     public Avatar(Coordinate position, int varTamShowX, int varTamShowY, int vida, String varNombre, int varStrength, int varArmor) {

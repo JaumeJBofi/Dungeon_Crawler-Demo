@@ -37,9 +37,12 @@ public abstract class Entity extends Sprite implements ISavable, IDibujable {
     
     protected int currentTilePositionX;
     protected int currentTilePositionY;
+<<<<<<< HEAD
     
     public int _Dx;
     public int _Dy;
+=======
+>>>>>>> origin/master
 
     //Modif
     public Entity(Coordinate varPosition, String nomb, int vida, int varStrength, int varArmor,int _nivel) {
@@ -254,7 +257,11 @@ public abstract class Entity extends Sprite implements ISavable, IDibujable {
         
         CellInformation.CELLTYPE cellInfo = dungeonAccess[_x][_y].GetType();
         if(cellInfo!=CellInformation.CELLTYPE.PARED&&cellInfo!=CellInformation.CELLTYPE.ENEMY&&
+<<<<<<< HEAD
                 cellInfo!=CellInformation.CELLTYPE.ARTIFACT)
+=======
+                cellInfo!=CellInformation.CELLTYPE.FRIEND&&cellInfo!=CellInformation.CELLTYPE.ARTIFACT)
+>>>>>>> origin/master
         {
             return move;
         }else{

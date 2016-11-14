@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Jauma/Downloads/Lab5%20Lp2/GameProject/src/Interfaz/Lore.java</file>
             <file>file:/C:/Users/Jauma/Downloads/Lab5%20Lp2/GameProject/src/Controllers/AllyGenerator.java</file>
             <file>file:/C:/Users/Jauma/Downloads/Lab5%20Lp2/GameProject/src/Mundo/Dungeon.java</file>
@@ -15,6 +16,28 @@
             <file>file:/C:/Users/Jauma/Downloads/Lab5%20Lp2/GameProject/src/Models/Entity.java</file>
             <file>file:/C:/Users/Jauma/Downloads/Lab5%20Lp2/GameProject/src/gameproject/GameProject.java</file>
             <file>file:/C:/Users/Jauma/Downloads/Lab5%20Lp2/GameProject/src/Interfaz/CharacterCreation.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/Jauma/Downloads/3_V208_20130698/0781_06_20105127_20131271_20135353_20130698/GameProject/src/Mundo/Dungeon.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/3_V208_20130698/0781_06_20105127_20131271_20135353_20130698/GameProject/src/Artefactos/Armadura.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/3_V208_20130698/0781_06_20105127_20131271_20135353_20130698/GameProject/src/Models/Sprite.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/3_V208_20130698/0781_06_20105127_20131271_20135353_20130698/GameProject/src/Controllers/Game.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/3_V208_20130698/0781_06_20105127_20131271_20135353_20130698/GameProject/src/Mundo/Chamber.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/3_V208_20130698/0781_06_20105127_20131271_20135353_20130698/GameProject/src/Artefactos/Arma.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/3_V208_20130698/0781_06_20105127_20131271_20135353_20130698/GameProject/src/Controllers/AllyGenerator.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/3_V208_20130698/0781_06_20105127_20131271_20135353_20130698/GameProject/src/Foundation/CellInformation.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/3_V208_20130698/0781_06_20105127_20131271_20135353_20130698/GameProject/src/Mundo/DungeonManager.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/3_V208_20130698/0781_06_20105127_20131271_20135353_20130698/GameProject/src/Models/Stage.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/3_V208_20130698/0781_06_20105127_20131271_20135353_20130698/GameProject/src/Models/Player.java</file>
+            <file>file:/C:/Users/Jauma/Downloads/3_V208_20130698/0781_06_20105127_20131271_20135353_20130698/GameProject/src/Models/Entity.java</file>
+=======
+            <file>file:/D:/Mis%20Documentos/Documentos/GitHub/GameProject/src/Mundo/Dungeon.java</file>
+            <file>file:/D:/Mis%20Documentos/Documentos/GitHub/GameProject/src/Controllers/Game.java</file>
+            <file>file:/D:/Mis%20Documentos/Documentos/GitHub/GameProject/src/Models/Player.java</file>
+            <file>file:/D:/Mis%20Documentos/Documentos/GitHub/GameProject/src/Models/Stage.java</file>
+            <file>file:/D:/Mis%20Documentos/Documentos/GitHub/GameProject/src/Models/Entity.java</file>
+>>>>>>> origin/master
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>

@@ -43,6 +43,7 @@ public abstract class Player extends Entity implements ISavable {
     private List<Artefacto> saco;    
     private int xp;
     private int currentTop;
+<<<<<<< HEAD
     private int tileSizeX,tileSizeY;
     
     // Problemas con el primer movimeinto
@@ -54,6 +55,9 @@ public abstract class Player extends Entity implements ISavable {
     int tryTimes = 0;
     public DIRECTIONS currentTry = DIRECTIONS.BOT;
     
+=======
+
+>>>>>>> origin/master
     public Player(Coordinate position, String varNombre) {
         super(position, varNombre, 100, 5, 5,1);
         hp = 100; // digamos q sea 100
@@ -65,12 +69,15 @@ public abstract class Player extends Entity implements ISavable {
         xp = 0;
         currentTop = 100;
     }
+<<<<<<< HEAD
     
     public void SetTileSize(int _tileX,int _tileY)
     {
         tileSizeX = _tileX;
         tileSizeY = _tileY;
     }
+=======
+>>>>>>> origin/master
 
     public Player(Coordinate position, int varTamShowX, int varTamShowY, int vida, String varNombre, int varStrength, int varArmor) {
         super(position, varNombre, vida, varStrength, varArmor,1);
@@ -100,11 +107,14 @@ public abstract class Player extends Entity implements ISavable {
         }
     }
     
+<<<<<<< HEAD
     public void SetMoveDelta()
     {
         
     }
     
+=======
+>>>>>>> origin/master
     public void LvlUp()
     {
         nivel++;
@@ -201,13 +211,18 @@ public abstract class Player extends Entity implements ISavable {
     {   
         movePlayer(dungeonAccess);                
     }   
+<<<<<<< HEAD
     // LABORATORIO 4 - PREG 1
+=======
+    
+>>>>>>> origin/master
     public void movePlayer(CellInformation[][] dungeonAccess)
     {        
         ArrayList<DIRECTIONS> dirs = GetMovedDirections();
         for(DIRECTIONS dir: dirs)
         {
             Coordinate varCoord;
+<<<<<<< HEAD
             currentDirection = dir;
             if((varCoord = CheckDungeonCollision(dungeonAccess, dir, 1))!=null)
             {
@@ -248,6 +263,17 @@ public abstract class Player extends Entity implements ISavable {
     }
     
     // LABORATORIO 4 - PREG 1
+=======
+            if((varCoord = CheckDungeonCollision(dungeonAccess, dir, 1))!=null)
+            {
+                // check what is there.
+                SetX(varCoord.GetX());
+                SetY(varCoord.GetY());
+            }
+        }                
+    }
+    
+>>>>>>> origin/master
     public ArrayList<DIRECTIONS> GetMovedDirections()
     {
         ArrayList<DIRECTIONS> dirs = new ArrayList<>();
@@ -259,12 +285,17 @@ public abstract class Player extends Entity implements ISavable {
         
         return dirs;
     }
+<<<<<<< HEAD
     
     // LABORATORIO 4 - PREG 1
     // Esto es para que cada uno pueda definir sus teclas
     public abstract void createKeys();
     
     // LABORATORIO 4 - PREG 1
+=======
+    public abstract void createKeys();
+    
+>>>>>>> origin/master
     public int keyLeft;
     public int keyRight;
     public int keyTop;
@@ -274,21 +305,30 @@ public abstract class Player extends Entity implements ISavable {
     /* Variables booleanas que indican si las
      * teclas anteriormente nombradas est�n o
      * no pulsadas. */
+<<<<<<< HEAD
     // LABORATORIO 4 - PREG 1
+=======
+>>>>>>> origin/master
     public boolean keyLeftDown = false;
     public boolean keyRightDown = false;
     public boolean keyTopDown = false;
     public boolean keyDownDown = false;
     public boolean keyInteractDown = false;
     
+<<<<<<< HEAD
     // LABORATORIO 4 - PREG 1
+=======
+>>>>>>> origin/master
     public boolean IsWalkingLeft() {return keyLeftDown;};
     public boolean IsWalkingRight() {return keyRightDown;};
     public boolean IsWalkingTop() {return keyTopDown;};
     public boolean IsWalkingDown() {return keyDownDown;};
     public boolean Interacting() {return keyInteractDown;};       
     
+<<<<<<< HEAD
     // LABORATORIO 4 - PREG 1
+=======
+>>>>>>> origin/master
     public synchronized void keyPressed(KeyEvent e) {
     if (e.getKeyCode() == keyTop) {
             keyTopDown = true;
@@ -394,7 +434,11 @@ public abstract class Player extends Entity implements ISavable {
     
     public void Render(Graphics g)
     {
+<<<<<<< HEAD
         paint(g);
+=======
+        
+>>>>>>> origin/master
     }
     
     @Override

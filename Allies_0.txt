@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ALIADOS:4
 ALIADO:Audrey Hepburn/CONSEJOS:5@Primer Consejo.1@Segundo Consejo1.2@Tercer Consejo1
 0-0-0-24-32-Allies_1Sheet-0-0-FALSE-3-4:12-*OLDMAN
@@ -7,3 +8,10 @@ ALIADO:Henry Ford/CONSEJOS:5@Primer Consejo3.1@Segundo Consejo3.2@Tercer Consejo
 0-0-0-24-32-Allies_1Sheet-9-4-FALSE-3-4:12-*BILL
 ALIADO:Eleanor Roosevelt/CONSEJOS:5@Primer Consejo4.1@Segundo Consejo4.2@Tercer Consejo4
 0-0-0-24-32-Allies_1Sheet-6-0-TRUE-3-4:12-*BEARDMAN
+=======
+ALIADOS:2
+ALIADO:Audrey Hepburn/CONSEJOS:5@Primer Consejo.1@Segundo Consejo1.2@Tercer Consejo1
+ALIADO:Maya Angelou/CONSEJOS:5@Primer Consejo2.1@Segundo Consejo2.2@Tercer Consejo2
+ALIADO:Henry Ford/CONSEJOS:5@Primer Consejo3.1@Segundo Consejo3.2@Tercer Consejo3
+ALIADO:Eleanor Roosevelt/CONSEJOS:5@Primer Consejo4.1@Segundo Consejo4.2@Tercer Consejo4
+>>>>>>> origin/master

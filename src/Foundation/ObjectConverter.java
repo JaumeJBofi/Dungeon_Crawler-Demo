@@ -54,12 +54,15 @@ public class ObjectConverter {
         return tokens[currentCount++];
     }
     
+<<<<<<< HEAD
     public String PeekNextPart()
     {
         if(currentCount==tokens.length) return null;
         return tokens[currentCount];
     }
     
+=======
+>>>>>>> origin/master
     public String[] GetTokens(String delim)
     {
         return value.split(delim);

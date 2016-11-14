@@ -31,7 +31,11 @@ final public class AllyGenerator {
     private int numTips;
     private int numNames;
       
+<<<<<<< HEAD
     private int tileSizeX;
+=======
+     private int tileSizeX;
+>>>>>>> origin/master
     private int tileSizeY;
     
     public  AllyGenerator(String varFileName)
@@ -109,18 +113,28 @@ final public class AllyGenerator {
         String[] tokens = buffer.split(":");
         numNames = Integer.parseInt(tokens[1]);
         Coordinate newCoord = new Coordinate(0, 0);
+<<<<<<< HEAD
         String spriteInfo;
+=======
+>>>>>>> origin/master
         
         //Pregunta 1.
         for(int i = 0;i<numNames;i++)
         {
             buffer  = in.readLine();     
+<<<<<<< HEAD
             spriteInfo = in.readLine();
             tokens = buffer.split("ALIADO:");
             buffer = tokens[1];
             tokens = buffer.split("/CONSEJOS:");            
             Aliado newAlly = new Aliado(newCoord,tokens[0],spriteInfo,tileSizeX,tileSizeY);         
             //Aliado newAlly = new Aliado(newCoord,tokens[0]);   
+=======
+            tokens = buffer.split("ALIADO:");
+            buffer = tokens[1];
+            tokens = buffer.split("/CONSEJOS:");
+            Aliado newAlly = new Aliado(newCoord,tokens[0]);         
+>>>>>>> origin/master
             buffer = tokens[1];
                                                    
             tokens = buffer.split("\\.");
@@ -129,7 +143,11 @@ final public class AllyGenerator {
             {                             
                 smallTokens = tokens[j].split("@");
                 newAlly.AddAdvice(new Tip(smallTokens[1],Integer.parseInt(smallTokens[0])));                      
+<<<<<<< HEAD
             }                                     
+=======
+            }                                    
+>>>>>>> origin/master
             allyPool.add(newAlly);
         }         
         } catch (Exception e) {

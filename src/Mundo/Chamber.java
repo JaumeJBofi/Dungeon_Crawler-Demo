@@ -32,6 +32,7 @@ public class Chamber extends Sprite implements IDibujable{
     {
         super(_width,_height);
         LoadComponents(spriteInfo);
+<<<<<<< HEAD
     }
 
     public Chamber(Sprite base,int _width,int _height)
@@ -39,6 +40,9 @@ public class Chamber extends Sprite implements IDibujable{
         super(_width,_height);
         copySprite(base);
     }
+=======
+    }    
+>>>>>>> origin/master
     
     public Chamber(Enemy enemyResident,Artefacto artefactResident){
         SetArtefact(chamberArtefact);

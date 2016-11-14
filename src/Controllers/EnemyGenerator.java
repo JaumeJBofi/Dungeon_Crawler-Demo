@@ -30,6 +30,7 @@ final public class EnemyGenerator {
         
         LoadEnemyTxt();
         
+<<<<<<< HEAD
 //        try {
 //        XStream xs = new XStream();
 //        FileReader fr = new FileReader("Enemy_XML.xml");
@@ -38,17 +39,32 @@ final public class EnemyGenerator {
 //        } catch (IOException e) {
 //            System.out.println(e.toString());
 //        }                           
+=======
+        try {
+        XStream xs = new XStream();
+        FileReader fr = new FileReader("Enemy_XML.xml");
+        enemigos = (ArrayList<Enemy>)xs.fromXML(fr);       
+        fr.close();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }                           
+>>>>>>> origin/master
     }
     
     public EnemyGenerator(int _tileSizeX,int _tileSizeY) {
         randomManager = new Random();
         enemigos = new ArrayList();
         
+<<<<<<< HEAD
         LoadEnemyTxt();
+=======
+        //LoadEnemyTxt();
+>>>>>>> origin/master
         
         tileSizeX = _tileSizeX;
         tileSizeY = _tileSizeY;
         
+<<<<<<< HEAD
 //        try {
 //        XStream xs = new XStream();
 //        FileReader fr = new FileReader("Enemy_XML.xml");
@@ -57,6 +73,16 @@ final public class EnemyGenerator {
 //        } catch (IOException e) {
 //            System.out.println(e.toString());
 //        }                           
+=======
+        try {
+        XStream xs = new XStream();
+        FileReader fr = new FileReader("Enemy_XML.xml");
+        enemigos = (ArrayList<Enemy>)xs.fromXML(fr);       
+        fr.close();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }                           
+>>>>>>> origin/master
     }
     
     public void LoadEnemyTxt()
@@ -74,7 +100,11 @@ final public class EnemyGenerator {
                 }
                 String[] arr = linea.split(",");
                 Enemy enemigo = new Enemy(nulo, arr[0], Integer.parseInt(arr[1]), Integer.parseInt(arr[2]),
+<<<<<<< HEAD
                         Integer.parseInt(arr[3]), arr[4], Integer.parseInt(arr[5]),arr[6],tileSizeX,tileSizeY);
+=======
+                        Integer.parseInt(arr[3]), arr[4], Integer.parseInt(arr[5]));
+>>>>>>> origin/master
                 enemigos.add(enemigo);                
             }
             fr.close();
@@ -82,6 +112,7 @@ final public class EnemyGenerator {
             e.printStackTrace();
         }        
          
+<<<<<<< HEAD
 //        XStream xs = new XStream();
 //        try {
 //        FileWriter fw = new FileWriter("Enemy_XML.xml");        
@@ -91,6 +122,17 @@ final public class EnemyGenerator {
 //        } catch (IOException e) {
 //        System.out.println(e.toString());
 //        }        
+=======
+        XStream xs = new XStream();
+        try {
+        FileWriter fw = new FileWriter("Enemy_XML.xml");        
+        String temp = xs.toXML(enemigos);
+        fw.write(temp);
+        fw.close();
+        } catch (IOException e) {
+        System.out.println(e.toString());
+        }        
+>>>>>>> origin/master
     }
 
     public Enemy generar_enemigo() {
